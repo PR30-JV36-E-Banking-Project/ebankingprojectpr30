@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en">
     <head>
         <title>E-Banking Website</title>
@@ -178,7 +179,7 @@
             <!-- //about top-->
             <!--footer-->	 
             <div class="w3_agile-copyright text-center">
-                <p>© 2020 E-Banking. | Design by Hoang Duy Nhat</p>
+                <p>ï¿½ 2020 E-Banking. | Design by Hoang Duy Nhat</p>
             </div>
             <!--//footer-->	
             <!-- modal-sign -->
@@ -205,16 +206,18 @@
                                 </tr>
                                 <br/>
                                 <br/>
+                                <br/>
                                 <tr>
                                     <td>
-                                        <img src="${pageContext.request.contextPath }/captcha"><br/>
-                                        <br>
+                                        <img src="${pageContext.request.contextPath }/captcha">
                                         <br/>
-                                        <input type="text" name="captcha" required="required" style="margin-top: 5px;">
-                                        <br>
-                                        ${error }
+                                        <br/>
+                                        <input autocomplete="off" type="text" name="captcha" required="required" style="margin-top: 5px;">
+                                        <br/>
+                                        <span style="color:red">${error }</span>
                                     </td>
                                 </tr>
+                                <br/>
                                 <br/>
                                 <input type="submit" value="Sign In">  
                                 <div class="clearfix"></div>

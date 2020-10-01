@@ -1594,7 +1594,7 @@ h2.typoh2{
     margin-bottom: 1em;
     font-weight: 600;
 }
-.w3l_contact_form input[type="text"], .w3l_contact_form input[type="email"], .w3l_contact_form textarea {
+.w3l_contact_form input[type="text"], .w3l_contact_form input[type="email"], .w3l_contact_form textarea , .w3l_contact_form input[type="password"]{
     outline: none;
     width: 100%;
     padding: .8em 1em;
@@ -1692,7 +1692,7 @@ form.wthree-subsribe {
     width: 70%;
     margin: 2em auto;
 }
-.wthree-subsribe input[type="email"] ,.wthree-subsribe input[type="text"]{
+.wthree-subsribe input[type="email"] ,.wthree-subsribe input[type="text"],.wthree-subsribe input[type="password"]{
     width: 100%;
     padding: .8em 1em;
     font-size: 1em;
@@ -2676,7 +2676,7 @@ form.wthree-subsribe {
 	ul.contact_info li i {
         margin-right: 0.8em;
 	}
-	.w3l_contact_form input[type="text"], .w3l_contact_form input[type="email"], .w3l_contact_form textarea,.w3l_contact_form textarea {
+	.w3l_contact_form input[type="text"], .w3l_contact_form input[type="email"],.w3l_contact_form input[type="password"] .w3l_contact_form textarea,.w3l_contact_form textarea {
         font-size: 0.9em;
 	}
 	.w3l_contact_form input[type="submit"] {
