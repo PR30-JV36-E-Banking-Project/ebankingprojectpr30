@@ -33,7 +33,7 @@ public class Customer {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDay;
     private String sex;
-    private String Adrress;
+    private String adrress;
     private String country;
     private String nationlaty;
     private String district;
@@ -98,11 +98,11 @@ public class Customer {
     }
 
     public String getAdrress() {
-        return Adrress;
+        return adrress;
     }
 
     public void setAdrress(String Adrress) {
-        this.Adrress = Adrress;
+        this.adrress = adrress;
     }
 
     public String getCountry() {

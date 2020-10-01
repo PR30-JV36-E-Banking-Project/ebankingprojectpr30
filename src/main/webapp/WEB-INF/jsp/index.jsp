@@ -6,12 +6,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- Custom Theme files -->
-        <link href="resources/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-        <link href="resources/css/style.css" type="text/css" rel="stylesheet" media="all">
-        <link href="resources/css/font-awesome.css" rel="stylesheet">   <!-- font-awesome icons --> 
+        <link href="../../resources/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+        <link href="../../resources/css/style.css" type="text/css" rel="stylesheet" media="all">
+        <link href="../../resources/css/font-awesome.css" rel="stylesheet">   <!-- font-awesome icons --> 
         <!-- //Custom Theme files -->  
         <!-- js --> 
-        <script src="resources/js/jquery-2.2.3.min.js"></script>
+        <script src="../../resources/js/jquery-2.2.3.min.js"></script>
         <!-- web-fonts -->
         <link href="//fonts.googleapis.com/css?family=Secular+One" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
@@ -24,7 +24,7 @@
             <div class="header-w3mdl"><!-- header-two --> 
                 <div class="container"> 
                     <div class="agileits-logo navbar-left">
-                        <h1><a href="index.jsp"><img src="resources/images/e.png" alt="logo"/>Banking</a></h1> 
+                        <h1><a href="index.jsp"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
                     </div> 
                     <div class="agileits-hdright nav navbar-nav">
                         <div class="header-w3top"><!-- header-top --> 
@@ -165,7 +165,7 @@
                 <div class="w3ls-about agile-section">
                     <div class="w3-agileits-about-grids">
                         <div class="col-md-6 col-sm-6 col-xs-6 agileits-title">
-                            <h3>what makes <img src="resources/images/logo.png" alt="logo"/>Unique?</h3> 
+                            <h3>what makes <img src="../../resources/images/logo.png" alt="logo"/>Unique?</h3> 
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6  agile-about-bottom-right">
                             <p>Introduction something about website</p>
@@ -186,12 +186,12 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <img src="images/logo.png" alt="logo"/>
+                            <img src="../../resources/images/logo.png" alt="logo"/>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
                         </div> 
                         <div class="modal-body modal-spa">
                             <p>Please Sign In your E-Banking Account to use our services</p>
-                            <p>If you haven't have account yet. Please <a href="#">Sign Up</a></p>
+                            <p>If you haven't have account yet. Please <a href="/account/showForm">Sign Up</a></p>
                             <form class=" wthree-subsribe" modelAttribute="customer"
                                   action="${pageContext.request.contextPath }/account/save" method="post"> 
                                 <tr>
@@ -228,7 +228,7 @@
             <!-- //banner-text -->  
             <!-- //banner -->
             <!-- banner Slider starts Here -->
-            <script src="resources/js/responsiveslides.min.js"></script>
+            <script src="../../resources/js/responsiveslides.min.js"></script>
             <script>
                 // You can also use "$(window).load(function() {"
                 $(function () {
@@ -249,10 +249,10 @@
 
                 });
             </script>
-            <script src="resources/js/SmoothScroll.min.js"></script>
+            <script src="../../resources/js/SmoothScroll.min.js"></script>
             <!-- smooth-scrolling-of-move-up -->
-            <script type="text/javascript" src="resources/js/move-top.js"></script>
-            <script type="text/javascript" src="resources/js/easing.js"></script>
+            <script type="text/javascript" src="../../resources/js/move-top.js"></script>
+            <script type="text/javascript" src="../../resources/js/easing.js"></script>
             <script type="text/javascript">
                 $(document).ready(function () {
                     /*
@@ -273,7 +273,7 @@
             <!-- Bootstrap core JavaScript
         ================================================== -->
             <!-- Placed at the end of the document so the pages load faster -->
-            <script src="resources/js/bootstrap.js"></script>
+            <script src="../../resources/js/bootstrap.js"></script>
 
     </body>
 </html>
