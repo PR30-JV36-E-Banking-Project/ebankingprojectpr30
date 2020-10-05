@@ -3,7 +3,7 @@
     Created on : Sep 29, 2020, 12:08:51 AM
     Author     : solid
 --%>
-
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,6 +16,8 @@
         <h3>Account Info</h3>
         Username: ${customer.ctUserName }
         <br> Password: ${customer.ctPassword }
+        <br>${msg}<br>
+        <a href="<c:url value='/logout' />">Click here to logout</a>  
 
     </body>
 </html>

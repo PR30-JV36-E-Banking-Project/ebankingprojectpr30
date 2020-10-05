@@ -21,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 /**
  *
  * @author solid
@@ -40,6 +39,10 @@ public class CaptchaController {
         Random randChars = new Random();
         String sImageCode = (Long.toString(Math.abs(randChars.nextLong()), 36)).substring(0, iTotalChars);
         BufferedImage biImage = new BufferedImage(iWidth, iHeight, BufferedImage.TYPE_INT_RGB);
+//        Graphics2D ig2 = (Graphics2D) biImage.createGraphics();
+//        ig2.setPaint(new Color(74, 74, 74));
+//        ig2.fillRect(0, 0, biImage.getWidth(), biImage.getHeight());
+//        ig2.dispose();
         Graphics2D g2dImage = (Graphics2D) biImage.getGraphics();
         int iCircle = 15;
         for (int i = 0; i < iCircle; i++) {

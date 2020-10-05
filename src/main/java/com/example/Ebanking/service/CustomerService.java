@@ -9,10 +9,6 @@ import com.example.Ebanking.entities.Customer;
 import com.example.Ebanking.repository.CustomerRepositoryIF;
 import java.text.MessageFormat;
 import java.util.Optional;
-import java.util.Set;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -28,6 +24,12 @@ public class CustomerService implements CustomerServiceIF {
     CustomerRepositoryIF customerRepositoryIF;
 
     @Override
+    public Customer getCustomerByUserName(String username) {
+        Optional<Customer> cusOptional= customerRepositoryIF.findByUserName(username);
+        return cusOptional.isPresent() ? cusOptional.get() : null;
+    }
+
+    @Override
     public void saveCustomer(Customer theCustomer) {
         customerRepositoryIF.save(theCustomer);
     }
@@ -35,7 +37,7 @@ public class CustomerService implements CustomerServiceIF {
     private CustomerRepositoryIF customerRepository;
 
     @Override
-    public Customer loadCustomerByUsername(String email) throws UsernameNotFoundException {
+    public Customer loadCustomerByEmail(String email) throws UsernameNotFoundException {
         final Optional<Customer> optionalCumstomer = customerRepository.findByEmail(email);
 
         if (optionalCumstomer.isPresent()) {

@@ -14,5 +14,6 @@ import com.example.Ebanking.entities.Customer;
 
 public interface CustomerServiceIF {
     public void saveCustomer(Customer theCustomer);
-    public Customer loadCustomerByUsername(String email);
+    public Customer loadCustomerByEmail(String email);
+    public Customer getCustomerByUserName(String username);
 }

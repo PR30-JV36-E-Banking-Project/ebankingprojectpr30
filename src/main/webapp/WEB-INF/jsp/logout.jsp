@@ -38,11 +38,9 @@
                         </div>
                         <div class="agile_social_banner">
                             <ul class="agileits_social_list">
-                                <li><a href="#" class="w3_agile_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#" class="agile_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#" class="w3_agile_dribble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-                                <li><a href="#" class="w3_agile_vimeo"><i class="fa fa-vimeo" aria-hidden="true"></i></a></li>
-                                <li><h2><a href="#"><span class="label label-info" data-toggle="modal" data-target="#myModal1">Login</span></a></h2></li>
+                                <li><h2><span class="label label-danger">${username}</span></h2></li>
+                                <li><h2><a href="<c:url value='/logout' />"><span class="label label-info">LogOut</span></a></h2></li>
+                                
                             </ul>
                         </div>  
 

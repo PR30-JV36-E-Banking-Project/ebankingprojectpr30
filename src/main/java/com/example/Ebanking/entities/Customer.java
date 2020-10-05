@@ -27,8 +27,8 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int customerID;
-    private String ctUserName;
-    private String ctPassword;
+    private String userName;
+    private String password;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDay;
@@ -65,21 +65,23 @@ public class Customer {
         this.customerID = customerID;
     }
 
-    public String getCtUserName() {
-        return ctUserName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setCtUserName(String ctUserName) {
-        this.ctUserName = ctUserName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getCtPassword() {
-        return ctPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCtPassword(String ctPassword) {
-        this.ctPassword = ctPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
+
 
     public Date getBirthDay() {
         return birthDay;
