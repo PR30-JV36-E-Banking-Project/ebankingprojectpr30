@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
  * @author solid
  */
 @Entity
-public class Bank {
+public class BankEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,13 +26,13 @@ public class Bank {
     private String bankPhone;
     private String bankEmail;
     private String bankAddress;
-    @OneToMany(mappedBy = "bank")
-    private Set<Account> account;
+    @OneToMany(mappedBy = "bankEntity")
+    private Set<AccountEntity> accountEntitys;
 
-    @OneToMany(mappedBy = "bank")
-    private Set<User> user;
+    @OneToMany(mappedBy = "bankEntity")
+    private Set<TellerEntity> tellerEntitys;
 
-    public Bank() {
+    public BankEntity() {
     }
 
     public int getBankID() {
@@ -75,20 +75,20 @@ public class Bank {
         this.bankAddress = bankAddress;
     }
 
-    public Set<Account> getAccount() {
-        return account;
+    public Set<AccountEntity> getAccountEntitys() {
+        return accountEntitys;
     }
 
-    public void setAccount(Set<Account> account) {
-        this.account = account;
+    public void setAccountEntitys(Set<AccountEntity> accountEntitys) {
+        this.accountEntitys = accountEntitys;
     }
 
-    public Set<User> getUser() {
-        return user;
+    public Set<TellerEntity> getTellerEntitys() {
+        return tellerEntitys;
     }
 
-    public void setUser(Set<User> user) {
-        this.user = user;
+    public void setTellerEntitys(Set<TellerEntity> tellerEntitys) {
+        this.tellerEntitys = tellerEntitys;
     }
 
 }

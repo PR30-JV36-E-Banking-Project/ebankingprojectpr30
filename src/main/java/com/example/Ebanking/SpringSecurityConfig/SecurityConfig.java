@@ -1,7 +1,8 @@
 package com.example.Ebanking.SpringSecurityConfig;
 
-import com.example.Ebanking.service.UserService;
+import com.example.Ebanking.service.UserServiceSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -12,18 +13,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    PasswordEncoder passwordEncoder;
-    //    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
     @Autowired
-    UserService userDetailsService;
+    UserServiceSecurity userServiceSecurity;
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userServiceSecurity);
     }
 
 //    @Override
@@ -46,10 +41,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login","/","/account/showForm")
-                .permitAll()
-                .antMatchers("/**")
-                .hasAnyRole("ADMIN", "USER")
+                .antMatchers("/login", "/", "/account/showForm").permitAll()
+                //                .antMatchers("/403").hasRole("ADMIN")
+//                .antMatchers("/**").hasAnyRole("ADMIN", "USER", "TELLER")
+                .antMatchers("/interTranfer").hasAuthority("ROLE_USER")
+                .antMatchers("/teller").hasAuthority("ROLE_TELLER")
+                .antMatchers("/admin").hasAuthority("ROLE_ADMIN")
+                .anyRequest().fullyAuthenticated()
+                .and()
+                .exceptionHandling().accessDeniedPage("/403")
+                
+                
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -59,8 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login?logout=true")
-                .invalidateHttpSession(true)
-                .permitAll()
+                .invalidateHttpSession(true).permitAll()
                 .and()
                 .csrf()
                 .disable()

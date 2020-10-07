@@ -5,7 +5,7 @@
  */
 package com.example.Ebanking.service;
 
-import com.example.Ebanking.entities.Customer;
+import com.example.Ebanking.entities.CustomerEntity;
 
 /**
  *
@@ -13,7 +13,6 @@ import com.example.Ebanking.entities.Customer;
  */
 
 public interface CustomerServiceIF {
-    public void saveCustomer(Customer theCustomer);
-    public Customer loadCustomerByEmail(String email);
-    public Customer getCustomerByUserName(String username);
+    public void saveCustomer(CustomerEntity theCustomer);
+    public CustomerEntity loadCustomerByEmail(String email);
 }

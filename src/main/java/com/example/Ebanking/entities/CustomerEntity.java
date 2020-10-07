@@ -7,14 +7,17 @@ package com.example.Ebanking.entities;
 
 import java.util.Date;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -22,40 +25,51 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author solid
  */
 @Entity
-public class Customer {
+public class CustomerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     private int customerID;
-    private String userName;
-    private String password;
+    @NotNull
+    @Size(max = 30, message = "FullName must under 30 character")
+    private String fullName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDay;
+    @NotNull
     private String sex;
-    private String adrress;
+    @NotNull
+    @Size(max = 50, message = "Adrress must under 50 character")
+    private String address;
+    @NotNull
     private String country;
+    @NotNull
     private String nationlaty;
+    @NotNull
     private String district;
+    @NotNull
     private String city;
+    @NotNull
+    @Size(max = 11, message = "Phone must under 11 number")
     private String phone;
+    @NotNull
     private String email;
+    @NotNull
     private String IDcard;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateIssueIDCard;
+    @NotNull
     private String issueIDCardOffice;
     private boolean status;
 
-    @OneToMany(mappedBy = "customer")
-    private Set<Account> account;
-    
-    @ManyToOne
-    @JoinColumn(name="roleID")
-    private Role role;
+    @OneToMany(mappedBy = "customerEntity")
+    private Set<AccountEntity> accountEntitys;
 
-    public Customer() {
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userID")
+    private UserEntity userEntity;
 
     public int getCustomerID() {
         return customerID;
@@ -65,23 +79,13 @@ public class Customer {
         this.customerID = customerID;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
 
     public Date getBirthDay() {
         return birthDay;
@@ -99,12 +103,12 @@ public class Customer {
         this.sex = sex;
     }
 
-    public String getAdrress() {
-        return adrress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdrress(String Adrress) {
-        this.adrress = adrress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getCountry() {
@@ -187,21 +191,23 @@ public class Customer {
         this.status = status;
     }
 
-    public Set<Account> getAccount() {
-        return account;
+    public Set<AccountEntity> getAccountEntitys() {
+        return accountEntitys;
     }
 
-    public void setAccount(Set<Account> account) {
-        this.account = account;
+    public void setAccountEntitys(Set<AccountEntity> accountEntitys) {
+        this.accountEntitys = accountEntitys;
     }
 
-    public Role getRole() {
-        return role;
+    public UserEntity getUserEntity() {
+        return userEntity;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
-    
+    public CustomerEntity() {
+    }
+
 }

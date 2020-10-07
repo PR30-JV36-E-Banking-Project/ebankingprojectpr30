@@ -5,6 +5,7 @@
  */
 package com.example.Ebanking.entities;
 
+import com.example.Ebanking.validateCustom.AccountValidate;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -20,25 +26,32 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author solid
  */
 @Entity
-public class Transaction {
+public class TransactionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
+    @AccountValidate
     private int transactionID;
     private String transactionType;
+    @Range(min = 50000, max = 9999999, message = "Your Amount must greater 50,000VND")
     private double amount;
+    @NotBlank(message = "Content can not blank")
+    @Size(max = 30, message = "Your content must under 30 character")
+    private String content;
+    private boolean feeBearer;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date transactionDate;
     @ManyToOne
     @JoinColumn(name = "senderAccountID")
-    private Account senderAccount;
+    private AccountEntity senderAccount;
     @ManyToOne
     @JoinColumn(name = "receiveAccountID")
-    private Account receiverAccount;
+    private AccountEntity receiverAccount;
 
-    public Transaction() {
+    public TransactionEntity() {
     }
 
     public int getTransactionID() {
@@ -73,21 +86,36 @@ public class Transaction {
         this.transactionDate = transactionDate;
     }
 
-    public Account getSenderAccount() {
+    public AccountEntity getSenderAccount() {
         return senderAccount;
     }
 
-    public void setSenderAccount(Account senderAccount) {
+    public void setSenderAccount(AccountEntity senderAccount) {
         this.senderAccount = senderAccount;
     }
 
-    public Account getReceiverAccount() {
+    public AccountEntity getReceiverAccount() {
         return receiverAccount;
     }
 
-    public void setReceiverAccount(Account receiverAccount) {
+    public void setReceiverAccount(AccountEntity receiverAccount) {
         this.receiverAccount = receiverAccount;
     }
 
-  
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public boolean isFeeBearer() {
+        return feeBearer;
+    }
+
+    public void setFeeBearer(boolean feeBearer) {
+        this.feeBearer = feeBearer;
+    }
+
 }

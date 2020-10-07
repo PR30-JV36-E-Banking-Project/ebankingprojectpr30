@@ -39,12 +39,12 @@ public class CaptchaAuthenticationFilter extends AbstractAuthenticationProcessin
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
-        
+
         if (processUrl.equals(req.getServletPath()) && "POST".equalsIgnoreCase(req.getMethod())) {
             String captcha = req.getSession().getAttribute("captcha_security").toString();
             String verifyCaptcha = req.getParameter("captcha");
-            System.out.println(captcha);
-            System.out.println(verifyCaptcha);
+            System.out.println("capthcha" + captcha);
+            System.out.println("capthcha verify" + verifyCaptcha);
             //remove from session
             req.getSession().removeAttribute("captcha_security");
 

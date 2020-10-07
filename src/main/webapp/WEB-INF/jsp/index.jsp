@@ -199,7 +199,7 @@
                         <div class="modal-body modal-spa">
                             <p>Please Sign In your E-Banking Account to use our services</p>
                             <p>If you haven't have account yet. Please <a href="/account/showForm">Sign Up</a></p>
-                            <form class=" wthree-subsribe" modelAttribute="customer"
+                            <form class=" wthree-subsribe" 
                                   action="/login" method="post" id="login-Form"> 
                                 <tr>
                                     <td>Username</td><br/>
@@ -297,7 +297,5 @@
                     showModal();
                 </script>
             </c:if>
-
-
     </body>
 </html>

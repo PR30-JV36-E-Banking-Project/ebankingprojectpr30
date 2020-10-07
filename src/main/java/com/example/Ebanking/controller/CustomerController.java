@@ -5,7 +5,7 @@
  */
 package com.example.Ebanking.controller;
 
-import com.example.Ebanking.entities.Customer;
+import com.example.Ebanking.entities.CustomerEntity;
 import com.example.Ebanking.service.CustomerServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,20 +28,20 @@ public class CustomerController {
 
     @RequestMapping(value = "showForm", method = RequestMethod.GET)
     public String showFormForAdd(Model theModel) {
-        Customer theCustomer = new Customer();
+        CustomerEntity theCustomer = new CustomerEntity();
         theModel.addAttribute("customer", theCustomer);
         return "registerForm";
     }
 
     @RequestMapping(value = "saveCustomer", method = RequestMethod.POST)
     @Transactional
-    public String saveCustomer(@ModelAttribute("customer") Customer theCustomer) {
+    public String saveCustomer(@ModelAttribute("customer") CustomerEntity theCustomer) {
         customerService.saveCustomer(theCustomer);
         return "checkEmailNotification";
     }
     
      @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(@ModelAttribute("customer") Customer theCustomer) {
+    public String login(@ModelAttribute("customer") CustomerEntity theCustomer) {
         customerService.saveCustomer(theCustomer);
         return "checkEmailNotification";
     }

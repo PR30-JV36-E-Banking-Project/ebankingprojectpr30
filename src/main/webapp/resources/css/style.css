@@ -2837,4 +2837,7 @@ form.wthree-subsribe {
 	}
 }
 /* -- //Responsive code -- */
-            
+
+.error{
+    color:red;
+}

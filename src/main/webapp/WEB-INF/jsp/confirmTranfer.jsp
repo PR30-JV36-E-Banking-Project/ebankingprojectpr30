@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -73,7 +74,7 @@
                     <!-- top-nav -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li><a href="<c:url value = "/">Home</a></li>
+                            <li><a href="<c:url value = "/"/>">Home</a></li>
                             <li><a href="about.html">About</a></li>    
                             <li><a href="services.html">services</a></li>    
                             <li><a href="gallery.html">Gallery</a></li>    
@@ -99,57 +100,66 @@
                     <div class="col-md-7">
                         <h4>Tranfer Money</h4> 
                         <div class="container">
-                            <table class="table">
-                                <tbody>
-                                    <tr class="info">
-                                        <td>Account</td>
-                                        <td>Anna</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Blance</td>
-                                        <td>10000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>amount transferred.</td>
-                                        <td>5000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>amount in words.</td>
-                                        <td>1 triệu Đồng</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Account Reciver.</td>
-                                        <td>sadsads</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tranfer Content.</td>
-                                        <td>chuyen tien</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fees.</td>
-                                        <td>nguoi chuyen tra</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Fees Amount.</td>
-                                        <td>1000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Email recive OTP code.</td>
-                                        <td>1000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Captcha.</td>
-                                        <td>1000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Input Captcha.</td>
-                                        <td><div class="form-group">
-                                                <input type="text" class="form-control" id="usr">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <form action="/confirmTranfer" method="post" >
+                                <table class="table">
+                                    <tbody>
+                                        <tr class="info">
+                                            <td>Account Sender</td>
+                                            <td>${transaction.senderAccount.accountID}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Blance</td>
+                                            <td>${transaction.senderAccount.accountID-transaction.amount}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>amount transferred.</td>
+                                            <td>${transaction.amount}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>amount in words.</td>
+                                            <td>1 triệu Đồng</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Account Receiver.</td>
+                                            <td>${transaction.receiverAccount.accountID}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tranfer Content.</td>
+                                            <td>${transaction.content}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fees.</td>
+                                            <c:choose>
+                                                <c:when test="${transaction.feeBearer==false}">
+                                                    <td>nguoi chuyen tra</td>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <td>nguoi nhan tra</td>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </tr>
+                                        <tr>
+                                            <td>Fees Amount.</td>
+                                            <td>5000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email recive OTP code.</td>
+                                            <td>${transaction.senderAccount.customerEntity.email}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Captcha.</td>
+                                            <td>1000</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="text"></td>
+                                            <td><div class="form-group">
+                                                    <input type="text" class="form-control" id="usr">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
                         </div>
                     </div>
 

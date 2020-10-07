@@ -5,6 +5,7 @@
  */
 package com.example.Ebanking.entities;
 
+import com.example.Ebanking.validateCustom.AccountValidate;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,32 +14,36 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Range;
 
 /**
  *
  * @author solid
  */
 @Entity
-public class Account {
+public class AccountEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotBlank(message="Account number cannot blank")
     private int accountID;
     private double ballance;
     private String accountType;
     private boolean status;
     @ManyToOne
     @JoinColumn(name = "customerID")
-    private Customer customer;
+    private CustomerEntity customerEntity;
     @OneToMany(mappedBy = "senderAccount")
-    private Set<Transaction> senders;
+    private Set<TransactionEntity> senders;
     @OneToMany(mappedBy = "receiverAccount")
-    private Set<Transaction> receivers;
+    private Set<TransactionEntity> receivers;
     @ManyToOne
     @JoinColumn(name = "bankID")
-    private Bank bank;
+    private BankEntity bankEntity;
 
-    public Account() {
+    public AccountEntity() {
     }
 
     public int getAccountID() {
@@ -73,36 +78,38 @@ public class Account {
         this.status = status;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public CustomerEntity getCustomerEntity() {
+        return customerEntity;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setCustomerEntity(CustomerEntity customerEntity) {
+        this.customerEntity = customerEntity;
     }
 
-    public Set<Transaction> getSenders() {
+    public BankEntity getBankEntity() {
+        return bankEntity;
+    }
+
+    public void setBankEntity(BankEntity bankEntity) {
+        this.bankEntity = bankEntity;
+    }
+
+    public Set<TransactionEntity> getSenders() {
         return senders;
     }
 
-    public void setSenders(Set<Transaction> senders) {
+    public void setSenders(Set<TransactionEntity> senders) {
         this.senders = senders;
     }
 
-    public Set<Transaction> getReceivers() {
+    public Set<TransactionEntity> getReceivers() {
         return receivers;
     }
 
-    public void setReceivers(Set<Transaction> receivers) {
+    public void setReceivers(Set<TransactionEntity> receivers) {
         this.receivers = receivers;
     }
 
-    public Bank getBank() {
-        return bank;
-    }
 
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
 
 }

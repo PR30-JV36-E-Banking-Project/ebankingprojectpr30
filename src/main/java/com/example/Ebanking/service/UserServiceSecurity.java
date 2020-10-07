@@ -5,10 +5,8 @@
  */
 package com.example.Ebanking.service;
 
-import com.example.Ebanking.entities.Customer;
+import com.example.Ebanking.entities.UserEntity;
 import java.util.Arrays;
-import static net.bytebuddy.matcher.ElementMatchers.is;
-import static net.bytebuddy.matcher.ElementMatchers.is;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,22 +23,23 @@ import org.springframework.stereotype.Service;
  * @author solid
  */
 @Service
-public class UserService implements UserDetailsService {
+public class UserServiceSecurity implements UserDetailsService {
 
     @Autowired
-    CustomerService customerService;
+    UserSevice userSevice;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        Customer customer = customerService.getCustomerByUserName(userName);
-        if(customer == null){
-            System.out.println("username"+userName);
+        UserEntity userEntity = userSevice.getUserByUserName(userName);
+        if (userEntity == null) {
+            System.out.println("load user name is null" + userName);
             throw new UsernameNotFoundException("van a");
         }
         BCryptPasswordEncoder encoder = passwordEncoder();
-        GrantedAuthority authority = new SimpleGrantedAuthority(customer.getRole().getRoleType());
-        UserDetails userDetails = (UserDetails) new User(customer.getUserName(),
-                encoder.encode(customer.getPassword()), Arrays.asList(authority));
+        GrantedAuthority authority = new SimpleGrantedAuthority(userEntity.getRoleType());
+        UserDetails userDetails = (UserDetails) new User(userEntity.getUserName(),
+                encoder.encode(userEntity.getPassword()), Arrays.asList(authority));
+        System.out.println("load user name not null" + userName);
         return userDetails;
     }
 

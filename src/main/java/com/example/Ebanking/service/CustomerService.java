@@ -5,7 +5,7 @@
  */
 package com.example.Ebanking.service;
 
-import com.example.Ebanking.entities.Customer;
+import com.example.Ebanking.entities.CustomerEntity;
 import com.example.Ebanking.repository.CustomerRepositoryIF;
 import java.text.MessageFormat;
 import java.util.Optional;
@@ -24,21 +24,13 @@ public class CustomerService implements CustomerServiceIF {
     CustomerRepositoryIF customerRepositoryIF;
 
     @Override
-    public Customer getCustomerByUserName(String username) {
-        Optional<Customer> cusOptional= customerRepositoryIF.findByUserName(username);
-        return cusOptional.isPresent() ? cusOptional.get() : null;
-    }
-
-    @Override
-    public void saveCustomer(Customer theCustomer) {
+    public void saveCustomer(CustomerEntity theCustomer) {
         customerRepositoryIF.save(theCustomer);
     }
 
-    private CustomerRepositoryIF customerRepository;
-
     @Override
-    public Customer loadCustomerByEmail(String email) throws UsernameNotFoundException {
-        final Optional<Customer> optionalCumstomer = customerRepository.findByEmail(email);
+    public CustomerEntity loadCustomerByEmail(String email) throws UsernameNotFoundException {
+        final Optional<CustomerEntity> optionalCumstomer = customerRepositoryIF.findByEmail(email);
 
         if (optionalCumstomer.isPresent()) {
             return optionalCumstomer.get();
