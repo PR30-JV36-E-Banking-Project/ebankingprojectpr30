@@ -7,6 +7,7 @@ package com.example.Ebanking.entities;
 
 import com.example.Ebanking.validateCustom.AccountValidate;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -44,10 +45,10 @@ public class TransactionEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date transactionDate;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "senderAccountID")
     private AccountEntity senderAccount;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "receiveAccountID")
     private AccountEntity receiverAccount;
 

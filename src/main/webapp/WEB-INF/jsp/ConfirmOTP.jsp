@@ -108,8 +108,8 @@
                                             <td>${transaction.senderAccount.accountID}</td>
                                         </tr>
                                         <tr>
-                                            <td>Balance</td>
-                                            <td>${transaction.senderAccount.ballance-transaction.amount-5000}</td>
+                                            <td>Blance</td>
+                                            <td>${transaction.senderAccount.accountID-transaction.amount}</td>
                                         </tr>
                                         <tr>
                                             <td>amount transferred.</td>
@@ -148,19 +148,13 @@
                                         </tr>
                                         <tr>
                                             <td>Captcha.</td>
-                                            <td><img src=${"/captcha"}></td>
+                                            <td>1000</td>
                                         </tr>
                                         <tr>
-                                            <td>Input Captcha</td>
+                                            <td><input type="text"></td>
                                             <td><div class="form-group">
-                                                    <input type="text" class="form-control" name="captcha" id="usr">
-                                                    <span id="error" style="color:red">${error}</span>
+                                                    <input type="text" class="form-control" id="usr">
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="submit" class="btn btn-primary" value="Confirm">
                                             </td>
                                         </tr>
                                     </tbody>

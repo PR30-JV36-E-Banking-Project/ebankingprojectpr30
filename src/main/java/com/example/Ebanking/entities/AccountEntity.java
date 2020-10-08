@@ -7,6 +7,7 @@ package com.example.Ebanking.entities;
 
 import com.example.Ebanking.validateCustom.AccountValidate;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,19 +28,18 @@ public class AccountEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotBlank(message="Account number cannot blank")
     private int accountID;
     private double ballance;
     private String accountType;
     private boolean status;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customerID")
     private CustomerEntity customerEntity;
     @OneToMany(mappedBy = "senderAccount")
     private Set<TransactionEntity> senders;
     @OneToMany(mappedBy = "receiverAccount")
     private Set<TransactionEntity> receivers;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bankID")
     private BankEntity bankEntity;
 

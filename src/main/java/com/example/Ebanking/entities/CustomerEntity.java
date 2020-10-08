@@ -29,38 +29,38 @@ public class CustomerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
+//    @NotNull
     private int customerID;
-    @NotNull
-    @Size(max = 30, message = "FullName must under 30 character")
+//    @NotNull
+//    @Size(max = 30, message = "FullName must under 30 character")
     private String fullName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date birthDay;
-    @NotNull
+//    @NotNull
     private String sex;
-    @NotNull
-    @Size(max = 50, message = "Adrress must under 50 character")
+//    @NotNull
+//    @Size(max = 50, message = "Adrress must under 50 character")
     private String address;
-    @NotNull
+//    @NotNull
     private String country;
-    @NotNull
+//    @NotNull
     private String nationlaty;
-    @NotNull
+//    @NotNull
     private String district;
-    @NotNull
+//    @NotNull
     private String city;
-    @NotNull
-    @Size(max = 11, message = "Phone must under 11 number")
+//    @NotNull
+//    @Size(max = 11, message = "Phone must under 11 number")
     private String phone;
-    @NotNull
+//    @NotNull
     private String email;
-    @NotNull
+//    @NotNull
     private String IDcard;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateIssueIDCard;
-    @NotNull
+//    @NotNull
     private String issueIDCardOffice;
     private boolean status;
 

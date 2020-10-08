@@ -5,6 +5,7 @@
  */
 package com.example.Ebanking.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +33,7 @@ public class TellerEntity {
     @NotNull
     @Size(max = 30, message = "Address must under 50 character")
     private String address;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bankID")
     private BankEntity bankEntity;
     @OneToOne
