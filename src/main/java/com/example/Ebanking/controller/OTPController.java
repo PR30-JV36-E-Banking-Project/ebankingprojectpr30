@@ -54,7 +54,7 @@ public class OTPController {
         String username = auth.getName();
         String cacheOTP = Integer.toString(otpService.getOtp(username));
         if (cacheOTP.equals(OTPcode)) {
-            return"index";
+            return"registerSuccess";
         }
         otpService.clearOTP(username);
         int Otp=otpService.generateOTP(username);
