@@ -97,11 +97,22 @@
                 <div class="contact_wthreerow agileits-w3layouts">
                     <div class="col-md-7 w3l_contact_form">
                         <h4>Register Form</h4> 
-                        <form action="/account/saveCustomer" method="post" modelAttribute="user">
+                        <form action="/account/saveCustomer" method="post" modelAttribute="customer">
                             <form:hidden path="id" />
-                            <input style="margin: 10px;" type="text" name="ctUserName"  required="" placeholder="Enter Your User Name" path="userName">
-                            <input style="margin: 10px;" type="password" name="ctPassword" required="" placeholder="Enter Your Password" path="password">
+                            <input style="margin: 10px;" type="text" name="ctUserName"  required="" placeholder="Enter Your User Name" path="ctUserName">
+                            <input style="margin: 10px;" type="password" name="ctPassword" required="" placeholder="Enter Your Password" path="ctPassword">
                             <input style="margin: 10px;" type="email" name="email" required="" placeholder="Enter Your Email" path="email">
+                            <input style="margin: 10px;" type="text" name="address"  required="" placeholder="Enter Your Address" path="address">
+                            <p style="margin: 10px;" >Your birthday: <input type="date" name="birthday"  required="" path="birthDay"></p>
+                            <input style="margin: 10px;" type="text" name="phone" required="" placeholder="Enter Your Phone Number" path="phone">
+                            <input style="margin: 10px;" type="text" name="nationlaty"  required="" placeholder="Enter Your Nationlaty" path="nationlaty">
+                            <input style="margin: 10px;" type="text" name="country"  required="" placeholder="Enter Your Country" path="country">
+                            <input style="margin: 10px;" type="text" name="district"  required="" placeholder="Enter Your District" path="district">
+                            <input style="margin: 10px;" type="text" name="city"  required="" placeholder="Enter Your City" path="city">
+                            <input style="margin: 10px;" type="text" name="sex"  required="" placeholder="Enter Your Gender" path="sex">
+                            <input style="margin: 10px;" type="text" name="IDcard"  required="" placeholder="Enter Your ID Card" path="IDcard">
+                            <p style="margin: 10px;" >Date of Issue: <input type="date" name="dateIssueIDCard"  required="" path="dateIssueIDCard"></p>
+                            <input style="margin: 10px;" type="text" name="issueIDCardOffice"  required="" placeholder="Enter Your ID Card Office" path="issueIDCardOffice">
                             <input style="margin: 10px;" type="submit" value="Register New Customer">
                         </form>
                     </div>

@@ -8,6 +8,7 @@ package com.example.Ebanking.repository;
 import com.example.Ebanking.entities.UserEntity;
 import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -17,4 +18,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepositoryIF extends CrudRepository<UserEntity, Integer>{
     public Optional<UserEntity> findByUserName(String username);
+    Optional<User> findByEmail(String email);
+
+    public UserEntity save(UserEntity userEntity);
 }

@@ -5,10 +5,13 @@
  */
 package com.example.Ebanking.service;
 
+import com.example.Ebanking.entities.ConfirmationToken;
 import com.example.Ebanking.entities.UserEntity;
+import com.example.Ebanking.repository.UserRepositoryIF;
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -28,6 +31,15 @@ public class UserServiceSecurity implements UserDetailsService {
     @Autowired
     UserSevice userSevice;
 
+    @Autowired
+    ConfirmationTokenService confirmationTokenService;
+
+    @Autowired
+    UserRepositoryIF userRepositoryIF;
+    
+    @Autowired
+    EmailSenderService emailSenderService;
+    
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         UserEntity userEntity = userSevice.getUserByUserName(userName);
@@ -46,5 +58,44 @@ public class UserServiceSecurity implements UserDetailsService {
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    public void signUpUser(UserEntity userEntity) {
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = passwordEncoder();
+
+        final String encryptedPassword = bCryptPasswordEncoder.encode(userEntity.getPassword());
+
+        userEntity.setPassword(encryptedPassword);
+
+        final UserEntity createdUser = userRepositoryIF.save(userEntity);
+
+        final ConfirmationToken confirmationToken = new ConfirmationToken(userEntity);
+
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
+
+    }
+    
+    void sendConfirmationMail(String userMail, String token) {
+
+	final SimpleMailMessage mailMessage = new SimpleMailMessage();
+	mailMessage.setTo(userMail);
+	mailMessage.setSubject("Mail Confirmation Link!");
+	mailMessage.setFrom("<MAIL>");
+	mailMessage.setText(
+			"Thank you for registering. Please click on the below link to activate your account." + "http://localhost:8082/sign-up/confirm?token="
+					+ token);
+
+	emailSenderService.sendEmail(mailMessage);
+}
+    
+    public void confirmUser(ConfirmationToken confirmationToken) {
+
+        final UserEntity userEntity = confirmationToken.getUserEntity();
+
+        userRepositoryIF.save(userEntity);
+
+        confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
+
     }
 }

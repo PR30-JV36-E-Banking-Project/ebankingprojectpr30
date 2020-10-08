@@ -28,7 +28,7 @@ public class UserEntity {
     @Size(max = 20, message = "Your Password must under 20 character")
     private String password;
     private String roleType;
-    
+    private String email;
     @OneToOne(mappedBy="userEntity")
     private CustomerEntity customerEntity;
     @OneToOne(mappedBy="userEntity1")
@@ -83,6 +83,14 @@ public class UserEntity {
 
     public void setRoleType(String roleType) {
         this.roleType = roleType;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }
