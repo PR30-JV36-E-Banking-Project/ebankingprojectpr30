@@ -68,7 +68,7 @@ public class UserServiceSecurity implements UserDetailsService {
 
         userEntity.setPassword(encryptedPassword);
 
-        final UserEntity createdUser = userRepositoryIF.save(userEntity);
+        userRepositoryIF.save(userEntity);
 
         final ConfirmationToken confirmationToken = new ConfirmationToken(userEntity);
 

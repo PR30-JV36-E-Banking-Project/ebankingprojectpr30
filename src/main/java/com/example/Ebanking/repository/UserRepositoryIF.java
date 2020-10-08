@@ -20,5 +20,5 @@ public interface UserRepositoryIF extends CrudRepository<UserEntity, Integer>{
     public Optional<UserEntity> findByUserName(String username);
     Optional<User> findByEmail(String email);
 
-    public UserEntity save(UserEntity userEntity);
+//    public UserEntity save(UserEntity userEntity);
 }

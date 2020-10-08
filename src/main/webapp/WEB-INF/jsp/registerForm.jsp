@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -97,13 +99,20 @@
                 <div class="contact_wthreerow agileits-w3layouts">
                     <div class="col-md-7 w3l_contact_form">
                         <h4>Register Form</h4> 
-                        <form action="/account/saveCustomer" method="post" modelAttribute="user">
-                            <form:hidden path="id" />
-                            <input style="margin: 10px;" type="text" name="ctUserName"  required="" placeholder="Enter Your User Name" path="userName">
-                            <input style="margin: 10px;" type="password" name="ctPassword" required="" placeholder="Enter Your Password" path="password">
-                            <input style="margin: 10px;" type="email" name="email" required="" placeholder="Enter Your Email" path="email">
+                        <form:form action="/account/saveCustomer" method="post" modelAttribute="user">
+                            <form:hidden path="userID" />
+                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your User Name" path="userName"/>
+                            <form:errors path="userName" class="error"/>
+                            <form:input style="margin: 10px;" type="password"  required="" placeholder="Enter Your Password" path="password"/>
+                            <form:errors path="password" class="error"/>
+                            <form:input style="margin: 10px;" type="email"  required="" placeholder="Enter Your Password" path="email"/>
+                            <form:errors path="email" class="error"/>
+                            <form:select class="form-control" path="roleType">
+                                <form:option value="ROLE_USER" label="USER"/>
+                                <form:option value="ROLE_ADMIN" label="ADMIN"/>
+                            </form:select>
                             <input style="margin: 10px;" type="submit" value="Register New Customer">
-                        </form>
+                        </form:form>
                     </div>
 
                     <div class="clearfix"> </div>
