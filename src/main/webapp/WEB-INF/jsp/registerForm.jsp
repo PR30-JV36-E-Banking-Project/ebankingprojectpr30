@@ -110,6 +110,7 @@
                             <form:select class="form-control" path="roleType">
                                 <form:option value="ROLE_USER" label="USER"/>
                                 <form:option value="ROLE_ADMIN" label="ADMIN"/>
+                                <form:option value="ROLE_TELLER" label="TELLER"/>
                             </form:select>
                             <input style="margin: 10px;" type="submit" value="Register New Customer">
                         </form:form>
