@@ -36,17 +36,16 @@ public class UserController {
     String signUp(UserEntity userEntity) {
 
 //        userServiceSecurity.signUpUser(userEntity);
-
         return "checkEmailNotification";
     }
 
-    @GetMapping("/confirm")
-    String confirmMail(@RequestParam("token") String token) {
-
-        Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
-
-        optionalConfirmationToken.ifPresent(userServiceSecurity::confirmUser);
-
-        return "registerSuccess";
-    }
+//    @GetMapping("/confirm")
+//    String confirmMail(@RequestParam("token") String token) {
+//
+//        Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
+//
+//        optionalConfirmationToken.ifPresent(userServiceSecurity::confirmUser);
+//
+//        return "registerSuccess";
+//    }
 }
