@@ -18,6 +18,7 @@
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- Custom Theme files -->
         <link href="../../resources/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+        <link href="../../resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
         <link href="../../resources/css/style.css" type="text/css" rel="stylesheet" media="all">
         <link href="../../resources/css/font-awesome.css" rel="stylesheet">   <!-- font-awesome icons --> 
         <!-- //Custom Theme files -->  
@@ -98,74 +99,23 @@
             <div class="container"> 
                 <div class="contact_wthreerow agileits-w3layouts">
                     <div class="col-md-7">
-                        <h4>Tranfer Money</h4> 
+                        <h4>View Tranfer</h4> 
                         <div class="container">
-                            <form action="/confirmTranfer" method="post" modelAttribute="transaction">
-                                <table class="table">
-                                    <tbody>
-                                        <tr class="info">
-                                            <td>Account Sender</td>
-                                            <td>${transaction.senderAccount.accountID}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Balance</td>
-                                            <td>${transaction.senderAccount.ballance-transaction.amount-5000}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>amount transferred.</td>
-                                            <td>${transaction.amount}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>amount in words.</td>
-                                            <td>1 triệu Đồng</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Account Receiver.</td>
-                                            <td>${transaction.receiverAccount.accountID}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tranfer Content.</td>
-                                            <td>${transaction.content}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fees.</td>
-                                            <c:choose>
-                                                <c:when test="${transaction.feeBearer==false}">
-                                                    <td>nguoi chuyen tra</td>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <td>nguoi nhan tra</td>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </tr>
-                                        <tr>
-                                            <td>Fees Amount.</td>
-                                            <td>5000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Email recive OTP code.</td>
-                                            <td>${transaction.senderAccount.customerEntity.email}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Captcha.</td>
-                                            <td><img src=${"/captcha"}></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Input Captcha</td>
-                                            <td><div class="form-group">
-                                                    <input type="text" autocomplete="off" class="form-control" name="captcha" id="usr">
-                                                    <span id="error" style="color:red">${error}</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="submit" class="btn btn-primary" value="Confirm">
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </form>
+                            <form:form action="/viewTranfer" method="post" modelAttribute="transaction">
+                                <form:select path="transactionID" class="form-control">
+                                    <form:option value="0" label="select Account"/>
+                                    <form:options items="${listTypeAccount}"/>
+                                </form:select>
+                                <div class="control-group">
+                                    <label class="control-label">Date Picking</label>
+                                    <div class="controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                        <input size="16" type="text" value="" readonly>
+                                        <span class="add-on"><i class="icon-remove"></i></span>
+                                        <span class="add-on"><i class="icon-th"></i></span>
+                                    </div>
+                                </div>
+                                <input type="submit" class="btn btn-primary" value="View Transaction">
+                            </form:form>
                         </div>
                     </div>
 
@@ -221,6 +171,7 @@
         </div>
         <!-- //subscribe --> 
         <script src="js/SmoothScroll.min.js"></script>
+
         <!-- smooth-scrolling-of-move-up -->
         <script type="text/javascript" src="js/move-top.js"></script>
         <script type="text/javascript" src="js/easing.js"></script>

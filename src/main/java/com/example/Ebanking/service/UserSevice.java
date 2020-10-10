@@ -31,7 +31,6 @@ public class UserSevice implements UserServiceIF {
     
     @Override
     public UserEntity getUserByUserName(String username) {
-        System.out.println(username);
         Optional<UserEntity> userOptional = userRepositoryIF.findByUserName(username);
         return userOptional.isPresent() ? userOptional.get() : null;
     }

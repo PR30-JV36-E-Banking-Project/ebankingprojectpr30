@@ -5,6 +5,7 @@
  */
 package com.example.Ebanking.entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -16,8 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -58,8 +57,7 @@ public class CustomerEntity {
 //    @NotNull
     private String IDcard;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dateIssueIDCard;
+    private LocalDate dateIssueIDCard;
 //    @NotNull
     private String issueIDCardOffice;
     private boolean status;
@@ -167,11 +165,11 @@ public class CustomerEntity {
         this.IDcard = IDcard;
     }
 
-    public Date getDateIssueIDCard() {
+    public LocalDate getDateIssueIDCard() {
         return dateIssueIDCard;
     }
 
-    public void setDateIssueIDCard(Date dateIssueIDCard) {
+    public void setDateIssueIDCard(LocalDate dateIssueIDCard) {
         this.dateIssueIDCard = dateIssueIDCard;
     }
 

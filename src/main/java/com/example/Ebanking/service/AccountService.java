@@ -26,6 +26,11 @@ public class AccountService implements AccountServiceIF {
         Optional<AccountEntity> account = accountRepositoryIF.findByAccountType(accountType);
         return account.isPresent() ? account.get() : null;
     }
-    
+
+    @Override
+    public AccountEntity findByAccountID(int ID) {
+        Optional<AccountEntity> account = accountRepositoryIF.findByAccountID(ID);
+        return account.isPresent() ? account.get() : null;
+    }
 
 }

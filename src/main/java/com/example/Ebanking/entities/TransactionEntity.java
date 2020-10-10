@@ -6,18 +6,14 @@
 package com.example.Ebanking.entities;
 
 import com.example.Ebanking.validateCustom.AccountValidate;
-import java.util.Date;
-import javax.persistence.CascadeType;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,8 +27,6 @@ public class TransactionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
-    @AccountValidate
     private int transactionID;
     private String transactionType;
     @Range(min = 50000, max = 9999999, message = "Your Amount must greater 50,000VND")
@@ -43,13 +37,13 @@ public class TransactionEntity {
     private boolean feeBearer;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date transactionDate;
-    @ManyToOne(cascade = CascadeType.ALL)
+    private LocalDate transactionDate=null;
+    @ManyToOne
     @JoinColumn(name = "senderAccountID")
     private AccountEntity senderAccount;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "receiveAccountID")
+    @AccountValidate
     private AccountEntity receiverAccount;
 
     public TransactionEntity() {
@@ -79,11 +73,11 @@ public class TransactionEntity {
         this.amount = amount;
     }
 
-    public Date getTransactionDate() {
+    public LocalDate getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Date transactionDate) {
+    public void setTransactionDate(LocalDate transactionDate) {
         this.transactionDate = transactionDate;
     }
 
@@ -117,6 +111,11 @@ public class TransactionEntity {
 
     public void setFeeBearer(boolean feeBearer) {
         this.feeBearer = feeBearer;
+    }
+
+    @Override
+    public String toString() {
+        return "TransactionEntity{" + "transactionID=" + transactionID + ", transactionType=" + transactionType + ", amount=" + amount + ", content=" + content + ", feeBearer=" + feeBearer + ", transactionDate=" + transactionDate +'}';
     }
 
 }

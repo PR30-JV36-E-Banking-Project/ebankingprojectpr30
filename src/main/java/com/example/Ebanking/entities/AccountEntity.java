@@ -5,7 +5,6 @@
  */
 package com.example.Ebanking.entities;
 
-import com.example.Ebanking.validateCustom.AccountValidate;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -15,9 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Range;
+
 
 /**
  *
@@ -108,6 +105,11 @@ public class AccountEntity {
 
     public void setReceivers(Set<TransactionEntity> receivers) {
         this.receivers = receivers;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountEntity{" + "accountID=" + accountID + ", ballance=" + ballance + ", accountType=" + accountType + ", status=" + status + ", customerEntity=" + customerEntity + ", senders=" + senders + ", receivers=" + receivers + ", bankEntity=" + bankEntity + '}';
     }
 
 

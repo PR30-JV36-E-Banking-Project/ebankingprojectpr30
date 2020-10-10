@@ -15,7 +15,8 @@ import org.springframework.stereotype.Service;
  * @author solid
  */
 @Service
-public class TransactionService implements TransactionServiceIF{
+public class TransactionService implements TransactionServiceIF {
+
     @Autowired
     TransactionRepositoryIF transactionRepositoryIF;
 
@@ -23,5 +24,5 @@ public class TransactionService implements TransactionServiceIF{
     public void saveTransaction(TransactionEntity transactionEntity) {
         transactionRepositoryIF.save(transactionEntity);
     }
-    
+
 }

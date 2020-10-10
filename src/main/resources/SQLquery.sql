@@ -8,7 +8,7 @@
  * Created: Oct 6, 2020
  */
 
-INSERT INTO `user_entity` VALUES (1,'123','USER','customer1'),(2,'123','USER','customer2'),(3,'1234','TELLER','teller'),(4,'1234','ADMIN','admin');
+INSERT INTO `user_entity` VALUES (1,'cus@gmail.com','123','ROLE_USER','customer1'),(2,'cus@gmail.com','123','ROLE_USER','customer2'),(3,'cus@gmail.com','1234','ROLE_TELLER','teller'),(4,'cus@gmail.com','1234','ROLE_ADMIN','admin');
 INSERT INTO `bank_entity` VALUES (1,'Da nang','BIDV@gmail.com','BIDV','87439837');
 INSERT INTO `customer_entity` VALUES (2,'123','Da nang','2012-02-23','Da nang','Viet nam','2017-02-23','Thanh khue','cus@gmail.com','Tam','police Da nang','iet nam','43534','male',_binary '',1),(3,'123','Da nang','2012-02-23','Da nang','Viet Nam','2013-03-02','Thah khue','cus@gmail.com','TamThai','Da nang','Viet Nam','5435','Female',_binary '',2);
 INSERT INTO `teller_entity` VALUES (1,'Da nang','teller1@gmail.com',1,3),(2,'Da nang','Admin@gmail.com',1,4);
