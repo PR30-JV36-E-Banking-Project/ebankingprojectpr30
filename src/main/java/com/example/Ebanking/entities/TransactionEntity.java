@@ -29,7 +29,7 @@ public class TransactionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int transactionID;
     private String transactionType;
-    @Range(min = 50000, max = 9999999, message = "Your Amount must greater 50,000VND")
+    @Range(min = 50000, max = 300000000, message = "Your Amount must greater 50,000VND")
     private double amount;
     @NotBlank(message = "Content can not blank")
     @Size(max = 30, message = "Your content must under 30 character")

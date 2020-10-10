@@ -46,14 +46,9 @@ public class TranferController {
     @Autowired
     OTPController oTPController;
 
-//    @ModelAttribute("transactionSS")
-//    public TransactionEntity getTransaction() {
-//        return new TransactionEntity();
-//    }
     @GetMapping("interTranfer")
     public String interTranfer(Model model, Principal principal, Authentication authentication) {
         TransactionEntity transaction = new TransactionEntity();
-//        Map<AccountEntity, String> accountTypesMap = getListAccType(principal);
         List<AccountEntity> accountTypesMap = getListAccType(principal);
         model.addAttribute("transaction", transaction);
         model.addAttribute("listTypeAccount", accountTypesMap);
@@ -62,34 +57,21 @@ public class TranferController {
 
     @PostMapping("createTF")
     public String createTF(@Valid @ModelAttribute("transaction") TransactionEntity transaction, BindingResult result, Model model, Principal principal) throws ParseException {
+        int senderAccID = transaction.getSenderAccount().getAccountID();
+        double amount = transaction.getAmount();
+        if (!accountService.checkBalance(senderAccID, amount)) {
+            List<AccountEntity> accountTypesMap = getListAccType(principal);
+            model.addAttribute("listTypeAccount", accountTypesMap);
+            model.addAttribute("error", "Balance not enought");
+            return "intranferForm";
+        }
         if (result.hasErrors()) {
-//            Map<AccountEntity, String> accountTypesMap = getListAccType(principal);
             List<AccountEntity> accountTypesMap = getListAccType(principal);
             model.addAttribute("listTypeAccount", accountTypesMap);
             return "intranferForm";
         }
-//        transaction.setAmount(transaction.getAmount());
-//        transaction.setContent(transaction.getContent());
-//        transaction.setFeeBearer(transaction.isFeeBearer());
         transaction.setReceiverAccount(accountService.findByAccountID(transaction.getReceiverAccount().getAccountID()));
         transaction.setTransactionDate(LocalDate.parse("2020-02-25"));
-//        transaction.setReceiverAccount(accountService.findByAccountID(transaction.getReceiverAccount().getAccountID()));
-//        transaction.setSenderAccount(transaction.getSenderAccount());
-//        transaction.setTransactionType(transaction.getTransactionType());
-//        transactionSS.setTransactionDate(stringDate);
-//        transaction.setTransactionDate(stringDate);
-//
-//        transaction.setReceiverAccount(accountService.findByAccountID(transaction.getReceiverAccount().getAccountID()));
-//        TransactionEntity trans= new TransactionEntity();
-//        trans.setAmount(50000);
-//        trans.setContent("chuyen tien");
-//        trans.setTransactionType("internal");
-//        trans.setFeeBearer(false);
-//        trans.setReceiverAccount(accountService.findByAccountID(7));
-//        trans.setSenderAccount(accountService.findByAccountID(3));
-//        trans.setTransactionDate(LocalDate.parse("2020-02-25"));
-//        System.out.println(trans);
-//        transactionService.saveTransaction(trans);
         model.addAttribute("transaction", transaction);
         return "confirmTranfer";
     }
@@ -100,7 +82,6 @@ public class TranferController {
         String verifyCaptcha = request.getParameter("captcha");
         if (captcha.equals(verifyCaptcha)) {
             return oTPController.generateOtp();
-//              return "redirect:/generateOtp";
         }
         model.addAttribute("error", "Wrong Captcha");
         return "confirmTranfer";

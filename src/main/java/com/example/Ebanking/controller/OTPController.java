@@ -6,6 +6,7 @@
 package com.example.Ebanking.controller;
 
 import com.example.Ebanking.entities.TransactionEntity;
+import com.example.Ebanking.service.AccountService;
 import com.example.Ebanking.service.EmailService;
 import com.example.Ebanking.service.OTPService;
 import com.example.Ebanking.service.TransactionService;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,6 +42,8 @@ public class OTPController {
     private EmailService myEmailService;
     @Autowired
     private TransactionService transactionService;
+    @Autowired
+    private AccountService accountService;
 
 //    @GetMapping("/generateOtp")
     public String generateOtp() {
@@ -58,9 +62,13 @@ public class OTPController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         String cacheOTP = Integer.toString(otpService.getOtp(username));
+        int senderAccID = transactionSS.getSenderAccount().getAccountID();
+        int recieverAccID = transactionSS.getReceiverAccount().getAccountID();
+        double amount = transactionSS.getAmount();
+        boolean fee = transactionSS.isFeeBearer();
         if (cacheOTP.equals(OTPcode)) {
-            System.out.println("accountID " + transactionSS.toString());
             transactionService.saveTransaction(transactionSS);
+            accountService.updateBalance(senderAccID, amount, recieverAccID, fee);
             status.setComplete();
             return "registerSuccess";
         }

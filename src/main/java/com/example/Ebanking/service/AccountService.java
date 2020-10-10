@@ -10,6 +10,7 @@ import com.example.Ebanking.repository.AccountRepositoryIF;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -31,6 +32,33 @@ public class AccountService implements AccountServiceIF {
     public AccountEntity findByAccountID(int ID) {
         Optional<AccountEntity> account = accountRepositoryIF.findByAccountID(ID);
         return account.isPresent() ? account.get() : null;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateBalance(int senderAccountID, double amount, int recieverAccountID, boolean fee) {
+        AccountEntity senderAccount = findByAccountID(senderAccountID);
+        AccountEntity recieverAccount = findByAccountID(recieverAccountID);
+        if (fee == true) {
+            senderAccount.setBallance(senderAccount.getBallance() - amount - 5000);
+            recieverAccount.setBallance(recieverAccount.getBallance() + amount);
+        } else {
+            senderAccount.setBallance(senderAccount.getBallance() - amount);
+            recieverAccount.setBallance(recieverAccount.getBallance() + amount - 5000);
+        }
+        accountRepositoryIF.save(senderAccount);
+        accountRepositoryIF.save(recieverAccount);
+    }
+
+    @Override
+    public boolean checkBalance(int senderAccountID, double amount) {
+        double balance = findByAccountID(senderAccountID).getBallance();
+        if (balance >= amount + 50000) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 }

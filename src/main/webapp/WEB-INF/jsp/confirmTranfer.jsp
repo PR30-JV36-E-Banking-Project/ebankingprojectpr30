@@ -100,7 +100,7 @@
                     <div class="col-md-7">
                         <h4>Tranfer Money</h4> 
                         <div class="container">
-                            <form action="/confirmTranfer" method="post" modelAttribute="transaction">
+                            <form action="/confirmTranfer" method="post" >
                                 <table class="table">
                                     <tbody>
                                         <tr class="info">
@@ -109,7 +109,14 @@
                                         </tr>
                                         <tr>
                                             <td>Balance</td>
-                                            <td>${transaction.senderAccount.ballance-transaction.amount-5000}</td>
+                                            <c:choose>
+                                                <c:when test="${transaction.feeBearer==true}">
+                                                    <td>${transaction.senderAccount.ballance-transaction.amount-5000}</td>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <td>${transaction.senderAccount.ballance-transaction.amount}</td>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </tr>
                                         <tr>
                                             <td>amount transferred.</td>
@@ -117,7 +124,7 @@
                                         </tr>
                                         <tr>
                                             <td>amount in words.</td>
-                                            <td>1 triệu Đồng</td>
+                                            <td>XXX triệu Đồng</td>
                                         </tr>
                                         <tr>
                                             <td>Account Receiver.</td>
@@ -130,7 +137,7 @@
                                         <tr>
                                             <td>Fees.</td>
                                             <c:choose>
-                                                <c:when test="${transaction.feeBearer==false}">
+                                                <c:when test="${transaction.feeBearer==true}">
                                                     <td>nguoi chuyen tra</td>
                                                 </c:when>
                                                 <c:otherwise>
