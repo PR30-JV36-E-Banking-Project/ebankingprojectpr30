@@ -12,8 +12,10 @@ import com.example.Ebanking.service.TransactionService;
 import com.example.Ebanking.service.UserSevice;
 import java.security.Principal;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
@@ -56,7 +59,8 @@ public class TranferController {
     }
 
     @PostMapping("createTF")
-    public String createTF(@Valid @ModelAttribute("transaction") TransactionEntity transaction, BindingResult result, Model model, Principal principal) throws ParseException {
+    public String createTF(@Valid @ModelAttribute("transaction") TransactionEntity transaction,
+            BindingResult result, Model model, Principal principal) throws ParseException {
         int senderAccID = transaction.getSenderAccount().getAccountID();
         double amount = transaction.getAmount();
         if (!accountService.checkBalance(senderAccID, amount)) {
@@ -88,18 +92,30 @@ public class TranferController {
     }
 
     @GetMapping("viewTransaction")
-    public String viewTransaction(Model model) {
+    public String viewTransaction(Model model, Principal principal) {
         model.addAttribute("transaction", new TransactionEntity());
+        List<AccountEntity> accountTypesMap = getListAccType(principal);
+        model.addAttribute("listTypeAccount", accountTypesMap);
         return "viewTransaction";
+    }
+
+    @PostMapping("viewTranfer")
+    public String vewTranfer(@ModelAttribute("transaction") TransactionEntity ts, @RequestParam("startDay") String startDay,
+            @RequestParam("endDay") String endDay, Model model) throws ParseException {
+        int accountID = ts.getSenderAccount().getAccountID();
+        Date startD = new SimpleDateFormat("yyyy-MM-dd").parse(startDay);
+        Date endD = new SimpleDateFormat("yyyy-MM-dd").parse(endDay);
+        System.out.println(startD + "  " + endD + "  " + accountID);
+        List<TransactionEntity> transactions = transactionService.getTransactionByDate(startD, endD, accountID);
+        System.out.println(transactions);
+        model.addAttribute("listTransaction", transactions);
+        return "transactionInfo";
     }
 
     public List<AccountEntity> getListAccType(Principal principal) {
         Set<AccountEntity> accounts = userSevice.getUserByUserName(principal.getName()).getCustomerEntity().getAccountEntitys();
-//        Map<AccountEntity, String> accountTypeMap = new LinkedHashMap<>();
         List<AccountEntity> accountEntitys = new ArrayList<>();
         for (AccountEntity account : accounts) {
-//            System.out.println(account.toString());
-//            accountTypeMap.put(account, account.getAccountType());
             accountEntitys.add(account);
         }
         return accountEntitys;

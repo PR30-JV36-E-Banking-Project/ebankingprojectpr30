@@ -68,7 +68,7 @@
                             <li><a href="#" class="scroll" data-toggle="dropdown">Services</a>  
                                 <ul class="dropdown-menu">
                                     <li><a href="<c:url value = "/interTranfer"/>">Internal Tranfer</a></li>
-                                    <li><a href="external.jsp">External Tranfer</a></li>
+                                    <li><a href="#">External Tranfer</a></li>
                                     <li><a href="<c:url value = "/viewTransaction"/>">View Tranfer</a></li>
                                 </ul>
                             </li>

@@ -43,13 +43,10 @@ public class CaptchaAuthenticationFilter extends AbstractAuthenticationProcessin
         if (processUrl.equals(req.getServletPath()) && "POST".equalsIgnoreCase(req.getMethod())) {
             String captcha = req.getSession().getAttribute("captcha_security").toString();
             String verifyCaptcha = req.getParameter("captcha");
-            System.out.println("capthcha" + captcha);
-            System.out.println("capthcha verify" + verifyCaptcha);
-            //remove from session
             req.getSession().removeAttribute("captcha_security");
 
             if (captcha != null && !captcha.equals(verifyCaptcha)) {
-                unsuccessfulAuthentication(req, res, new InsufficientAuthenticationException("Wrong verification code."));
+                unsuccessfulAuthentication(req, res, new InsufficientAuthenticationException("Wrong verification code..."));
                 return;
             }
         }

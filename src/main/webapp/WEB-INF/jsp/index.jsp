@@ -69,13 +69,13 @@
                             <li><a href="#" class="scroll">About</a></li>    
                             <li><a href="#" class="scroll" data-toggle="dropdown">Services</a>  
                                 <ul class="dropdown-menu">
-                                    <li><a href="<c:url value = "/interTranfer"/>">Internal Tranfer</a></li>
-                                    <li><a href="<c:url value = "/exterTranfer"/>">External Tranfer</a></li>
-                                    <li><a href="<c:url value = "/viewTransaction"/>">View Tranfer</a></li>
+                                    <li><a href="/login?error_3=true">Internal Tranfer</a></li>
+                                    <li><a href="/login?error_3=true">External Tranfer</a></li>
+                                    <li><a href="/login?error_3=true">View Tranfer</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#" class="scroll">News & Events</a></li>    	
-                            <li><a href="#" class="scroll">Contact Us</a></li>
+                            <li><a href="/login?error_3=true" class="scroll">News & Events</a></li>    	
+                            <li><a href="/login?error_3=true" class="scroll">Contact Us</a></li>
                         </ul>  
                         <div class="clearfix"> </div>	
                     </div>
@@ -292,7 +292,7 @@
                 }
                 ;
             </script>
-            <c:if test="${error2!=null||error!=null}">
+            <c:if test="${error2!=null||error!=null||error_3!=null}">
                 <script>
                     showModal();
                 </script>

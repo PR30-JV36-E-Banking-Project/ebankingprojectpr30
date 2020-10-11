@@ -7,6 +7,8 @@ package com.example.Ebanking.service;
 
 import com.example.Ebanking.entities.TransactionEntity;
 import com.example.Ebanking.repository.TransactionRepositoryIF;
+import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,11 @@ public class TransactionService implements TransactionServiceIF {
     @Override
     public void saveTransaction(TransactionEntity transactionEntity) {
         transactionRepositoryIF.save(transactionEntity);
+    }
+
+    @Override
+    public List<TransactionEntity> getTransactionByDate(Date start, Date end, int id) {
+        return transactionRepositoryIF.getTransactionWhereDateBetweenValue(start, end, id);
     }
 
 }

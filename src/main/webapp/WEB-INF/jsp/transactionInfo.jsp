@@ -18,7 +18,6 @@
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- Custom Theme files -->
         <link href="../../resources/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-        <link href="../../resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
         <link href="../../resources/css/style.css" type="text/css" rel="stylesheet" media="all">
         <link href="../../resources/css/font-awesome.css" rel="stylesheet">   <!-- font-awesome icons --> 
         <!-- //Custom Theme files -->  
@@ -95,34 +94,61 @@
             <!-- banner -->
         </div>	
         <!-- contact -->
-        <div class="w3ls-section contact">
-            <div class="container"> 
-                <div class="contact_wthreerow agileits-w3layouts">
-                    <div class="col-md-7">
-                        <h4>View Account Infomation</h4> 
-                        <div class="container">
-                            <form:form action="/viewTranfer" method="post" modelAttribute="transaction">
-                                <form:select path="senderAccount" class="form-control">
-                                    <form:option value="0" label="select Account"/>
-                                    <form:options items="${listTypeAccount}" itemLabel="accountType" itemValue="accountID" />
-                                </form:select>
-                                <div class="control-group">
-                                    <label class="control-label">Start Time</label>
-                                    <input type="date" name="startDay"  required="" >
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">End Time</label>
-                                    <input type="date" name="endDay"  required="" >
-                                </div>
-                                <input type="submit" class="btn btn-primary" value="View Transaction">
-                            </form:form>
+        <c:if test="${listTransaction!=null}">
+            <div class="w3ls-section contact">
+                <div class="container"> 
+                    <div class="contact_wthreerow agileits-w3layouts">
+                        <div class="col-md-7">
+                            <h4>Tranfer Infomation</h4> 
+                            <div class="container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Transaction ID</th>
+                                            <th>Transaction Amount</th>
+                                            <th>Transaction date</th>
+                                            <th>Account Sender</th>
+                                            <th>Content</th>
+                                            <th>Account receiver</th>
+                                            <th>Fee</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:set var="i" value="1" /> 
+                                        <c:forEach items="${listTransaction}" var="u"> 
+                                            <tr> 
+                                                <td>${i}</td> 
+                                                <td>${u.transactionID}</td> 
+                                                <td>${u.amount}</td> 
+                                                <td>${u.transactionDate}</td> 
+                                                <td>${u.content}</td> 
+                                                <td>${u.receiverAccount.accountID}</td> 
+                                                <td>${u.senderAccount.accountID}</td> 
+                                                <td> 5000 "/n" 
+                                                    <c:choose>
+                                                        <c:when test="${transaction.feeBearer==true}">
+                                                            nguoi chuyen tra
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            nguoi nhan tra
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td> 
+                                            </tr> 
+                                            <c:set var="i" value="${i+1}" /> 
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                                <a href="#" class="btn btn-info" role="button"> Print reciept</a>
+                                <a href="#" class="btn btn-info" role="button"> Back</a>
+                            </div>
                         </div>
+                        <div class="clearfix"> </div>
                     </div>
-
-                    <div class="clearfix"> </div>
                 </div>
             </div>
-        </div>
+        </c:if>
         <!-- //contact --> 
 
         <!--footer-->
@@ -171,7 +197,6 @@
         </div>
         <!-- //subscribe --> 
         <script src="js/SmoothScroll.min.js"></script>
-
         <!-- smooth-scrolling-of-move-up -->
         <script type="text/javascript" src="js/move-top.js"></script>
         <script type="text/javascript" src="js/easing.js"></script>

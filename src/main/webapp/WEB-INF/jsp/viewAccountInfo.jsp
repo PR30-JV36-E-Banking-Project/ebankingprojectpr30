@@ -99,20 +99,20 @@
             <div class="container"> 
                 <div class="contact_wthreerow agileits-w3layouts">
                     <div class="col-md-7">
-                        <h4>View Account Infomation</h4> 
+                        <h4>View Tranfer</h4> 
                         <div class="container">
                             <form:form action="/viewTranfer" method="post" modelAttribute="transaction">
-                                <form:select path="senderAccount" class="form-control">
+                                <form:select path="transactionID" class="form-control">
                                     <form:option value="0" label="select Account"/>
-                                    <form:options items="${listTypeAccount}" itemLabel="accountType" itemValue="accountID" />
+                                    <form:options items="${listTypeAccount}"/>
                                 </form:select>
                                 <div class="control-group">
-                                    <label class="control-label">Start Time</label>
-                                    <input type="date" name="startDay"  required="" >
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">End Time</label>
-                                    <input type="date" name="endDay"  required="" >
+                                    <label class="control-label">Date Picking</label>
+                                    <div class="controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                        <input size="16" type="text" value="" readonly>
+                                        <span class="add-on"><i class="icon-remove"></i></span>
+                                        <span class="add-on"><i class="icon-th"></i></span>
+                                    </div>
                                 </div>
                                 <input type="submit" class="btn btn-primary" value="View Transaction">
                             </form:form>

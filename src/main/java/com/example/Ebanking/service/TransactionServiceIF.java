@@ -6,6 +6,8 @@
 package com.example.Ebanking.service;
 
 import com.example.Ebanking.entities.TransactionEntity;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -13,4 +15,5 @@ import com.example.Ebanking.entities.TransactionEntity;
  */
 public interface TransactionServiceIF {
     public void saveTransaction(TransactionEntity transactionEntity);
+    public List<TransactionEntity>getTransactionByDate(Date start,Date end,int id);
 }

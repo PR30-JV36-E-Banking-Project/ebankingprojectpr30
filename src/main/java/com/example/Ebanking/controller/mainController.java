@@ -48,7 +48,11 @@ public class mainController {
     }
 
     @GetMapping("/login")
-    public String login(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "logout", required = false) String logout, @RequestParam(value = "error2", required = false) String error2, Model model, HttpServletRequest request) {
+    public String login(@RequestParam(value = "error", required = false) String error, 
+            @RequestParam(value = "logout", required = false) String logout, 
+            @RequestParam(value = "error2", required = false) String error2, 
+            @RequestParam(value = "error_3", required = false) String error_3, 
+            Model model, HttpServletRequest request) {
         HttpSession ses = request.getSession();
         if (ses.getAttribute("user") != null) {
             return "redirect:/home";
@@ -58,6 +62,9 @@ public class mainController {
         }
         if (error2 != null) {
             model.addAttribute("error2", "Wrong verification code.!");
+        }
+        if (error_3 != null) {
+            model.addAttribute("error_3", "Show login dialog!");
         }
         return "index";
     }
