@@ -34,7 +34,7 @@ public class CustomerController {
 
     @Autowired
     private CustomerServiceIF customerService;
-
+    
 //    @RequestMapping(value = "showForm", method = RequestMethod.GET)
 //    public String showFormForAdd(Model theModel) {
 //        CustomerEntity theCustomer = new CustomerEntity();
@@ -54,9 +54,9 @@ public class CustomerController {
         customerService.saveCustomer(theCustomer);
         return "checkEmailNotification";
     }
-    
+    @Autowired 
     private UserServiceSecurity userServiceSecurity;
-
+    @Autowired 
     private ConfirmationTokenService confirmationTokenService;
 
     @GetMapping("/sign-up")
@@ -66,7 +66,7 @@ public class CustomerController {
     }
 
     @PostMapping("/sign-up")
-    String signUp(UserEntity userEntity) {
+    String signUp(@ModelAttribute("user") UserEntity userEntity) {
 
         userServiceSecurity.signUpUser(userEntity);
 

@@ -36,10 +36,10 @@ public class UserServiceSecurity implements UserDetailsService {
 
     @Autowired
     UserRepositoryIF userRepositoryIF;
-    
+
     @Autowired
-    EmailSenderService emailSenderService;
-    
+    EmailService emailService;
+
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         UserEntity userEntity = userSevice.getUserByUserName(userName);
@@ -74,24 +74,23 @@ public class UserServiceSecurity implements UserDetailsService {
 
         confirmationTokenService.saveConfirmationToken(confirmationToken);
 
+        String userMail = userEntity.getEmail();
+
+        String token = confirmationToken.getConfirmationToken();
+
+        sendConfirmationMail(userMail, token);
     }
-    
+
     void sendConfirmationMail(String userMail, String token) {
+        emailService.sendTokenMessage(userMail, "Mail Confirmation Link!", "Thank you for registering. Please click on the below link to activate your account." + "http://localhost:8082/sign-up/confirm?token="
+                + token);
+    }
 
-	final SimpleMailMessage mailMessage = new SimpleMailMessage();
-	mailMessage.setTo(userMail);
-	mailMessage.setSubject("Mail Confirmation Link!");
-	mailMessage.setFrom("<MAIL>");
-	mailMessage.setText(
-			"Thank you for registering. Please click on the below link to activate your account." + "http://localhost:8082/sign-up/confirm?token="
-					+ token);
-
-	emailSenderService.sendEmail(mailMessage);
-}
-    
     public void confirmUser(ConfirmationToken confirmationToken) {
 
         final UserEntity userEntity = confirmationToken.getUserEntity();
+
+        userEntity.setIsActived(true);
 
         userRepositoryIF.save(userEntity);
 

@@ -41,6 +41,21 @@ public class EmailService {
         //Uncomment to send mail
         javaMailSender.send(simpleMailMessage);
     }
+    
+    public void sendTokenMessage(String to, String subject, String message) {
+
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setTo(to);
+        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setText(message);
+
+        logger.info(subject);
+        logger.info(to);
+        logger.info(message);
+
+        //Uncomment to send mail
+        javaMailSender.send(simpleMailMessage);
+    }
 
 //    @Bean
 //    public JavaMailSender getJavaMailSender() {

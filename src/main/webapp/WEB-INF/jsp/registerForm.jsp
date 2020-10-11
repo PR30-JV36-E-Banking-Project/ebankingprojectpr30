@@ -99,7 +99,7 @@
                 <div class="contact_wthreerow agileits-w3layouts">
                     <div class="col-md-7 w3l_contact_form">
                         <h4>Register Form</h4> 
-                        <form:form action="/account/saveCustomer" method="post" modelAttribute="user">
+                        <form:form action="/account/sign-up" method="post" modelAttribute="user">
                             <form:hidden path="userID" />
                             <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your User Name" path="userName"/>
                             <form:errors path="userName" class="error"/>
