@@ -19,5 +19,5 @@ public interface AccountServiceIF {
     public AccountEntity findByAccountType(String accountType);
     public void updateBalance(int senderAccountID,double amount,int receiverAccountID,boolean  fee);
     public boolean checkBalance(int senderAccountID,double amount);
-    
+    public void saveAccount(AccountEntity account);
 }

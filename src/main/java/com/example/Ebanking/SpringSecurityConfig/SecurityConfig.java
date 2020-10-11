@@ -43,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/login", "/", "/account/**").permitAll()
                 .antMatchers("/interTranfer").hasAuthority("ROLE_USER")
-                .antMatchers("/teller").hasAuthority("ROLE_TELLER")
+                .antMatchers("/teller","/newAccount").hasAuthority("ROLE_TELLER")
                 .antMatchers("/admin").hasAuthority("ROLE_ADMIN")
                 .anyRequest().fullyAuthenticated()
                 .and()

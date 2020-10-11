@@ -61,4 +61,9 @@ public class AccountService implements AccountServiceIF {
 
     }
 
+    @Override
+    public void saveAccount(AccountEntity account) {
+        accountRepositoryIF.save(account);
+    }
+
 }

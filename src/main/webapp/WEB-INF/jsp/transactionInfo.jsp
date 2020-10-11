@@ -120,12 +120,12 @@
                                             <tr> 
                                                 <td>${i}</td> 
                                                 <td>${u.transactionID}</td> 
-                                                <td>${u.amount}</td> 
+                                                <td>${u.amount} VND</td> 
                                                 <td>${u.transactionDate}</td> 
-                                                <td>${u.content}</td> 
                                                 <td>${u.receiverAccount.accountID}</td> 
+                                                <td>${u.content}</td> 
                                                 <td>${u.senderAccount.accountID}</td> 
-                                                <td> 5000 "/n" 
+                                                <td> 5000 VND -
                                                     <c:choose>
                                                         <c:when test="${transaction.feeBearer==true}">
                                                             nguoi chuyen tra
@@ -141,7 +141,7 @@
                                     </tbody>
                                 </table>
                                 <a href="#" class="btn btn-info" role="button"> Print reciept</a>
-                                <a href="#" class="btn btn-info" role="button"> Back</a>
+                                <button onclick="goBack()" class="btn btn-info">Go Back</button>
                             </div>
                         </div>
                         <div class="clearfix"> </div>
@@ -198,8 +198,9 @@
         <!-- //subscribe --> 
         <script src="js/SmoothScroll.min.js"></script>
         <!-- smooth-scrolling-of-move-up -->
-        <script type="text/javascript" src="js/move-top.js"></script>
-        <script type="text/javascript" src="js/easing.js"></script>
+        <script type="text/javascript" src="../../resources/js/move-top.js"></script>
+        <script type="text/javascript" src="../../resources/js/easing.js"></script>
+        <script type="text/javascript" src="../../resources/js/myJavascript.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 /*

@@ -6581,4 +6581,25 @@ button.close {
     display: none !important;
   }
 }
+.customInput{
+    height:45px;
+    border: 1px solid #ccc;
+    border-radius: 0 3px 3px 0;
+}
+.customCaptcha{
+    height:42px;
+    border: 1px solid #ccc;
+    border-radius: 0 3px 3px 0;
+}
+.input-group-addon-custom {
+  padding:0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1;
+  color: #555;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 /*# sourceMappingURL=bootstrap.css.map */

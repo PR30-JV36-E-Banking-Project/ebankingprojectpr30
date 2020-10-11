@@ -1699,7 +1699,7 @@ form.wthree-subsribe {
     float: left;
     color: #000;
     outline: none;
-    border: 1px solid #000;
+    /*border: 1px solid #000;*/
     background: none;
     -webkit-appearance: none;
     -webkit-transition: 0.5s all;

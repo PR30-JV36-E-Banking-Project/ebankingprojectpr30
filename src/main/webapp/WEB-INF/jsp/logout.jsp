@@ -72,7 +72,7 @@
                                     <li><a href="<c:url value = "/viewTransaction"/>">View Tranfer</a></li>
                                 </ul>
                             </li>
-                            <li><a href="#" class="scroll">Gallery</a></li>
+                            <li><a href="<c:url value = "/newAccount"/>" class="scroll">New Account</a></li>
                             <li><a href="#" class="scroll">News & Events</a></li>    	
                             <li><a href="#" class="scroll">Contact Us</a></li>
                         </ul>  

@@ -199,34 +199,22 @@
                         <div class="modal-body modal-spa">
                             <p>Please Sign In your E-Banking Account to use our services</p>
                             <p>If you haven't have account yet. Please <a href="/account/showForm">Sign Up</a></p>
-                            <form class=" wthree-subsribe" 
-                                  action="/login" method="post" id="login-Form"> 
-                                <tr>
-                                    <td>Username</td><br/>
-                                <td><input id="user-name" type="text" name="username" placeholder="User Name" required=""></td>
-                                </tr>
-                                <br/>
-                                <tr>
-                                    <td>Password</td><br/>
-                                <td><input id="password" type="password" name="password" placeholder="your Password" required=""></td>
-                                <span id="usPass" style="color:red">${usPass}</span>
-                                </tr>
-                                <br/>
-                                <br/>
-                                <br/>
-                                <tr>
-                                    <td>
-                                        <img src=${"/captcha"}>
-                                        <br/>
-                                        <br/>
-                                        <input id="captcha" autocomplete="off" type="text" name="captcha" required="required" style="margin-top: 5px;">
-                                        <br/>
-                                        <span id="error" style="color:red">${error}</span>
-                                        <span id="error2" style="color:red">${error2}</span>
-                                    </td>
-                                </tr>
-                                <br/>
-                                <br/>
+                            <form class=" wthree-subsribe" action="/login" method="post" id="login-Form"> 
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input id="user-name" type="text" class="form-control  customInput" name="username" placeholder="User Name" required="">
+                                    <br/>
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon "><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input id="password" type="password" class="form-control customInput" name="password" placeholder="Password">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon input-group-addon-custom"><img src=${"/captcha"}></span>
+                                    <input type="text" autocomplete="off" class="form-control customCaptcha" name="captcha" placeholder="Captcha" placeholder="Captcha">
+                                </div>
+                                <span id="error" style="color:red">${error}</span>
+                                <span id="error2" style="color:red">${error2}</span>
                                 <input type="submit" value="Sign In">  
                                 <div class="clearfix"></div>
                             </form>
