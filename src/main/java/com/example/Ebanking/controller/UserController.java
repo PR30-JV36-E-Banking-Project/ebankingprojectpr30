@@ -42,12 +42,11 @@ public class UserController {
         return "registerForm";
     }
 
-    @PostMapping("/account/saveCustomer")
+    @PostMapping("/account/signup")
     String signUp(@Valid @ModelAttribute("user") UserEntity userEntity, BindingResult result) {
         if (result.hasErrors()) {
             return "registerForm";
         }
-        System.out.println(userEntity.getUserName());
 //        userRepositoryIF.save(userEntity);
         userServiceSecurity.signUpUser(userEntity);
         return "checkEmailNotification";

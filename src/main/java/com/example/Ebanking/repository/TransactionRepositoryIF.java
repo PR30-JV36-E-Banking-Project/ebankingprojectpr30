@@ -18,6 +18,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface TransactionRepositoryIF extends CrudRepository<TransactionEntity, Integer>{
-    @Query(value = "SELECT * FROM ebankingdbtest.transaction_entity where (transaction_date between ?1 and ?2) and receive_accountid=?3" ,nativeQuery=true)
+    @Query(value = "SELECT * FROM ebankingdbtest.transaction_entity where (transaction_date between ?1 and ?2) and sender_accountid=?3" ,nativeQuery=true)
     public List<TransactionEntity> getTransactionWhereDateBetweenValue(Date start,Date end,int id);
 }

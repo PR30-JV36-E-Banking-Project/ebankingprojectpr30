@@ -8,12 +8,15 @@ package com.example.Ebanking.controller;
 import com.example.Ebanking.entities.AccountEntity;
 import com.example.Ebanking.entities.TransactionEntity;
 import com.example.Ebanking.service.AccountService;
+import com.example.Ebanking.service.RecieptService;
 import com.example.Ebanking.service.TransactionService;
 import com.example.Ebanking.service.UserSevice;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,6 +51,8 @@ public class TranferController {
     TransactionService transactionService;
     @Autowired
     OTPController oTPController;
+    @Autowired
+    RecieptService recieptService;
 
     @GetMapping("interTranfer")
     public String interTranfer(Model model, Principal principal, Authentication authentication) {
@@ -63,6 +68,8 @@ public class TranferController {
             BindingResult result, Model model, Principal principal) throws ParseException {
         int senderAccID = transaction.getSenderAccount().getAccountID();
         double amount = transaction.getAmount();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyy-MM-dd");  
+        LocalDateTime now = LocalDateTime.now();  
         if (!accountService.checkBalance(senderAccID, amount)) {
             List<AccountEntity> accountTypesMap = getListAccType(principal);
             model.addAttribute("listTypeAccount", accountTypesMap);
@@ -75,7 +82,7 @@ public class TranferController {
             return "intranferForm";
         }
         transaction.setReceiverAccount(accountService.findByAccountID(transaction.getReceiverAccount().getAccountID()));
-        transaction.setTransactionDate(LocalDate.parse("2020-02-25"));
+        transaction.setTransactionDate(LocalDate.parse(dtf.format(now)));
         model.addAttribute("transaction", transaction);
         return "confirmTranfer";
     }
@@ -100,16 +107,19 @@ public class TranferController {
     }
 
     @PostMapping("viewTranfer")
-    public String vewTranfer(@ModelAttribute("transaction") TransactionEntity ts, @RequestParam("startDay") String startDay,
+    public String viewTranfer(@ModelAttribute("transaction") TransactionEntity ts, @RequestParam("startDay") String startDay,
             @RequestParam("endDay") String endDay, Model model) throws ParseException {
         int accountID = ts.getSenderAccount().getAccountID();
         Date startD = new SimpleDateFormat("yyyy-MM-dd").parse(startDay);
         Date endD = new SimpleDateFormat("yyyy-MM-dd").parse(endDay);
-        System.out.println(startD + "  " + endD + "  " + accountID);
         List<TransactionEntity> transactions = transactionService.getTransactionByDate(startD, endD, accountID);
-        System.out.println(transactions);
         model.addAttribute("listTransaction", transactions);
         return "transactionInfo";
+    }
+    @GetMapping("printReciept")
+    public String printReciept(){
+//        recieptService.createPdf();
+        return "index";
     }
 
     public List<AccountEntity> getListAccType(Principal principal) {

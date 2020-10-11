@@ -72,7 +72,8 @@ public class UserServiceSecurity implements UserDetailsService {
 
         final ConfirmationToken confirmationToken = new ConfirmationToken(userEntity);
 
-        confirmationTokenService.saveConfirmationToken(confirmationToken);
+//        confirmationTokenService.saveConfirmationToken(confirmationToken);
+//        bị lỗi 
 
         String userMail = userEntity.getEmail();
 
@@ -82,6 +83,8 @@ public class UserServiceSecurity implements UserDetailsService {
     }
 
     void sendConfirmationMail(String userMail, String token) {
+        System.out.println("email "+userMail);
+        System.out.println("token "+token);
         emailService.sendTokenMessage(userMail, "Mail Confirmation Link!", "Thank you for registering. Please click on the below link to activate your account." + "http://localhost:8082/sign-up/confirm?token="
                 + token);
     }

@@ -140,7 +140,7 @@
                                         </c:forEach>
                                     </tbody>
                                 </table>
-                                <a href="#" class="btn btn-info" role="button"> Print reciept</a>
+                                <a href="<c:url value = "/printReciept"/>" class="btn btn-info" role="button"> Print reciept</a>
                                 <button onclick="goBack()" class="btn btn-info">Go Back</button>
                             </div>
                         </div>
