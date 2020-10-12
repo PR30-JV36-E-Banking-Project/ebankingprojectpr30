@@ -13,14 +13,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Teller Manager</title>
-	<link href="<c:url value="../../resources/css/bootstrap.min.css" />" rel="stylesheet">
-	<script src="<c:url value="../../resources/js/jquery-3.4.1.min.js" />"></script>
-	<script src="<c:url value="../../resources/js/bootstrap.min.js" />"></script>
+<!--        <link href="../../resources/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <script src="../../resources/js/bootstrap.js" type="text/javascript"></script>
+        <script src="../../resources/js/jquery-2.2.3.min.js" type="text/javascript"></script>-->
+	<link href="<c:url value="../../resources/css/bootstrap.css" />" rel="stylesheet">
+	<script src="<c:url value="../../resources/js/jquery-2.2.3.min.js" />"></script>
+	<script src="<c:url value="../../resources/js/bootstrap.js" />"></script>
     </head>
     <body>
 	<div class="container">
 	    <div class="col-md-offset-2 col-md-7">
-		<h2 class="text-center">Spring MVC + Hibernate + JSP + MySQL Example</h2>
+		<h2 class="text-center">ADD NEW TELLER OR UPDATE TELLER'S INFORMATION</h2>
 		<div class="panel panel-info">
 		    <div class="panel-heading">
 			<div class="panel-title">Manage Teller</div>

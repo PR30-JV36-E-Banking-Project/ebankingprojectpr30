@@ -41,10 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login", "/", "/account/**","/list-teller").permitAll()
+                .antMatchers("/login", "/", "/account/**").permitAll()
                 .antMatchers("/interTranfer").hasAuthority("ROLE_USER")
                 .antMatchers("/teller","/newAccount").hasAuthority("ROLE_TELLER")
-                .antMatchers("/admin").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/admin","/list-teller").hasAuthority("ROLE_ADMIN")
                 .anyRequest().fullyAuthenticated()
                 .and()
                 .exceptionHandling().accessDeniedPage("/403")
