@@ -60,8 +60,9 @@ public class CustomerController {
     private ConfirmationTokenService confirmationTokenService;
 
     @GetMapping("/sign-up")
-    String signUp() {
-
+    String signUp(Model model) {
+        UserEntity userEntity = new UserEntity();
+        model.addAttribute("user", userEntity);
         return "registerForm";
     }
 

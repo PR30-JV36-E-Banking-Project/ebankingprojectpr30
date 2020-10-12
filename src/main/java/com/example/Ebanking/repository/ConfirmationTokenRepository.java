@@ -6,6 +6,7 @@
 package com.example.Ebanking.repository;
 
 import com.example.Ebanking.entities.ConfirmationToken;
+import java.util.Optional;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -13,5 +14,5 @@ import org.springframework.data.repository.CrudRepository;
  * @author Hoang Duy Nhat
  */
 public interface ConfirmationTokenRepository extends CrudRepository<ConfirmationToken, Long> {
-    
+    Optional<ConfirmationToken> findConfirmationTokenByConfirmationToken(String token);
 }
