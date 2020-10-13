@@ -88,7 +88,7 @@ public class CustomerController {
         return "registerSuccess";
     }
     
-    @RequestMapping(value = "viewUserInformatiton", method = RequestMethod.GET)
+    @RequestMapping(value = "viewUserInformation", method = RequestMethod.GET)
     public String home(Model model, Principal principal, HttpServletRequest request) {
         String username = principal.getName();
         

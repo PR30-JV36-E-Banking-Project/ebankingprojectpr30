@@ -74,7 +74,7 @@ public class OTPController {
             transactionService.saveTransaction(transactionSS);
             accountService.updateBalance(senderAccID, amount, recieverAccID, fee);
             status.setComplete();
-            return "registerSuccess";
+            return "tranferSuccess";
         }
         otpService.clearOTP(username);
         int Otp = otpService.generateOTP(username);

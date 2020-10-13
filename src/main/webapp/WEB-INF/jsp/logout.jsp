@@ -70,11 +70,12 @@
                                     <li><a href="<c:url value = "/interTranfer"/>">Internal Tranfer</a></li>
                                     <li><a href="#">External Tranfer</a></li>
                                     <li><a href="<c:url value = "/viewTransaction"/>">View Tranfer</a></li>
+                                    <li><a href="<c:url value = "account/viewUserInformation"/>">View account Information</a></li>
                                 </ul>
                             </li>
                             <li><a href="<c:url value = "/newAccount"/>" class="scroll">New Account</a></li>
                             <li><a href="#" class="scroll">News & Events</a></li>    	
-                            <li><a href="#" class="scroll">Contact Us</a></li>
+                            <li><a href="list-teller" class="scroll">Contact Us</a></li>
                         </ul>  
                         <div class="clearfix"> </div>	
                     </div>

@@ -198,7 +198,7 @@
                         </div> 
                         <div class="modal-body modal-spa">
                             <p>Please Sign In your E-Banking Account to use our services</p>
-                            <p>If you haven't have account yet. Please <a href="/account/showForm">Sign Up</a></p>
+                            <p>If you haven't have account yet. Please <a href="/account/sign-up">Sign Up</a></p>
                             <form class=" wthree-subsribe" action="/login" method="post" id="login-Form"> 
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
