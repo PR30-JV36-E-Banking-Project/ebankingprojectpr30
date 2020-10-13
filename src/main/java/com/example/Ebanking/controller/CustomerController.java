@@ -11,8 +11,11 @@ import com.example.Ebanking.entities.UserEntity;
 import com.example.Ebanking.service.ConfirmationTokenService;
 import com.example.Ebanking.service.CustomerServiceIF;
 import com.example.Ebanking.service.UserServiceSecurity;
+import com.example.Ebanking.service.UserSevice;
 import java.security.Principal;
 import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +37,8 @@ public class CustomerController {
 
     @Autowired
     private CustomerServiceIF customerService;
-    
+    @Autowired
+    private UserSevice userSevice;
 //    @RequestMapping(value = "showForm", method = RequestMethod.GET)
 //    public String showFormForAdd(Model theModel) {
 //        CustomerEntity theCustomer = new CustomerEntity();
@@ -85,9 +89,13 @@ public class CustomerController {
     }
     
     @RequestMapping(value = "viewUserInformatiton", method = RequestMethod.GET)
-    public String viewUserInformatiton(Principal principal) {
-        UserEntity theUser = new UserEntity();
-        theUser.setUserName(principal.getName());
-        return "viewUserInformatiton";
+    public String home(Model model, Principal principal, HttpServletRequest request) {
+        String username = principal.getName();
+        
+        UserEntity currentUser = userSevice.getUserByUserName(username);
+                
+        model.addAttribute("currentUser", currentUser);
+             
+        return "viewAccountInformation";
     }
 }
