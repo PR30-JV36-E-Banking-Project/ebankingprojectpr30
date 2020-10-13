@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login", "/", "/account/**").permitAll()
                 .antMatchers("/interTranfer").hasAuthority("ROLE_USER")
                 .antMatchers("/teller","/newAccount").hasAuthority("ROLE_TELLER")
-                .antMatchers("/admin").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/admin","/list-teller").hasAuthority("ROLE_ADMIN")
                 .anyRequest().fullyAuthenticated()
                 .and()
                 .exceptionHandling().accessDeniedPage("/403")

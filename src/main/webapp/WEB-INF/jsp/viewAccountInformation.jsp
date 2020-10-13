@@ -1,12 +1,10 @@
 <%-- 
-    Document   : register
-    Created on : Sep 29, 2020, 6:29:19 PM
+    Document   : registerSuccess
+    Created on : Sep 29, 2020, 6:31:04 PM
     Author     : Hoang Duy Nhat
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -84,7 +82,7 @@
                                     <li><a href="typography.html">Typograpghy</a></li>
                                 </ul>
                             </li>	
-                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="contact.html" >Contact Us</a></li>
                         </ul>  
                         <div class="clearfix"> </div>	
                     </div>
@@ -96,100 +94,111 @@
         <!-- contact -->
         <div class="w3ls-section contact">
             <div class="container"> 
-                <div class="contact_wthreerow agileits-w3layouts">
-                    <div class="col-md-7 w3l_contact_form">
-                        <h4>Register Form</h4> 
-                        <form:form action="/account/sign-up" method="post" modelAttribute="user">
-                            <form:hidden path="userID" />
-                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your User Name" path="userName"/>
-                            <form:errors path="userName" class="error"/>
-                            <form:input style="margin: 10px;" type="password"  required="" placeholder="Enter Your Password" path="password"/>
-                            <form:errors path="password" class="error"/>
-                            <form:input style="margin: 10px;" type="email"  required="" placeholder="Enter Your Email" path="email"/>
-                            <form:errors path="email" class="error"/>
-                            <form:select class="form-control" path="roleType">
-                                <form:option value="ROLE_USER" label="USER"/>
-                                <form:option value="ROLE_ADMIN" label="ADMIN"/>
-                                <form:option value="ROLE_TELLER" label="TELLER"/>
-                            </form:select>
-                            <input style="margin: 10px;" type="submit" value="Register New Customer">
-                        </form:form>
-                    </div>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Your Account Information</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Account ID</th>
+                                <td>${currentUser.userID}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Account Username</th>
+                                <td>${currentUser.userName}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Account Email</th>
+                                <td>${currentUser.email}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Account is actived</th>
+                                <td>${currentUser.isActived}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>  
 
-                    <div class="clearfix"> </div>
-                </div>
+
+                <div class="clearfix"> </div>
             </div>
         </div>
-        <!-- //contact --> 
+    </div>
+    <!-- //contact --> 
 
-        <!--footer-->
-        <div class="agile-footer w3ls-section">
-            <div class="container">
-                <div class="col-md-7 list-footer">
-                    <ul class="footer-nav">
-                        <li><a  href="index.html">Home</a></li>
-                        <li><a  href="about.html">About</a></li>
-                        <li><a  href="services.html">Services</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                    </ul>
-                    <p>Vivamus sed porttitor felis. Pellentesque habitant morbi tristique senectus et netus et ctetur adipiscing elit. Cras rutrum iaculis</p>
-                </div>
-                <div class="col-md-5 agileinfo-sub">
-                    <h6>Click the link below to start the subscription service</h6>
-                    <a href="#" data-toggle="modal" data-target="#myModal1">subscribe</a>
-                </div>
-                <div class="clearfix"></div>
+    <!--footer-->
+    <div class="agile-footer w3ls-section">
+        <div class="container">
+            <div class="col-md-7 list-footer">
+                <ul class="footer-nav">
+                    <li><a  href="index.html">Home</a></li>
+                    <li><a  href="about.html">About</a></li>
+                    <li><a  href="services.html">Services</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+                <p>Vivamus sed porttitor felis. Pellentesque habitant morbi tristique senectus et netus et ctetur adipiscing elit. Cras rutrum iaculis</p>
             </div>
-        </div>	 
-        <div class="w3_agile-copyright text-center">
-            <p>© 2017 E-Banking. All rights reserved | Design by <a href="//w3layouts.com/">W3layouts</a></p>
+            <div class="col-md-5 agileinfo-sub">
+                <h6>Click the link below to start the subscription service</h6>
+                <a href="#" data-toggle="modal" data-target="#myModal1">subscribe</a>
+            </div>
+            <div class="clearfix"></div>
         </div>
-        <!--//footer-->	
-        <!-- subscribe -->
-        <div class="modal bnr-modal fade" id="myModal1" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <img src="../../resources/images/logo.png" alt="logo"/>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-                    </div> 
-                    <div class="modal-body modal-spa">
-                        <p>E-Banking's email newsletter provides subscribers with helpful articles on important issues in the banking industry, as well as news about events and more! To sign up for the newsletter, fill the below form.</p>
-                        <form class=" wthree-subsribe" action="#" method="post"> 
-                            <input type="text" name="name" placeholder="Your Name" required="">
-                            <input type="email" name="email" placeholder="your Email" required="">
-                            <input type="submit" value="SignUp"> 
-                            <div class="clearfix"></div>
-                        </form>
-                    </div> 
-                </div>
+    </div>	 
+    <div class="w3_agile-copyright text-center">
+        <p>© 2017 E-Banking. All rights reserved | Design by <a href="//w3layouts.com/">W3layouts</a></p>
+    </div>
+    <!--//footer-->	
+    <!-- subscribe -->
+    <div class="modal bnr-modal fade" id="myModal1" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="../../resources/images/logo.png" alt="logo"/>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
+                </div> 
+                <div class="modal-body modal-spa">
+                    <p>E-Banking's email newsletter provides subscribers with helpful articles on important issues in the banking industry, as well as news about events and more! To sign up for the newsletter, fill the below form.</p>
+                    <form class=" wthree-subsribe" action="#" method="post"> 
+                        <input type="text" name="name" placeholder="Your Name" required="">
+                        <input type="email" name="email" placeholder="your Email" required="">
+                        <input type="submit" value="SignUp"> 
+                        <div class="clearfix"></div>
+                    </form>
+                </div> 
             </div>
         </div>
-        <!-- //subscribe --> 
-        <script src="js/SmoothScroll.min.js"></script>
-        <!-- smooth-scrolling-of-move-up -->
-        <script type="text/javascript" src="js/move-top.js"></script>
-        <script type="text/javascript" src="js/easing.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                /*
-                 var defaults = {
-                 containerID: 'toTop', // fading element id
-                 containerHoverID: 'toTopHover', // fading element hover id
-                 scrollSpeed: 1200,
-                 easingType: 'linear' 
-                 };
-                 */
+    </div>
+    <!-- //subscribe --> 
+    <script src="../../resources/js/SmoothScroll.min.js"></script>
+    <!-- smooth-scrolling-of-move-up -->
+    <script type="text/javascript" src="../../resources/js/move-top.js"></script>
+    <script type="text/javascript" src="../../resources/js/easing.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*
+             var defaults = {
+             containerID: 'toTop', // fading element id
+             containerHoverID: 'toTopHover', // fading element hover id
+             scrollSpeed: 1200,
+             easingType: 'linear' 
+             };
+             */
 
-                $().UItoTop({easingType: 'easeOutQuart'});
+            $().UItoTop({easingType: 'easeOutQuart'});
 
-            });
-        </script>
-        <!-- //smooth-scrolling-of-move-up -->  
-        <!-- Bootstrap core JavaScript
-    ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="../../resources/js/bootstrap.js"></script>
-    </body>
+        });
+    </script>
+    <!-- //smooth-scrolling-of-move-up -->  
+    <!-- Bootstrap core JavaScript
+================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../../resources/js/bootstrap.js"></script>
+
+</body>
 </html>

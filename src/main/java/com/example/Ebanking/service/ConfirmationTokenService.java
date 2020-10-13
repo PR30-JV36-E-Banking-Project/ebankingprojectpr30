@@ -25,8 +25,9 @@ public class ConfirmationTokenService {
     
     @Autowired
     ConfirmationTokenService confirmationTokenService;
-
-    private ConfirmationTokenRepository confirmationTokenRepository;
+    
+    @Autowired
+    ConfirmationTokenRepository confirmationTokenRepository;
 
     void saveConfirmationToken(ConfirmationToken confirmationToken) {
 
@@ -49,6 +50,6 @@ public class ConfirmationTokenService {
 //    }
 
     public Optional<ConfirmationToken> findConfirmationTokenByToken(String token) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return confirmationTokenRepository.findConfirmationTokenByConfirmationToken(token);
     }
 }

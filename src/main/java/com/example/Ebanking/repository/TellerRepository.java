@@ -5,14 +5,15 @@
  */
 package com.example.Ebanking.repository;
 
-import com.example.Ebanking.entities.ConfirmationToken;
-import java.util.Optional;
+import com.example.Ebanking.entities.TellerEntity;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Hoang Duy Nhat
  */
-public interface ConfirmationTokenRepository extends CrudRepository<ConfirmationToken, Long> {
-    Optional<ConfirmationToken> findConfirmationTokenByConfirmationToken(String token);
+@Repository
+public interface TellerRepository extends  CrudRepository<TellerEntity, Integer>{
+    
 }

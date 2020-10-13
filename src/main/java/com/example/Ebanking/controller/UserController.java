@@ -35,22 +35,22 @@ public class UserController {
     @Autowired
     private UserRepositoryIF userRepositoryIF;
 
-    @GetMapping("/account/showForm")
-    String signUp(Model model) {
-        UserEntity userEntity = new UserEntity();
-        model.addAttribute("user", userEntity);
-        return "registerForm";
-    }
-
-    @PostMapping("/account/signup")
-    String signUp(@Valid @ModelAttribute("user") UserEntity userEntity, BindingResult result) {
-        if (result.hasErrors()) {
-            return "registerForm";
-        }
-//        userRepositoryIF.save(userEntity);
-        userServiceSecurity.signUpUser(userEntity);
-        return "checkEmailNotification";
-    }
+//    @GetMapping("/account/showForm")
+//    String signUp(Model model) {
+//        UserEntity userEntity = new UserEntity();
+//        model.addAttribute("user", userEntity);
+//        return "registerForm";
+//    }
+//
+//    @PostMapping("/account/signup")
+//    String signUp(@Valid @ModelAttribute("user") UserEntity userEntity, BindingResult result) {
+//        if (result.hasErrors()) {
+//            return "registerForm";
+//        }
+////        userRepositoryIF.save(userEntity);
+//        userServiceSecurity.signUpUser(userEntity);
+//        return "checkEmailNotification";
+//    }
 
 //    @GetMapping("/confirm")
 //    String confirmMail(@RequestParam("token") String token) {
