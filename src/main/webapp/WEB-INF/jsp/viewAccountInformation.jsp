@@ -104,20 +104,52 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <th scope="row">Account ID</th>
-                                <td>${currentUser.userID}</td>
+                                <th scope="row">Customer's ID</th>
+                                <td>${currentCustomer.customerID}</td>
                             </tr>
                             <tr>
-                                <th scope="row">Account Username</th>
-                                <td>${currentUser.userName}</td>
+                                <th scope="row">Customer's Full Name</th>
+                                <td>${currentCustomer.fullName}</td>
                             </tr>
                             <tr>
-                                <th scope="row">Account Email</th>
-                                <td>${currentUser.email}</td>
+                                <th scope="row">Customer's Adress</th>
+                                <td>${currentCustomer.address}</td>
                             </tr>
                             <tr>
-                                <th scope="row">Account is actived</th>
-                                <td>${currentUser.isActived}</td>
+                                <th scope="row">Customer's Country</th>
+                                <td>${currentCustomer.country}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Customer's Nationlaty</th>
+                                <td>${currentCustomer.nationlaty}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Customer's District</th>
+                                <td>${currentCustomer.district}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Customer's city</th>
+                                <td>${currentCustomer.city}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Customer's phone numberd</th>
+                                <td>${currentCustomer.phone}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Customer's email</th>
+                                <td>${currentCustomer.email}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Customer's ID Card</th>
+                                <td>${currentCustomer.IDcard}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Customer's Date Issue ID Card</th>
+                                <td>${currentCustomer.dateIssueIDCard}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Customer's Issue ID Card Office</th>
+                                <td>${currentCustomer.issueIDCardOffice}</td>
                             </tr>
                         </tbody>
                     </table>

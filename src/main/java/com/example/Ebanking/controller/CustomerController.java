@@ -94,7 +94,11 @@ public class CustomerController {
         
         UserEntity currentUser = userSevice.getUserByUserName(username);
                 
-        model.addAttribute("currentUser", currentUser);
+        CustomerEntity currentCustomer = currentUser.getCustomerEntity();
+//        CustomerEntity currentCustomer = customerService.findByUserEntity(currentUser);
+//        
+//        model.addAttribute("currentCustomer", currentCustomer);
+        model.addAttribute("currentCustomer", currentCustomer);
              
         return "viewAccountInformation";
     }

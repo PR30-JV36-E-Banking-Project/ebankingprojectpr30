@@ -6,6 +6,7 @@
 package com.example.Ebanking.service;
 
 import com.example.Ebanking.entities.CustomerEntity;
+import com.example.Ebanking.entities.UserEntity;
 import com.example.Ebanking.repository.CustomerRepositoryIF;
 import java.text.MessageFormat;
 import java.util.Optional;
@@ -37,6 +38,12 @@ public class CustomerService implements CustomerServiceIF {
         } else {
             throw new UsernameNotFoundException(MessageFormat.format("User with email {0} cannot be found.", email));
         }
+    }
+
+
+    @Override
+    public CustomerEntity findByUserEntity(UserEntity userEntity) {
+        return customerRepositoryIF.findByUserEntity(userEntity);
     }
 
 }
