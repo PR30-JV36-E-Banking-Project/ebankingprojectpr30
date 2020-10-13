@@ -103,7 +103,6 @@
                         <div class="container">
                             <form:form action="/viewTranfer" method="post" modelAttribute="transaction">
                                 <form:select path="senderAccount" class="form-control">
-                                    <form:option value="0" label="select Account"/>
                                     <form:options items="${listTypeAccount}" itemLabel="accountType" itemValue="accountID" />
                                 </form:select>
                                 <div class="control-group">

@@ -10,6 +10,7 @@ import com.example.Ebanking.service.AccountService;
 import com.example.Ebanking.service.EmailService;
 import com.example.Ebanking.service.OTPService;
 import com.example.Ebanking.service.TransactionService;
+import com.example.Ebanking.service.UserSevice;
 import java.util.HashMap;
 import java.util.Map;
 import javax.transaction.Transaction;
@@ -44,15 +45,18 @@ public class OTPController {
     private TransactionService transactionService;
     @Autowired
     private AccountService accountService;
+    @Autowired
+    private UserSevice userSevice;
 
 //    @GetMapping("/generateOtp")
     public String generateOtp() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         int otp = otpService.generateOTP(username);
+        String email=userSevice.getUserByUserName(username).getCustomerEntity().getEmail();
         String message = Integer.toString(otp);
         logger.info("OTP : " + otp);
-        myEmailService.sendOtpMessage("solidwork2013@gmail.com", "OTP -SpringBoot", message);
+        myEmailService.sendOtpMessage(email, "Verify-OTP", message);
 
         return "confirmOTP";
     }

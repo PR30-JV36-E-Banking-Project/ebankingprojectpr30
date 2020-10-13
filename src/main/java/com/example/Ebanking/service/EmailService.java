@@ -5,14 +5,25 @@
  */
 package com.example.Ebanking.service;
 
+import java.io.File;
 import java.util.Properties;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 /**
@@ -41,7 +52,7 @@ public class EmailService {
         //Uncomment to send mail
         javaMailSender.send(simpleMailMessage);
     }
-    
+
     public void sendTokenMessage(String to, String subject, String message) {
 
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
@@ -57,6 +68,17 @@ public class EmailService {
         javaMailSender.send(simpleMailMessage);
     }
 
+    public void sendRecieptMessage(String to, String subject, String message) throws MessagingException {
+
+        MimeMessage msg = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+        helper.setTo(to);
+        helper.setSubject(subject);
+        helper.setText(message);
+        DataSource source = new FileDataSource("C:\\Users\\solid\\Documents\\NetBeansProjects\\ebankingprojectpr30\\Ebanking Reciept.pdf");
+        helper.addAttachment("Ebanking Reciept.pdf",source);
+        javaMailSender.send(msg);
+    }
 //    @Bean
 //    public JavaMailSender getJavaMailSender() {
 //        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();

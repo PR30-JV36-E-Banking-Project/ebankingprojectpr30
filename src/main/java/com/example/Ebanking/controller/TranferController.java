@@ -8,9 +8,11 @@ package com.example.Ebanking.controller;
 import com.example.Ebanking.entities.AccountEntity;
 import com.example.Ebanking.entities.TransactionEntity;
 import com.example.Ebanking.service.AccountService;
+import com.example.Ebanking.service.EmailService;
 import com.example.Ebanking.service.RecieptService;
 import com.example.Ebanking.service.TransactionService;
 import com.example.Ebanking.service.UserSevice;
+import java.io.IOException;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -31,6 +34,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -53,6 +57,8 @@ public class TranferController {
     OTPController oTPController;
     @Autowired
     RecieptService recieptService;
+    @Autowired
+    EmailService emailService;
 
     @GetMapping("interTranfer")
     public String interTranfer(Model model, Principal principal, Authentication authentication) {
@@ -68,8 +74,8 @@ public class TranferController {
             BindingResult result, Model model, Principal principal) throws ParseException {
         int senderAccID = transaction.getSenderAccount().getAccountID();
         double amount = transaction.getAmount();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyy-MM-dd");  
-        LocalDateTime now = LocalDateTime.now();  
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
         if (!accountService.checkBalance(senderAccID, amount)) {
             List<AccountEntity> accountTypesMap = getListAccType(principal);
             model.addAttribute("listTypeAccount", accountTypesMap);
@@ -116,9 +122,12 @@ public class TranferController {
         model.addAttribute("listTransaction", transactions);
         return "transactionInfo";
     }
-    @GetMapping("printReciept")
-    public String printReciept(){
-//        recieptService.createPdf();
+
+    @GetMapping("printReciept/{transactionID}")
+    public String printReciept(@PathVariable("transactionID") int id) throws IOException, MessagingException {
+        TransactionEntity transactionEntity = transactionService.getTransactionByID(id);
+        recieptService.createPdf(transactionEntity);
+        emailService.sendRecieptMessage(transactionEntity.getSenderAccount().getCustomerEntity().getEmail(), "Reciept", "Reciept");
         return "index";
     }
 

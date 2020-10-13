@@ -5,22 +5,19 @@
  */
 package com.example.Ebanking.service;
 
-import com.itextpdf.text.Chapter;
+import com.example.Ebanking.entities.TransactionEntity;
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Section;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.CMYKColor;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URL;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 /**
@@ -30,43 +27,169 @@ import org.springframework.stereotype.Service;
 @Service
 public class RecieptService {
 
-    
-
-    public void createPdf() throws IOException{
-        URL font_path = Thread.currentThread().getContextClassLoader().getResource("arial-unicode-ms.ttf");
-        FontFactory.register(font_path.toString(), "Arial Unicode MS");
-//        System.out.println(font_path.toString());
-//        Font myfont = FontFactory.getFont("Arial Unicode MS", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+    public void createPdf(TransactionEntity transactionE) {
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        String imgUrl = classLoader.getResource(".").getPath().replace("/classes", "").substring(1)
+                + "Ebanking-0.0.1-SNAPSHOT/resources/fonts/arial-unicode-ms.ttf";
+        FontFactory.register(imgUrl, "Arial Unicode MS");
+        System.out.println("reciept " + imgUrl);
+        Font myfont = FontFactory.getFont("Arial Unicode MS", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         Font blueFont = FontFactory.getFont(FontFactory.HELVETICA, 8, Font.NORMAL, new CMYKColor(255, 0, 0, 0));
         Font redFont = FontFactory.getFont(FontFactory.COURIER, 12, Font.BOLD, new CMYKColor(0, 255, 0, 0));
         Font yellowFont = FontFactory.getFont(FontFactory.TIMES_BOLDITALIC, 14, Font.BOLD, new CMYKColor(0, 0, 255, 0));
         Document document = new Document();
         try {
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("StylingExample.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Ebanking Reciept.pdf"));
             document.open();
-            //document.add(new Paragraph("Styling Example"));
+            PdfPTable table = new PdfPTable(4); // 3 columns.
+            table.setWidthPercentage(100); //Width 100%
+            table.setSpacingBefore(10f); //Space before table
+            table.setSpacingAfter(10f); //Space after table
 
-            //Paragraph with color and font styles
-            Paragraph paragraphOne = new Paragraph("Some colored paragraph text Thái Ngọc Tâm nguyễn thị linh", blueFont);
-            document.add(paragraphOne);
-            Paragraph paragraphOne1 = new Paragraph("Some colored paragraph text Thái Ngọc Tâm", blueFont);
-            document.add(paragraphOne1);
-            Paragraph paragraphOne2 = new Paragraph("Some colored paragraph text Thái Ngọc Tâm", redFont);
-            document.add(paragraphOne2);
+            //Set Column widths
+            float[] columnWidths = {1f, 1f, 1f, 1f};
+            table.setWidths(columnWidths);
 
-            //Create chapter and sections
-            Paragraph chapterTitle = new Paragraph("Chapter Title ", yellowFont);
-            Chapter chapter1 = new Chapter(chapterTitle, 1);
-            chapter1.setNumberDepth(0);
+            PdfPCell cell1 = new PdfPCell(new Paragraph("Ngày, giờ giao dịch", myfont));
+            cell1.setBorderColor(BaseColor.BLUE);
+            cell1.setPaddingLeft(10);
+            cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            PdfPCell cell1CT = new PdfPCell(new Paragraph(transactionE.getTransactionDate().toString(), myfont));
+            cell1CT.setBorderColor(BaseColor.BLUE);
+            cell1CT.setBorderColorRight(BaseColor.WHITE);
+            cell1CT.setBorderWidthRight(0);
+            cell1CT.setPaddingLeft(10);
+            cell1CT.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell1CT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell1CT.setColspan(3);
 
-            Paragraph sectionTitle = new Paragraph("Section Title", redFont);
-            Section section1 = chapter1.addSection(sectionTitle);
+            PdfPCell cell2 = new PdfPCell(new Paragraph("Số lệnh giao dịch", myfont));
+            cell2.setBorderColor(BaseColor.BLUE);
+            cell2.setPaddingLeft(10);
+            cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            PdfPCell cell2CT = new PdfPCell(new Paragraph(Integer.toString(transactionE.getTransactionID()), myfont));
+            cell2CT.setBorderColor(BaseColor.BLUE);
+            cell2CT.setPaddingLeft(10);
+            cell2CT.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell2CT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell2CT.setColspan(3);
 
-            Paragraph sectionContent = new Paragraph("Section Text content", blueFont);
-            section1.add(sectionContent);
+            PdfPCell cell3 = new PdfPCell(new Paragraph("Tài Khoản nguồn", myfont));
+            cell3.setBorderColor(BaseColor.BLUE);
+            cell3.setPaddingLeft(10);
+            cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            PdfPCell cell3CT = new PdfPCell(new Paragraph(Integer.toString(transactionE.getSenderAccount().getAccountID()), myfont));
+            cell3CT.setBorderColor(BaseColor.BLUE);
+            cell3CT.setPaddingLeft(10);
+            cell3CT.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell3CT.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
-            document.add(chapter1);
+            PdfPCell cell31 = new PdfPCell(new Paragraph("Số tiền trích nợ", myfont));
+            cell31.setBorderColor(BaseColor.BLUE);
+            cell31.setPaddingLeft(10);
+            cell31.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell31.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            PdfPCell cell31CT = new PdfPCell(new Paragraph(String.valueOf(transactionE.getAmount()), myfont));
+            cell31CT.setBorderColor(BaseColor.BLUE);
+            cell31CT.setPaddingLeft(10);
+            cell31CT.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell31CT.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
+            PdfPCell cell4 = new PdfPCell(new Paragraph("Tài Khoản ghi", myfont));
+            cell4.setBorderColor(BaseColor.BLUE);
+            cell4.setPaddingLeft(10);
+            cell4.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell4.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            PdfPCell cell4CT = new PdfPCell(new Paragraph(String.valueOf(transactionE.getReceiverAccount().getAccountID()), myfont));
+            cell4CT.setBorderColor(BaseColor.BLUE);
+            cell4CT.setPaddingLeft(10);
+            cell4CT.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell4CT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            PdfPCell cell41 = new PdfPCell(new Paragraph("Số tiền ghi", myfont));
+            cell41.setBorderColor(BaseColor.BLUE);
+            cell41.setPaddingLeft(10);
+            cell41.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell41.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            PdfPCell cell41CT = new PdfPCell(new Paragraph(String.valueOf(transactionE.getAmount()), myfont));
+            cell41CT.setBorderColor(BaseColor.BLUE);
+            cell41CT.setPaddingLeft(10);
+            cell41CT.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell41CT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            PdfPCell cell5 = new PdfPCell(new Paragraph("Tên người hưởng", myfont));
+            cell5.setBorderColor(BaseColor.BLUE);
+            cell5.setPaddingLeft(10);
+            cell5.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell5.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            PdfPCell cell5CT = new PdfPCell(new Paragraph(transactionE.getReceiverAccount().getCustomerEntity().getFullName(), myfont));
+            cell5CT.setBorderColor(BaseColor.BLUE);
+            cell5CT.setPaddingLeft(10);
+            cell5CT.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell5CT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell5CT.setColspan(3);
+
+            PdfPCell cell6 = new PdfPCell(new Paragraph("Tên ngân hàng", myfont));
+            cell6.setBorderColor(BaseColor.BLUE);
+            cell6.setPaddingLeft(10);
+            cell6.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell6.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            PdfPCell cell6CT = new PdfPCell(new Paragraph(transactionE.getSenderAccount().getBankEntity().getBankName(), myfont));
+            cell6CT.setBorderColor(BaseColor.BLUE);
+            cell6CT.setPaddingLeft(10);
+            cell6CT.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell6CT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            cell6CT.setColspan(3);
+
+            PdfPCell cell7 = new PdfPCell(new Paragraph("Loại phí", myfont));
+            cell7.setBorderColor(BaseColor.BLUE);
+            cell7.setPaddingLeft(10);
+            cell7.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell7.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            PdfPCell cell7CT = new PdfPCell(new Paragraph("Cell 2", myfont));
+            cell7CT.setBorderColor(BaseColor.BLUE);
+            cell7CT.setPaddingLeft(10);
+            cell7CT.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell7CT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            
+            PdfPCell cell81 = new PdfPCell(new Paragraph("Số tiền Phí", myfont));
+            cell81.setBorderColor(BaseColor.BLUE);
+            cell81.setPaddingLeft(10);
+            cell81.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell81.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            PdfPCell cell81CT = new PdfPCell(new Paragraph("5,000 VND", myfont));
+            cell81CT.setBorderColor(BaseColor.BLUE);
+            cell81CT.setPaddingLeft(10);
+            cell81CT.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell81CT.setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            table.addCell(cell1);
+            table.addCell(cell1CT);
+            table.addCell(cell2);
+            table.addCell(cell2CT);
+            table.addCell(cell3);
+            table.addCell(cell3CT);
+            table.addCell(cell31);
+            table.addCell(cell31CT);
+            table.addCell(cell4);
+            table.addCell(cell4CT);
+            table.addCell(cell41);
+            table.addCell(cell41CT);
+            table.addCell(cell5);
+            table.addCell(cell5CT);
+            table.addCell(cell6);
+            table.addCell(cell6CT);
+            table.addCell(cell7);
+            table.addCell(cell7CT);
+
+            table.addCell(cell81);
+            table.addCell(cell81CT);
+
+            document.add(table);
             document.close();
             writer.close();
         } catch (Exception e) {

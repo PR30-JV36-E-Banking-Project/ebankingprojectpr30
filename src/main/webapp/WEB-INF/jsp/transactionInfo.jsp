@@ -112,6 +112,7 @@
                                             <th>Content</th>
                                             <th>Account receiver</th>
                                             <th>Fee</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -135,12 +136,13 @@
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </td> 
+                                                <td><a href="<c:url value = "/printReciept/${u.transactionID}"/>" class="btn btn-info" role="button"> Print reciept</a></td>
                                             </tr> 
                                             <c:set var="i" value="${i+1}" /> 
                                         </c:forEach>
                                     </tbody>
                                 </table>
-                                <a href="<c:url value = "/printReciept"/>" class="btn btn-info" role="button"> Print reciept</a>
+                                
                                 <button onclick="goBack()" class="btn btn-info">Go Back</button>
                             </div>
                         </div>
