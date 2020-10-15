@@ -40,7 +40,7 @@ public class TellerController {
                 
 	theModel.addAttribute("pagedListHolder", pagedListHolder);
                 
-	return "tellerList";
+	return "adminTeller";
     }
     
     @GetMapping("/showFormForAdd")

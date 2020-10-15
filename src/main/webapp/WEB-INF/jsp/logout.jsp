@@ -70,6 +70,7 @@
                                     <li><a href="<c:url value = "/interTranfer"/>">Internal Tranfer</a></li>
                                     <li><a href="#">External Tranfer</a></li>
                                     <li><a href="<c:url value = "/viewTransaction"/>">View Tranfer</a></li>
+                                    <li><a href="<c:url value = "/account/viewUserInformation"/>">View User Information</a></li>
                                 </ul>
                             </li>
                             <li><a href="<c:url value = "/newAccount"/>" class="scroll">New Account</a></li>

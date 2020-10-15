@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -53,6 +57,7 @@ public class CustomerEntity {
 //    @Size(max = 11, message = "Phone must under 11 number")
     private String phone;
 //    @NotNull
+    @Column(unique=true)
     private String email;
 //    @NotNull
     private String IDcard;
@@ -66,6 +71,7 @@ public class CustomerEntity {
     private Set<AccountEntity> accountEntitys;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(name = "userID")
     private UserEntity userEntity;
 

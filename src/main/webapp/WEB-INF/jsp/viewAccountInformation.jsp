@@ -13,6 +13,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="E-Banking Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
               SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- Custom Theme files -->
         <link href="../../resources/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
@@ -92,145 +95,163 @@
             <!-- banner -->
         </div>	
         <!-- contact -->
-        <div class="w3ls-section contact">
-            <div class="container"> 
-                <div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Your Account Information</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">Customer's ID</th>
-                                <td>${currentCustomer.customerID}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Customer's Full Name</th>
-                                <td>${currentCustomer.fullName}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Customer's Adress</th>
-                                <td>${currentCustomer.address}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Customer's Country</th>
-                                <td>${currentCustomer.country}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Customer's Nationlaty</th>
-                                <td>${currentCustomer.nationlaty}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Customer's District</th>
-                                <td>${currentCustomer.district}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Customer's city</th>
-                                <td>${currentCustomer.city}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Customer's phone numberd</th>
-                                <td>${currentCustomer.phone}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Customer's email</th>
-                                <td>${currentCustomer.email}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Customer's ID Card</th>
-                                <td>${currentCustomer.IDcard}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Customer's Date Issue ID Card</th>
-                                <td>${currentCustomer.dateIssueIDCard}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Customer's Issue ID Card Office</th>
-                                <td>${currentCustomer.issueIDCardOffice}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>  
+        <div class="w3-bar-block w3-collapse w3-card w3-animate-left" style="width:30%; float: left; margin: 70px; height: 100%" id="mySidebar">
+            <ul style="margin: 20px; list-style-type: none">Accounts
+                <li><a href="#" class="w3-bar-item w3-button" style="margin: 10px;">Customer Information</a></li>
+                <li><a href="/viewTransaction" class="w3-bar-item w3-button" style="margin: 10px">View Transactions</a></li>
+            </ul>
+            <ul style="margin: 20px; list-style-type: none">Tranfers
+                <li><a href="/interTranfer" class="w3-bar-item w3-button" style="margin: 10px">Internal Tranfer</a></li>
+
+                <li><a href="#" class="w3-bar-item w3-button" style="margin: 10px">External Tranfer</a></li>
+            </ul>
+            <ul style="margin: 20px; list-style-type: none">Suports
+                <li><a href="#" class="w3-bar-item w3-button" style="margin: 10px">Help</a></li>
+                <li><a href="#" class="w3-bar-item w3-button" style="margin: 10px">Change password</a></li>
+                <li><a href="#" class="w3-bar-item w3-button" style="margin: 10px">Logout</a></li>
+            </ul>
+        </div>
+
+        <div style="margin-left:30%">
+            <div class="w3ls-section contact">
+                <div class="container"> 
+                    <div>
+                        <table class="table table-bordered" style="width: 70%; font-size: 15px">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="text-align: right" class="info">#</th>
+                                    <th scope="col" class="info">Your Account Information</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row" style="text-align: right">Customer's ID</th>
+                                    <td>${currentCustomer.customerID}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="text-align: right">Customer's Full Name</th>
+                                    <td>${currentCustomer.fullName}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="text-align: right">Customer's Adress</th>
+                                    <td>${currentCustomer.address}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="text-align: right">Customer's Country</th>
+                                    <td>${currentCustomer.country}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="text-align: right">Customer's Nationlaty</th>
+                                    <td>${currentCustomer.nationlaty}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="text-align: right">Customer's District</th>
+                                    <td>${currentCustomer.district}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="text-align: right">Customer's city</th>
+                                    <td>${currentCustomer.city}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="text-align: right">Customer's phone numberd</th>
+                                    <td>${currentCustomer.phone}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="text-align: right">Customer's email</th>
+                                    <td>${currentCustomer.email}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="text-align: right">Customer's ID Card</th>
+                                    <td>${currentCustomer.IDcard}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="text-align: right">Customer's Date Issue ID Card</th>
+                                    <td>${currentCustomer.dateIssueIDCard}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="text-align: right">Customer's Issue ID Card Office</th>
+                                    <td>${currentCustomer.issueIDCardOffice}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>  
 
 
-                <div class="clearfix"> </div>
+                    <div class="clearfix"> </div>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- //contact --> 
+        <!-- //contact --> 
 
-    <!--footer-->
-    <div class="agile-footer w3ls-section">
-        <div class="container">
-            <div class="col-md-7 list-footer">
-                <ul class="footer-nav">
-                    <li><a  href="index.html">Home</a></li>
-                    <li><a  href="about.html">About</a></li>
-                    <li><a  href="services.html">Services</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-                <p>Vivamus sed porttitor felis. Pellentesque habitant morbi tristique senectus et netus et ctetur adipiscing elit. Cras rutrum iaculis</p>
+        <!--footer-->
+        <div class="agile-footer w3ls-section">
+            <div class="container">
+                <div class="col-md-7 list-footer">
+                    <ul class="footer-nav">
+                        <li><a  href="index.html">Home</a></li>
+                        <li><a  href="about.html">About</a></li>
+                        <li><a  href="services.html">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                    <p>Vivamus sed porttitor felis. Pellentesque habitant morbi tristique senectus et netus et ctetur adipiscing elit. Cras rutrum iaculis</p>
+                </div>
+                <div class="col-md-5 agileinfo-sub">
+                    <h6>Click the link below to start the subscription service</h6>
+                    <a href="#" data-toggle="modal" data-target="#myModal1">subscribe</a>
+                </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="col-md-5 agileinfo-sub">
-                <h6>Click the link below to start the subscription service</h6>
-                <a href="#" data-toggle="modal" data-target="#myModal1">subscribe</a>
-            </div>
-            <div class="clearfix"></div>
+        </div>	 
+        <div class="w3_agile-copyright text-center">
+            <p>© 2017 E-Banking. All rights reserved | Design by <a href="//w3layouts.com/">W3layouts</a></p>
         </div>
-    </div>	 
-    <div class="w3_agile-copyright text-center">
-        <p>© 2017 E-Banking. All rights reserved | Design by <a href="//w3layouts.com/">W3layouts</a></p>
-    </div>
-    <!--//footer-->	
-    <!-- subscribe -->
-    <div class="modal bnr-modal fade" id="myModal1" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <img src="../../resources/images/logo.png" alt="logo"/>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-                </div> 
-                <div class="modal-body modal-spa">
-                    <p>E-Banking's email newsletter provides subscribers with helpful articles on important issues in the banking industry, as well as news about events and more! To sign up for the newsletter, fill the below form.</p>
-                    <form class=" wthree-subsribe" action="#" method="post"> 
-                        <input type="text" name="name" placeholder="Your Name" required="">
-                        <input type="email" name="email" placeholder="your Email" required="">
-                        <input type="submit" value="SignUp"> 
-                        <div class="clearfix"></div>
-                    </form>
-                </div> 
+        <!--//footer-->	
+        <!-- subscribe -->
+        <div class="modal bnr-modal fade" id="myModal1" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="../../resources/images/logo.png" alt="logo"/>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
+                    </div> 
+                    <div class="modal-body modal-spa">
+                        <p>E-Banking's email newsletter provides subscribers with helpful articles on important issues in the banking industry, as well as news about events and more! To sign up for the newsletter, fill the below form.</p>
+                        <form class=" wthree-subsribe" action="#" method="post"> 
+                            <input type="text" name="name" placeholder="Your Name" required="">
+                            <input type="email" name="email" placeholder="your Email" required="">
+                            <input type="submit" value="SignUp"> 
+                            <div class="clearfix"></div>
+                        </form>
+                    </div> 
+                </div>
             </div>
         </div>
-    </div>
-    <!-- //subscribe --> 
-    <script src="../../resources/js/SmoothScroll.min.js"></script>
-    <!-- smooth-scrolling-of-move-up -->
-    <script type="text/javascript" src="../../resources/js/move-top.js"></script>
-    <script type="text/javascript" src="../../resources/js/easing.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            /*
-             var defaults = {
-             containerID: 'toTop', // fading element id
-             containerHoverID: 'toTopHover', // fading element hover id
-             scrollSpeed: 1200,
-             easingType: 'linear' 
-             };
-             */
+        <!-- //subscribe --> 
+        <script src="../../resources/js/SmoothScroll.min.js"></script>
+        <!-- smooth-scrolling-of-move-up -->
+        <script type="text/javascript" src="../../resources/js/move-top.js"></script>
+        <script type="text/javascript" src="../../resources/js/easing.js"></script>
+        <script type="text/javascript">
+                $(document).ready(function () {
+                    /*
+                     var defaults = {
+                     containerID: 'toTop', // fading element id
+                     containerHoverID: 'toTopHover', // fading element hover id
+                     scrollSpeed: 1200,
+                     easingType: 'linear' 
+                     };
+                     */
 
-            $().UItoTop({easingType: 'easeOutQuart'});
+                    $().UItoTop({easingType: 'easeOutQuart'});
 
-        });
-    </script>
-    <!-- //smooth-scrolling-of-move-up -->  
-    <!-- Bootstrap core JavaScript
-================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../../resources/js/bootstrap.js"></script>
+                });
+        </script>
+        <!-- //smooth-scrolling-of-move-up -->  
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="../../resources/js/bootstrap.js"></script>
 
-</body>
+    </body>
 </html>

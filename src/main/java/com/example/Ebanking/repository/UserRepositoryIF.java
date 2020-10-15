@@ -19,6 +19,6 @@ import org.springframework.stereotype.Repository;
 public interface UserRepositoryIF extends CrudRepository<UserEntity, Integer>{
     public Optional<UserEntity> findByUserName(String username);
     Optional<User> findByEmail(String email);
-
+    UserEntity findByEmailIgnoreCase(String email);
 //    public UserEntity save(UserEntity userEntity);
 }

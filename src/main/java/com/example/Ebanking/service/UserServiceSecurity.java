@@ -6,6 +6,7 @@
 package com.example.Ebanking.service;
 
 import com.example.Ebanking.entities.ConfirmationToken;
+import com.example.Ebanking.entities.CustomerEntity;
 import com.example.Ebanking.entities.UserEntity;
 import com.example.Ebanking.repository.UserRepositoryIF;
 import java.util.Arrays;
@@ -65,9 +66,15 @@ public class UserServiceSecurity implements UserDetailsService {
         BCryptPasswordEncoder bCryptPasswordEncoder = passwordEncoder();
 
         final String encryptedPassword = bCryptPasswordEncoder.encode(userEntity.getPassword());
-
+        
         userEntity.setPassword(encryptedPassword);
-
+        
+        userEntity.setRoleType("ROLE_USER");
+        
+//        CustomerEntity linkingCustomer = userEntity.getCustomerEntity();
+//        
+//        userEntity.setUserID(linkingCustomer.getUserEntity().getUserID());
+        
         userRepositoryIF.save(userEntity);
 
         final ConfirmationToken confirmationToken = new ConfirmationToken(userEntity);

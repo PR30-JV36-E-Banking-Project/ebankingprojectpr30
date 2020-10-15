@@ -19,4 +19,5 @@ import org.springframework.stereotype.Repository;
 public interface CustomerRepositoryIF extends  CrudRepository<CustomerEntity, Integer>{
     Optional<CustomerEntity> findByEmail(String email);
     CustomerEntity findByUserEntity(UserEntity userEntity);
+    CustomerEntity findByEmailIgnoreCase(String email);
 }

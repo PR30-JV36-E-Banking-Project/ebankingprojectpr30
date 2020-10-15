@@ -97,22 +97,22 @@
         <div class="w3ls-section contact">
             <div class="container"> 
                 <div class="contact_wthreerow agileits-w3layouts">
-                    <div class="col-md-7 w3l_contact_form">
+                    <div class="col-md-7 w3l_contact_form" style="border: 1px solid black; padding: 30px;">
                         <h4>Register Form</h4> 
-                        <form:form action="/account/sign-up" method="post" modelAttribute="user">
-                            <form:hidden path="userID" />
+                        <p>Please user the email which you registered customer account in our bank</p>
+                        <form:form action="/account/sign-up" method="post" modelAttribute="user"> 
+                            <form:hidden path="userID"/>
                             <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your User Name" path="userName"/>
                             <form:errors path="userName" class="error"/>
-                            <form:input style="margin: 10px;" type="password"  required="" placeholder="Enter Your Password" path="password"/>
+                            <form:input style="margin: 10px;" type="password"  required="" placeholder="Enter Your Password" path="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password"  onkeyup='check();' />
                             <form:errors path="password" class="error"/>
+                            <input style="margin: 10px;" type="password" placeholder="Comfirm Your Password" name="confirm_password" id="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password"  onkeyup='check();'/>
+                            <span id='message'></span>
                             <form:input style="margin: 10px;" type="email"  required="" placeholder="Enter Your Email" path="email"/>
                             <form:errors path="email" class="error"/>
-                            <form:select class="form-control" path="roleType">
-                                <form:option value="ROLE_USER" label="USER"/>
-                                <form:option value="ROLE_ADMIN" label="ADMIN"/>
-                                <form:option value="ROLE_TELLER" label="TELLER"/>
-                            </form:select>
-                            <input style="margin: 10px;" type="submit" value="Register New Customer">
+                            <span id="error1" style="color:red">${error1}</span>
+                            <span id="error2" style="color:red">${error2}</span>
+                            <input style="margin: 10px; float: right;" type="submit" value="Register New Customer">
                         </form:form>
                     </div>
 
@@ -172,19 +172,29 @@
         <script type="text/javascript" src="js/move-top.js"></script>
         <script type="text/javascript" src="js/easing.js"></script>
         <script type="text/javascript">
-            $(document).ready(function () {
-                /*
-                 var defaults = {
-                 containerID: 'toTop', // fading element id
-                 containerHoverID: 'toTopHover', // fading element hover id
-                 scrollSpeed: 1200,
-                 easingType: 'linear' 
-                 };
-                 */
+                                $(document).ready(function () {
+                                    /*
+                                     var defaults = {
+                                     containerID: 'toTop', // fading element id
+                                     containerHoverID: 'toTopHover', // fading element hover id
+                                     scrollSpeed: 1200,
+                                     easingType: 'linear' 
+                                     };
+                                     */
 
-                $().UItoTop({easingType: 'easeOutQuart'});
+                                    $().UItoTop({easingType: 'easeOutQuart'});
 
-            });
+                                });
+                                var check = function () {
+                                    if (document.getElementById('password').value ==
+                                            document.getElementById('confirm_password').value) {
+                                        document.getElementById('message').style.color = 'green';
+                                        document.getElementById('message').innerHTML = 'Password is matched';
+                                    } else {
+                                        document.getElementById('message').style.color = 'red';
+                                        document.getElementById('message').innerHTML = 'Password is not matched';
+                                    }
+                                }
         </script>
         <!-- //smooth-scrolling-of-move-up -->  
         <!-- Bootstrap core JavaScript
