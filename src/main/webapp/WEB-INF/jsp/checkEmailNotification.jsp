@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -79,7 +79,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<!-- top-nav -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><a href="index.html">Home</a></li>
+						<li><a href="<c:url value = "/"/>">Home</a></li>
 						<li><a href="about.html">About</a></li>    
 						<li><a href="services.html">services</a></li>    
 						<li><a href="gallery.html">Gallery</a></li>    

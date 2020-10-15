@@ -75,7 +75,7 @@
                             </li>
                             <li><a href="<c:url value = "/newAccount"/>" class="scroll">New Account</a></li>
                             <li><a href="#" class="scroll">News & Events</a></li>    	
-                            <li><a href="#" class="scroll">Contact Us</a></li>
+                            <li><a href="list-teller" class="scroll">Contact Us</a></li>
                         </ul>  
                         <div class="clearfix"> </div>	
                     </div>

@@ -105,14 +105,17 @@
                                 <form:select path="senderAccount" class="form-control">
                                     <form:options items="${listTypeAccount}" itemLabel="accountType" itemValue="accountID" />
                                 </form:select>
+                                <br>
                                 <div class="control-group">
                                     <label class="control-label">Start Time</label>
                                     <input type="date" name="startDay"  required="" >
                                 </div>
+                                <br>
                                 <div class="control-group">
                                     <label class="control-label">End Time</label>
                                     <input type="date" name="endDay"  required="" >
                                 </div>
+                                <br>
                                 <input type="submit" class="btn btn-primary" value="View Transaction">
                             </form:form>
                         </div>
