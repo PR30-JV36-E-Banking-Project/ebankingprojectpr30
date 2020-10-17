@@ -66,8 +66,8 @@ public class OTPController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         String cacheOTP = Integer.toString(otpService.getOtp(username));
-        int senderAccID = transactionSS.getSenderAccount().getAccountID();
-        int recieverAccID = transactionSS.getReceiverAccount().getAccountID();
+        double senderAccID = transactionSS.getSenderAccount().getAccountID();
+        double recieverAccID = transactionSS.getReceiverAccount().getAccountID();
         double amount = transactionSS.getAmount();
         boolean fee = transactionSS.isFeeBearer();
         if (cacheOTP.equals(OTPcode)) {

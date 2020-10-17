@@ -67,8 +67,7 @@
                             <li><a href="#" class="scroll">About</a></li>    
                             <li><a href="#" class="scroll" data-toggle="dropdown">Services</a>  
                                 <ul class="dropdown-menu">
-                                    <li><a href="<c:url value = "/interTranfer"/>">Internal Tranfer</a></li>
-                                    <li><a href="#">External Tranfer</a></li>
+                                    <li><a href="<c:url value = "/newTranfer"/>">Tranfer Services</a></li>
                                     <li><a href="<c:url value = "/viewTransaction"/>">View Tranfer</a></li>
                                     <li><a href="<c:url value = "account/viewUserInformation"/>">View account Information</a></li>
                                 </ul>

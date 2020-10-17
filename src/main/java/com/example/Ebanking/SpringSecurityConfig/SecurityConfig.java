@@ -21,16 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userServiceSecurity);
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-////                .passwordEncoder(passwordEncoder)
-////                .withUser("user").password(passwordEncoder.encode("123456")).roles("USER")
-//                .withUser("user").password("123456").roles("USER")
-//                .and()
-////                .withUser("admin").password(passwordEncoder.encode("123456")).roles("USER", "ADMIN");
-//                .withUser("admin").password("123456").roles("USER", "ADMIN");
-//    }
+
     @Override
     public void configure(WebSecurity web) {
         web
@@ -41,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login", "/", "/account/**").permitAll()
+                .antMatchers("/login", "/", "/account/**","/accountRest","/rest").permitAll()
                 .antMatchers("/interTranfer").hasAuthority("ROLE_USER")
                 .antMatchers("/teller","/newAccount").hasAuthority("ROLE_TELLER")
                 .antMatchers("/admin","/list-teller").hasAuthority("ROLE_ADMIN")

@@ -81,7 +81,7 @@ public class RecieptService {
             cell3.setPaddingLeft(10);
             cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
             cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            PdfPCell cell3CT = new PdfPCell(new Paragraph(Integer.toString(transactionE.getSenderAccount().getAccountID()), myfont));
+            PdfPCell cell3CT = new PdfPCell(new Paragraph(Double.toString(transactionE.getSenderAccount().getAccountID()), myfont));
             cell3CT.setBorderColor(BaseColor.BLUE);
             cell3CT.setPaddingLeft(10);
             cell3CT.setHorizontalAlignment(Element.ALIGN_CENTER);

@@ -50,8 +50,7 @@ public class UserServiceSecurity implements UserDetailsService {
         BCryptPasswordEncoder encoder = passwordEncoder();
         GrantedAuthority authority = new SimpleGrantedAuthority(userEntity.getRoleType());
         UserDetails userDetails = (UserDetails) new User(userEntity.getUserName(),
-                userEntity.getPassword(), Arrays.asList(authority));
-        System.out.println("load user name not null" + userName);
+                encoder.encode(userEntity.getPassword()), Arrays.asList(authority));
         return userDetails;
     }
 

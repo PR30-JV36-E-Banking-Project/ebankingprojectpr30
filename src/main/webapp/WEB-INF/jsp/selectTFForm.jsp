@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,7 +20,8 @@
         <link href="../../resources/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
         <link href="../../resources/css/style.css" type="text/css" rel="stylesheet" media="all">
         <link href="../../resources/css/font-awesome.css" rel="stylesheet">   <!-- font-awesome icons --> 
-        <!-- //Custom Theme files -->  
+        <link href="../../resources/css/custom.css" rel="stylesheet"> 
+
         <!-- js --> 
         <script src="../../resources/js/jquery-2.2.3.min.js"></script>
         <!-- web-fonts -->
@@ -30,11 +33,11 @@
     </head>
     <body> 
         <!-- header -->
-        <div class="headerw3-agile"> 
+        <div class="headerw3-agile header"> 
             <div class="header-w3mdl"><!-- header-two --> 
                 <div class="container"> 
                     <div class="agileits-logo navbar-left">
-                        <h1><a href="index.html"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
+                        <h1><a href="<c:url value = "/"/>"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
                     </div> 
                     <div class="agileits-hdright nav navbar-nav">
                         <div class="header-w3top"><!-- header-top --> 
@@ -59,72 +62,54 @@
             </div>	
         </div>	
         <!-- //header -->  
-        <!-- banner -->
-        <div class="banner inner-banner">
-            <div class="header-nav"><!-- header-three --> 	
-                <nav class="navbar navbar-default">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            Menu 
-                        </button> 
-                    </div>
-                    <!-- top-nav -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About</a></li>    
-                            <li><a href="services.html">services</a></li>    
-                            <li><a href="gallery.html">Gallery</a></li>    
-                            <li><a href="icons.html" data-toggle="dropdown">Short Codes<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="icons.html">Icons</a></li>
-                                    <li><a href="typography.html">Typograpghy</a></li>
-                                </ul>
-                            </li>	
-                            <li><a href="contact.html">Contact Us</a></li>
-                        </ul>  
-                        <div class="clearfix"> </div>	
-                    </div>
-                </nav>    
+        <!-- Vertical navbar -->
+        <div class="verMenu">
+            <div class="bormenu">
+                <p class="textmenu">Information Query</p>
+                <ul class="listmenu">
+                    <li><a href="#">List Account</a></li>
+                    <li><a href="#">Transaction Details</a></li>
+                    <li><a href="#">List Card</a></li>
+                    <li><a href="#">Statement</a></li>
+                    <li><a href="#">Pending transactions</a></li>
+                </ul>
             </div>
-            <!-- banner-text -->
-            <!-- banner -->
-        </div>	
-        <!-- contact -->
-        <div class="w3ls-section contact">
-            <div class="container"> 
-                <div class="contact_wthreerow agileits-w3layouts">
-                    <div class="col-md-7 w3l_contact_form">
-                        <h4>Register Form</h4> 
-                        <form action="/account/saveCustomer" method="post" modelAttribute="customer">
-                            <form:hidden path="id" />
-                            <input style="margin: 10px;" type="text" name="ctUserName"  required="" placeholder="Enter Your User Name" path="ctUserName">
-                            <input style="margin: 10px;" type="password" name="ctPassword" required="" placeholder="Enter Your Password" path="ctPassword">
-                            <input style="margin: 10px;" type="email" name="email" required="" placeholder="Enter Your Email" path="email">
-                            <input style="margin: 10px;" type="text" name="address"  required="" placeholder="Enter Your Address" path="address">
-                            <p style="margin: 10px;" >Your birthday: <input type="date" name="birthday"  required="" path="birthDay"></p>
-                            <input style="margin: 10px;" type="text" name="phone" required="" placeholder="Enter Your Phone Number" path="phone">
-                            <input style="margin: 10px;" type="text" name="nationlaty"  required="" placeholder="Enter Your Nationlaty" path="nationlaty">
-                            <input style="margin: 10px;" type="text" name="country"  required="" placeholder="Enter Your Country" path="country">
-                            <input style="margin: 10px;" type="text" name="district"  required="" placeholder="Enter Your District" path="district">
-                            <input style="margin: 10px;" type="text" name="city"  required="" placeholder="Enter Your City" path="city">
-                            <input style="margin: 10px;" type="text" name="sex"  required="" placeholder="Enter Your Gender" path="sex">
-                            <input style="margin: 10px;" type="text" name="IDcard"  required="" placeholder="Enter Your ID Card" path="IDcard">
-                            <p style="margin: 10px;" >Date of Issue: <input type="date" name="dateIssueIDCard"  required="" path="dateIssueIDCard"></p>
-                            <input style="margin: 10px;" type="text" name="issueIDCardOffice"  required="" placeholder="Enter Your ID Card Office" path="issueIDCardOffice">
-                            <input style="margin: 10px;" type="submit" value="Register New Customer">
-                        </form>
-                    </div>
+            <br>
+            <div class="bormenu">
+                <p class="textmenu">Pay</p>
+                <ul class="listmenu">
+                    <li><a href="#">Transaction</a></li>
+                    <li><a href="#">Deposit</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--<-----content------->
 
-                    <div class="clearfix"> </div>
-                </div>
+        <div class="content">
+            <!--<div class="w3ls-section contact">-->
+            <!--<div class="container">--> 
+            <!--<div class="contact_wthreerow agileits-w3layouts">-->
+            <div class="col-md-7 info">
+                <h4>Tranfer Money</h4><br>
+                <form action="/selectTF" method="get" >
+                    <div class="form-group">
+                        <label for="sel1">Select Type Account:</label>
+                        <select class="form-control" id="sel1" name="typeTF">
+                            <option value="1">Tranfer Inside E-bank</option>
+                            <option value="2">Tranfer Outside E-bank</option>
+                        </select>
+                    </div>
+                    <input type="submit" class="btn btn-info buttonback" value="Submit">
+                    <button onclick="goBack()" class="btn btn-info buttonback">Go Back</button> 
+                </form>
             </div>
+
+            <div class="clearfix"> </div>
         </div>
         <!-- //contact --> 
 
         <!--footer-->
-        <div class="agile-footer w3ls-section">
+        <div class="agile-footer w3ls-section footer">
             <div class="container">
                 <div class="col-md-7 list-footer">
                     <ul class="footer-nav">
@@ -148,7 +133,7 @@
         </div>
         <!--//footer-->	
         <!-- subscribe -->
-        <div class="modal bnr-modal fade" id="myModal1" tabindex="-1" role="dialog">
+        <div class="modal bnr-modal fade " id="myModal1" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -170,22 +155,23 @@
         <!-- //subscribe --> 
         <script src="js/SmoothScroll.min.js"></script>
         <!-- smooth-scrolling-of-move-up -->
-        <script type="text/javascript" src="js/move-top.js"></script>
-        <script type="text/javascript" src="js/easing.js"></script>
+        <script type="text/javascript" src="../../resources/js/move-top.js"></script>
+        <script type="text/javascript" src="../../resources/js/easing.js"></script>
+        <script type="text/javascript" src="../../resources/js/myJavascript.js"></script>
         <script type="text/javascript">
-            $(document).ready(function () {
-                /*
-                 var defaults = {
-                 containerID: 'toTop', // fading element id
-                 containerHoverID: 'toTopHover', // fading element hover id
-                 scrollSpeed: 1200,
-                 easingType: 'linear' 
-                 };
-                 */
+                        $(document).ready(function () {
+                            /*
+                             var defaults = {
+                             containerID: 'toTop', // fading element id
+                             containerHoverID: 'toTopHover', // fading element hover id
+                             scrollSpeed: 1200,
+                             easingType: 'linear' 
+                             };
+                             */
 
-                $().UItoTop({easingType: 'easeOutQuart'});
+                            $().UItoTop({easingType: 'easeOutQuart'});
 
-            });
+                        });
         </script>
         <!-- //smooth-scrolling-of-move-up -->  
         <!-- Bootstrap core JavaScript

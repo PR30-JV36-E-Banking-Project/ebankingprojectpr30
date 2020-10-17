@@ -20,9 +20,12 @@
         <link href="../../resources/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
         <link href="../../resources/css/style.css" type="text/css" rel="stylesheet" media="all">
         <link href="../../resources/css/font-awesome.css" rel="stylesheet">   <!-- font-awesome icons --> 
-        <!-- //Custom Theme files -->  
+        <link href="../../resources/css/custom.css" rel="stylesheet"> 
+
         <!-- js --> 
         <script src="../../resources/js/jquery-2.2.3.min.js"></script>
+        <!--<script src="../../resources/js/js.js"></script>-->
+        <!--<script src="../../resources/js/modernizr-custom.js"></script>-->
         <!-- web-fonts -->
         <link href="//fonts.googleapis.com/css?family=Secular+One" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
@@ -32,11 +35,11 @@
     </head>
     <body> 
         <!-- header -->
-        <div class="headerw3-agile"> 
+        <div class="headerw3-agile header"> 
             <div class="header-w3mdl"><!-- header-two --> 
                 <div class="container"> 
                     <div class="agileits-logo navbar-left">
-                        <h1><a href="index.html"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
+                        <h1><a href="<c:url value = "/"/>"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
                     </div> 
                     <div class="agileits-hdright nav navbar-nav">
                         <div class="header-w3top"><!-- header-top --> 
@@ -61,100 +64,82 @@
             </div>	
         </div>	
         <!-- //header -->  
-        <!-- banner -->
-        <div class="banner inner-banner">
-            <div class="header-nav"><!-- header-three --> 	
-                <nav class="navbar navbar-default">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            Menu 
-                        </button> 
-                    </div>
-                    <!-- top-nav -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li><a href="<c:url value = "/"/>">Home</a></li>
-                            <li><a href="about.html">About</a></li>    
-                            <li><a href="services.html">services</a></li>    
-                            <li><a href="gallery.html">Gallery</a></li>    
-                            <li><a href="icons.html" data-toggle="dropdown">Short Codes<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="icons.html">Icons</a></li>
-                                    <li><a href="typography.html">Typograpghy</a></li>
-                                </ul>
-                            </li>	
-                            <li><a href="contact.html">Contact Us</a></li>
-                        </ul>  
-                        <div class="clearfix"> </div>	
-                    </div>
-                </nav>    
+        <!-- Vertical navbar -->
+        <div class="verMenu">
+            <div class="bormenu">
+                <p class="textmenu">Information Query</p>
+                <ul class="listmenu">
+                    <li><a href="#">List Account</a></li>
+                    <li><a href="#">Transaction Details</a></li>
+                    <li><a href="#">List Card</a></li>
+                    <li><a href="#">Statement</a></li>
+                    <li><a href="#">Pending transactions</a></li>
+                </ul>
             </div>
-            <!-- banner-text -->
-            <!-- banner -->
-        </div>	
-        <!-- contact -->
-        <c:if test="${listTransaction!=null}">
-            <div class="w3ls-section contact">
-                <div class="container"> 
-                    <div class="contact_wthreerow agileits-w3layouts">
-                        <div class="col-md-7">
-                            <h4>Tranfer Infomation</h4> 
-                            <div class="container">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Transaction ID</th>
-                                            <th>Transaction Amount</th>
-                                            <th>Transaction date</th>
-                                            <th>Account Sender</th>
-                                            <th>Content</th>
-                                            <th>Account receiver</th>
-                                            <th>Fee</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:set var="i" value="1" /> 
-                                        <c:forEach items="${listTransaction}" var="u"> 
-                                            <tr> 
-                                                <td>${i}</td> 
-                                                <td>${u.transactionID}</td> 
-                                                <td>${u.amount} VND</td> 
-                                                <td>${u.transactionDate}</td> 
-                                                <td>${u.receiverAccount.accountID}</td> 
-                                                <td>${u.content}</td> 
-                                                <td>${u.senderAccount.accountID}</td> 
-                                                <td> 5000 VND -
-                                                    <c:choose>
-                                                        <c:when test="${transaction.feeBearer==true}">
-                                                            nguoi chuyen tra
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            nguoi nhan tra
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </td> 
-                                                <td><a href="<c:url value = "/printReciept/${u.transactionID}"/>" class="btn btn-info" role="button"> Print reciept</a></td>
-                                            </tr> 
-                                            <c:set var="i" value="${i+1}" /> 
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
-                                
-                                <button onclick="goBack()" class="btn btn-info">Go Back</button>
-                            </div>
-                        </div>
-                        <div class="clearfix"> </div>
-                    </div>
+            <br>
+            <div class="bormenu">
+                <p class="textmenu">Pay</p>
+                <ul class="listmenu">
+                    <li><a href="#">Transaction</a></li>
+                    <li><a href="#">Deposit</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <c:if test="${listTransaction!=null}">
+                <div class="col-md-7 info">
+                    <h4>Tranfer Infomation</h4> 
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Transaction ID</th>
+                                <th>Transaction Amount</th>
+                                <th>Transaction date</th>
+                                <th>Account Sender</th>
+                                <th>Content</th>
+                                <th>Account receiver</th>
+                                <th>Fee</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:set var="i" value="1" /> 
+                            <c:forEach items="${listTransaction}" var="u"> 
+                                <tr> 
+                                    <td>${i}</td> 
+                                    <td>${u.transactionID}</td> 
+                                    <td>${u.amount} VND</td> 
+                                    <td>${u.transactionDate}</td> 
+                                    <td>${u.receiverAccount.accountID}</td> 
+                                    <td>${u.content}</td> 
+                                    <td>${u.senderAccount.accountID}</td> 
+                                    <td> 5000 VND -
+                                        <c:choose>
+                                            <c:when test="${transaction.feeBearer==true}">
+                                                nguoi chuyen tra
+                                            </c:when>
+                                            <c:otherwise>
+                                                nguoi nhan tra
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td> 
+                                    <td><a href="<c:url value = "/printReciept/${u.transactionID}"/>" class="btn btn-info" role="button"> Print reciept</a></td>
+                                </tr> 
+                                <c:set var="i" value="${i+1}" /> 
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                    <button onclick="goBack()" class="btn btn-info buttonback">Go Back</button>
                 </div>
-            </div>
-        </c:if>
+                <div class="clearfix"> </div>
+            </c:if>
+        </div>
         <!-- //contact --> 
 
         <!--footer-->
-        <div class="agile-footer w3ls-section">
+        <div class="agile-footer w3ls-section footer">
             <div class="container">
                 <div class="col-md-7 list-footer">
                     <ul class="footer-nav">
@@ -178,7 +163,7 @@
         </div>
         <!--//footer-->	
         <!-- subscribe -->
-        <div class="modal bnr-modal fade" id="myModal1" tabindex="-1" role="dialog">
+        <div class="modal bnr-modal fade " id="myModal1" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -204,19 +189,19 @@
         <script type="text/javascript" src="../../resources/js/easing.js"></script>
         <script type="text/javascript" src="../../resources/js/myJavascript.js"></script>
         <script type="text/javascript">
-            $(document).ready(function () {
-                /*
-                 var defaults = {
-                 containerID: 'toTop', // fading element id
-                 containerHoverID: 'toTopHover', // fading element hover id
-                 scrollSpeed: 1200,
-                 easingType: 'linear' 
-                 };
-                 */
+                        $(document).ready(function () {
+                            /*
+                             var defaults = {
+                             containerID: 'toTop', // fading element id
+                             containerHoverID: 'toTopHover', // fading element hover id
+                             scrollSpeed: 1200,
+                             easingType: 'linear' 
+                             };
+                             */
 
-                $().UItoTop({easingType: 'easeOutQuart'});
+                            $().UItoTop({easingType: 'easeOutQuart'});
 
-            });
+                        });
         </script>
         <!-- //smooth-scrolling-of-move-up -->  
         <!-- Bootstrap core JavaScript

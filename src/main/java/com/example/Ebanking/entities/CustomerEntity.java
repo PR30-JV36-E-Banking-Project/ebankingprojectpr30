@@ -5,11 +5,13 @@
  */
 package com.example.Ebanking.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,11 +26,11 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author solid
  */
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CustomerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @NotNull
     private int customerID;
 //    @NotNull
 //    @Size(max = 30, message = "FullName must under 30 character")
@@ -62,10 +64,10 @@ public class CustomerEntity {
     private String issueIDCardOffice;
     private boolean status;
 
-    @OneToMany(mappedBy = "customerEntity")
+    @OneToMany(mappedBy = "customerEntity", fetch = FetchType.LAZY)
     private Set<AccountEntity> accountEntitys;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "userID")
     private UserEntity userEntity;
 

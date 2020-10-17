@@ -20,9 +20,12 @@
         <link href="../../resources/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
         <link href="../../resources/css/style.css" type="text/css" rel="stylesheet" media="all">
         <link href="../../resources/css/font-awesome.css" rel="stylesheet">   <!-- font-awesome icons --> 
-        <!-- //Custom Theme files -->  
+        <link href="../../resources/css/custom.css" rel="stylesheet"> 
+
         <!-- js --> 
         <script src="../../resources/js/jquery-2.2.3.min.js"></script>
+        <!--<script src="../../resources/js/js.js"></script>-->
+        <!--<script src="../../resources/js/modernizr-custom.js"></script>-->
         <!-- web-fonts -->
         <link href="//fonts.googleapis.com/css?family=Secular+One" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
@@ -32,11 +35,11 @@
     </head>
     <body> 
         <!-- header -->
-        <div class="headerw3-agile"> 
+        <div class="headerw3-agile header"> 
             <div class="header-w3mdl"><!-- header-two --> 
                 <div class="container"> 
                     <div class="agileits-logo navbar-left">
-                        <h1><a href="index.html"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
+                        <h1><a href="<c:url value = "/"/>"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
                     </div> 
                     <div class="agileits-hdright nav navbar-nav">
                         <div class="header-w3top"><!-- header-top --> 
@@ -61,129 +64,107 @@
             </div>	
         </div>	
         <!-- //header -->  
-        <!-- banner -->
-        <div class="banner inner-banner">
-            <div class="header-nav"><!-- header-three --> 	
-                <nav class="navbar navbar-default">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            Menu 
-                        </button> 
-                    </div>
-                    <!-- top-nav -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li><a href="<c:url value = "/"/>">Home</a></li>
-                            <li><a href="about.html">About</a></li>    
-                            <li><a href="services.html">services</a></li>    
-                            <li><a href="gallery.html">Gallery</a></li>    
-                            <li><a href="icons.html" data-toggle="dropdown">Short Codes<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="icons.html">Icons</a></li>
-                                    <li><a href="typography.html">Typograpghy</a></li>
-                                </ul>
-                            </li>	
-                            <li><a href="contact.html">Contact Us</a></li>
-                        </ul>  
-                        <div class="clearfix"> </div>	
-                    </div>
-                </nav>    
+        <!-- Vertical navbar -->
+        <div class="verMenu">
+            <div class="bormenu">
+                <p class="textmenu">Information Query</p>
+                <ul class="listmenu">
+                    <li><a href="#">List Account</a></li>
+                    <li><a href="#">Transaction Details</a></li>
+                    <li><a href="#">List Card</a></li>
+                    <li><a href="#">Statement</a></li>
+                    <li><a href="#">Pending transactions</a></li>
+                </ul>
             </div>
-            <!-- banner-text -->
-            <!-- banner -->
-        </div>	
-        <!-- contact -->
-        <div class="w3ls-section contact">
-            <div class="container"> 
-                <div class="contact_wthreerow agileits-w3layouts">
-                    <div class="col-md-7">
-                        <h4>Tranfer Money</h4> 
-                        <div class="container">
-                            <form action="/confirmTranfer" method="post" >
-                                <table class="table">
-                                    <tbody>
-                                        <tr class="info">
-                                            <td>Account Sender</td>
-                                            <td>${transaction.senderAccount.accountID}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Balance</td>
-                                            <c:choose>
-                                                <c:when test="${transaction.feeBearer==true}">
-                                                    <td>${transaction.senderAccount.ballance-transaction.amount-5000}</td>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <td>${transaction.senderAccount.ballance-transaction.amount}</td>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </tr>
-                                        <tr>
-                                            <td>amount transferred.</td>
-                                            <td>${transaction.amount}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>amount in words.</td>
-                                            <td>XXX triệu Đồng</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Account Receiver.</td>
-                                            <td>${transaction.receiverAccount.accountID}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tranfer Content.</td>
-                                            <td>${transaction.content}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fees.</td>
-                                            <c:choose>
-                                                <c:when test="${transaction.feeBearer==true}">
-                                                    <td>nguoi chuyen tra</td>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <td>nguoi nhan tra</td>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </tr>
-                                        <tr>
-                                            <td>Fees Amount.</td>
-                                            <td>5000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Email recive OTP code.</td>
-                                            <td>${transaction.senderAccount.customerEntity.email}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Captcha.</td>
-                                            <td><img src=${"/captcha"}></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Input Captcha</td>
-                                            <td><div class="form-group">
-                                                    <input type="text" autocomplete="off" class="form-control" name="captcha" id="usr">
-                                                    <span id="error" style="color:red">${error}</span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="submit" class="btn btn-primary" value="Confirm">
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="clearfix"> </div>
-                </div>
+            <br>
+            <div class="bormenu">
+                <p class="textmenu">Pay</p>
+                <ul class="listmenu">
+                    <li><a href="#">Transaction</a></li>
+                    <li><a href="#">Deposit</a></li>
+                </ul>
             </div>
         </div>
+
+        <div>
+            <div class="col-md-7 info">
+                <h4>Tranfer Money</h4> 
+                <form action="/confirmTranfer" method="post" >
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Account Sender</td>
+                                <td>${transaction.senderAccount.accountID}</td>
+                            </tr>
+                            <tr>
+                                <td>Balance</td>
+                                <c:choose>
+                                    <c:when test="${transaction.feeBearer==true}">
+                                        <td>${transaction.senderAccount.ballance-transaction.amount-5000}</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>${transaction.senderAccount.ballance-transaction.amount}</td>
+                                    </c:otherwise>
+                                </c:choose>
+                            </tr>
+                            <tr>
+                                <td>amount transferred.</td>
+                                <td>${transaction.amount}</td>
+                            </tr>
+                            <tr>
+                                <td>amount in words.</td>
+                                <td>XXX triệu Đồng</td>
+                            </tr>
+                            <tr>
+                                <td>Account Receiver.</td>
+                                <td>${transaction.receiverAccount.accountID}</td>
+                            </tr>
+                            <tr>
+                                <td>Tranfer Content.</td>
+                                <td>${transaction.content}</td>
+                            </tr>
+                            <tr>
+                                <td>Fees.</td>
+                                <c:choose>
+                                    <c:when test="${transaction.feeBearer==true}">
+                                        <td>nguoi chuyen tra</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>nguoi nhan tra</td>
+                                    </c:otherwise>
+                                </c:choose>
+                            </tr>
+                            <tr>
+                                <td>Fees Amount.</td>
+                                <td>5000</td>
+                            </tr>
+                            <tr>
+                                <td>Email recive OTP code.</td>
+                                <td>${transaction.senderAccount.customerEntity.email}</td>
+                            </tr>
+                            <tr>
+                                <td>Captcha.</td>
+                                <td><img src=${"/captcha"}></td>
+                            </tr>
+                            <tr>
+                                <td>Input Captcha</td>
+                                <td><div class="form-group">
+                                        <input type="text" autocomplete="off" class="form-control" name="captcha" id="usr">
+                                        <span id="error" style="color:red">${error}</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input type="submit" class="btn btn-primary buttonback" value="Confirm">
+                </form>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
         <!-- //contact --> 
 
         <!--footer-->
-        <div class="agile-footer w3ls-section">
+        <div class="agile-footer w3ls-section footer">
             <div class="container">
                 <div class="col-md-7 list-footer">
                     <ul class="footer-nav">
@@ -207,7 +188,7 @@
         </div>
         <!--//footer-->	
         <!-- subscribe -->
-        <div class="modal bnr-modal fade" id="myModal1" tabindex="-1" role="dialog">
+        <div class="modal bnr-modal fade " id="myModal1" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -229,8 +210,9 @@
         <!-- //subscribe --> 
         <script src="js/SmoothScroll.min.js"></script>
         <!-- smooth-scrolling-of-move-up -->
-        <script type="text/javascript" src="js/move-top.js"></script>
-        <script type="text/javascript" src="js/easing.js"></script>
+        <script type="text/javascript" src="../../resources/js/move-top.js"></script>
+        <script type="text/javascript" src="../../resources/js/easing.js"></script>
+        <script type="text/javascript" src="../../resources/js/myJavascript.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 /*

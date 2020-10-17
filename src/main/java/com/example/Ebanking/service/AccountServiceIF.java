@@ -15,9 +15,9 @@ import java.util.Optional;
  * @author solid
  */
 public interface AccountServiceIF {
-    public AccountEntity findByAccountID(int ID);
+    public AccountEntity findByAccountID(double ID);
     public AccountEntity findByAccountType(String accountType);
-    public void updateBalance(int senderAccountID,double amount,int receiverAccountID,boolean  fee);
-    public boolean checkBalance(int senderAccountID,double amount);
+    public void updateBalance(double senderAccountID,double amount,double receiverAccountID,boolean  fee);
+    public boolean checkBalance(double senderAccountID,double amount);
     public void saveAccount(AccountEntity account);
 }

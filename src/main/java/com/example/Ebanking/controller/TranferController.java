@@ -10,10 +10,14 @@ import com.example.Ebanking.entities.TransactionEntity;
 import com.example.Ebanking.service.AccountService;
 import com.example.Ebanking.service.EmailService;
 import com.example.Ebanking.service.RecieptService;
+import com.example.Ebanking.service.RestService;
 import com.example.Ebanking.service.TransactionService;
 import com.example.Ebanking.service.UserSevice;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import java.io.IOException;
 import java.security.Principal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -59,20 +63,31 @@ public class TranferController {
     RecieptService recieptService;
     @Autowired
     EmailService emailService;
+    @Autowired
+    RestService restService;
 
-    @GetMapping("interTranfer")
-    public String interTranfer(Model model, Principal principal, Authentication authentication) {
+    @GetMapping("newTranfer")
+    public String newTranfer() {
+        return "selectTFForm";
+    }
+
+    @GetMapping("selectTF")
+    public String interTranfer(Model model, Principal principal, Authentication authentication, @RequestParam("typeTF") String typeTF) {
         TransactionEntity transaction = new TransactionEntity();
         List<AccountEntity> accountTypesMap = getListAccType(principal);
         model.addAttribute("transaction", transaction);
         model.addAttribute("listTypeAccount", accountTypesMap);
-        return "intranferForm";
+        if (typeTF.equals("1")) {
+            return "intranferForm";
+        } else {
+            return "logout";
+        }
     }
 
     @PostMapping("createTF")
     public String createTF(@Valid @ModelAttribute("transaction") TransactionEntity transaction,
             BindingResult result, Model model, Principal principal) throws ParseException {
-        int senderAccID = transaction.getSenderAccount().getAccountID();
+        double senderAccID = transaction.getSenderAccount().getAccountID();
         double amount = transaction.getAmount();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
@@ -115,10 +130,13 @@ public class TranferController {
     @PostMapping("viewTranfer")
     public String viewTranfer(@ModelAttribute("transaction") TransactionEntity ts, @RequestParam("startDay") String startDay,
             @RequestParam("endDay") String endDay, Model model) throws ParseException {
-        int accountID = ts.getSenderAccount().getAccountID();
         Date startD = new SimpleDateFormat("yyyy-MM-dd").parse(startDay);
         Date endD = new SimpleDateFormat("yyyy-MM-dd").parse(endDay);
+        NumberFormat formatter = new DecimalFormat("#############");
+        double accountID = Double.valueOf(formatter.format(ts.getSenderAccount().getAccountID())).longValue();
         List<TransactionEntity> transactions = transactionService.getTransactionByDate(startD, endD, accountID);
+        System.out.println(formatter.format(ts.getSenderAccount().getAccountID()));
+        System.out.println(Double.parseDouble(formatter.format(ts.getSenderAccount().getAccountID())));
         model.addAttribute("listTransaction", transactions);
         return "transactionInfo";
     }
@@ -129,6 +147,17 @@ public class TranferController {
         recieptService.createPdf(transactionEntity);
         emailService.sendRecieptMessage(transactionEntity.getSenderAccount().getCustomerEntity().getEmail(), "Reciept", "Reciept");
         return "index";
+    }
+
+    @GetMapping("rest")
+    public String externalTF() throws JsonProcessingException {
+        AccountEntity ae = new AccountEntity();
+        ae.setAccountType("Saving");
+        ae.setBallance(10000000);
+        ae.setStatus(true);
+        accountService.saveAccount(ae);
+//        restService.getAccountFromRest();
+        return "logout";
     }
 
     public List<AccountEntity> getListAccType(Principal principal) {

@@ -29,7 +29,8 @@ public class TransactionService implements TransactionServiceIF {
     }
 
     @Override
-    public List<TransactionEntity> getTransactionByDate(Date start, Date end, int id) {
+    public List<TransactionEntity> getTransactionByDate(Date start, Date end, double id) {
+        System.out.println("id "+id);
         return transactionRepositoryIF.getTransactionWhereDateBetweenValue(start, end, id);
     }
 

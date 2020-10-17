@@ -8,13 +8,15 @@ package com.example.Ebanking.entities;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 /**
  *
@@ -24,30 +26,36 @@ import javax.persistence.OneToMany;
 public class AccountEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int accountID;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IdGenerator")
+    @GenericGenerator(name = "IdGenerator",
+            strategy = "com.example.Ebanking.IdGenerator.AccountIdGenerator",
+            parameters = {@Parameter(name = "sequence", value = "book_id_sequence")})
+    private double accountID;
     private double ballance;
     private String accountType;
     private boolean status;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "customerID")
     private CustomerEntity customerEntity;
-    @OneToMany(mappedBy = "senderAccount")
+
+    @OneToMany(mappedBy = "senderAccount", fetch = FetchType.LAZY)
     private Set<TransactionEntity> senders;
-    @OneToMany(mappedBy = "receiverAccount")
+
+    @OneToMany(mappedBy = "receiverAccount", fetch = FetchType.LAZY)
     private Set<TransactionEntity> receivers;
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "bankID")
     private BankEntity bankEntity;
 
     public AccountEntity() {
     }
 
-    public int getAccountID() {
+    public double getAccountID() {
         return accountID;
     }
 
-    public void setAccountID(int accountID) {
+    public void setAccountID(double accountID) {
         this.accountID = accountID;
     }
 
@@ -111,7 +119,5 @@ public class AccountEntity {
     public String toString() {
         return "AccountEntity{" + "accountID=" + accountID + ", ballance=" + ballance + ", accountType=" + accountType + ", status=" + status + ", customerEntity=" + customerEntity + ", senders=" + senders + ", receivers=" + receivers + ", bankEntity=" + bankEntity + '}';
     }
-
-
 
 }

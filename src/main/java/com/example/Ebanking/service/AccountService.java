@@ -29,14 +29,14 @@ public class AccountService implements AccountServiceIF {
     }
 
     @Override
-    public AccountEntity findByAccountID(int ID) {
+    public AccountEntity findByAccountID(double ID) {
         Optional<AccountEntity> account = accountRepositoryIF.findByAccountID(ID);
         return account.isPresent() ? account.get() : null;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void updateBalance(int senderAccountID, double amount, int recieverAccountID, boolean fee) {
+    public void updateBalance(double senderAccountID, double amount, double recieverAccountID, boolean fee) {
         AccountEntity senderAccount = findByAccountID(senderAccountID);
         AccountEntity recieverAccount = findByAccountID(recieverAccountID);
         if (fee == true) {
@@ -51,13 +51,9 @@ public class AccountService implements AccountServiceIF {
     }
 
     @Override
-    public boolean checkBalance(int senderAccountID, double amount) {
+    public boolean checkBalance(double senderAccountID, double amount) {
         double balance = findByAccountID(senderAccountID).getBallance();
-        if (balance >= amount + 50000) {
-            return true;
-        } else {
-            return false;
-        }
+        return balance >= amount + 50000;
 
     }
 
