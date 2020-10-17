@@ -78,13 +78,15 @@ public class TranferController {
         model.addAttribute("transaction", transaction);
         model.addAttribute("listTypeAccount", accountTypesMap);
         if (typeTF.equals("1")) {
-            return "intranferForm";
+            model.addAttribute("action", "/createITF");
+            return "tranferForm";
         } else {
-            return "logout";
+            model.addAttribute("actiona", "/createETF");
+            return "tranferForm";
         }
     }
 
-    @PostMapping("createTF")
+    @PostMapping("createITF")
     public String createTF(@Valid @ModelAttribute("transaction") TransactionEntity transaction,
             BindingResult result, Model model, Principal principal) throws ParseException {
         double senderAccID = transaction.getSenderAccount().getAccountID();
