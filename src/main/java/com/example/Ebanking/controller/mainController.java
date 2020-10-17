@@ -85,7 +85,7 @@ public class mainController {
 
     @GetMapping("/teller")
     public String teller() {
-        return "teller";
+        return "adminTeller";
     }
 
     @GetMapping("/admin")

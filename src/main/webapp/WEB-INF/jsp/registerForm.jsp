@@ -102,6 +102,14 @@
                         <p>Please user the email which you registered customer account in our bank</p>
                         <form:form action="/account/sign-up" method="post" modelAttribute="user"> 
                             <form:hidden path="userID"/>
+                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your Full Name" path="customerEntity.fullName"/>
+                            <form:errors path="customerEntity.fullName" class="error"/>
+                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your email(customer)" path="customerEntity.email"/>
+                            <form:errors path="customerEntity.email" class="error"/>
+                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your country" path="customerEntity.country"/>
+                            <form:errors path="customerEntity.country" class="error"/>
+                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your city" path="customerEntity.city"/>
+                            <form:errors path="customerEntity.city" class="error"/>
                             <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your User Name" path="userName"/>
                             <form:errors path="userName" class="error"/>
                             <form:input style="margin: 10px;" type="password"  required="" placeholder="Enter Your Password" path="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password"  onkeyup='check();' />

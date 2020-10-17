@@ -83,12 +83,13 @@ public class CustomerController {
         UserEntity existingUser = userRepository.findByEmailIgnoreCase(userEntity.getEmail());
 
         CustomerEntity availableEmail = customerRepository.findByEmailIgnoreCase(userEntity.getEmail());
+        System.out.println(availableEmail);
 
         if (existingUser != null) {
             model.addAttribute("error1", "Email is registered");
             return "registerForm";
         }
-        if (availableEmail != null) {
+        if (availableEmail == null) {
             userServiceSecurity.signUpUser(userEntity);
             return "checkEmailNotification";
         } else {
