@@ -81,41 +81,78 @@ public class TranferController {
             model.addAttribute("action", "/createITF");
             return "tranferForm";
         } else {
-            model.addAttribute("actiona", "/createETF");
+            model.addAttribute("action", "/createETF");
             return "tranferForm";
         }
     }
 
     @PostMapping("createITF")
-    public String createTF(@Valid @ModelAttribute("transaction") TransactionEntity transaction,
+    public String createITF(@Valid @ModelAttribute("transaction") TransactionEntity transaction,
             BindingResult result, Model model, Principal principal) throws ParseException {
         double senderAccID = transaction.getSenderAccount().getAccountID();
+        double receiverAccID = transaction.getReceiverAccount().getAccountID();
         double amount = transaction.getAmount();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
-        if (!accountService.checkBalance(senderAccID, amount)) {
+
+        if (result.hasErrors()) {
+            List<AccountEntity> accountTypesMap = getListAccType(principal);
+            model.addAttribute("listTypeAccount", accountTypesMap);
+            return "tranferForm";
+        } else if (!accountService.checkAccountITF(receiverAccID)) {
+            List<AccountEntity> accountTypesMap = getListAccType(principal);
+            model.addAttribute("listTypeAccount", accountTypesMap);
+            model.addAttribute("errorAccount", "Account not valid");
+            return "tranferForm";
+        } else if (!accountService.checkBalance(senderAccID, amount)) {
+            List<AccountEntity> accountTypesMap = getListAccType(principal);
+            model.addAttribute("listTypeAccount", accountTypesMap);
+            model.addAttribute("error", "Balance not enought");
+            return "tranferForm";
+        }
+        transaction.setReceiverAccount(accountService.findByAccountID(transaction.getReceiverAccount().getAccountID()));
+        transaction.setTransactionDate(LocalDate.parse(dtf.format(now)));
+        model.addAttribute("transaction", transaction);
+        model.addAttribute("msg", "internal");
+        return "confirmTranfer";
+    }
+
+    @PostMapping("createETF")
+    public String createETF(@Valid @ModelAttribute("transaction") TransactionEntity transaction,
+            BindingResult result, Model model, Principal principal) throws JsonProcessingException {
+        double senderAccID = transaction.getSenderAccount().getAccountID();
+        double receiverAccID = transaction.getReceiverAccount().getAccountID();
+        double amount = transaction.getAmount();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        if (result.hasErrors()) {
+            List<AccountEntity> accountTypesMap = getListAccType(principal);
+            model.addAttribute("listTypeAccount", accountTypesMap);
+            return "intranferForm";
+        } else if (!restService.checkAccountFromRest(receiverAccID)) {
+            List<AccountEntity> accountTypesMap = getListAccType(principal);
+            model.addAttribute("listTypeAccount", accountTypesMap);
+            model.addAttribute("errorAccount", "Account not valid");
+            return "intranferForm";
+        } else if (!accountService.checkBalance(senderAccID, amount)) {
             List<AccountEntity> accountTypesMap = getListAccType(principal);
             model.addAttribute("listTypeAccount", accountTypesMap);
             model.addAttribute("error", "Balance not enought");
             return "intranferForm";
         }
-        if (result.hasErrors()) {
-            List<AccountEntity> accountTypesMap = getListAccType(principal);
-            model.addAttribute("listTypeAccount", accountTypesMap);
-            return "intranferForm";
-        }
-        transaction.setReceiverAccount(accountService.findByAccountID(transaction.getReceiverAccount().getAccountID()));
         transaction.setTransactionDate(LocalDate.parse(dtf.format(now)));
         model.addAttribute("transaction", transaction);
+        model.addAttribute("msg", "external");
         return "confirmTranfer";
     }
 
     @PostMapping("confirmTranfer")
-    public String confirmTranfer(HttpSession session, HttpServletRequest request, Model model) {
+    public String confirmTranfer(HttpSession session, HttpServletRequest request, Model model,
+            @RequestParam("msg") String msg) {
         String captcha = session.getAttribute("captcha_security").toString();
         String verifyCaptcha = request.getParameter("captcha");
         if (captcha.equals(verifyCaptcha)) {
-            return oTPController.generateOtp();
+            return oTPController.generateOtp(msg,model);
         }
         model.addAttribute("error", "Wrong Captcha");
         return "confirmTranfer";

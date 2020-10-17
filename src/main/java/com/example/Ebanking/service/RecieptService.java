@@ -29,8 +29,9 @@ public class RecieptService {
 
     public void createPdf(TransactionEntity transactionE) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        String imgUrl = classLoader.getResource(".").getPath().replace("/classes", "").substring(1)
-                + "Ebanking-0.0.1-SNAPSHOT/resources/fonts/arial-unicode-ms.ttf";
+        System.out.println(classLoader.getResource(".").getPath().replace("/classes", "").replace("target/", ""));
+        String imgUrl = classLoader.getResource(".").getPath().replace("/classes", "").replace("target/", "").substring(1)
+                + "src/main/webapp/resources/fonts/arial-unicode-ms.ttf";
         FontFactory.register(imgUrl, "Arial Unicode MS");
         System.out.println("reciept " + imgUrl);
         Font myfont = FontFactory.getFont("Arial Unicode MS", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);

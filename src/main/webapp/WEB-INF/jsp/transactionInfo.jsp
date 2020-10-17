@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -110,11 +111,11 @@
                                 <tr> 
                                     <td>${i}</td> 
                                     <td>${u.transactionID}</td> 
-                                    <td>${u.amount} VND</td> 
+                                    <td><fmt:formatNumber pattern="#############" value="${u.amount}"/> VND</td> 
                                     <td>${u.transactionDate}</td> 
-                                    <td>${u.receiverAccount.accountID}</td> 
+                                    <td><fmt:formatNumber pattern="#############" value="${u.receiverAccount.accountID}"/></td> 
                                     <td>${u.content}</td> 
-                                    <td>${u.senderAccount.accountID}</td> 
+                                    <td><fmt:formatNumber pattern="#############" value="${u.senderAccount.accountID}"/></td> 
                                     <td> 5000 VND -
                                         <c:choose>
                                             <c:when test="${transaction.feeBearer==true}">

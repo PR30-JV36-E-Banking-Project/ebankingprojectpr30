@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -91,25 +92,27 @@
                 <h4>Tranfer Money</h4> 
                 <form action="/confirmTranfer" method="post" >
                     <table class="table">
+                        <input type="hidden" name="msg" value="${msg}">
                         <tbody>
                             <tr>
                                 <td>Account Sender</td>
-                                <td>${transaction.senderAccount.accountID}</td>
+
+                                <td><fmt:formatNumber pattern="#############" value="${transaction.senderAccount.accountID}" /></td>
                             </tr>
                             <tr>
                                 <td>Balance</td>
                                 <c:choose>
                                     <c:when test="${transaction.feeBearer==true}">
-                                        <td>${transaction.senderAccount.ballance-transaction.amount-5000}</td>
+                                        <td><fmt:formatNumber pattern="#############" value="${transaction.senderAccount.ballance-transaction.amount-5000}" /></td>
                                     </c:when>
                                     <c:otherwise>
-                                        <td>${transaction.senderAccount.ballance-transaction.amount}</td>
+                                        <td><fmt:formatNumber pattern="#############" value="${transaction.senderAccount.ballance-transaction.amount}" /></td>
                                     </c:otherwise>
                                 </c:choose>
                             </tr>
                             <tr>
                                 <td>amount transferred.</td>
-                                <td>${transaction.amount}</td>
+                                <td><fmt:formatNumber pattern="#############" value="${transaction.amount}" /></td>
                             </tr>
                             <tr>
                                 <td>amount in words.</td>
@@ -117,7 +120,7 @@
                             </tr>
                             <tr>
                                 <td>Account Receiver.</td>
-                                <td>${transaction.receiverAccount.accountID}</td>
+                                <td><fmt:formatNumber pattern="#############" value="${transaction.receiverAccount.accountID}"/></td>
                             </tr>
                             <tr>
                                 <td>Tranfer Content.</td>

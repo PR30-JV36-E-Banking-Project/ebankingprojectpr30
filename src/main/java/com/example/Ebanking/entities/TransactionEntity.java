@@ -43,7 +43,6 @@ public class TransactionEntity {
     private AccountEntity senderAccount;
     @ManyToOne
     @JoinColumn(name = "receiveAccountID")
-    @AccountValidate
     private AccountEntity receiverAccount;
 
     public TransactionEntity() {

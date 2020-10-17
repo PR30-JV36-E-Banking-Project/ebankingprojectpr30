@@ -21,6 +21,8 @@ public class AccountService implements AccountServiceIF {
 
     @Autowired
     AccountRepositoryIF accountRepositoryIF;
+    @Autowired
+    RestService restService;
 
     @Override
     public AccountEntity findByAccountType(String accountType) {
@@ -36,30 +38,47 @@ public class AccountService implements AccountServiceIF {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void updateBalance(double senderAccountID, double amount, double recieverAccountID, boolean fee) {
+    public void updateBalance(double senderAccountID, double amount, double recieverAccountID, boolean fee, String msg) {
         AccountEntity senderAccount = findByAccountID(senderAccountID);
-        AccountEntity recieverAccount = findByAccountID(recieverAccountID);
-        if (fee == true) {
-            senderAccount.setBallance(senderAccount.getBallance() - amount - 5000);
-            recieverAccount.setBallance(recieverAccount.getBallance() + amount);
+        if (msg.equalsIgnoreCase("internal")) {
+            AccountEntity recieverAccount = findByAccountID(recieverAccountID);
+            if (fee == true) {
+                senderAccount.setBallance(senderAccount.getBallance() - amount - 5000);
+                recieverAccount.setBallance(recieverAccount.getBallance() + amount);
+            } else {
+                senderAccount.setBallance(senderAccount.getBallance() - amount);
+                recieverAccount.setBallance(recieverAccount.getBallance() + amount - 5000);
+            }
+            accountRepositoryIF.save(recieverAccount);
         } else {
-            senderAccount.setBallance(senderAccount.getBallance() - amount);
-            recieverAccount.setBallance(recieverAccount.getBallance() + amount - 5000);
+            if (fee == true) {
+                senderAccount.setBallance(senderAccount.getBallance() - amount - 5000);
+                restService.updateBallanceETF(recieverAccountID, amount);
+            } else {
+                senderAccount.setBallance(senderAccount.getBallance() - amount);
+                restService.updateBallanceETF(recieverAccountID, amount - 5000);
+            }
         }
         accountRepositoryIF.save(senderAccount);
-        accountRepositoryIF.save(recieverAccount);
     }
 
     @Override
     public boolean checkBalance(double senderAccountID, double amount) {
         double balance = findByAccountID(senderAccountID).getBallance();
         return balance >= amount + 50000;
-
     }
 
     @Override
-    public void saveAccount(AccountEntity account) {
+    public void saveAccount(AccountEntity account
+    ) {
         accountRepositoryIF.save(account);
+    }
+
+    @Override
+    public boolean checkAccountITF(Double accountID
+    ) {
+        Optional<AccountEntity> accountEntity = accountRepositoryIF.findByAccountID(accountID);
+        return accountEntity != null && accountEntity.isPresent();
     }
 
 }

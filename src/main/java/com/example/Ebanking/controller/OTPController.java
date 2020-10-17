@@ -11,19 +11,13 @@ import com.example.Ebanking.service.EmailService;
 import com.example.Ebanking.service.OTPService;
 import com.example.Ebanking.service.TransactionService;
 import com.example.Ebanking.service.UserSevice;
-import java.util.HashMap;
-import java.util.Map;
-import javax.transaction.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -49,20 +43,21 @@ public class OTPController {
     private UserSevice userSevice;
 
 //    @GetMapping("/generateOtp")
-    public String generateOtp() {
+    public String generateOtp(String msg, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         int otp = otpService.generateOTP(username);
-        String email=userSevice.getUserByUserName(username).getCustomerEntity().getEmail();
+        String email = userSevice.getUserByUserName(username).getCustomerEntity().getEmail();
         String message = Integer.toString(otp);
-        logger.info("OTP : " + otp);
         myEmailService.sendOtpMessage(email, "Verify-OTP", message);
-
+        model.addAttribute("msg", msg);
         return "confirmOTP";
     }
 
     @PostMapping("/confirmOTP")
-    public String confirmOTP(@RequestParam(name = "OTPcode") String OTPcode, Model model, @SessionAttribute("transaction") TransactionEntity transactionSS, SessionStatus status) {
+    public String confirmOTP(@RequestParam(name = "OTPcode") String OTPcode, Model model,
+            @SessionAttribute("transaction") TransactionEntity transactionSS, SessionStatus status,
+            @RequestParam("msg") String msg) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         String cacheOTP = Integer.toString(otpService.getOtp(username));
@@ -71,9 +66,9 @@ public class OTPController {
         double amount = transactionSS.getAmount();
         boolean fee = transactionSS.isFeeBearer();
         if (cacheOTP.equals(OTPcode)) {
-            transactionService.saveTransaction(transactionSS);
-            accountService.updateBalance(senderAccID, amount, recieverAccID, fee);
-            status.setComplete();
+                transactionService.saveTransaction(transactionSS);
+                accountService.updateBalance(senderAccID, amount, recieverAccID, fee,msg);
+//            status.setComplete();
             return "tranferSuccess";
         }
         otpService.clearOTP(username);

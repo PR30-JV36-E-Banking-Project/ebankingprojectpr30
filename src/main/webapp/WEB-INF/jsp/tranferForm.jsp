@@ -118,7 +118,7 @@
                     <div class="form-group">
                         <label for="content">Transfer Content:</label>
                         <form:input type="text" class="form-control" required="" path="content" placeholder="Enter transfer content" id="content"/>
-                        <form:errors path="content" class="error"/>
+                        <span id="error" style="color:red">${errorAccount}</span>
                     </div>
                     <div class="form-group">
                         <label for="fees">Select Fees:</label>
