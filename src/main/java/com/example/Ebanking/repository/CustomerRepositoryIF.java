@@ -20,4 +20,5 @@ public interface CustomerRepositoryIF extends  CrudRepository<CustomerEntity, In
     Optional<CustomerEntity> findByEmail(String email);
     CustomerEntity findByUserEntity(UserEntity userEntity);
     CustomerEntity findByEmailIgnoreCase(String email);
+    CustomerEntity findByCustomerID(int customerID);
 }

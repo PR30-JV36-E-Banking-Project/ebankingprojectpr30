@@ -101,22 +101,40 @@
                         <h4>Register Form</h4> 
                         <p>Please user the email which you registered customer account in our bank</p>
                         <form:form action="/account/sign-up" method="post" modelAttribute="user"> 
-                            <form:hidden path="userID"/>
+                            
                             <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your Full Name" path="customerEntity.fullName"/>
                             <form:errors path="customerEntity.fullName" class="error"/>
-                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your email(customer)" path="customerEntity.email"/>
-                            <form:errors path="customerEntity.email" class="error"/>
+                            <p>Your Date of birth</p><form:input style="margin: 10px;" type="date"  required="" path="customerEntity.birthDay"/>
+                            <form:errors path="customerEntity.birthDay" class="error"/>
+                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your Gender" path="customerEntity.sex"/>
+                            <form:errors path="customerEntity.sex" class="error"/>
+                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your Address" path="customerEntity.address"/>
+                            <form:errors path="customerEntity.address" class="error"/>
                             <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your country" path="customerEntity.country"/>
                             <form:errors path="customerEntity.country" class="error"/>
-                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your city" path="customerEntity.city"/>
+                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your Nationality" path="customerEntity.nationlaty"/>
+                            <form:errors path="customerEntity.nationlaty" class="error"/>
+                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your District" path="customerEntity.district"/>
+                            <form:errors path="customerEntity.district" class="error"/>
+                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your City" path="customerEntity.city"/>
                             <form:errors path="customerEntity.city" class="error"/>
+                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your Phone" path="customerEntity.phone"/>
+                            <form:errors path="customerEntity.phone" class="error"/>
+                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your email(Customer)" path="customerEntity.email"/>
+                            <form:errors path="customerEntity.email" class="error"/>
+                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your ID card" path="customerEntity.IDcard"/>
+                            <form:errors path="customerEntity.IDcard" class="error"/>
+                            <p>Date Issue ID Card</p><form:input style="margin: 10px;" type="date"  required="" placeholder="Enter Your date Issue ID Card" path="customerEntity.dateIssueIDCard"/>
+                            <form:errors path="customerEntity.dateIssueIDCard" class="error"/>
+                            <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your issue ID Card Office" path="customerEntity.issueIDCardOffice"/>
+                            <form:errors path="customerEntity.issueIDCardOffice" class="error"/>
                             <form:input style="margin: 10px;" type="text"  required="" placeholder="Enter Your User Name" path="userName"/>
                             <form:errors path="userName" class="error"/>
                             <form:input style="margin: 10px;" type="password"  required="" placeholder="Enter Your Password" path="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password"  onkeyup='check();' />
                             <form:errors path="password" class="error"/>
                             <input style="margin: 10px;" type="password" placeholder="Comfirm Your Password" name="confirm_password" id="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password"  onkeyup='check();'/>
                             <span id='message'></span>
-                            <form:input style="margin: 10px;" type="email"  required="" placeholder="Enter Your Email" path="email"/>
+                            <form:input style="margin: 10px;" type="email"  required="" placeholder="Enter Your Email (User)" path="email"/>
                             <form:errors path="email" class="error"/>
                             <span id="error1" style="color:red">${error1}</span>
                             <span id="error2" style="color:red">${error2}</span>

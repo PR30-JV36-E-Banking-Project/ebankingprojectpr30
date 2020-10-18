@@ -57,7 +57,6 @@ public class CustomerEntity {
 //    @Size(max = 11, message = "Phone must under 11 number")
     private String phone;
 //    @NotNull
-    @Column(unique=true)
     private String email;
 //    @NotNull
     private String IDcard;

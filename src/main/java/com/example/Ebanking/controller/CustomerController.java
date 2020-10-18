@@ -60,11 +60,11 @@ public class CustomerController {
 //        customerService.saveCustomer(theCustomer);
 //        return "checkEmailNotification";
 //    }
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(@ModelAttribute("customer") CustomerEntity theCustomer) {
-        customerService.saveCustomer(theCustomer);
-        return "checkEmailNotification";
-    }
+//    @RequestMapping(value = "login", method = RequestMethod.POST)
+//    public String login(@ModelAttribute("customer") CustomerEntity theCustomer) {
+//        customerService.saveCustomer(theCustomer);
+//        return "checkEmailNotification";
+//    }
     @Autowired
     private UserServiceSecurity userServiceSecurity;
     @Autowired
@@ -73,30 +73,33 @@ public class CustomerController {
     @GetMapping("/sign-up")
     String signUp(Model model) {
         UserEntity userEntity = new UserEntity();
+        //CustomerEntity customerEntity = new CustomerEntity();
+        //customerEntity.setUserEntity(userEntity);
         model.addAttribute("user", userEntity);
+        //model.addAttribute("customerEntity", userEntity);
         return "registerForm";
     }
 
     @PostMapping("/sign-up")
-    String signUp(@ModelAttribute("user") UserEntity userEntity, Model model) {
-    	System.out.println("this is sign up..................");
+    String signUp(@ModelAttribute("user") UserEntity userEntity,Model model) {
         UserEntity existingUser = userRepository.findByEmailIgnoreCase(userEntity.getEmail());
-
-        CustomerEntity availableEmail = customerRepository.findByEmailIgnoreCase(userEntity.getEmail());
-        System.out.println(availableEmail);
+        CustomerEntity customerEntity = userEntity.getCustomerEntity();
+        customerEntity.setUserEntity(userEntity);
+        //userEntity.setCustomerEntity(customerEntity);
+        //model.addAttribute("customerEntity", customerEntity);
 
         if (existingUser != null) {
             model.addAttribute("error1", "Email is registered");
             return "registerForm";
-        }
-        if (availableEmail == null) {
-            userServiceSecurity.signUpUser(userEntity);
-            return "checkEmailNotification";
         } else {
-            model.addAttribute("error2", "Please register Customer Account to user our services");
-            return "registerForm";
+            userServiceSecurity.signUpUser(userEntity, customerEntity);
+            return "checkEmailNotification";
         }
-        
+//        } else {
+//            model.addAttribute("error2", "Please register Customer Account to user our services");
+//            return "registerForm";
+//        }
+
     }
 
     @GetMapping("/confirm")
@@ -114,10 +117,10 @@ public class CustomerController {
         String username = principal.getName();
 
         UserEntity currentUser = userSevice.getUserByUserName(username);
-        
-        String currentEmail = currentUser.getEmail();
-        
-        CustomerEntity currentCustomer = customerRepository.findByEmailIgnoreCase(currentEmail);
+
+        int currentID = currentUser.getCustomerEntity().getCustomerID();
+
+        CustomerEntity currentCustomer = customerRepository.findByCustomerID(currentID);
 //        CustomerEntity currentCustomer = customerService.findByUserEntity(currentUser);
 //        
 //        model.addAttribute("currentCustomer", currentCustomer);
@@ -125,5 +128,5 @@ public class CustomerController {
 
         return "viewAccountInformation";
     }
-    
+
 }

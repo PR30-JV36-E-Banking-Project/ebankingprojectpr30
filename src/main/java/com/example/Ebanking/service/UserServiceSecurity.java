@@ -8,6 +8,7 @@ package com.example.Ebanking.service;
 import com.example.Ebanking.entities.ConfirmationToken;
 import com.example.Ebanking.entities.CustomerEntity;
 import com.example.Ebanking.entities.UserEntity;
+import com.example.Ebanking.repository.CustomerRepositoryIF;
 import com.example.Ebanking.repository.UserRepositoryIF;
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class UserServiceSecurity implements UserDetailsService {
 
     @Autowired
     UserRepositoryIF userRepositoryIF;
+    
+    @Autowired
+    CustomerRepositoryIF customerRepositoryIF;
 
     @Autowired
     EmailService emailService;
@@ -61,7 +65,7 @@ public class UserServiceSecurity implements UserDetailsService {
         return new BCryptPasswordEncoder();
     }
 
-    public void signUpUser(UserEntity userEntity) {
+    public void signUpUser(UserEntity userEntity, CustomerEntity customerEntity) {
 
         BCryptPasswordEncoder bCryptPasswordEncoder = passwordEncoder();
 
@@ -76,7 +80,9 @@ public class UserServiceSecurity implements UserDetailsService {
 //        userEntity.setUserID(linkingCustomer.getUserEntity().getUserID());
         
         userRepositoryIF.save(userEntity);
-
+        
+        customerRepositoryIF.save(customerEntity);
+        
         final ConfirmationToken confirmationToken = new ConfirmationToken(userEntity);
 
         confirmationTokenService.saveConfirmationToken(confirmationToken);
@@ -96,11 +102,11 @@ public class UserServiceSecurity implements UserDetailsService {
     public void confirmUser(ConfirmationToken confirmationToken) {
 
         UserEntity userEntity = confirmationToken.getUserEntity();
-
+        CustomerEntity customerEntity = userEntity.getCustomerEntity();
         userEntity.setIsActived(true);
 
         userRepositoryIF.save(userEntity);
-
+        customerRepositoryIF.save(customerEntity);
         confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
 
     }
