@@ -7,6 +7,7 @@ package com.example.Ebanking.service;
 
 import com.example.Ebanking.entities.AccountEntity;
 import com.example.Ebanking.repository.AccountRepositoryIF;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,5 +66,8 @@ public class AccountService implements AccountServiceIF {
     public void saveAccount(AccountEntity account) {
         accountRepositoryIF.save(account);
     }
-
+    @Override
+    public List<AccountEntity> getAccounts() {
+        return (List)accountRepositoryIF.findAll();
+    }
 }

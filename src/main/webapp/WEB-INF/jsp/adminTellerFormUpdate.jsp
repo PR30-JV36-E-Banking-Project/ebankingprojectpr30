@@ -123,33 +123,19 @@
                             </div>
                             <div class="panel-body">
                                 <form:form action="saveTeller" cssClass="form-horizontal"
-                                           method="post" modelAttribute="user">
-
-                                    <!-- need to associate this data with customer id -->
-                                    <form:hidden path="tellerEntity.tellerID" />
+                                           method="post" modelAttribute="teller">
+                                    <form:hidden path="tellerID" />
 
                                     <div class="form-group">
                                         <label for="address" class="col-md-3 control-label">Address</label>
                                         <div class="col-md-9">
-                                            <form:input path="tellerEntity.address" cssClass="form-control" />
+                                            <form:input path="address" cssClass="form-control" />
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="email" class="col-md-3 control-label">Email</label>
                                         <div class="col-md-9">
-                                            <form:input type="email" path="tellerEntity.email" cssClass="form-control" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="userName" class="col-md-3 control-label">Username</label>
-                                        <div class="col-md-9">
-                                            <form:input path="userName" cssClass="form-control" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password" class="col-md-3 control-label">Password</label>
-                                        <div class="col-md-9">
-                                            <form:input path="password" cssClass="form-control" />
+                                            <form:input path="email" cssClass="form-control" />
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -158,7 +144,6 @@
                                             <form:button cssClass="btn btn-primary">Submit</form:button>
                                             </div>
                                         </div>
-
                                 </form:form>
                             </div>
                         </div>

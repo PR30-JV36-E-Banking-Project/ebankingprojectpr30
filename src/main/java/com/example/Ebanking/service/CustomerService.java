@@ -9,6 +9,7 @@ import com.example.Ebanking.entities.CustomerEntity;
 import com.example.Ebanking.entities.UserEntity;
 import com.example.Ebanking.repository.CustomerRepositoryIF;
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -44,6 +45,11 @@ public class CustomerService implements CustomerServiceIF {
     @Override
     public CustomerEntity findByUserEntity(UserEntity userEntity) {
         return customerRepositoryIF.findByUserEntity(userEntity);
+    }
+
+    @Override
+    public List<CustomerEntity> getCustomers() {
+        return (List)customerRepositoryIF.findAll();
     }
 
 }

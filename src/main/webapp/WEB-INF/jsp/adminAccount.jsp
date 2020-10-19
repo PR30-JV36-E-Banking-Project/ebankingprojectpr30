@@ -5,7 +5,7 @@
 <html lang="en">
 
     <head>
-        <title>Manage Teller For Admin</title>
+        <title>Manage Account For Teller</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -93,9 +93,9 @@
                                     <span>Management</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                 <div id="subPages" class="collapse ">
                                     <ul class="nav">
-                                        <li><a href="list-teller" class="lnr lnr-user active"> Tellers</a></li>
+                                        <li><a href="list-teller" class="lnr lnr-user"> Tellers</a></li>
                                         <li><a href="/account/list-customer" class="lnr lnr-user"> Customers</a></li>
-                                        <li><a href="/list-account" class="lnr lnr-user"> Account</a></li>
+                                        <li><a href="/list-account" class="lnr lnr-user  active"> Account</a></li>
                                         <li><a href="/list-transaction" class="fa fa-random"> Transactions</a></li>
                                     </ul>
                                 </div>
@@ -119,38 +119,40 @@
                                 <span class="input-group-btn"><button type="button" class="btn btn-primary">Search</button></span>
                             </div>
                             <div style="text-align: center;">
-                                <h1>Manage Teller</h1>
+                                <h1>Manage Account</h1>
                             </div>
                             <div style="float: left; margin: 20px;">
-                                <input type="button" value="Add New Teller"
+                                <input type="button" value="Add New Account"
                                        onclick="window.location.href = 'showFormForAdd'; return false;"
                                        class="btn btn-primary" />
                             </div>
                             <div class="panel-body">
                                 <table class="table table-striped table-bordered">
                                     <tr>
-                                        <th>Teller ID</th>
-                                        <th>Adress</th>
-                                        <th>Email</th>
-                                        <th>Action</th>
+                                        <th>Account ID</th>
+                                        <th>Ballance</th>
+                                        <th>Account Type</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
                                     </tr>
 
                                     <!-- loop over and print our customers -->
-                                    <c:forEach var="tempTeller" items="${pagedListHolder.pageList}">
+                                    <c:forEach var="tempAccount" items="${pagedListHolder.pageList}">
 
                                         <!-- construct an "update" link with customer id -->
                                         <c:url var="updateLink" value="/updateTellerForm">
-                                            <c:param name="tellerID" value="${tempTeller.tellerID}" />
+                                            <c:param name="accountID" value="${tempAccount.accountID}" />
                                         </c:url>
 
                                         <!-- construct an "delete" link with customer id -->
                                         <c:url var="deleteLink" value="/deleteTeller">
-                                            <c:param name="tellerID" value="${tempTeller.tellerID}" />
+                                            <c:param name="accountID" value="${tempAccount.accountID}" />
                                         </c:url>
                                         <tr>
-                                            <td>${tempTeller.tellerID}</td>
-                                            <td>${tempTeller.address}</td>
-                                            <td>${tempTeller.email}</td>
+                                            <td>${tempAccount.accountID}</td>
+                                            <td>${tempAccount.ballance}</td>
+                                            <td>${tempAccount.accountType}</td>
+                                            <td>${tempAccount.status}</td>
 
                                             <td>
                                                 <!-- display the update link --> 

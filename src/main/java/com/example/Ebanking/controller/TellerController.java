@@ -52,7 +52,7 @@ public class TellerController {
     public String showFormForAdd(Model model) {
 	UserEntity userEntity = new UserEntity();
 	model.addAttribute("user", userEntity);
-	return "tellerForm";
+	return "adminTellerForm";
     }
     
     @PostMapping("/saveTeller")
@@ -70,7 +70,7 @@ public class TellerController {
 	TellerEntity theTeller = tellerService.getTeller(theId);
         UserEntity userEntity = theTeller.getUserEntity1();
 	theModel.addAttribute("teller", theTeller);
-	return "tellerFormUpdate";
+	return "adminTellerFormUpdate";
     }
 
     @GetMapping("/deleteTeller")

@@ -6,6 +6,7 @@
 package com.example.Ebanking.service;
 
 import com.example.Ebanking.entities.AccountEntity;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -20,4 +21,5 @@ public interface AccountServiceIF {
     public void updateBalance(int senderAccountID,double amount,int receiverAccountID,boolean  fee);
     public boolean checkBalance(int senderAccountID,double amount);
     public void saveAccount(AccountEntity account);
+    public List <AccountEntity> getAccounts();
 }

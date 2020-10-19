@@ -90,6 +90,6 @@ public class mainController {
 
     @GetMapping("/admin")
     public String admin() {
-        return "admin";
+        return "adminIndex";
     }
 }

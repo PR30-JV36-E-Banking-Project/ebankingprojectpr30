@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.Ebanking.entities.ConfirmationToken;
 import com.example.Ebanking.entities.CustomerEntity;
+import com.example.Ebanking.entities.TellerEntity;
 import com.example.Ebanking.entities.UserEntity;
 import com.example.Ebanking.repository.CustomerRepositoryIF;
 import com.example.Ebanking.repository.UserRepositoryIF;
@@ -29,6 +30,9 @@ import com.example.Ebanking.service.ConfirmationTokenService;
 import com.example.Ebanking.service.CustomerServiceIF;
 import com.example.Ebanking.service.UserServiceSecurity;
 import com.example.Ebanking.service.UserSevice;
+import java.util.List;
+import org.springframework.beans.support.PagedListHolder;
+import org.springframework.web.bind.ServletRequestUtils;
 
 /**
  *
@@ -128,5 +132,16 @@ public class CustomerController {
 
         return "viewAccountInformation";
     }
-
+    @GetMapping(value = "/list-customer")
+    public String listCustomers(HttpServletRequest request, Model theModel) {
+	List<CustomerEntity> customers = customerService.getCustomers();
+        PagedListHolder pagedListHolder = new PagedListHolder(customers);
+		int page = ServletRequestUtils.getIntParameter(request, "p", 0);
+		pagedListHolder.setPage(page);
+		pagedListHolder.setPageSize(5);
+                
+	theModel.addAttribute("pagedListHolder", pagedListHolder);
+                
+	return "adminCustomer";
+    }
 }

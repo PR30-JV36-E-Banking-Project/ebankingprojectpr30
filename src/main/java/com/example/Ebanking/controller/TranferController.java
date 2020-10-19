@@ -28,10 +28,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -138,5 +140,17 @@ public class TranferController {
             accountEntitys.add(account);
         }
         return accountEntitys;
+    }
+    @GetMapping(value = "/list-transaction")
+    public String listTransactions(HttpServletRequest request, Model theModel) {
+	List<TransactionEntity> transactions = transactionService.getTransactions();
+        PagedListHolder pagedListHolder = new PagedListHolder(transactions);
+		int page = ServletRequestUtils.getIntParameter(request, "p", 0);
+		pagedListHolder.setPage(page);
+		pagedListHolder.setPageSize(5);
+                
+	theModel.addAttribute("pagedListHolder", pagedListHolder);
+                
+	return "adminTransaction";
     }
 }
