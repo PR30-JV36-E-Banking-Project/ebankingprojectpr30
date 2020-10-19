@@ -95,6 +95,7 @@
                                     <ul class="nav">
                                         <li><a href="teller.html" class="lnr lnr-user active"> Tellers</a></li>
                                         <li><a href="customer.html" class="lnr lnr-user"> Customers</a></li>
+                                        <li><a href="customer.html" class="lnr lnr-user"> Account</a></li>
                                         <li><a href="transaction.html" class="fa fa-random"> Transactions</a></li>
                                     </ul>
                                 </div>

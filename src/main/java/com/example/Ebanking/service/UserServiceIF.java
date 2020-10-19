@@ -14,4 +14,6 @@ import com.example.Ebanking.entities.UserEntity;
 
 public interface UserServiceIF {
     public UserEntity getUserByUserName(String username);
+    public UserEntity getUser(int theId);
+    
 }

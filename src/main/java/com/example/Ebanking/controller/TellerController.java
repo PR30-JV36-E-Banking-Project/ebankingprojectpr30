@@ -6,7 +6,9 @@
 package com.example.Ebanking.controller;
 
 import com.example.Ebanking.entities.TellerEntity;
+import com.example.Ebanking.entities.UserEntity;
 import com.example.Ebanking.service.TellerServiceIF;
+import com.example.Ebanking.service.UserServiceSecurity;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class TellerController {
     @Autowired
     private TellerServiceIF tellerService;
     
+    @Autowired
+    private UserServiceSecurity userServiceSecurity;
+    
     @GetMapping(value = "/list-teller")
     public String listTellerrs(HttpServletRequest request, Model theModel) {
 	List<TellerEntity> tellers = tellerService.getTellers();
@@ -44,16 +49,18 @@ public class TellerController {
     }
     
     @GetMapping("/showFormForAdd")
-    public String showFormForAdd(Model theModel) {
-	TellerEntity theTeller = new TellerEntity();
-	theModel.addAttribute("teller", theTeller);
+    public String showFormForAdd(Model model) {
+	UserEntity userEntity = new UserEntity();
+	model.addAttribute("user", userEntity);
 	return "tellerForm";
     }
     
     @PostMapping("/saveTeller")
     @Transactional
-    public String saveTeller(@ModelAttribute("teller") TellerEntity theTeller) {
-	tellerService.saveTeller(theTeller);
+    public String saveTeller(@ModelAttribute("user") UserEntity userEntity, Model model) {
+	TellerEntity tellerEntity = userEntity.getTellerEntity();
+        tellerEntity.setUserEntity1(userEntity);
+        userServiceSecurity.addNewTeller(userEntity, tellerEntity);
 	return "redirect:/list-teller";
     }
 
@@ -61,8 +68,9 @@ public class TellerController {
     public String showFormForUpdate(@RequestParam("tellerID") int theId,
 	    Model theModel) {
 	TellerEntity theTeller = tellerService.getTeller(theId);
+        UserEntity userEntity = theTeller.getUserEntity1();
 	theModel.addAttribute("teller", theTeller);
-	return "tellerForm";
+	return "tellerFormUpdate";
     }
 
     @GetMapping("/deleteTeller")

@@ -11,9 +11,11 @@ import com.example.Ebanking.repository.UserRepositoryIF;
 import java.text.MessageFormat;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,10 +27,10 @@ public class UserSevice implements UserServiceIF {
 
     @Autowired
     UserRepositoryIF userRepositoryIF;
-    
+
     @Autowired
     ConfirmationTokenService confirmationTokenService;
-    
+
     @Override
     public UserEntity getUserByUserName(String username) {
         Optional<UserEntity> userOptional = userRepositoryIF.findByUserName(username);
@@ -45,7 +47,7 @@ public class UserSevice implements UserServiceIF {
             throw new UsernameNotFoundException(MessageFormat.format("User with email {0} cannot be found.", email));
         }
     }
-    
+
 //    void signUpUser(User user) {
 //
 //	final User createdUser = userRepositoryIF.save(user);
@@ -53,7 +55,12 @@ public class UserSevice implements UserServiceIF {
 //	final ConfirmationToken confirmationToken = new ConfirmationToken(user);
 //
 //	confirmationTokenService.saveConfirmationToken(confirmationToken);
-
 //}
+    @Override
+    public UserEntity getUser(int theId) {
+        Optional<UserEntity> userOpt = userRepositoryIF.findById(theId);
+        return userOpt.isPresent() ? userOpt.get() : null;
+    }
 
+    
 }

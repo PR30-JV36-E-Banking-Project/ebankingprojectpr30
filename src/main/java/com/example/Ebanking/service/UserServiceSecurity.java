@@ -7,8 +7,10 @@ package com.example.Ebanking.service;
 
 import com.example.Ebanking.entities.ConfirmationToken;
 import com.example.Ebanking.entities.CustomerEntity;
+import com.example.Ebanking.entities.TellerEntity;
 import com.example.Ebanking.entities.UserEntity;
 import com.example.Ebanking.repository.CustomerRepositoryIF;
+import com.example.Ebanking.repository.TellerRepository;
 import com.example.Ebanking.repository.UserRepositoryIF;
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -41,9 +44,15 @@ public class UserServiceSecurity implements UserDetailsService {
     
     @Autowired
     CustomerRepositoryIF customerRepositoryIF;
-
+    
+    @Autowired
+    TellerRepository tellerRepository;
+    
     @Autowired
     EmailService emailService;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -67,9 +76,7 @@ public class UserServiceSecurity implements UserDetailsService {
 
     public void signUpUser(UserEntity userEntity, CustomerEntity customerEntity) {
 
-        BCryptPasswordEncoder bCryptPasswordEncoder = passwordEncoder();
-
-        final String encryptedPassword = bCryptPasswordEncoder.encode(userEntity.getPassword());
+        final String encryptedPassword = passwordEncoder.encode(userEntity.getPassword());
         
         userEntity.setPassword(encryptedPassword);
         
@@ -109,5 +116,44 @@ public class UserServiceSecurity implements UserDetailsService {
         customerRepositoryIF.save(customerEntity);
         confirmationTokenService.deleteConfirmationToken(confirmationToken.getId());
 
+    }
+    
+    public void addNewTeller(UserEntity userEntity, TellerEntity tellerEntity) {
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = passwordEncoder();
+
+        final String encryptedPassword = bCryptPasswordEncoder.encode(userEntity.getPassword());
+        
+        userEntity.setPassword(encryptedPassword);
+        
+        userEntity.setRoleType("ROLE_TELLER");
+        userEntity.setIsActived(true);
+        userRepositoryIF.save(userEntity);
+        
+        tellerRepository.save(tellerEntity);
+    }
+    
+    public String getBCryptPassword(UserEntity userEntity){
+        BCryptPasswordEncoder bCryptPasswordEncoder = passwordEncoder();
+
+        String encryptedPassword = bCryptPasswordEncoder.encode(userEntity.getPassword());
+        
+        return encryptedPassword;  
+    }
+    
+    public void setBCryptPassword(UserEntity userEntity){
+        BCryptPasswordEncoder bCryptPasswordEncoder = passwordEncoder();
+
+        String encryptedPassword = bCryptPasswordEncoder.encode(userEntity.getPassword());
+        
+        userEntity.setPassword(encryptedPassword);
+    }
+    
+    public void updatePassword(UserEntity currentUser, String password) {
+        BCryptPasswordEncoder bCryptPasswordEncoder = passwordEncoder();
+
+        currentUser.setPassword(bCryptPasswordEncoder.encode(password));
+        
+        userRepositoryIF.save(currentUser);
     }
 }

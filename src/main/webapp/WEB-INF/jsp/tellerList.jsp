@@ -59,8 +59,8 @@
 
 				    <td>
 					<!-- display the update link --> 
-					<a href="${updateLink}">Update</a>| 
-					<a href="${deleteLink}"	onclick="if (!(confirm('Are you sure you want to delete this teller?')))
+                                        <a href="${updateLink}" class="info">Update</a>| 
+                                        <a href="${deleteLink}" class="danger"	onclick="if (!(confirm('Are you sure you want to delete this teller?')))
 					    return false">Delete</a>
 				    </td>
 				</tr>

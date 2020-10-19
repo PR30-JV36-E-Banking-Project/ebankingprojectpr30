@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -107,7 +109,7 @@
             </ul>
             <ul style="margin: 20px; list-style-type: none">Suports
                 <li><a href="#" class="w3-bar-item w3-button" style="margin: 10px">Help</a></li>
-                <li><a href="/user/updatePassword" class="w3-bar-item w3-button" style="margin: 10px">Change password</a></li>
+                <li><a href="#" class="w3-bar-item w3-button" style="margin: 10px">Change password</a></li>
                 <li><a href="#" class="w3-bar-item w3-button" style="margin: 10px">Logout</a></li>
             </ul>
         </div>
@@ -116,70 +118,32 @@
             <div class="w3ls-section contact">
                 <div class="container"> 
                     <div>
-                        <table class="table table-bordered" style="width: 70%; font-size: 15px">
-                            <thead>
-                                <tr>
-                                    <th scope="col" style="text-align: right" class="info">#</th>
-                                    <th scope="col" class="info">Your Account Information</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row" style="text-align: right">Customer's ID</th>
-                                    <td>${currentCustomer.customerID}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="text-align: right">Customer's Full Name</th>
-                                    <td>${currentCustomer.fullName}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="text-align: right">Customer's Adress</th>
-                                    <td>${currentCustomer.address}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="text-align: right">Customer's Country</th>
-                                    <td>${currentCustomer.country}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="text-align: right">Customer's Nationlaty</th>
-                                    <td>${currentCustomer.nationlaty}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="text-align: right">Customer's District</th>
-                                    <td>${currentCustomer.district}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="text-align: right">Customer's city</th>
-                                    <td>${currentCustomer.city}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="text-align: right">Customer's phone numberd</th>
-                                    <td>${currentCustomer.phone}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="text-align: right">Customer's email</th>
-                                    <td>${currentCustomer.email}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="text-align: right">Customer's ID Card</th>
-                                    <td>${currentCustomer.IDcard}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="text-align: right">Customer's Date Issue ID Card</th>
-                                    <td>${currentCustomer.dateIssueIDCard}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" style="text-align: right">Customer's Issue ID Card Office</th>
-                                    <td>${currentCustomer.issueIDCardOffice}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="w3ls-section contact">
+                            <div class="container"> 
+                                <div class="contact_wthreerow agileits-w3layouts">
+                                    <div class="col-md-7 w3l_contact_form" style="border: 1px solid black; padding: 30px;">
+                                        <h1 style="margin: 20px">Change Your Password</h1>
+                                        <form action="/user/updatePassword" method="post" modelAttribute="user">
+                                            <input style="margin: 10px;" type="password"  required="" placeholder="Enter Your Old Password" name="oldPassword" value="oldPassword"/>
+                                            <errors class="error"/>
+                                            <input style="margin: 10px;" type="password"  required="" placeholder="Enter Your New Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password"  onkeyup='check();' />
+                                            <errors class="error1"/>
+                                            <input style="margin: 10px;" type="password" placeholder="Comfirm Your New Password" name="confirm_password" id="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password"  onkeyup='check();'/>
+                                            <span id='message'></span>
+                                            <span id="error" style="color:red">${error}</span>
+                                            <span id="success" style="color:blue">${success}</span>
+                                            <input style="margin: 10px; float: right;" type="submit" value="Change Your Password">
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
                     </div>  
 
-
                     <div class="clearfix"> </div>
-                </div>
-            </div>
+                </div>                                                         </div>
         </div>
         <!-- //contact --> 
 
@@ -233,25 +197,28 @@
         <script type="text/javascript" src="../../resources/js/move-top.js"></script>
         <script type="text/javascript" src="../../resources/js/easing.js"></script>
         <script type="text/javascript">
-                $(document).ready(function () {
-                    /*
-                     var defaults = {
-                     containerID: 'toTop', // fading element id
-                     containerHoverID: 'toTopHover', // fading element hover id
-                     scrollSpeed: 1200,
-                     easingType: 'linear' 
-                     };
-                     */
+                                        $(document).ready(function () {
+                                            /*
+                                             var defaults = {
+                                             containerID: 'toTop', // fading element id
+                                             containerHoverID: 'toTopHover', // fading element hover id
+                                             scrollSpeed: 1200,
+                                             easingType: 'linear' 
+                                             };
+                                             */
 
-                    $().UItoTop({easingType: 'easeOutQuart'});
+                                            $().UItoTop({easingType: 'easeOutQuart'});
 
-                });
+                                        });
+                                        var check = function () {
+                                            if (document.getElementById('password').value ==
+                                                    document.getElementById('confirm_password').value) {
+                                                document.getElementById('message').style.color = 'green';
+                                                document.getElementById('message').innerHTML = 'Password is matched';
+                                            } else {
+                                                document.getElementById('message').style.color = 'red';
+                                                document.getElementById('message').innerHTML = 'Password is not matched';
+                                            }
+                                        }
         </script>
-        <!-- //smooth-scrolling-of-move-up -->  
-        <!-- Bootstrap core JavaScript
-    ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="../../resources/js/bootstrap.js"></script>
-
-    </body>
 </html>
