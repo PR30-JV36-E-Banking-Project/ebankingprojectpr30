@@ -12,6 +12,7 @@
         <link href="../../resources/css/style.css" type="text/css" rel="stylesheet" media="all">
         <link href="../../resources/css/font-awesome.css" rel="stylesheet">   <!-- font-awesome icons --> 
         <!-- //Custom Theme files -->  
+        <link href="../../resources/css/custom.css" rel="stylesheet" type="text/css"/>
         <!-- js --> 
         <script src="../../resources/js/jquery-2.2.3.min.js"></script>
         <!-- web-fonts -->
@@ -29,13 +30,19 @@
                         <h1><a href="index.jsp"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
                     </div> 
                     <div class="agileits-hdright nav navbar-nav">
-                        <div class="header-w3top"><!-- header-top --> 
-                            <ul class="w3l-nav-top">
-                                <li><i class="fa fa-phone"></i><span> +0123456789 </span></li> 
-                                <li><a href="mailto:a@gmail.com"><i class="fa fa-envelope-o"></i><span>hoangduynhat@gmail.com</span></a></li>
-                            </ul>
+                            <div class="hotline">
+                                <div class="iconphone">
+                                    <img src="../../resources/images/icon-hotline.png" draggable="false">
+                                </div>
+                                <div class="des">
+                                    <p class="dv">
+                                        Dịch vụ Khách hàng 24/7
+                                    </p>
+                                    <p class="phone-number">1900 54 54 13</p>
+                                </div>
+                            </div>
+                    </div>
                             <div class="clearfix"> </div> 	 
-                        </div>
                         <div class="agile_social_banner">
                             <ul class="agileits_social_list">
                                 <li><a href="#" class="w3_agile_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>

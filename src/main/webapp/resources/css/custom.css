@@ -11,15 +11,15 @@
     margin-left:10px;
     float:left;
     width: 20%;
-    
+
 }
 .bormenu{
     border:1px solid #005030;
     border-radius:6px;
-    
+
 }
 .listmenu{
-    line-height: 50px;
+    line-height: 40px;
     list-style-type: square;
 }
 .listmenu>li{
@@ -49,9 +49,9 @@
 }
 
 .content{
-/*    border:1px solid #005030;
-    margin-left: 10px;
-    width: 75%;*/
+    /*    border:1px solid #005030;
+        margin-left: 10px;
+        width: 75%;*/
 }
 
 .buttonback{
@@ -80,7 +80,36 @@ body{
     display: none;
 }
 
+#phone-number{
+    padding-left: 60px;
+    font-size: 15px;
+    font-weight: BOLD;
+}
+#dv{
+    font-size: 12px;
+    width: 300px;
+}
+#iconphone{
+    float: left;
+}
 
+.readonly{
+    background-color: #EBEBE4 !important;
+    color:#A7A9AC !important;
+}
+
+@media (max-width: 1224px) and (min-width: 1000px){
+    #hotline {
+        text-align: right;
+        width: 190px;
+        float: right;
+        border: 1px solid #005030;
+        height: 55px;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 12px;
+        margin-right: 0;}
+}
 
 @media (max-width: 768px) {
     #sidebar {

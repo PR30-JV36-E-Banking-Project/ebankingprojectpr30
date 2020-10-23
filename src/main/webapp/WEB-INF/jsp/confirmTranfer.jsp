@@ -71,17 +71,17 @@
                 <p class="textmenu">Information Query</p>
                 <ul class="listmenu">
                     <li><a href="#">List Account</a></li>
-                    <li><a href="#">Transaction Details</a></li>
+                    <li><a href="<c:url value = "/viewTransaction"/>">Transaction Details</a></li>
                     <li><a href="#">List Card</a></li>
                     <li><a href="#">Statement</a></li>
-                    <li><a href="#">Pending transactions</a></li>
+                    <li><a href="#">Account Ballance</a></li>
                 </ul>
             </div>
             <br>
             <div class="bormenu">
                 <p class="textmenu">Pay</p>
                 <ul class="listmenu">
-                    <li><a href="#">Transaction</a></li>
+                    <li><a href="<c:url value = "/newTranfer"/>">Transaction</a></li>
                     <li><a href="#">Deposit</a></li>
                 </ul>
             </div>
@@ -97,7 +97,7 @@
                             <tr>
                                 <td>Account Sender</td>
 
-                                <td><fmt:formatNumber pattern="#############" value="${transaction.senderAccount.accountID}" /></td>
+                                <td><fmt:formatNumber pattern="#" value="${transaction.senderAccount.accountID}" /> </td>
                             </tr>
                             <tr>
                                 <td>Balance</td>
@@ -112,7 +112,7 @@
                             </tr>
                             <tr>
                                 <td>amount transferred.</td>
-                                <td><fmt:formatNumber pattern="#############" value="${transaction.amount}" /></td>
+                                <td><fmt:formatNumber pattern="#############" value="${transaction.amount}" /> VND</td>
                             </tr>
                             <tr>
                                 <td>amount in words.</td>

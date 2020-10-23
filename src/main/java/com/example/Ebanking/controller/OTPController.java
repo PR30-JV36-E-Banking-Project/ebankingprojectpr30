@@ -68,7 +68,7 @@ public class OTPController {
         if (cacheOTP.equals(OTPcode)) {
                 transactionService.saveTransaction(transactionSS);
                 accountService.updateBalance(senderAccID, amount, recieverAccID, fee,msg);
-//            status.setComplete();
+            status.setComplete();
             return "tranferSuccess";
         }
         otpService.clearOTP(username);

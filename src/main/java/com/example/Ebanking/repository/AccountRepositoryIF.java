@@ -18,4 +18,5 @@ import org.springframework.stereotype.Repository;
 public interface AccountRepositoryIF extends CrudRepository<AccountEntity, Double>{
     public Optional<AccountEntity> findByAccountID(double ID);
     public Optional<AccountEntity> findByAccountType(String accountType);
+    
 }

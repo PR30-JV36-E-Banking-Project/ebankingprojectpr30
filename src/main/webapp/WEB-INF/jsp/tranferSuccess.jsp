@@ -35,7 +35,7 @@
 		<div class="header-w3mdl"><!-- header-two --> 
 			<div class="container"> 
 				<div class="agileits-logo navbar-left">
-					<h1><a href="index.html"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
+					<h1><a href="<c:url value = "/"/>"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
 				</div> 
 				<div class="agileits-hdright nav navbar-nav">
 					<div class="header-w3top"><!-- header-top --> 

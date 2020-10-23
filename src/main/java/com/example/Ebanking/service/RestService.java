@@ -11,6 +11,7 @@ import com.example.Ebanking.model.ETFModel;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.Writer;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -25,7 +26,7 @@ public class RestService {
     @Autowired
     FormatDouble formatDouble;
 
-    public boolean checkAccountFromRest(double accountID) throws JsonProcessingException {
+    public AccountEntity checkAccountFromRest(double accountID) throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
         String ID = formatDouble.formatDoubleNum(accountID);
         System.out.println("id " + ID);
@@ -36,7 +37,7 @@ public class RestService {
         AccountEntity accountEntity = mapper.readValue(json, AccountEntity.class);
         System.out.println(accountEntity.getAccountID() + ", " + accountEntity.getBallance() + ", " + accountEntity.getAccountType());
         System.out.println(accountEntity.getCustomerEntity().getEmail() + ", " + accountEntity.getCustomerEntity().getFullName());
-        return accountEntity != null;
+        return accountEntity;
     }
 
     public void updateBallanceETF(double accountID, double amount) {

@@ -29,8 +29,10 @@ import java.util.List;
 import java.util.Set;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -41,6 +43,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
@@ -79,9 +82,11 @@ public class TranferController {
         model.addAttribute("listTypeAccount", accountTypesMap);
         if (typeTF.equals("1")) {
             model.addAttribute("action", "/createITF");
+            model.addAttribute("tittle", "Internal Transaction");
             return "tranferForm";
         } else {
             model.addAttribute("action", "/createETF");
+            model.addAttribute("tittle", "External Transaction");
             return "tranferForm";
         }
     }
@@ -98,15 +103,18 @@ public class TranferController {
         if (result.hasErrors()) {
             List<AccountEntity> accountTypesMap = getListAccType(principal);
             model.addAttribute("listTypeAccount", accountTypesMap);
+            model.addAttribute("tittle", "Internal Transaction");
             return "tranferForm";
         } else if (!accountService.checkAccountITF(receiverAccID)) {
             List<AccountEntity> accountTypesMap = getListAccType(principal);
             model.addAttribute("listTypeAccount", accountTypesMap);
+            model.addAttribute("tittle", "Internal Transaction");
             model.addAttribute("errorAccount", "Account not valid");
             return "tranferForm";
         } else if (!accountService.checkBalance(senderAccID, amount)) {
             List<AccountEntity> accountTypesMap = getListAccType(principal);
             model.addAttribute("listTypeAccount", accountTypesMap);
+            model.addAttribute("tittle", "Internal Transaction");
             model.addAttribute("error", "Balance not enought");
             return "tranferForm";
         }
@@ -128,17 +136,20 @@ public class TranferController {
         if (result.hasErrors()) {
             List<AccountEntity> accountTypesMap = getListAccType(principal);
             model.addAttribute("listTypeAccount", accountTypesMap);
-            return "intranferForm";
-        } else if (!restService.checkAccountFromRest(receiverAccID)) {
+            model.addAttribute("tittle", "External Transaction");
+            return "tranferForm";
+        } else if (restService.checkAccountFromRest(receiverAccID)== null) {
             List<AccountEntity> accountTypesMap = getListAccType(principal);
             model.addAttribute("listTypeAccount", accountTypesMap);
+            model.addAttribute("tittle", "External Transaction");
             model.addAttribute("errorAccount", "Account not valid");
-            return "intranferForm";
+            return "tranferForm";
         } else if (!accountService.checkBalance(senderAccID, amount)) {
             List<AccountEntity> accountTypesMap = getListAccType(principal);
             model.addAttribute("listTypeAccount", accountTypesMap);
+            model.addAttribute("tittle", "External Transaction");
             model.addAttribute("error", "Balance not enought");
-            return "intranferForm";
+            return "tranferForm";
         }
         transaction.setTransactionDate(LocalDate.parse(dtf.format(now)));
         model.addAttribute("transaction", transaction);
@@ -152,7 +163,7 @@ public class TranferController {
         String captcha = session.getAttribute("captcha_security").toString();
         String verifyCaptcha = request.getParameter("captcha");
         if (captcha.equals(verifyCaptcha)) {
-            return oTPController.generateOtp(msg,model);
+            return oTPController.generateOtp(msg, model);
         }
         model.addAttribute("error", "Wrong Captcha");
         return "confirmTranfer";
@@ -181,10 +192,10 @@ public class TranferController {
     }
 
     @GetMapping("printReciept/{transactionID}")
-    public String printReciept(@PathVariable("transactionID") int id) throws IOException, MessagingException {
+    public String printReciept(@PathVariable("transactionID") int id, HttpServletResponse response) throws IOException, MessagingException {
         TransactionEntity transactionEntity = transactionService.getTransactionByID(id);
-        recieptService.createPdf(transactionEntity);
-        emailService.sendRecieptMessage(transactionEntity.getSenderAccount().getCustomerEntity().getEmail(), "Reciept", "Reciept");
+        recieptService.createPdf(transactionEntity,response);
+//        emailService.sendRecieptMessage(transactionEntity.getSenderAccount().getCustomerEntity().getEmail(), "Reciept", "Reciept");
         return "index";
     }
 
@@ -199,6 +210,25 @@ public class TranferController {
         return "logout";
     }
 
+    @PostMapping("getUsername")
+    @ResponseBody
+    public String getUsetName(@RequestParam double accountID, @RequestParam String tittle) throws JsonProcessingException {
+        if (tittle.equalsIgnoreCase("Internal Transaction")) {
+            try {
+                AccountEntity accountEntity = accountService.findByAccountID(accountID);
+                return accountEntity.getCustomerEntity().getFullName();
+            } catch (NullPointerException ex) {
+                return "Not Found";
+            }
+        }else{
+            AccountEntity accountEntity = restService.checkAccountFromRest(accountID);
+            if(accountEntity!=null){
+                return accountEntity.getCustomerEntity().getFullName();
+            }
+            return "Not Found";
+        }
+    }
+
     public List<AccountEntity> getListAccType(Principal principal) {
         Set<AccountEntity> accounts = userSevice.getUserByUserName(principal.getName()).getCustomerEntity().getAccountEntitys();
         List<AccountEntity> accountEntitys = new ArrayList<>();
@@ -207,4 +237,5 @@ public class TranferController {
         }
         return accountEntitys;
     }
+
 }

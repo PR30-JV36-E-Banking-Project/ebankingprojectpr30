@@ -68,18 +68,27 @@
                 <p class="textmenu">Information Query</p>
                 <ul class="listmenu">
                     <li><a href="#">List Account</a></li>
-                    <li><a href="#">Transaction Details</a></li>
+                    <li><a href="<c:url value = "/viewTransaction"/>">Transaction Details</a></li>
                     <li><a href="#">List Card</a></li>
                     <li><a href="#">Statement</a></li>
-                    <li><a href="#">Pending transactions</a></li>
+                    <li><a href="#">Account Balance</a></li>
                 </ul>
             </div>
             <br>
             <div class="bormenu">
                 <p class="textmenu">Pay</p>
                 <ul class="listmenu">
-                    <li><a href="#">Transaction</a></li>
+                    <li><a href="<c:url value = "/newTranfer"/>">Transaction</a></li>
                     <li><a href="#">Deposit</a></li>
+                </ul>
+            </div>
+            <br>
+            <div class="bormenu">
+                <p class="textmenu">Card</p>
+                <ul class="listmenu">
+                    <li><a href="#">Open Card</a></li>
+                    <li><a href="#">Lock Card</a></li>
+                    <li><a href="#">Cancel Internet Banking</a></li>
                 </ul>
             </div>
         </div>
@@ -93,7 +102,7 @@
                 <h4>Tranfer Money</h4><br>
                 <form action="/selectTF" method="get" >
                     <div class="form-group">
-                        <label for="sel1">Select Type Account:</label>
+                        <label for="sel1">Select Type TranFer:</label>
                         <select class="form-control" id="sel1" name="typeTF">
                             <option value="1">Tranfer Inside E-bank</option>
                             <option value="2">Tranfer Outside E-bank</option>
