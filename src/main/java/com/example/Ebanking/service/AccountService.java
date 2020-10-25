@@ -50,7 +50,7 @@ public class AccountService implements AccountServiceIF {
                 recieverAccount.setBallance(recieverAccount.getBallance() + amount - 5000);
             }
             accountRepositoryIF.save(recieverAccount);
-        } else {
+        } else if(msg.equalsIgnoreCase("external")){
             if (fee == true) {
                 senderAccount.setBallance(senderAccount.getBallance() - amount - 5000);
                 restService.updateBallanceETF(recieverAccountID, amount);

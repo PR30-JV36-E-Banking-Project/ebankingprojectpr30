@@ -96,88 +96,86 @@
         <!--<-----content------->
 
         <div class="content">
-            <!--<div class="w3ls-section contact">-->
-            <!--<div class="container">--> 
-            <!--<div class="contact_wthreerow agileits-w3layouts">-->
             <div class="col-md-7 info">
-                <h4 id="tittle">${tittle}</h4><br>
+                <h4 id="tittle" class="tittle">${tittle}</h4><br>
                 <form:form action="${action}" method="post" modelAttribute="transaction" class="form-horizontal">
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="accountType">Select Type Account:</label>
-                        <div class="col-sm-9">
-                            <form:select class="form-control" id="accountType" path="senderAccount" onchange="showDiv('hidden_div', this)">
-                                <form:options items="${listTypeAccount}" itemLabel="accountType" itemValue="accountID" />
-                            </form:select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="accountNumber">Account number:</label>
-                        <div class="col-sm-9">
-                            <c:forEach items="${listTypeAccount}" var="accountType">  
-                                <label id="hidden_accNumber_${listTypeAccount.indexOf(accountType)}"  class="form-control readonly"><fmt:formatNumber pattern="#" value="${accountType.accountID}"/></label>
-                            </c:forEach>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="Ballance">Balance:</label>
-                        <div class="col-sm-9">
-                            <c:forEach items="${listTypeAccount}" var="accountType">  
-                                <label id="hidden_div_${listTypeAccount.indexOf(accountType)}"  class="form-control readonly"><fmt:formatNumber pattern="#" value="${accountType.ballance}"/></label>
-                            </c:forEach>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="amount">Amount:</label>
-                        <div class="col-sm-9">
-                            <form:input type="number" class="form-control" path="amount" oninput="validity.valid||(value='');" required="" placeholder="Enter Amount" id="amount" />
-                            <form:errors path="amount" class="error"/>
-                            <span id="error" style="color:red">${error}</span>
-                        </div>
-                    </div>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row"><label class="control-label col-sm-3" for="accountType">Select Type Account:</label></th>
+                                <td>
+                                    <form:select class="form-control" id="accountType" path="senderAccount" onchange="showDiv('hidden_div', this)">
+                                        <form:options items="${listTypeAccount}" itemLabel="accountType" itemValue="accountID" />
+                                    </form:select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label col-sm-3" for="accountNumber">Account number:</label></th>
+                                <td>
+                                    <c:forEach items="${listTypeAccount}" var="accountType">  
+                                        <label id="hidden_accNumber_${listTypeAccount.indexOf(accountType)}"  class="form-control readonly"><fmt:formatNumber pattern="#" value="${accountType.accountID}"/></label>
+                                    </c:forEach>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label col-sm-3" for="Ballance">Balance:</label></th>
+                                <td>
+                                    <c:forEach items="${listTypeAccount}" var="accountType">  
+                                        <label id="hidden_div_${listTypeAccount.indexOf(accountType)}"  class="form-control readonly"><fmt:formatNumber pattern="#" value="${accountType.ballance}"/></label>
+                                    </c:forEach>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label col-sm-3" for="amount">Amount:</label></th>
+                                <td>
+                                    <form:input type="number"  class="form-control" path="amount" oninput="validity.valid||(value='');" required="" placeholder="Enter Amount" id="amount" />
+                                    <form:errors path="amount" class="error"/>
+                                    <span id="error" style="color:red">${error}</span>
+                                </td>
+                            </tr>
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="AccountReceiver">Account Receiver:</label>
-                        <div class="col-sm-9">
-                            <form:input type="number" class="form-control"  id="AccountReceiver" required="" placeholder="Enter Account Reciver" path="receiverAccount.accountID" onchange="myFunction(this.value)"/>
-                            <form:errors path="receiverAccount" class="error"/>
-                            <span id="error" style="color:red">${errorAccount}</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="receiverU">Name of beneficiary:</label>
-                        <div class="col-sm-9">
-                            <span id="receiverU" class="form-control  readonly">${receiverU}</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="content">Transfer Content:</label>
-                        <div class="col-sm-9">
-                            <form:input type="text" class="form-control" required="" path="content" placeholder="Enter transfer content" id="content"/>
-                            <form:errors path="content" class="error"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3" for="fees">Select Fees:</label>
-                        <div class="col-sm-9">
-                            <form:select class="form-control" path="feeBearer" id="fees">
-                                <form:option value="1">Fee paid by the Sender.</form:option>
-                                <form:option value="0">Fee paid by the Receiver.</form:option>
-                            </form:select>
-                        </div>
-                    </div>
-                    <form:hidden path="transactionID"/>
-                    <form:hidden path="transactionType" value = "Internal tranform" />
+                            <tr>
+                                <th scope="row"><label class="control-label col-sm-3" for="AccountReceiver">Account Receiver:</label></th>
+                                <td>
+                                    <form:input type="number" class="form-control"  id="AccountReceiver" required="" placeholder="Enter Account Reciver" path="receiverAccount.accountID" onchange="myFunction(this.value)"/>
+                                    <form:errors path="receiverAccount" class="error"/>
+                                    <span id="error" style="color:red">${errorAccount}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label col-sm-3" for="receiverU">Name of beneficiary:</label></th>
+                                <td>
+                                    <label id="receiverU" class="form-control  readonly">${receiverU}</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label col-sm-3" for="content">Transfer Content:</label></th>
+                                <td>
+                                    <form:input type="text" class="form-control" required="" path="content" placeholder="Enter transfer content" id="content"/>
+                                    <form:errors path="content" class="error"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label col-sm-3" for="fees">Select Fees:</label></th>
+                                <td>
+                                    <form:select class="form-control" path="feeBearer" id="fees">
+                                        <form:option value="1">Fee paid by the Sender.</form:option>
+                                        <form:option value="0">Fee paid by the Receiver.</form:option>
+                                    </form:select>
+                                </td>
+                            </tr>
+                            <form:hidden path="transactionID"/>
+                            <form:hidden path="transactionType" value = "Internal tranform" />
+                        </tbody>
+                    </table>
                     <input type="submit" class="btn btn-info buttonback" value="Submit">
-                    <button onclick="goBack()" type="button" class="btn btn-info buttonback">Go Back</button> 
+                    <button onclick="goBack()" type="button" class="btn btn-info buttonback">Go Back</button>
                 </form:form>
             </div>
 
             <div class="clearfix"> </div>
         </div>
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!-- //contact --> 
+
 
         <!--footer-->
         <div class="agile-footer w3ls-section footer">
@@ -246,7 +244,7 @@
         </script>
         <!-- //smooth-scrolling-of-move-up -->  
         <!-- Bootstrap core JavaScript
-    ================================================== -->
+        ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="../../resources/js/bootstrap.js"></script>
     </body>

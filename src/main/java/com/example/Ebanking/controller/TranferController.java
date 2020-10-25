@@ -8,6 +8,7 @@ package com.example.Ebanking.controller;
 import com.example.Ebanking.entities.AccountEntity;
 import com.example.Ebanking.entities.TransactionEntity;
 import com.example.Ebanking.service.AccountService;
+import com.example.Ebanking.service.CoverCurrencyToText;
 import com.example.Ebanking.service.EmailService;
 import com.example.Ebanking.service.RecieptService;
 import com.example.Ebanking.service.RestService;
@@ -32,7 +33,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import javax.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -44,6 +44,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
@@ -68,6 +69,8 @@ public class TranferController {
     EmailService emailService;
     @Autowired
     RestService restService;
+    @Autowired
+    CoverCurrencyToText currencyToText;
 
     @GetMapping("newTranfer")
     public String newTranfer() {
@@ -97,6 +100,7 @@ public class TranferController {
         double senderAccID = transaction.getSenderAccount().getAccountID();
         double receiverAccID = transaction.getReceiverAccount().getAccountID();
         double amount = transaction.getAmount();
+        String amountbyWords = currencyToText.coverNumberToText(amount);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
 
@@ -122,6 +126,7 @@ public class TranferController {
         transaction.setTransactionDate(LocalDate.parse(dtf.format(now)));
         model.addAttribute("transaction", transaction);
         model.addAttribute("msg", "internal");
+        model.addAttribute("amountbyWords", amountbyWords);
         return "confirmTranfer";
     }
 
@@ -138,7 +143,7 @@ public class TranferController {
             model.addAttribute("listTypeAccount", accountTypesMap);
             model.addAttribute("tittle", "External Transaction");
             return "tranferForm";
-        } else if (restService.checkAccountFromRest(receiverAccID)== null) {
+        } else if (restService.checkAccountFromRest(receiverAccID) == null) {
             List<AccountEntity> accountTypesMap = getListAccType(principal);
             model.addAttribute("listTypeAccount", accountTypesMap);
             model.addAttribute("tittle", "External Transaction");
@@ -159,11 +164,11 @@ public class TranferController {
 
     @PostMapping("confirmTranfer")
     public String confirmTranfer(HttpSession session, HttpServletRequest request, Model model,
-            @RequestParam("msg") String msg) {
+            @RequestParam("msg") String msg, @SessionAttribute("transaction") TransactionEntity transactionSS) {
         String captcha = session.getAttribute("captcha_security").toString();
         String verifyCaptcha = request.getParameter("captcha");
         if (captcha.equals(verifyCaptcha)) {
-            return oTPController.generateOtp(msg, model);
+            return oTPController.generateOtp(msg, model, transactionSS);
         }
         model.addAttribute("error", "Wrong Captcha");
         return "confirmTranfer";
@@ -194,7 +199,7 @@ public class TranferController {
     @GetMapping("printReciept/{transactionID}")
     public String printReciept(@PathVariable("transactionID") int id, HttpServletResponse response) throws IOException, MessagingException {
         TransactionEntity transactionEntity = transactionService.getTransactionByID(id);
-        recieptService.createPdf(transactionEntity,response);
+        recieptService.createPdf(transactionEntity, response);
 //        emailService.sendRecieptMessage(transactionEntity.getSenderAccount().getCustomerEntity().getEmail(), "Reciept", "Reciept");
         return "index";
     }
@@ -220,9 +225,9 @@ public class TranferController {
             } catch (NullPointerException ex) {
                 return "Not Found";
             }
-        }else{
+        } else {
             AccountEntity accountEntity = restService.checkAccountFromRest(accountID);
-            if(accountEntity!=null){
+            if (accountEntity != null) {
                 return accountEntity.getCustomerEntity().getFullName();
             }
             return "Not Found";
@@ -236,6 +241,11 @@ public class TranferController {
             accountEntitys.add(account);
         }
         return accountEntitys;
+    }
+
+    @GetMapping("/getOtp")
+    public String getOTP() {
+        return "confirmOTP_1";
     }
 
 }

@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -24,6 +25,8 @@
 
         <!-- js --> 
         <script src="../../resources/js/jquery-2.2.3.min.js"></script>
+        <!--<script src="../../resources/js/js.js"></script>-->
+        <!--<script src="../../resources/js/modernizr-custom.js"></script>-->
         <!-- web-fonts -->
         <link href="//fonts.googleapis.com/css?family=Secular+One" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
@@ -68,53 +71,93 @@
                 <p class="textmenu">Information Query</p>
                 <ul class="listmenu">
                     <li><a href="#">List Account</a></li>
-                    <li><a href="<c:url value = "/viewTransaction"/>">Transaction Details</a></li>
+                    <li><a href="#">Transaction Details</a></li>
                     <li><a href="#">List Card</a></li>
                     <li><a href="#">Statement</a></li>
-                    <li><a href="#">Account Balance</a></li>
+                    <li><a href="#">Account Ballance</a></li>
                 </ul>
             </div>
             <br>
             <div class="bormenu">
                 <p class="textmenu">Pay</p>
                 <ul class="listmenu">
-                    <li><a href="<c:url value = "/newTranfer"/>">Transaction</a></li>
+                    <li><a href="#">Transaction</a></li>
                     <li><a href="#">Deposit</a></li>
                 </ul>
             </div>
-            <br>
-            <div class="bormenu">
-                <p class="textmenu">Card</p>
-                <ul class="listmenu">
-                    <li><a href="#">Open Card</a></li>
-                    <li><a href="#">Lock Card</a></li>
-                    <li><a href="#">Cancel Internet Banking</a></li>
-                </ul>
-            </div>
         </div>
-        <!--<-----content------->
 
-        <div class="content">
-            <!--<div class="w3ls-section contact">-->
-            <!--<div class="container">--> 
-            <!--<div class="contact_wthreerow agileits-w3layouts">-->
+        <div>
             <div class="col-md-7 info">
-                <h4>Tranfer Money</h4><br>
-                <form action="/selectTF" method="get" >
-                    <div class="form-group">
-                        <label for="sel1">Select Type TranFer:</label>
-                        <select class="form-control" id="sel1" name="typeTF">
-                            <option value="1">Tranfer Inside E-bank</option>
-                            <option value="2">Tranfer Outside E-bank</option>
-                        </select>
-                    </div>
-                    <input type="submit" class="btn btn-info buttonback" value="Submit">
-                    <button onclick="goBack()" type="button" class="btn btn-info buttonback">Go Back</button> 
+                <h4>Tranfer Money</h4> 
+                <form action="/confirmOTP" method="post" >
+                    <table class="table">
+                        <tbody>
+                        <input type="hidden" name="msg" value="${msg}">
+                            <tr>
+                                <td>Account Sender</td>
+                                <td><fmt:formatNumber pattern="#" value="${transaction.senderAccount.accountID}"/> </td>
+                            </tr>
+                            <tr>
+                                <td>Balance</td>
+                                <c:choose>
+                                    <c:when test="${transaction.feeBearer==true}">
+                                        <td><fmt:formatNumber pattern="####,###,###,###" value="${transaction.senderAccount.ballance-transaction.amount-5000}"/> VND</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td><fmt:formatNumber pattern="####,###,###,###" value="${transaction.senderAccount.ballance-transaction.amount}"/> VND</td>
+                                    </c:otherwise>
+                                </c:choose>
+                            </tr>
+                            <tr>
+                                <td>Amount transferred.</td>
+                                <td><fmt:formatNumber pattern="####,###,###,###" value="${transaction.amount}"/> VND</td>
+                            </tr>
+                            <tr>
+                                <td>Amount in words.</td>
+                                <td>${amountbyWords}</td>
+                            </tr>
+                            <tr>
+                                <td>Account Receiver.</td>
+                                <td><fmt:formatNumber pattern="#############" value="${transaction.receiverAccount.accountID}"/></td>
+                            </tr>
+                            <tr>
+                                <td>Tranfer Content.</td>
+                                <td>${transaction.content}</td>
+                            </tr>
+                            <tr>
+                                <td>Fees.</td>
+                                <c:choose>
+                                    <c:when test="${transaction.feeBearer==true}">
+                                        <td>nguoi chuyen tra</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>nguoi nhan tra</td>
+                                    </c:otherwise>
+                                </c:choose>
+                            </tr>
+                            <tr>
+                                <td>Fees Amount.</td>
+                                <td>5000 VND</td>
+                            </tr>
+                            <tr>
+                                <td>Email recive OTP code.</td>
+                                <td>${transaction.senderAccount.customerEntity.email}</td>
+                            </tr>
+                            <tr>
+                                <td style="color:red">Enter OTP Code</td>
+                                <td><div class="form-group">
+                                        <input type="text" class="form-control" name="OTPcode">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input type="submit" class="btn btn-primary buttonback" value="Confirm">
                 </form>
             </div>
-
-            <div class="clearfix"> </div>
         </div>
+        <div class="clearfix"> </div>
         <!-- //contact --> 
 
         <!--footer-->
@@ -168,19 +211,19 @@
         <script type="text/javascript" src="../../resources/js/easing.js"></script>
         <script type="text/javascript" src="../../resources/js/myJavascript.js"></script>
         <script type="text/javascript">
-                        $(document).ready(function () {
-                            /*
-                             var defaults = {
-                             containerID: 'toTop', // fading element id
-                             containerHoverID: 'toTopHover', // fading element hover id
-                             scrollSpeed: 1200,
-                             easingType: 'linear' 
-                             };
-                             */
+            $(document).ready(function () {
+                /*
+                 var defaults = {
+                 containerID: 'toTop', // fading element id
+                 containerHoverID: 'toTopHover', // fading element hover id
+                 scrollSpeed: 1200,
+                 easingType: 'linear' 
+                 };
+                 */
 
-                            $().UItoTop({easingType: 'easeOutQuart'});
+                $().UItoTop({easingType: 'easeOutQuart'});
 
-                        });
+            });
         </script>
         <!-- //smooth-scrolling-of-move-up -->  
         <!-- Bootstrap core JavaScript

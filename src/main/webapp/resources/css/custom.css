@@ -41,12 +41,18 @@
 
 .info{
     margin-top: 20px;
-    padding: 10px;
     margin-left: 10px;
     border:1px solid #005030;
     border-radius:6px;
     width: 75%;
+    padding: 0px !important;
 }
+.tittle{
+    line-height: 50px;
+    background-color: #1ab7ea;
+    color:white;
+}
+
 
 .content{
     /*    border:1px solid #005030;
@@ -69,12 +75,27 @@
 body{
     background-color: #F6F7F8;
 }
+
 .table{
     color:black;
+
 }
-.table{
-    color:black;
+.table td{
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    width:70%;
 }
+.table th{
+    background-color: #EBF1FB;
+}
+.table input{
+    width:60%;
+}
+.table label{
+    width:100%;
+    text-align: left !important;
+}
+
 
 #hidden_div {
     display: none;

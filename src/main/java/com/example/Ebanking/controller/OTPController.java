@@ -7,6 +7,7 @@ package com.example.Ebanking.controller;
 
 import com.example.Ebanking.entities.TransactionEntity;
 import com.example.Ebanking.service.AccountService;
+import com.example.Ebanking.service.CoverCurrencyToText;
 import com.example.Ebanking.service.EmailService;
 import com.example.Ebanking.service.OTPService;
 import com.example.Ebanking.service.TransactionService;
@@ -41,16 +42,20 @@ public class OTPController {
     private AccountService accountService;
     @Autowired
     private UserSevice userSevice;
+    @Autowired
+    private CoverCurrencyToText currencyToText;
 
 //    @GetMapping("/generateOtp")
-    public String generateOtp(String msg, Model model) {
+    public String generateOtp(String msg, Model model,TransactionEntity transactionSS) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         int otp = otpService.generateOTP(username);
+        String amountByWords=currencyToText.coverNumberToText(transactionSS.getAmount());
         String email = userSevice.getUserByUserName(username).getCustomerEntity().getEmail();
         String message = Integer.toString(otp);
         myEmailService.sendOtpMessage(email, "Verify-OTP", message);
         model.addAttribute("msg", msg);
+        model.addAttribute("amountbyWords", amountByWords);
         return "confirmOTP";
     }
 
@@ -61,21 +66,25 @@ public class OTPController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         String cacheOTP = Integer.toString(otpService.getOtp(username));
+        String amountByWords=currencyToText.coverNumberToText(transactionSS.getAmount());
         double senderAccID = transactionSS.getSenderAccount().getAccountID();
         double recieverAccID = transactionSS.getReceiverAccount().getAccountID();
         double amount = transactionSS.getAmount();
         boolean fee = transactionSS.isFeeBearer();
         if (cacheOTP.equals(OTPcode)) {
-                transactionService.saveTransaction(transactionSS);
-                accountService.updateBalance(senderAccID, amount, recieverAccID, fee,msg);
+            transactionService.saveTransaction(transactionSS);
+            accountService.updateBalance(senderAccID, amount, recieverAccID, fee, msg);
             status.setComplete();
             return "tranferSuccess";
         }
         otpService.clearOTP(username);
         int Otp = otpService.generateOTP(username);
         String message = Integer.toString(Otp);
-        myEmailService.sendOtpMessage("solidwork2013@gmail.com", "Verify OTP", message);
-        model.addAttribute("error", "OTP Wrong");
+        String userEmail = transactionSS.getSenderAccount().getCustomerEntity().getEmail();
+        myEmailService.sendOtpMessage(userEmail, "Verify-OTP Again!", message);
+        model.addAttribute("errorOTP", "OTP Wrong");
+        model.addAttribute("msg", msg);
+        model.addAttribute("amountbyWords", amountByWords);
         return "confirmOTP";
     }
 }

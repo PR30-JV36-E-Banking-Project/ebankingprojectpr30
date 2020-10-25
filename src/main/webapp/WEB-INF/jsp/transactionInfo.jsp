@@ -119,7 +119,7 @@
                                 <tr> 
                                     <td>${i}</td> 
                                     <td>${u.transactionID}</td> 
-                                    <td><fmt:formatNumber pattern="#############" value="${u.amount}"/> VND</td> 
+                                    <td><fmt:formatNumber pattern="###,###,###,###" value="${u.amount}"/> VND</td> 
                                     <td>${u.transactionDate}</td> 
                                     <td><fmt:formatNumber pattern="#############" value="${u.receiverAccount.accountID}"/></td> 
                                     <td>${u.content}</td> 

@@ -89,45 +89,44 @@
 
         <div>
             <div class="col-md-7 info">
-                <h4>Tranfer Money</h4> 
+                <h4 class="tittle">Tranfer Infomation</h4> 
                 <form action="/confirmTranfer" method="post" >
                     <table class="table">
                         <input type="hidden" name="msg" value="${msg}">
                         <tbody>
                             <tr>
-                                <td>Account Sender</td>
-
+                                <th scope="row">Account Sender</th>
                                 <td><fmt:formatNumber pattern="#" value="${transaction.senderAccount.accountID}" /> </td>
                             </tr>
                             <tr>
-                                <td>Balance</td>
+                                <th scope="row">Balance</th>
                                 <c:choose>
                                     <c:when test="${transaction.feeBearer==true}">
-                                        <td><fmt:formatNumber pattern="#############" value="${transaction.senderAccount.ballance-transaction.amount-5000}" /></td>
+                                        <td><fmt:formatNumber pattern="###,###,###,###" value="${transaction.senderAccount.ballance-transaction.amount-5000}"/> VND</td>
                                     </c:when>
                                     <c:otherwise>
-                                        <td><fmt:formatNumber pattern="#############" value="${transaction.senderAccount.ballance-transaction.amount}" /></td>
+                                        <td><fmt:formatNumber pattern="###,###,###,###" value="${transaction.senderAccount.ballance-transaction.amount}"/> VND</td>
                                     </c:otherwise>
                                 </c:choose>
                             </tr>
                             <tr>
-                                <td>amount transferred.</td>
-                                <td><fmt:formatNumber pattern="#############" value="${transaction.amount}" /> VND</td>
+                                <th scope="row">Amount transferred.</th>
+                                <td><fmt:formatNumber pattern="###,###,###,###" value="${transaction.amount}"/> VND</td>
                             </tr>
                             <tr>
-                                <td>amount in words.</td>
-                                <td>XXX triệu Đồng</td>
+                                <th scope="row">Amount in words.</th>
+                                <td>${amountbyWords}</td>
                             </tr>
                             <tr>
-                                <td>Account Receiver.</td>
-                                <td><fmt:formatNumber pattern="#############" value="${transaction.receiverAccount.accountID}"/></td>
+                                <th scope="row">Account Receiver.</th>
+                                <td><fmt:formatNumber pattern="#" value="${transaction.receiverAccount.accountID}"/></td>
                             </tr>
                             <tr>
-                                <td>Tranfer Content.</td>
+                                <th scope="row">Tranfer Content.</th>
                                 <td>${transaction.content}</td>
                             </tr>
                             <tr>
-                                <td>Fees.</td>
+                                <th scope="row">Fees.</th>
                                 <c:choose>
                                     <c:when test="${transaction.feeBearer==true}">
                                         <td>nguoi chuyen tra</td>
@@ -138,20 +137,20 @@
                                 </c:choose>
                             </tr>
                             <tr>
-                                <td>Fees Amount.</td>
-                                <td>5000</td>
+                                <th scope="row">Fees Amount.</th>
+                                <td>5,000 VND</td>
                             </tr>
                             <tr>
-                                <td>Email recive OTP code.</td>
+                                <th scope="row">Email recive OTP code.</th>
                                 <td>${transaction.senderAccount.customerEntity.email}</td>
                             </tr>
                             <tr>
-                                <td>Captcha.</td>
+                                <th scope="row">Captcha.</th>
                                 <td><img src=${"/captcha"}></td>
                             </tr>
                             <tr>
-                                <td>Input Captcha</td>
-                                <td><div class="form-group">
+                                <th scope="row">Input Captcha</th>
+                                <td><div >
                                         <input type="text" autocomplete="off" class="form-control" name="captcha" id="usr">
                                         <span id="error" style="color:red">${error}</span>
                                     </div>
@@ -160,6 +159,7 @@
                         </tbody>
                     </table>
                     <input type="submit" class="btn btn-primary buttonback" value="Confirm">
+                    <button onclick="goBack()" type="button" class="btn btn-info buttonback">Go Back</button> 
                 </form>
             </div>
         </div>
