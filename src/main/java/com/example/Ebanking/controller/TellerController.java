@@ -13,6 +13,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -36,15 +37,15 @@ public class TellerController {
     private UserServiceSecurity userServiceSecurity;
     
     @GetMapping(value = "/list-teller")
-    public String listTellerrs(HttpServletRequest request, Model theModel) {
-	List<TellerEntity> tellers = tellerService.getTellers();
+    public String listTellerrs(HttpServletRequest request, Model theModel, @Param("keyword") String keyword) {
+	List<TellerEntity> tellers = tellerService.getTellers(keyword);
         PagedListHolder pagedListHolder = new PagedListHolder(tellers);
 		int page = ServletRequestUtils.getIntParameter(request, "p", 0);
 		pagedListHolder.setPage(page);
-		pagedListHolder.setPageSize(5);
+		pagedListHolder.setPageSize(10);
                 
 	theModel.addAttribute("pagedListHolder", pagedListHolder);
-                
+        theModel.addAttribute("keyword", keyword);
 	return "adminTeller";
     }
     

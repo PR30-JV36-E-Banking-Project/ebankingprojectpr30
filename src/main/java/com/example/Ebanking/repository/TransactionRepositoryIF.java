@@ -24,4 +24,11 @@ public interface TransactionRepositoryIF extends CrudRepository<TransactionEntit
 
     @Query(value = "SELECT * FROM ebankingdbtest.transaction_entity where (transaction_date between ?1 and ?2) and sender_accountid=?3", nativeQuery = true)
     public List<TransactionEntity> getTransactionWhereDateBetweenValue(Date start, Date end, int id);
+    
+    @Query("SELECT p FROM TransactionEntity p WHERE p.content LIKE %?1%"
+            + " OR p.transactionType LIKE %?1%")
+    public List<TransactionEntity> search(String keyword);
+    
+    @Query("SELECT SUM(amount) FROM TransactionEntity")
+    public int getAmountOfTransactions();
 }

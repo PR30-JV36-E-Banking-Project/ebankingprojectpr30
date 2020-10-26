@@ -108,7 +108,7 @@
             <ul style="margin: 20px; list-style-type: none">Suports
                 <li><a href="#" class="w3-bar-item w3-button" style="margin: 10px">Help</a></li>
                 <li><a href="/user/updatePassword" class="w3-bar-item w3-button" style="margin: 10px">Change password</a></li>
-                <li><a href="#" class="w3-bar-item w3-button" style="margin: 10px">Logout</a></li>
+                <li><a href="/logout" class="w3-bar-item w3-button" style="margin: 10px">Logout</a></li>
             </ul>
         </div>
 
@@ -116,7 +116,7 @@
             <div class="w3ls-section contact">
                 <div class="container"> 
                     <div>
-                        <table class="table table-bordered" style="width: 70%; font-size: 15px">
+                        <table class="table table-bordered table-striped" style="width: 70%; font-size: 15px">
                             <thead>
                                 <tr>
                                     <th scope="col" style="text-align: right" class="info">#</th>

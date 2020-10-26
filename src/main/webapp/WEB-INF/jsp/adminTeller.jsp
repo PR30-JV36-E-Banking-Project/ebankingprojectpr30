@@ -86,7 +86,7 @@
                 <div class="sidebar-scroll">
                     <nav>
                         <ul class="nav">
-                            <li><a href="index.html"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+                            <li><a href="/admin"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
                             <li><a href="#" class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>
                             <li>
                                 <a href="#subPages" data-toggle="collapse" class="active"><i class="lnr lnr-cog"></i>
@@ -114,10 +114,7 @@
                     <div class="container-fluid">
                         <!-- OVERVIEW -->
                         <div class="panel">
-                            <div class="input-group" style="padding: 20px;">
-                                <input type="text" value="" class="form-control" placeholder="Search">
-                                <span class="input-group-btn"><button type="button" class="btn btn-primary">Search</button></span>
-                            </div>
+
                             <div style="text-align: center;">
                                 <h1>Manage Teller</h1>
                             </div>
@@ -126,6 +123,12 @@
                                        onclick="window.location.href = 'showFormForAdd'; return false;"
                                        class="btn btn-primary" />
                             </div>
+                            <form action="list-teller">
+                                <div class="input-group" style="margin: 20px; width: 50%; float: right">
+                                    <input type="text" class="form-control" placeholder="Search By Address Or Email" name="keyword" id="keyword">
+                                    <span class="input-group-btn"><input type="submit" value="Search" class="btn btn-primary"/>Search</span>
+                                </div>
+                            </form>
                             <div class="panel-body">
                                 <table class="table table-striped table-bordered">
                                     <tr>
@@ -161,6 +164,13 @@
                                         </tr>
                                     </c:forEach>
                                 </table>
+                                <div style="text-align: center">
+                                    <c:url value="/list-teller" var="pagedLink">
+                                        <c:param name="p" value="~" />
+                                    </c:url>
+                                    <tg:paging pagedListHolder="${pagedListHolder}"	pagedLink="${pagedLink}" />
+                                </div>
+
                             </div>
                         </div>
                         <!-- END OVERVIEW -->

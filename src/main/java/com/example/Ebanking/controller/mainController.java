@@ -5,8 +5,12 @@
  */
 package com.example.Ebanking.controller;
 
+import com.example.Ebanking.repository.CustomerRepositoryIF;
+import com.example.Ebanking.repository.TellerRepository;
+import com.example.Ebanking.repository.TransactionRepositoryIF;
 import com.example.Ebanking.service.CustomerService;
 import java.security.Principal;
+import java.time.LocalDate;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,7 +31,15 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class mainController {
-
+    
+    @Autowired
+    private TellerRepository tellerRepository;
+    
+    @Autowired
+    private CustomerRepositoryIF customerRepositoryIF;
+    
+    @Autowired
+    private TransactionRepositoryIF transactionRepositoryIF;
     @GetMapping("/")
     public String index(Principal principal, HttpServletRequest request) {
         HttpSession ses = request.getSession();
@@ -89,7 +101,15 @@ public class mainController {
     }
 
     @GetMapping("/admin")
-    public String admin() {
+    public String admin(Model model) {
+        int numberOfTeller = tellerRepository.getNumberOfTellers();
+        int numberOfCustomer = customerRepositoryIF.getNumberOfCustomers();
+        float amountOfTransaction = transactionRepositoryIF.getAmountOfTransactions();
+        LocalDate today = LocalDate.now();
+        model.addAttribute("numberOfTeller", numberOfTeller);
+        model.addAttribute("numberOfCustomer", numberOfCustomer);
+        model.addAttribute("amountOfTransaction", amountOfTransaction);
+        model.addAttribute("today", today);
         return "adminIndex";
     }
 }

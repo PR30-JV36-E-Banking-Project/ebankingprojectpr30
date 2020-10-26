@@ -19,5 +19,5 @@ public interface CustomerServiceIF {
     public void saveCustomer(CustomerEntity theCustomer);
     public CustomerEntity loadCustomerByEmail(String email);
     public CustomerEntity findByUserEntity(UserEntity userEntity);
-    public List <CustomerEntity> getCustomers();
+    public List <CustomerEntity> getCustomers(String keyword);
 }

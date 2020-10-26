@@ -17,5 +17,5 @@ public interface TransactionServiceIF {
     public void saveTransaction(TransactionEntity transactionEntity);
     public List<TransactionEntity>getTransactionByDate(Date start,Date end,int id);
     public TransactionEntity getTransactionByID(int id);
-    public List <TransactionEntity> getTransactions();
+    public List <TransactionEntity> getTransactions(String keyword);
 }

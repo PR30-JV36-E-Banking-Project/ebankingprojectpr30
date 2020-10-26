@@ -99,7 +99,7 @@
         <!-- contact -->
         <div class="w3-bar-block w3-collapse w3-card w3-animate-left" style="width:30%; float: left; margin: 70px; height: 100%" id="mySidebar">
             <ul style="margin: 20px; list-style-type: none">Accounts
-                <li><a href="#" class="w3-bar-item w3-button" style="margin: 10px;">Customer Information</a></li>
+                <li><a href="/account/viewUserInformation" class="w3-bar-item w3-button" style="margin: 10px;">Customer Information</a></li>
                 <li><a href="/viewTransaction" class="w3-bar-item w3-button" style="margin: 10px">View Transactions</a></li>
             </ul>
             <ul style="margin: 20px; list-style-type: none">Tranfers
@@ -110,7 +110,7 @@
             <ul style="margin: 20px; list-style-type: none">Suports
                 <li><a href="#" class="w3-bar-item w3-button" style="margin: 10px">Help</a></li>
                 <li><a href="#" class="w3-bar-item w3-button" style="margin: 10px">Change password</a></li>
-                <li><a href="#" class="w3-bar-item w3-button" style="margin: 10px">Logout</a></li>
+                <li><a href="/logout" class="w3-bar-item w3-button" style="margin: 10px">Logout</a></li>
             </ul>
         </div>
 
@@ -124,7 +124,7 @@
                                     <div class="col-md-7 w3l_contact_form" style="border: 1px solid black; padding: 30px;">
                                         <h1 style="margin: 20px">Change Your Password</h1>
                                         <form action="/user/updatePassword" method="post" modelAttribute="user">
-                                            <input style="margin: 10px;" type="password"  required="" placeholder="Enter Your Old Password" name="oldPassword" value="oldPassword"/>
+                                            <input style="margin: 10px;" type="password"  required="" placeholder="Enter Your Old Password" name="oldPassword"/>
                                             <errors class="error"/>
                                             <input style="margin: 10px;" type="password"  required="" placeholder="Enter Your New Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password"  onkeyup='check();' />
                                             <errors class="error1"/>

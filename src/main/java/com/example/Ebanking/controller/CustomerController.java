@@ -32,6 +32,8 @@ import com.example.Ebanking.service.UserServiceSecurity;
 import com.example.Ebanking.service.UserSevice;
 import java.util.List;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.ServletRequestUtils;
 
 /**
@@ -133,15 +135,42 @@ public class CustomerController {
         return "viewAccountInformation";
     }
     @GetMapping(value = "/list-customer")
-    public String listCustomers(HttpServletRequest request, Model theModel) {
-	List<CustomerEntity> customers = customerService.getCustomers();
+    public String listCustomers(HttpServletRequest request, Model theModel, @Param("keyword") String keyword) {
+	List<CustomerEntity> customers = customerService.getCustomers(keyword);
         PagedListHolder pagedListHolder = new PagedListHolder(customers);
 		int page = ServletRequestUtils.getIntParameter(request, "p", 0);
 		pagedListHolder.setPage(page);
-		pagedListHolder.setPageSize(5);
+		pagedListHolder.setPageSize(10);
                 
 	theModel.addAttribute("pagedListHolder", pagedListHolder);
                 
 	return "adminCustomer";
     }
+    
+    @GetMapping("/showFormForAddCustomer")
+    public String showFormForAddCustomer(Model model) {
+	CustomerEntity customer = new CustomerEntity();
+	model.addAttribute("customer", customer);
+	return "adminCustomerForm";
+    }
+    @PostMapping("/saveCustomer")
+    @Transactional
+    public String saveTeller(@ModelAttribute("customer") CustomerEntity customerEntity, Model model) {
+	customerRepository.save(customerEntity);
+	return "redirect:/account/list-customer";
+    }
+//    @GetMapping("/updateCustomerForm")
+//    public String showFormForUpdate(@RequestParam("customerID") int theId,
+//	    Model theModel) {
+//	CustomerEntity customerEntity = customerService.getCustomers();
+//        UserEntity userEntity = theTeller.getUserEntity1();
+//	theModel.addAttribute("teller", theTeller);
+//	return "adminTellerFormUpdate";
+//    }
+//
+//    @GetMapping("/deleteTeller")
+//    public String deleteTeller(@RequestParam("tellerID") int theId) {
+//	tellerService.deleteTeller(theId);
+//	return "redirect:/list-teller";
+//    }
 }

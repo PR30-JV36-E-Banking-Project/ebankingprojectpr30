@@ -13,7 +13,7 @@ import java.util.List;
  * @author Hoang Duy Nhat
  */
 public interface TellerServiceIF {
-    public List <TellerEntity> getTellers();
+    public List <TellerEntity> getTellers(String keyword);
     public void saveTeller(TellerEntity theTeller);
     public TellerEntity getTeller(int theId);
     public void deleteTeller(int theId);

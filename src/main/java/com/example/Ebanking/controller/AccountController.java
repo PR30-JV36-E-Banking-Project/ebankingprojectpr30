@@ -12,6 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestUtils;
@@ -45,12 +46,12 @@ public class AccountController {
         return "logout";
     }
     @GetMapping(value = "/list-account")
-    public String listAccounts(HttpServletRequest request, Model theModel) {
-	List<AccountEntity> accounts = accountService.getAccounts();
+    public String listAccounts(HttpServletRequest request, Model theModel, @Param("keyword") String keyword) {
+	List<AccountEntity> accounts = accountService.getAccounts(keyword);
         PagedListHolder pagedListHolder = new PagedListHolder(accounts);
 		int page = ServletRequestUtils.getIntParameter(request, "p", 0);
 		pagedListHolder.setPage(page);
-		pagedListHolder.setPageSize(5);
+		pagedListHolder.setPageSize(10);
                 
 	theModel.addAttribute("pagedListHolder", pagedListHolder);
                 

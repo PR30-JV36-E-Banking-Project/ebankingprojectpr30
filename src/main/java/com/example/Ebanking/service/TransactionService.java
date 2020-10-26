@@ -40,7 +40,10 @@ public class TransactionService implements TransactionServiceIF {
     }
 
     @Override
-    public List<TransactionEntity> getTransactions() {
+    public List<TransactionEntity> getTransactions(String keyword) {
+        if (keyword != null) {
+            return transactionRepositoryIF.search(keyword);
+        }
         return (List)transactionRepositoryIF.findAll();
     }
 

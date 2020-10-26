@@ -48,7 +48,10 @@ public class CustomerService implements CustomerServiceIF {
     }
 
     @Override
-    public List<CustomerEntity> getCustomers() {
+    public List<CustomerEntity> getCustomers(String keyword) {
+        if (keyword != null) {
+            return customerRepositoryIF.search(keyword);
+        }
         return (List)customerRepositoryIF.findAll();
     }
 

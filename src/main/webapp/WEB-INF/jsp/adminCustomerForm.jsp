@@ -1,10 +1,7 @@
-<%-- 
-    Document   : adminTransaction
-    Created on : Oct 15, 2020, 1:26:17 PM
-    Author     : Hoang Duy Nhat
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!doctype html>
 <html lang="en">
 
@@ -21,7 +18,7 @@
         <!-- MAIN CSS -->
         <link rel="stylesheet" href="../../resources/assets/css/main.css">
         <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
-        <link rel="stylesheet" href="assets/css/demo.css">
+        <link rel="stylesheet" href="../../resources/assets/css/demo.css">
         <!-- GOOGLE FONTS -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
         <!-- ICONS -->
@@ -31,21 +28,19 @@
 
     <body>
         <!-- WRAPPER -->
-        <div id="wrapper" >
+        <div id="wrapper">
             <!-- NAVBAR -->
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="brand">
-                    <a href="index.html"><img src="../../resources/assets/img/logo.png" alt="Klorofil Logo" class="img-responsive logo" style="height: 60%; width: 60%;"></a>
+                    <a href="index.html"><img src="../../resources/assets/img/logo.png" alt="Klorofil Logo" class="img-responsive logo"
+                                              style="height: 60%; width: 60%;"></a>
                 </div>
                 <div class="container-fluid">
                     <div class="navbar-btn">
-                        <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+                        <button type="button" class="btn-toggle-fullwidth"><i
+                                class="lnr lnr-arrow-left-circle"></i></button>
                     </div>
                     <form class="navbar-form navbar-left">
-                        <div class="input-group">
-                            <input type="text" value="" class="form-control" placeholder="Search">
-                            <span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
-                        </div>
                     </form>
                     <div id="navbar-menu">
                         <ul class="nav navbar-nav navbar-right">
@@ -55,12 +50,15 @@
                                     <span class="badge bg-danger"></span>
                                 </a>
                                 <ul class="dropdown-menu notifications">
-                                    <li><a href="#" class="notification-item"><span class="dot bg-success"></span>You don't have any notification right now</a></li>
+                                    <li><a href="#" class="notification-item"><span class="dot bg-success"></span>You don't
+                                            have any notification right now</a></li>
                                     <li><a href="#" class="more">See all notifications</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                        class="lnr lnr-question-circle"></i> <span>Help</span> <i
+                                        class="icon-submenu lnr lnr-chevron-down"></i></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Basic Use</a></li>
                                     <li><a href="#">Working With Data</a></li>
@@ -69,7 +67,9 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="../../resources/assets/img/apple-icon.png" class="img-circle" alt="Avatar"> <span>${userName}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img
+                                        src="../../resources/assets/img/apple-icon.png" class="img-circle" alt="Avatar">
+                                    <span>${userName}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
                                     <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
@@ -87,16 +87,16 @@
                 <div class="sidebar-scroll">
                     <nav>
                         <ul class="nav">
-                            <li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+                            <li><a href="index.html"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
                             <li><a href="#" class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>
                             <li>
-                                <a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-cog"></i> <span>Management</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                                <a href="#subPages" data-toggle="collapse" class="active"><i class="lnr lnr-cog"></i>
+                                    <span>Management</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                 <div id="subPages" class="collapse ">
                                     <ul class="nav">
-                                        <li><a href="list-teller" class="lnr lnr-user"> Tellers</a></li>
-                                        <li><a href="/account/list-customer" class="lnr lnr-user"> Customers</a></li>
-                                        <li><a href="/list-account" class="lnr lnr-user"> Account</a></li>
-                                        <li><a href="/list-transaction" class="fa fa-random"> Transactions</a></li>
+                                        <li><a href="teller.html" class="lnr lnr-user active"> Tellers</a></li>
+                                        <li><a href="customer.html" class="lnr lnr-user"> Customers</a></li>
+                                        <li><a href="transaction.html" class="fa fa-random"> Transactions</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -113,51 +113,109 @@
                 <div class="main-content">
                     <div class="container-fluid">
                         <!-- OVERVIEW -->
-                        <div class="panel panel-headline">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Overview</h3>
-                                <p id="today" class="panel-subtitle">Period: ${today}</p>
+                        <div class="panel">
+                            <div class="input-group" style="padding: 20px;">
+                                <input type="text" value="" class="form-control" placeholder="Search">
+                                <span class="input-group-btn"><button type="button" class="btn btn-primary">Search</button></span>
+                            </div>
+                            <div style="text-align: center;">
+                                <h1>Manage Teller</h1>
                             </div>
                             <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="metric">
-                                            <span class="icon"><i class="lnr lnr-user"></i></span>
-                                            <p>
-                                                <span id="numberOfCustomer" class="number">${numberOfCustomer}</span>
-                                                <span class="title">Customers</span>
-                                            </p>
+                                <form:form action="saveCustomer" cssClass="form-horizontal"
+                                           method="post" modelAttribute="customer">
+
+                                    <!-- need to associate this data with customer id -->
+                                    <form:hidden path="customerID" />
+
+                                    <div class="form-group">
+                                        <label for="fullName" class="col-md-3 control-label">Full Name</label>
+                                        <div class="col-md-9">
+                                            <form:input path="fullName" cssClass="form-control" />
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="metric">
-                                            <span class="icon"><i class="lnr lnr-user"></i></span>
-                                            <p>
-                                                <span id="numberOfTeller" class="number">${numberOfTeller}</span>
-                                                <span class="title">Tellers</span>
-                                            </p>
+                                    <div class="form-group">
+                                        <label for="birthDay" class="col-md-3 control-label">Birthday</label>
+                                        <div class="col-md-9">
+                                            <form:input type="date" path="birthDay" cssClass="form-control" />
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="metric">
-                                            <span class="icon"><i class="fa fa-eye"></i></span>
-                                            <p>
-                                                <span class="number">100</span>
-                                                <span class="title">Visiters</span>
-                                            </p>
+                                    <div class="form-group">
+                                        <label for="sex" class="col-md-3 control-label">Gender</label>
+                                        <div class="col-md-9">
+                                            <form:input path="sex" cssClass="form-control" />
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="metric">
-                                            <span class="icon"><i class="fa fa-bar-chart"></i></span>
-                                            <p>
-                                                <span id="amountOfTransaction" class="number">${amountOfTransaction}</span>
-                                                <span class="title">Amount of transactions</span>
-                                            </p>
+                                    <div class="form-group">
+                                        <label for="address" class="col-md-3 control-label">Address</label>
+                                        <div class="col-md-9">
+                                            <form:input path="address" cssClass="form-control" />
                                         </div>
                                     </div>
-                                </div>
-                                
+                                    <div class="form-group">
+                                        <label for="country" class="col-md-3 control-label">Country</label>
+                                        <div class="col-md-9">
+                                            <form:input path="country" cssClass="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nationlaty" class="col-md-3 control-label">Nationality</label>
+                                        <div class="col-md-9">
+                                            <form:input path="nationlaty" cssClass="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="district" class="col-md-3 control-label">District</label>
+                                        <div class="col-md-9">
+                                            <form:input path="district" cssClass="form-control" />
+                                        </div>
+                                    </div>   
+                                    <div class="form-group">
+                                        <label for="city" class="col-md-3 control-label">City</label>
+                                        <div class="col-md-9">
+                                            <form:input path="city" cssClass="form-control" />
+                                        </div>
+                                    </div>  
+                                    <div class="form-group">
+                                        <label for="phone" class="col-md-3 control-label">Phone</label>
+                                        <div class="col-md-9">
+                                            <form:input path="phone" cssClass="form-control" />
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="email" class="col-md-3 control-label">Email</label>
+                                        <div class="col-md-9">
+                                            <form:input type="email" path="email" cssClass="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="IDcard" class="col-md-3 control-label">ID Card</label>
+                                        <div class="col-md-9">
+                                            <form:input path="IDcard" cssClass="form-control" />
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="dateIssueIDCard" class="col-md-3 control-label">Date Issue ID Card</label>
+                                        <div class="col-md-9">
+                                            <form:input path="dateIssueIDCard" cssClass="form-control" />
+                                        </div>
+                                    </div> 
+                                    <div class="form-group">
+                                        <label for="issueIDCardOffice" class="col-md-3 control-label">Issue ID Card Office</label>
+                                        <div class="col-md-9">
+                                            <form:input path="issueIDCardOffice" cssClass="form-control" />
+                                        </div>
+                                    </div> 
+
+
+                                    <div class="form-group">
+                                        <!-- Button -->
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <form:button style="float: right" cssClass="btn btn-primary">Add New Customer</form:button>
+                                            </div>
+                                        </div>
+
+                                </form:form>
                             </div>
                         </div>
                         <!-- END OVERVIEW -->
@@ -169,7 +227,8 @@
             <div class="clearfix"></div>
             <footer>
                 <div class="container-fluid">
-                    <p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
+                    <p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>.
+                        All Rights Reserved.</p>
                 </div>
             </footer>
         </div>
@@ -302,4 +361,3 @@
     </body>
 
 </html>
-

@@ -67,7 +67,10 @@ public class AccountService implements AccountServiceIF {
         accountRepositoryIF.save(account);
     }
     @Override
-    public List<AccountEntity> getAccounts() {
+    public List<AccountEntity> getAccounts(String keyword) {
+        if (keyword != null) {
+            return accountRepositoryIF.search(keyword);
+        }
         return (List)accountRepositoryIF.findAll();
     }
 }

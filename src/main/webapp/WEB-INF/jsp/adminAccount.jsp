@@ -114,10 +114,6 @@
                     <div class="container-fluid">
                         <!-- OVERVIEW -->
                         <div class="panel">
-                            <div class="input-group" style="padding: 20px;">
-                                <input type="text" value="" class="form-control" placeholder="Search">
-                                <span class="input-group-btn"><button type="button" class="btn btn-primary">Search</button></span>
-                            </div>
                             <div style="text-align: center;">
                                 <h1>Manage Account</h1>
                             </div>
@@ -126,6 +122,12 @@
                                        onclick="window.location.href = 'showFormForAdd'; return false;"
                                        class="btn btn-primary" />
                             </div>
+                            <form action="list-account">
+                                <div class="input-group" style="margin: 20px; width: 50%; float: right">
+                                    <input type="text" class="form-control" placeholder="Search Account" name="keyword" id="keyword">
+                                    <span class="input-group-btn"><input type="submit" value="Search" class="btn btn-primary"/>Search</span>
+                                </div>
+                            </form>
                             <div class="panel-body">
                                 <table class="table table-striped table-bordered">
                                     <tr>
@@ -163,6 +165,12 @@
                                         </tr>
                                     </c:forEach>
                                 </table>
+                                <div style="text-align: center">
+                                    <c:url value="list-account" var="pagedLink">
+                                        <c:param name="p" value="~" />
+                                    </c:url>
+                                    <tg:paging pagedListHolder="${pagedListHolder}"	pagedLink="${pagedLink}" />
+                                </div>
                             </div>
                         </div>
                         <!-- END OVERVIEW -->

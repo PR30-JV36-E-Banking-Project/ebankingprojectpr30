@@ -29,6 +29,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -142,12 +143,12 @@ public class TranferController {
         return accountEntitys;
     }
     @GetMapping(value = "/list-transaction")
-    public String listTransactions(HttpServletRequest request, Model theModel) {
-	List<TransactionEntity> transactions = transactionService.getTransactions();
+    public String listTransactions(HttpServletRequest request, Model theModel, @Param("keyword") String keyword) {
+	List<TransactionEntity> transactions = transactionService.getTransactions(keyword);
         PagedListHolder pagedListHolder = new PagedListHolder(transactions);
 		int page = ServletRequestUtils.getIntParameter(request, "p", 0);
 		pagedListHolder.setPage(page);
-		pagedListHolder.setPageSize(5);
+		pagedListHolder.setPageSize(10);
                 
 	theModel.addAttribute("pagedListHolder", pagedListHolder);
                 
