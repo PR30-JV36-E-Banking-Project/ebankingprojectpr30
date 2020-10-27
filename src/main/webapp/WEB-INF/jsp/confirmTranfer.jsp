@@ -139,9 +139,9 @@
             <div class="bormenu">
                 <p class="textmenu">Information Query</p>
                 <ul class="listmenu">
-                    <li><a href="viewAccount">Account Profile</a></li>
+                    <li><a href="#">Account Profile</a></li>
                     <li><a href="<c:url value = "/viewTransaction"/>">Transaction Details</a></li>
-                    <li><a href="#">View Ballance</a></li>
+                    <li><a href="<c:url value = "/viewAccount"/>">View Ballance</a></li>
                 </ul>
             </div>
             <br>
