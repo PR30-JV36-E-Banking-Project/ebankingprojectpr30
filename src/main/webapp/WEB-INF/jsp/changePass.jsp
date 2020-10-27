@@ -25,8 +25,6 @@
 
         <!-- js --> 
         <script src="../../resources/js/jquery-2.2.3.min.js"></script>
-        <!--<script src="../../resources/js/js.js"></script>-->
-        <!--<script src="../../resources/js/modernizr-custom.js"></script>-->
         <!-- web-fonts -->
         <link href="//fonts.googleapis.com/css?family=Secular+One" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
@@ -64,7 +62,6 @@
                 </div>	
             </div>	
         </div>	
-        <!-- //header -->  
 
         <!--slide carousel-->
         <div class="container slidecarousel">
@@ -166,92 +163,49 @@
 
         <div class="content">
             <div class="col-md-7 info">
-                <h4 id="tittle" class="tittle">Tranfer Infomation</h4> 
-                <form action="/confirmTranfer" method="post" >
+                <h4 id="tittle" class="tittle">${tittle}</h4>
+                <form action="${pageContext.request.contextPath}/account/changePass" method="post" >
                     <div class="wrapper">
                         <table class="tablec">
-                            <input type="hidden" name="msg" value="${msg}">
                             <tbody>
                                 <tr>
-                                    <th scope="row">Account Sender</th>
-                                    <td><fmt:formatNumber pattern="#" value="${transaction.senderAccount.accountID}" /> </td>
+                                    <th scope="row"><label class="control-label" for="accountType">Current Password:</label></th>
+                                    <td>
+                                        <input type="password"  name="currentPass" class="form-control myinput"/>
+                                        <span class="error">${errorCurrentPass}</span>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Name Sender.</th>
-                                    <td>${transaction.senderAccount.customerEntity.fullName}</td>
+                                    <th scope="row"><label class="control-label" for="accountType">New Password:</label></th>
+                                    <td>
+                                        <input type="password" id="password" name="password" class="form-control myinput "/>
+                                        <span class="error">${confirmPass}</span>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Balance</th>
-                                        <c:choose>
-                                            <c:when test="${transaction.feeBearer==true}">
-                                            <td><fmt:formatNumber pattern="###,###,###,###" value="${transaction.senderAccount.ballance-transaction.amount-5000}"/> VND</td>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <td><fmt:formatNumber pattern="###,###,###,###" value="${transaction.senderAccount.ballance-transaction.amount}"/> VND</td>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Amount transferred.</th>
-                                    <td ><fmt:formatNumber pattern="###,###,###,###" value="${transaction.amount}"/> VND</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Amount in words.</th>
-                                    <td>${amountbyWords}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Account Receiver.</th>
-                                    <td id="accountReceiver"><fmt:formatNumber pattern="#" value="${transaction.receiverAccount.accountID}"/> </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Name of beneficiary.</th>
-                                    <td>${nameReceiver}</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">Tranfer Content.</th>
-                                    <td>${transaction.content}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Fees.</th>
-                                        <c:choose>
-                                            <c:when test="${transaction.feeBearer==true}">
-                                            <td>nguoi chuyen tra</td>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <td>nguoi nhan tra</td>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Fees Amount.</th>
-                                    <td>5,000 VND</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Email recive OTP code.</th>
-                                    <td>${transaction.senderAccount.customerEntity.email}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Captcha.</th>
-                                    <td><img src=${"/captcha"}></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Input Captcha</th>
-                                    <td><div >
-                                            <input type="text" autocomplete="off" class="form-control myinput" name="captcha" id="usr">
-                                            <span id="error" style="color:red">${error}</span>
-                                        </div>
+                                    <th scope="row"><label class="control-label" for="accountType">Confirm Password:</label></th>
+                                    <td>
+                                        <input type="password" id="confirm_password" name="confirmPass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control myinput"/>
+                                        <span id='message'></span>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <input type="submit" class="btn btn-primary buttonback" value="Confirm">
+                    <input type="submit" class="btn btn-primary buttonback" value="Submit">
+                    <button onclick="goBack()" type="button" class="btn btn-primary buttonback">Go Back</button>
                 </form>
+                <div id="message">
+                    <h6 style="color:red;">Password must contain the following:</h6>
+                    <p> 1. A capital (uppercase) letter</p>
+                    <p> 2. A number</p>
+                    <p> 3. Minimum 8 characters</p>
+                </div>
             </div>
+
+            <div class="clearfix"> </div>
         </div>
-        <div class="clearfix"> </div>
-        <!-- //contact --> 
+
 
         <!--footer-->
         <div class="agile-footer w3ls-section footer">
@@ -302,7 +256,7 @@
         <!-- smooth-scrolling-of-move-up -->
         <script type="text/javascript" src="../../resources/js/move-top.js"></script>
         <script type="text/javascript" src="../../resources/js/easing.js"></script>
-        <script type="text/javascript" src="../../resources/js/myJavascript.js"></script>
+        <script src="../../resources/js/myJavascript.js" type="text/javascript"></script>
         <script type="text/javascript">
                         $(document).ready(function () {
                             /*
@@ -318,9 +272,18 @@
 
                         });
         </script>
+        <script type="text/javascript">
+            $('#password, #confirm_password').on('keyup', function () {
+                if ($('#password').val() === $('#confirm_password').val()) {
+                    $('#message').html('Matching').css('color', 'green');
+                } else
+                    $('#message').html('Not Matching').css('color', 'red');
+            });
+        </script>
+
         <!-- //smooth-scrolling-of-move-up -->  
         <!-- Bootstrap core JavaScript
-    ================================================== -->
+        ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="../../resources/js/bootstrap.js"></script>
     </body>

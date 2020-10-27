@@ -16,8 +16,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class FormatDouble {
 
-    public String formatDoubleNum(double num) {
-        NumberFormat nf = new DecimalFormat("#############");
+    public String fD(double num) {
+        NumberFormat nf = new DecimalFormat("###,###,###,###");
         return nf.format(num);
+    }
+    public String fmID(double ID) {
+        NumberFormat nf = new DecimalFormat("#");
+        return nf.format(ID);
     }
 }

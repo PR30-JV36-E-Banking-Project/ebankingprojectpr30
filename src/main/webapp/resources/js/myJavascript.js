@@ -32,6 +32,8 @@ function fire_ajax_submit(accountID) {
 
 $(document).ready(function () {
     showDiv();
+    var RCID = document.getElementById("AccountReceiver").value;
+    myFunction(RCID);
 });
 
 function showDiv(divId, element)
@@ -43,13 +45,18 @@ function showDiv(divId, element)
         $("#hidden_div_1").hide();
         $("#hidden_accNumber_0").show();
         $("#hidden_accNumber_1").hide();
-        hidden_accNumber_
+        $("#hidden_button_0").show();
+        $("#hidden_button_1").hide();
     } else {
         $("#hidden_div_1").show();
         $("#hidden_div_0").hide();
         $("#hidden_accNumber_1").show();
         $("#hidden_accNumber_0").hide();
+        $("#hidden_button_1").show();
+        $("#hidden_button_0").hide();
     }
     ;
 }
+
+
 

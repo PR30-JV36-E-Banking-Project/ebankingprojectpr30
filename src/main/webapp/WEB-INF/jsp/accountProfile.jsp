@@ -1,6 +1,6 @@
 <%-- 
-    Document   : register
-    Created on : Sep 29, 2020, 6:29:19 PM
+    Document   : registerSuccess
+    Created on : Sep 29, 2020, 6:31:04 PM
     Author     : Hoang Duy Nhat
 --%>
 
@@ -25,22 +25,20 @@
 
         <!-- js --> 
         <script src="../../resources/js/jquery-2.2.3.min.js"></script>
-        <!--<script src="../../resources/js/js.js"></script>-->
-        <!--<script src="../../resources/js/modernizr-custom.js"></script>-->
         <!-- web-fonts -->
         <link href="//fonts.googleapis.com/css?family=Secular+One" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-        <!-- //web-fonts --> 
+        <!-- //web-fonts -->
 
     </head>
     <body> 
         <!-- header -->
-        <div class="headerw3-agile header"> 
+        <div class="headerw3-agile"> 
             <div class="header-w3mdl"><!-- header-two --> 
                 <div class="container"> 
                     <div class="agileits-logo navbar-left">
-                        <h1><a href="<c:url value = "/"/>"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
+                        <h1><a href="index.html"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
                     </div> 
                     <div class="agileits-hdright nav navbar-nav">
                         <div class="header-w3top"><!-- header-top --> 
@@ -166,95 +164,52 @@
 
         <div class="content">
             <div class="col-md-7 info">
-                <h4 id="tittle" class="tittle">Tranfer Infomation</h4> 
-                <form action="/confirmTranfer" method="post" >
-                    <div class="wrapper">
-                        <table class="tablec">
-                            <input type="hidden" name="msg" value="${msg}">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Account Sender</th>
-                                    <td><fmt:formatNumber pattern="#" value="${transaction.senderAccount.accountID}" /> </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Name Sender.</th>
-                                    <td>${transaction.senderAccount.customerEntity.fullName}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Balance</th>
-                                        <c:choose>
-                                            <c:when test="${transaction.feeBearer==true}">
-                                            <td><fmt:formatNumber pattern="###,###,###,###" value="${transaction.senderAccount.ballance-transaction.amount-5000}"/> VND</td>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <td><fmt:formatNumber pattern="###,###,###,###" value="${transaction.senderAccount.ballance-transaction.amount}"/> VND</td>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Amount transferred.</th>
-                                    <td ><fmt:formatNumber pattern="###,###,###,###" value="${transaction.amount}"/> VND</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Amount in words.</th>
-                                    <td>${amountbyWords}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Account Receiver.</th>
-                                    <td id="accountReceiver"><fmt:formatNumber pattern="#" value="${transaction.receiverAccount.accountID}"/> </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Name of beneficiary.</th>
-                                    <td>${nameReceiver}</td>
-                                </tr>
-
-                                <tr>
-                                    <th scope="row">Tranfer Content.</th>
-                                    <td>${transaction.content}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Fees.</th>
-                                        <c:choose>
-                                            <c:when test="${transaction.feeBearer==true}">
-                                            <td>nguoi chuyen tra</td>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <td>nguoi nhan tra</td>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Fees Amount.</th>
-                                    <td>5,000 VND</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Email recive OTP code.</th>
-                                    <td>${transaction.senderAccount.customerEntity.email}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Captcha.</th>
-                                    <td><img src=${"/captcha"}></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Input Captcha</th>
-                                    <td><div >
-                                            <input type="text" autocomplete="off" class="form-control myinput" name="captcha" id="usr">
-                                            <span id="error" style="color:red">${error}</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <input type="submit" class="btn btn-primary buttonback" value="Confirm">
-                </form>
+                <h4 id="tittle" class="tittle">Account Infomation</h4>
+                <div class="wrapper">
+                    <table class="tablec">
+                        <tbody>
+                            <tr>
+                                <th scope="row"><label class="control-label" for="accountType">Select Type Account:</label></th>
+                                <td>
+                                    <select class="form-control" id="accountType" onchange="showDiv('hidden_div', this)">
+                                        <c:forEach items="${listAccount}" var="accountID">
+                                            <option value="${accountID}">
+                                                ${accountID.accountType}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label" for="accountNumber">Account number:</label></th>
+                                <td>
+                                    <c:forEach items="${listAccount}" var="accountType">  
+                                        <label id="hidden_accNumber_${listAccount.indexOf(accountType)}" class="form-control readonly"><fmt:formatNumber pattern="#" value="${accountType.accountID}"/></label>
+                                    </c:forEach>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label" for="Ballance">Balance:</label></th>
+                                <td>
+                                    <c:forEach items="${listAccount}" var="accountType">  
+                                        <label id="hidden_div_${listAccount.indexOf(accountType)}" class="form-control readonly"><fmt:formatNumber pattern="#" value="${accountType.ballance}"/></label>
+                                    </c:forEach>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <c:forEach items="${listAccount}" var="account">  
+                    <a id="hidden_button_${listAccount.indexOf(account)}" href="<c:url value = "/printRecieptAcc/${account.accountID}"/>" class="btn btn-info buttonback" role="button">Print reciept</a>
+                </c:forEach>
+                <button onclick="goBack()" type="button" class="btn btn-primary buttonback">Go Back</button>
             </div>
+
+            <div class="clearfix"> </div>
         </div>
-        <div class="clearfix"> </div>
-        <!-- //contact --> 
 
         <!--footer-->
-        <div class="agile-footer w3ls-section footer">
+        <div class="agile-footer w3ls-section">
             <div class="container">
                 <div class="col-md-7 list-footer">
                     <ul class="footer-nav">
@@ -278,7 +233,7 @@
         </div>
         <!--//footer-->	
         <!-- subscribe -->
-        <div class="modal bnr-modal fade " id="myModal1" tabindex="-1" role="dialog">
+        <div class="modal bnr-modal fade" id="myModal1" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -298,30 +253,31 @@
             </div>
         </div>
         <!-- //subscribe --> 
-        <script src="js/SmoothScroll.min.js"></script>
+        <script src="../../resources/js/SmoothScroll.min.js"></script>
         <!-- smooth-scrolling-of-move-up -->
         <script type="text/javascript" src="../../resources/js/move-top.js"></script>
         <script type="text/javascript" src="../../resources/js/easing.js"></script>
-        <script type="text/javascript" src="../../resources/js/myJavascript.js"></script>
+        <script src="../../resources/js/myJavascript.js" type="text/javascript"></script>
         <script type="text/javascript">
-                        $(document).ready(function () {
-                            /*
-                             var defaults = {
-                             containerID: 'toTop', // fading element id
-                             containerHoverID: 'toTopHover', // fading element hover id
-                             scrollSpeed: 1200,
-                             easingType: 'linear' 
-                             };
-                             */
+                    $(document).ready(function () {
+                        /*
+                         var defaults = {
+                         containerID: 'toTop', // fading element id
+                         containerHoverID: 'toTopHover', // fading element hover id
+                         scrollSpeed: 1200,
+                         easingType: 'linear' 
+                         };
+                         */
 
-                            $().UItoTop({easingType: 'easeOutQuart'});
+                        $().UItoTop({easingType: 'easeOutQuart'});
 
-                        });
+                    });
         </script>
         <!-- //smooth-scrolling-of-move-up -->  
         <!-- Bootstrap core JavaScript
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="../../resources/js/bootstrap.js"></script>
+
     </body>
 </html>

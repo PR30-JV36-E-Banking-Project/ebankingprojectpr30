@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +45,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -97,6 +99,12 @@ public class TranferController {
     @PostMapping("createITF")
     public String createITF(@Valid @ModelAttribute("transaction") TransactionEntity transaction,
             BindingResult result, Model model, Principal principal) throws ParseException {
+        if (result.hasErrors()) {
+            List<AccountEntity> accountTypesMap = getListAccType(principal);
+            model.addAttribute("listTypeAccount", accountTypesMap);
+            model.addAttribute("tittle", "Internal Transaction");
+            return "tranferForm";
+        }
         double senderAccID = transaction.getSenderAccount().getAccountID();
         double receiverAccID = transaction.getReceiverAccount().getAccountID();
         double amount = transaction.getAmount();
@@ -104,29 +112,27 @@ public class TranferController {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
 
-        if (result.hasErrors()) {
-            List<AccountEntity> accountTypesMap = getListAccType(principal);
-            model.addAttribute("listTypeAccount", accountTypesMap);
-            model.addAttribute("tittle", "Internal Transaction");
-            return "tranferForm";
-        } else if (!accountService.checkAccountITF(receiverAccID)) {
+        if (accountService.checkAccountITF(receiverAccID) == false) {
             List<AccountEntity> accountTypesMap = getListAccType(principal);
             model.addAttribute("listTypeAccount", accountTypesMap);
             model.addAttribute("tittle", "Internal Transaction");
             model.addAttribute("errorAccount", "Account not valid");
             return "tranferForm";
-        } else if (!accountService.checkBalance(senderAccID, amount)) {
+        }
+        if (accountService.checkBalance(senderAccID, amount)==false) {
             List<AccountEntity> accountTypesMap = getListAccType(principal);
             model.addAttribute("listTypeAccount", accountTypesMap);
             model.addAttribute("tittle", "Internal Transaction");
             model.addAttribute("error", "Balance not enought");
             return "tranferForm";
         }
+        String nameReceiver = accountService.findByAccountID(receiverAccID).getCustomerEntity().getFullName();
         transaction.setReceiverAccount(accountService.findByAccountID(transaction.getReceiverAccount().getAccountID()));
         transaction.setTransactionDate(LocalDate.parse(dtf.format(now)));
         model.addAttribute("transaction", transaction);
         model.addAttribute("msg", "internal");
         model.addAttribute("amountbyWords", amountbyWords);
+        model.addAttribute("nameReceiver", nameReceiver);
         return "confirmTranfer";
     }
 
@@ -136,6 +142,8 @@ public class TranferController {
         double senderAccID = transaction.getSenderAccount().getAccountID();
         double receiverAccID = transaction.getReceiverAccount().getAccountID();
         double amount = transaction.getAmount();
+        String amountbyWords = currencyToText.coverNumberToText(amount);
+        String nameReceiver = restService.checkAccountFromRest(receiverAccID).getCustomerEntity().getFullName();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
         if (result.hasErrors()) {
@@ -159,12 +167,14 @@ public class TranferController {
         transaction.setTransactionDate(LocalDate.parse(dtf.format(now)));
         model.addAttribute("transaction", transaction);
         model.addAttribute("msg", "external");
+        model.addAttribute("amountbyWords", amountbyWords);
+        model.addAttribute("nameReceiver", nameReceiver);
         return "confirmTranfer";
     }
 
     @PostMapping("confirmTranfer")
     public String confirmTranfer(HttpSession session, HttpServletRequest request, Model model,
-            @RequestParam("msg") String msg, @SessionAttribute("transaction") TransactionEntity transactionSS) {
+            @RequestParam("msg") String msg, @SessionAttribute("transaction") TransactionEntity transactionSS) throws JsonProcessingException {
         String captcha = session.getAttribute("captcha_security").toString();
         String verifyCaptcha = request.getParameter("captcha");
         if (captcha.equals(verifyCaptcha)) {
@@ -190,29 +200,15 @@ public class TranferController {
         NumberFormat formatter = new DecimalFormat("#############");
         double accountID = Double.valueOf(formatter.format(ts.getSenderAccount().getAccountID())).longValue();
         List<TransactionEntity> transactions = transactionService.getTransactionByDate(startD, endD, accountID);
-        System.out.println(formatter.format(ts.getSenderAccount().getAccountID()));
-        System.out.println(Double.parseDouble(formatter.format(ts.getSenderAccount().getAccountID())));
         model.addAttribute("listTransaction", transactions);
         return "transactionInfo";
     }
 
     @GetMapping("printReciept/{transactionID}")
-    public String printReciept(@PathVariable("transactionID") int id, HttpServletResponse response) throws IOException, MessagingException {
+    @ResponseStatus(value = HttpStatus.OK)
+    public void printReciept(@PathVariable("transactionID") int id, HttpServletResponse response) throws IOException, MessagingException {
         TransactionEntity transactionEntity = transactionService.getTransactionByID(id);
         recieptService.createPdf(transactionEntity, response);
-//        emailService.sendRecieptMessage(transactionEntity.getSenderAccount().getCustomerEntity().getEmail(), "Reciept", "Reciept");
-        return "index";
-    }
-
-    @GetMapping("rest")
-    public String externalTF() throws JsonProcessingException {
-        AccountEntity ae = new AccountEntity();
-        ae.setAccountType("Saving");
-        ae.setBallance(10000000);
-        ae.setStatus(true);
-        accountService.saveAccount(ae);
-//        restService.getAccountFromRest();
-        return "logout";
     }
 
     @PostMapping("getUsername")
@@ -226,11 +222,13 @@ public class TranferController {
                 return "Not Found";
             }
         } else {
-            AccountEntity accountEntity = restService.checkAccountFromRest(accountID);
-            if (accountEntity != null) {
+            try {
+
+                AccountEntity accountEntity = restService.checkAccountFromRest(accountID);
                 return accountEntity.getCustomerEntity().getFullName();
+            } catch (NullPointerException ex) {
+                return "Not Found";
             }
-            return "Not Found";
         }
     }
 
@@ -241,11 +239,6 @@ public class TranferController {
             accountEntitys.add(account);
         }
         return accountEntitys;
-    }
-
-    @GetMapping("/getOtp")
-    public String getOTP() {
-        return "confirmOTP_1";
     }
 
 }

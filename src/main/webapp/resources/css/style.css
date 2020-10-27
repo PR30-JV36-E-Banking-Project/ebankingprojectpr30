@@ -1424,6 +1424,8 @@ section#tables  p {
 	border-top: none !important;
 	border-bottom: 1px solid grey;
 	border-right: 1px solid grey;
+	border-left: 1px solid grey;
+        border-radius: 0 0 6px 6px;
 }
 .tab-content > .active {
 	display: block;

@@ -65,6 +65,76 @@
             </div>	
         </div>	
         <!-- //header -->  
+
+        <!--slide carousel-->
+        <div class="container slidecarousel">
+            <div  id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                    <li data-target="#myCarousel" data-slide-to="4"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+
+                    <div class="item active">
+                        <img  style="border-radius:10px;" src="../../resources/images/Banner1.jpg" alt="Chania" width="1800" height="300">
+                        <div class="carousel-caption">
+                            <h3>Deposit!</h3>
+                            <h4>Only one registration for all transactions!</h4>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img style="border-radius:10px;" src="../../resources/images/Banner2.png" alt="Chania" width="1800" height="300">
+                        <div class="carousel-caption">
+                            <h3>Quick transaction!</h3>
+                            <h4>Only one registration for all transactions!</h4>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img style="border-radius:10px;" src="../../resources/images/Banner3.png" alt="Chania" width="1800" height="300">
+                        <div class="carousel-caption">
+                            <h3>Basic account package.</h3>
+                            <h4>Only one registration for all transactions!</h4>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img style="border-radius:10px;" src="../../resources/images/Banner4.png" alt="Chania" width="1800" height="300">
+                        <div class="carousel-caption">
+                            <h3>Withdraw.</h3>
+                            <h4>Only one registration for all transactions!</h4>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img style="border-radius:10px;" src="../../resources/images/Banner5.jpg" alt="Chania" width="1800" height="300">
+                        <div class="carousel-caption">
+                            <h3>Personal loan.</h3>
+                            <h4>Only one registration for all transactions!</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- Left and right controls -->
+                <a style="border-radius:10px;"  class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a style="border-radius:10px;"  class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <!--slide carousel-->
+
+
         <!-- Vertical navbar -->
         <div class="verMenu">
             <div class="bormenu">
@@ -79,12 +149,13 @@
             </div>
             <br>
             <div class="bormenu">
-                <p class="textmenu">Pay</p>
+                <p class="textmenu">Transaction</p>
                 <ul class="listmenu">
-                    <li><a href="<c:url value = "/viewTransaction"/>">Transaction</a></li>
-                    <li><a href="#">Deposit</a></li>
+                    <li><a href="<c:url value = "/selectTF?typeTF=1"/>">Internal Transaction</a></li>
+                    <li><a href="<c:url value = "/selectTF?typeTF=2"/>">External Transaction</a></li>
                 </ul>
             </div>
+            <br>
             <div class="bormenu">
                 <p class="textmenu">Card</p>
                 <ul class="listmenu">
@@ -94,56 +165,61 @@
                 </ul>
             </div>
         </div>
+        <!--<-----content------->
 
         <div>
             <c:if test="${listTransaction!=null}">
-                <div class="col-md-7 info">
-                    <h4>Tranfer Infomation</h4> 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Transaction ID</th>
-                                <th>Transaction Amount</th>
-                                <th>Transaction date</th>
-                                <th>Account Sender</th>
-                                <th>Content</th>
-                                <th>Account receiver</th>
-                                <th>Fee</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:set var="i" value="1" /> 
-                            <c:forEach items="${listTransaction}" var="u"> 
-                                <tr> 
-                                    <td>${i}</td> 
-                                    <td>${u.transactionID}</td> 
-                                    <td><fmt:formatNumber pattern="###,###,###,###" value="${u.amount}"/> VND</td> 
-                                    <td>${u.transactionDate}</td> 
-                                    <td><fmt:formatNumber pattern="#############" value="${u.receiverAccount.accountID}"/></td> 
-                                    <td>${u.content}</td> 
-                                    <td><fmt:formatNumber pattern="#############" value="${u.senderAccount.accountID}"/></td> 
-                                    <td> 5000 VND -
-                                        <c:choose>
-                                            <c:when test="${transaction.feeBearer==true}">
-                                                nguoi chuyen tra
-                                            </c:when>
-                                            <c:otherwise>
-                                                nguoi nhan tra
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </td> 
-                                    <td><a href="<c:url value = "/printReciept/${u.transactionID}"/>" class="btn btn-info" role="button"> Print reciept</a></td>
-                                </tr> 
-                                <c:set var="i" value="${i+1}" /> 
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                    <button onclick="goBack()" type="button" class="btn btn-info buttonback">Go Back</button>
-                </div>
-                <div class="clearfix"> </div>
-            </c:if>
+                <div class="content">
+                    <div class="col-md-7 info">
+                        <h4 id="tittle" class="tittle">Tranfer Details</h4> 
+                        <div class="wrapper">
+                            <table class="tablec tableReciept">
+                                <thead>
+                                    <tr>
+                                        <th style="width:5%;">#</th>
+                                        <th style="width:5%">ID</th>
+                                        <th style="width:15%">Amount</th>
+                                        <th style="width:10%">Date</th>
+                                        <th style="width:15%">Account Sender</th>
+                                        <th style="width:12%">Content</th>
+                                        <th style="width:15%">Account Receiver</th>
+                                        <th style="width:13%">Fee</th>
+                                        <th style="width:10%"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:set var="i" value="1" /> 
+                                    <c:forEach items="${listTransaction}" var="u"> 
+                                        <tr> 
+                                            <td>${i}</td> 
+                                            <td>${u.transactionID}</td> 
+                                            <td><fmt:formatNumber pattern="###,###,###,###" value="${u.amount}"/> VND</td> 
+                                            <td>${u.transactionDate}</td> 
+                                            <td><fmt:formatNumber pattern="#############" value="${u.receiverAccount.accountID}"/></td> 
+                                            <td>${u.content}</td> 
+                                            <td><fmt:formatNumber pattern="#############" value="${u.senderAccount.accountID}"/></td> 
+                                            <td> 5000 VND -
+                                                <c:choose>
+                                                    <c:when test="${transaction.feeBearer==true}">
+                                                        nguoi chuyen tra
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        nguoi nhan tra
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </td> 
+                                            <td><a href="<c:url value = "/printReciept/${u.transactionID}"/>" class="btn btn-info" role="button"> Print reciept</a></td>
+                                        </tr> 
+                                        <c:set var="i" value="${i+1}" /> 
+                                    </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <button onclick="goBack()" type="button" class="btn btn-primary buttonback">Go Back</button>
+                    <div class="clearfix"> </div>
+                </c:if>
+            </div>
         </div>
         <!-- //contact --> 
 
@@ -198,19 +274,19 @@
         <script type="text/javascript" src="../../resources/js/easing.js"></script>
         <script type="text/javascript" src="../../resources/js/myJavascript.js"></script>
         <script type="text/javascript">
-                        $(document).ready(function () {
-                            /*
-                             var defaults = {
-                             containerID: 'toTop', // fading element id
-                             containerHoverID: 'toTopHover', // fading element hover id
-                             scrollSpeed: 1200,
-                             easingType: 'linear' 
-                             };
-                             */
+                                                                    $(document).ready(function () {
+                                                                        /*
+                                                                         var defaults = {
+                                                                         containerID: 'toTop', // fading element id
+                                                                         containerHoverID: 'toTopHover', // fading element hover id
+                                                                         scrollSpeed: 1200,
+                                                                         easingType: 'linear' 
+                                                                         };
+                                                                         */
 
-                            $().UItoTop({easingType: 'easeOutQuart'});
+                                                                        $().UItoTop({easingType: 'easeOutQuart'});
 
-                        });
+                                                                    });
         </script>
         <!-- //smooth-scrolling-of-move-up -->  
         <!-- Bootstrap core JavaScript

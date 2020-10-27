@@ -62,6 +62,77 @@
             </div>	
         </div>	
         <!-- //header -->  
+
+        <!--slide carousel-->
+        <div class="container slidecarousel">
+            <div  id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                    <li data-target="#myCarousel" data-slide-to="4"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+
+                    <div class="item active">
+                        <img  style="border-radius:10px;" src="../../resources/images/Banner1.jpg" alt="Chania" width="1800" height="300">
+                        <div class="carousel-caption">
+                            <h3>Deposit!</h3>
+                            <h4>Only one registration for all transactions!</h4>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img style="border-radius:10px;" src="../../resources/images/Banner2.png" alt="Chania" width="1800" height="300">
+                        <div class="carousel-caption">
+                            <h3>Quick transaction!</h3>
+                            <h4>Only one registration for all transactions!</h4>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img style="border-radius:10px;" src="../../resources/images/Banner3.png" alt="Chania" width="1800" height="300">
+                        <div class="carousel-caption">
+                            <h3>Basic account package.</h3>
+                            <h4>Only one registration for all transactions!</h4>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img style="border-radius:10px;" src="../../resources/images/Banner4.png" alt="Chania" width="1800" height="300">
+                        <div class="carousel-caption">
+                            <h3>Withdraw.</h3>
+                            <h4>Only one registration for all transactions!</h4>
+                        </div>
+                    </div>
+
+                    <div class="item">
+                        <img style="border-radius:10px;" src="../../resources/images/Banner5.jpg" alt="Chania" width="1800" height="300">
+                        <div class="carousel-caption">
+                            <h3>Personal loan.</h3>
+                            <h4>Only one registration for all transactions!</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- Left and right controls -->
+                <a style="border-radius:10px;"  class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a style="border-radius:10px;"  class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <!--slide carousel-->
+
+
+        <!-- //header -->  
         <!-- Vertical navbar -->
         <div class="verMenu">
             <div class="bormenu">
@@ -78,8 +149,17 @@
             <div class="bormenu">
                 <p class="textmenu">Pay</p>
                 <ul class="listmenu">
-                    <li><a href="<c:url value = "/newTranfer"/>">Transaction</a></li>
-                    <li><a href="#">Deposit</a></li>
+                    <li><a href="<c:url value = "/selectTF?typeTF=1"/>">Internal Transaction</a></li>
+                    <li><a href="<c:url value = "/selectTF?typeTF=2"/>">External Transaction</a></li>
+                </ul>
+            </div>
+            <br>
+            <div class="bormenu">
+                <p class="textmenu">Card</p>
+                <ul class="listmenu">
+                    <li><a href="#">Open Card</a></li>
+                    <li><a href="#">Lock Card</a></li>
+                    <li><a href="#">Cancel Internet Banking</a></li>
                 </ul>
             </div>
         </div>
@@ -90,98 +170,106 @@
             <!--<div class="container">--> 
             <!--<div class="contact_wthreerow agileits-w3layouts">-->
             <div class="col-md-7 info">
-                <h4>View Account Infomation</h4><br>
+                <h4 id="tittle" class="tittle">View Transaction details</h4><br>
                 <form:form action="/viewTranfer" method="post" modelAttribute="transaction">
-                    <form:select path="senderAccount" class="form-control">
-                        <form:options items="${listTypeAccount}" itemLabel="accountType" itemValue="accountID" />
-                    </form:select>
-                    <br>
-                    <div class="control-group">
-                        <label for="startday">Start Time</label>
-                        <input type="date" name="startDay" class="form-control" required="" id="startday">
+                    <div class="wrapper">
+                        <table class="tablec">
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><label class="control-label" for="accountType">Select Type Account:</label></th>
+                                    <td>
+                                        <form:select path="senderAccount" class="form-control myinput">
+                                            <form:options items="${listTypeAccount}" itemLabel="accountType" itemValue="accountID" />
+                                        </form:select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><label for="startday">Start Time</label></th>
+                                    <td><input type="date" name="startDay" class="form-control myinput" required="" id="startday"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><label class="control-label">End Time</label></th>
+                                    <td><input type="date" name="endDay" class="form-control myinput" required="" ></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <br>
-                    <div class="control-group">
-                        <label class="control-label">End Time</label>
-                        <input type="date" name="endDay" class="form-control" required="" >
+                        <input type="submit" class="btn btn-primary buttonback" value="View Transaction">
+                    </form:form>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+            <!-- //contact --> 
+
+            <!--footer-->
+            <div class="agile-footer w3ls-section footer">
+                <div class="container">
+                    <div class="col-md-7 list-footer">
+                        <ul class="footer-nav">
+                            <li><a  href="index.html">Home</a></li>
+                            <li><a  href="about.html">About</a></li>
+                            <li><a  href="services.html">Services</a></li>
+                            <li><a href="gallery.html">Gallery</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                        <p>Vivamus sed porttitor felis. Pellentesque habitant morbi tristique senectus et netus et ctetur adipiscing elit. Cras rutrum iaculis</p>
                     </div>
-                    <br>
-                    <input type="submit" class="btn btn-primary" value="View Transaction">
-                </form:form>
-            </div>
-        </div>
-        <div class="clearfix"> </div>
-        <!-- //contact --> 
-
-        <!--footer-->
-        <div class="agile-footer w3ls-section footer">
-            <div class="container">
-                <div class="col-md-7 list-footer">
-                    <ul class="footer-nav">
-                        <li><a  href="index.html">Home</a></li>
-                        <li><a  href="about.html">About</a></li>
-                        <li><a  href="services.html">Services</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                    </ul>
-                    <p>Vivamus sed porttitor felis. Pellentesque habitant morbi tristique senectus et netus et ctetur adipiscing elit. Cras rutrum iaculis</p>
+                    <div class="col-md-5 agileinfo-sub">
+                        <h6>Click the link below to start the subscription service</h6>
+                        <a href="#" data-toggle="modal" data-target="#myModal1">subscribe</a>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="col-md-5 agileinfo-sub">
-                    <h6>Click the link below to start the subscription service</h6>
-                    <a href="#" data-toggle="modal" data-target="#myModal1">subscribe</a>
-                </div>
-                <div class="clearfix"></div>
+            </div>	 
+            <div class="w3_agile-copyright text-center">
+                <p>© 2017 E-Banking. All rights reserved | Design by <a href="//w3layouts.com/">W3layouts</a></p>
             </div>
-        </div>	 
-        <div class="w3_agile-copyright text-center">
-            <p>© 2017 E-Banking. All rights reserved | Design by <a href="//w3layouts.com/">W3layouts</a></p>
-        </div>
-        <!--//footer-->	
-        <!-- subscribe -->
-        <div class="modal bnr-modal fade " id="myModal1" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <img src="../../resources/images/logo.png" alt="logo"/>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-                    </div> 
-                    <div class="modal-body modal-spa">
-                        <p>E-Banking's email newsletter provides subscribers with helpful articles on important issues in the banking industry, as well as news about events and more! To sign up for the newsletter, fill the below form.</p>
-                        <form class=" wthree-subsribe" action="#" method="post"> 
-                            <input type="text" name="name" placeholder="Your Name" required="">
-                            <input type="email" name="email" placeholder="your Email" required="">
-                            <input type="submit" value="SignUp"> 
-                            <div class="clearfix"></div>
-                        </form>
-                    </div> 
+            <!--//footer-->	
+            <!-- subscribe -->
+            <div class="modal bnr-modal fade " id="myModal1" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <img src="../../resources/images/logo.png" alt="logo"/>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
+                        </div> 
+                        <div class="modal-body modal-spa">
+                            <p>E-Banking's email newsletter provides subscribers with helpful articles on important issues in the banking industry, as well as news about events and more! To sign up for the newsletter, fill the below form.</p>
+                            <form class=" wthree-subsribe" action="#" method="post"> 
+                                <input type="text" name="name" placeholder="Your Name" required="">
+                                <input type="email" name="email" placeholder="your Email" required="">
+                                <input type="submit" value="SignUp"> 
+                                <div class="clearfix"></div>
+                            </form>
+                        </div> 
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- //subscribe --> 
-        <script src="js/SmoothScroll.min.js"></script>
-        <!-- smooth-scrolling-of-move-up -->
-        <script type="text/javascript" src="../../resources/js/move-top.js"></script>
-        <script type="text/javascript" src="../../resources/js/easing.js"></script>
-        <script type="text/javascript" src="../../resources/js/myJavascript.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                /*
-                 var defaults = {
-                 containerID: 'toTop', // fading element id
-                 containerHoverID: 'toTopHover', // fading element hover id
-                 scrollSpeed: 1200,
-                 easingType: 'linear' 
-                 };
-                 */
+            <!-- //subscribe --> 
+            <script src="js/SmoothScroll.min.js"></script>
+            <!-- smooth-scrolling-of-move-up -->
+            <script type="text/javascript" src="../../resources/js/move-top.js"></script>
+            <script type="text/javascript" src="../../resources/js/easing.js"></script>
+            <script type="text/javascript" src="../../resources/js/myJavascript.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    /*
+                     var defaults = {
+                     containerID: 'toTop', // fading element id
+                     containerHoverID: 'toTopHover', // fading element hover id
+                     scrollSpeed: 1200,
+                     easingType: 'linear' 
+                     };
+                     */
 
-                $().UItoTop({easingType: 'easeOutQuart'});
+                    $().UItoTop({easingType: 'easeOutQuart'});
 
-            });
-        </script>
-        <!-- //smooth-scrolling-of-move-up -->  
-        <!-- Bootstrap core JavaScript
-    ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="../../resources/js/bootstrap.js"></script>
+                });
+            </script>
+            <!-- //smooth-scrolling-of-move-up -->  
+            <!-- Bootstrap core JavaScript
+        ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <script src="../../resources/js/bootstrap.js"></script>
     </body>
 </html>

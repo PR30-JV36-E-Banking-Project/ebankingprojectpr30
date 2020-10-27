@@ -102,7 +102,7 @@
                         <h4>View Tranfer</h4> 
                         <div class="container">
                             <form:form action="/viewTranfer" method="post" modelAttribute="transaction">
-                                <form:select path="transactionID" class="form-control custom-select">
+                                <form:select path="transactionID" class="form-control myinput custom-select">
                                     <form:option value="0" label="select Account"/>
                                     <form:options items="${listTypeAccount}"/>
                                 </form:select>

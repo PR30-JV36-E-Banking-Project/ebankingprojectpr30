@@ -15,10 +15,8 @@ import com.example.Ebanking.service.UserSevice;
 import java.security.Principal;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -52,15 +50,15 @@ public class CustomerController {
 //        customerService.saveCustomer(theCustomer);
 //        return "checkEmailNotification";
 //    }
-    
-     @RequestMapping(value = "login", method = RequestMethod.POST)
+
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public String login(@ModelAttribute("customer") CustomerEntity theCustomer) {
         customerService.saveCustomer(theCustomer);
         return "checkEmailNotification";
     }
-    @Autowired 
+    @Autowired
     private UserServiceSecurity userServiceSecurity;
-    @Autowired 
+    @Autowired
     private ConfirmationTokenService confirmationTokenService;
 
     @GetMapping("/sign-up")
@@ -87,19 +85,39 @@ public class CustomerController {
 
         return "registerSuccess";
     }
-    
+
     @RequestMapping(value = "viewUserInformation", method = RequestMethod.GET)
     public String home(Model model, Principal principal, HttpServletRequest request) {
         String username = principal.getName();
-        
+
         UserEntity currentUser = userSevice.getUserByUserName(username);
-                
+
         CustomerEntity currentCustomer = currentUser.getCustomerEntity();
 //        CustomerEntity currentCustomer = customerService.findByUserEntity(currentUser);
 //        
 //        model.addAttribute("currentCustomer", currentCustomer);
         model.addAttribute("currentCustomer", currentCustomer);
-             
+
         return "viewAccountInformation";
+    }
+
+    @GetMapping("changePass")
+    public String changePass() {
+        return "changePass";
+    }
+
+    @PostMapping("changePass")
+    public String confirmChangePass(@RequestParam String currentPass, @RequestParam String password, @RequestParam String confirmPass,
+            Principal principal, Model model) {
+        UserEntity ue = userSevice.getUserByUserName(principal.getName());
+        if (!((ue.getPassword()).equals(currentPass))) {
+            model.addAttribute("errorCurrentPass", "Password is wrong!");
+            return "changePass";
+        }
+        if (!(password.equals(confirmPass))) {
+            model.addAttribute("confirmPass", "Password is wrong or not matched!");
+            return "changePass";
+        }
+        return "redirect:/home";
     }
 }
