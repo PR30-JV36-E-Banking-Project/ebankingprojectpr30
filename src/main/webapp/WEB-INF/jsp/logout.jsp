@@ -11,6 +11,7 @@
         <link href="../../resources/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
         <link href="../../resources/css/style.css" type="text/css" rel="stylesheet" media="all">
         <link href="../../resources/css/font-awesome.css" rel="stylesheet">   <!-- font-awesome icons --> 
+        <link href="../../resources/css/custom.css" rel="stylesheet" type="text/css"/>
         <!-- //Custom Theme files -->  
         <!-- js --> 
         <script src="../../resources/js/jquery-2.2.3.min.js"></script>
@@ -25,24 +26,32 @@
         <div class="headerw3-agile"> 
             <div class="header-w3mdl"><!-- header-two --> 
                 <div class="container"> 
-                    <div class="agileits-logo navbar-left">
+                    <div class="agileits-logo navbar-left Elogo">
                         <h1><a href="index.jsp"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
                     </div> 
-                    <div class="agileits-hdright nav navbar-nav">
-                        <div class="header-w3top"><!-- header-top --> 
+                    <div class="agileits-hdright nav navbar-nav Emenu">
+                        <div class="header-w3top header-menu"><!-- header-top --> 
                             <ul class="w3l-nav-top">
                                 <li><i class="fa fa-phone"></i><span> +0123456789 </span></li> 
                                 <li><a href="mailto:a@gmail.com"><i class="fa fa-envelope-o"></i><span>hoangduynhat@gmail.com</span></a></li>
+                                <li><a href="#"><i ><img style="height: 50px;width:50px;" src="../../resources/images/User_female.png" alt=""/></i><span>hoangduynhat</span></a></li>
+                                <li><h2><a href="<c:url value='/logout' />"><span class="label label-info">LogOut</span></a></h2></li>
                             </ul>
                             <div class="clearfix"> </div> 	 
                         </div>
-                        <div class="agile_social_banner">
+<!--                        <div class="agile_social_banner">
                             <ul class="agileits_social_list">
+                                <li>
+                                    <div>
+                                        <h2><span ><img style="height: 50px;width:50px;" src="../../resources/images/User_female.png" alt=""/></span></h2>
+                                        <p>${username}</p>
+                                    </div>
+                                </li>
                                 <li><h2><span class="label label-danger">${username}</span></h2></li>
                                 <li><h2><a href="<c:url value='/logout' />"><span class="label label-info">LogOut</span></a></h2></li>
-                                
+
                             </ul>
-                        </div>  
+                        </div>  -->
 
                     </div>
                     <div class="clearfix"> </div> 
@@ -69,7 +78,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="<c:url value = "/newTranfer"/>">Tranfer Services</a></li>
                                     <li><a href="<c:url value = "/viewTransaction"/>">View Tranfer</a></li>
-                                    <li><a href="<c:url value = "account/viewUserInformation"/>">View account Information</a></li>
+                                    <li><a href="<c:url value = "/account/viewCustomerInfor"/>">View account Information</a></li>
                                 </ul>
                             </li>
                             <li><a href="<c:url value = "/newAccount"/>" class="scroll">New Account</a></li>

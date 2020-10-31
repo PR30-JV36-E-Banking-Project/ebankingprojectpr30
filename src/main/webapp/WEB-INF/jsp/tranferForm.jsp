@@ -136,9 +136,10 @@
             <div class="bormenu">
                 <p class="textmenu">Information Query</p>
                 <ul class="listmenu">
-                    <li><a href="#">Account Profile</a></li>
+                    <li><a href="<c:url value = "/account/viewCustomerInfor"/>">Account Profile</a></li>
                     <li><a href="<c:url value = "/viewTransaction"/>">Transaction Details</a></li>
-                    <li><a href="<c:url value = "/viewAccount"/>">View Ballance</a></li>
+                    <li><a href="<c:url value = "/viewBallance"/>">View Ballance</a></li>
+                    <li><a href="<c:url value = "/account/changePass"/>">Change Password</a></li>
                 </ul>
             </div>
             <br>
@@ -155,7 +156,7 @@
                 <ul class="listmenu">
                     <li><a href="#">Open Card</a></li>
                     <li><a href="#">Lock Card</a></li>
-                    <li><a href="account/changePass">Cancel Internet Banking</a></li>
+                    <li><a href="#">Cancel Internet Banking</a></li>
                 </ul>
             </div>
         </div>
@@ -201,7 +202,6 @@
                                         <span id="error" style="color:red">${error}</span>
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <th scope="row"><label class="control-label" for="AccountReceiver">Account Receiver:</label></th>
                                     <td>
@@ -242,7 +242,6 @@
                     <button onclick="goBack()" type="button" class="btn btn-primary buttonback">Go Back</button>
                 </form:form>
             </div>
-
             <div class="clearfix"> </div>
         </div>
 

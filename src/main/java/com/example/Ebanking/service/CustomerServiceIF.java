@@ -7,6 +7,7 @@ package com.example.Ebanking.service;
 
 import com.example.Ebanking.entities.CustomerEntity;
 import com.example.Ebanking.entities.UserEntity;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -18,4 +19,5 @@ public interface CustomerServiceIF {
     public void saveCustomer(CustomerEntity theCustomer);
     public CustomerEntity loadCustomerByEmail(String email);
     public CustomerEntity findByUserEntity(UserEntity userEntity);
+    public List <CustomerEntity> getCustomers(String keyword);
 }

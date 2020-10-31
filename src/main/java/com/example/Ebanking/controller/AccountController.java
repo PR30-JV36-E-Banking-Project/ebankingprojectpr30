@@ -11,16 +11,19 @@ import com.example.Ebanking.service.RecieptService;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
@@ -55,19 +58,32 @@ public class AccountController {
         return "logout";
     }
 
-    @GetMapping("viewAccount")
+    @GetMapping(value = "/list-account")
+    public String listAccounts(HttpServletRequest request, Model theModel, @Param("keyword") String keyword) {
+        List<AccountEntity> accounts = accountService.getAccounts(keyword);
+        PagedListHolder pagedListHolder = new PagedListHolder(accounts);
+        int page = ServletRequestUtils.getIntParameter(request, "p", 0);
+        pagedListHolder.setPage(page);
+        pagedListHolder.setPageSize(10);
+
+        theModel.addAttribute("pagedListHolder", pagedListHolder);
+
+        return "adminAccount";
+    }
+
+    @GetMapping("viewBallance")
     public String viewAccount(Model model, Principal principal) {
         List<AccountEntity> accList = tc.getListAccType(principal);
         model.addAttribute("listAccount", accList);
-        return "accountProfile";
+        return "viewBallance";
     }
 
+//    TNT
     @GetMapping("printRecieptAcc/{accountID}")
     @ResponseStatus(value = HttpStatus.OK)
     public void viewAccount(@PathVariable("accountID") double accountID, HttpServletResponse response) throws IOException {
         AccountEntity ae = accountService.findByAccountID(accountID);
         rs.pdfAccount(ae, response);
     }
-    
 
 }

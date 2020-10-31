@@ -29,7 +29,7 @@
         <link href="//fonts.googleapis.com/css?family=Secular+One" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
         <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-        <!-- //web-fonts -->
+        <!-- //web-fonts --> 
 
     </head>
     <body> 
@@ -38,7 +38,7 @@
             <div class="header-w3mdl"><!-- header-two --> 
                 <div class="container"> 
                     <div class="agileits-logo navbar-left">
-                        <h1><a href="index.html"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
+                        <h1><a href="<c:url value = "/"/>"><img src="../../resources/images/e.png" alt="logo"/>Banking</a></h1> 
                     </div> 
                     <div class="agileits-hdright nav navbar-nav">
                         <div class="header-w3top"><!-- header-top --> 
@@ -63,6 +63,36 @@
             </div>	
         </div>	
         <!-- //header -->  
+        
+        <!-- banner -->
+        <div><!-- header-three --> 	
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        Menu 
+                    </button> 
+                </div>
+                <!-- top-nav -->
+                <div class="collapse mynav navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="<c:url value = "/"/>">Home</a></li>
+                        <li><a href="#">About</a></li>    
+                        <li><a href="#">services</a></li>    
+                        <li><a href="#">Account</a></li>    
+                        <li><a href="#" data-toggle="dropdown">Card<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Icons</a></li>
+                                <li><a href="#">Typograpghy</a></li>
+                            </ul>
+                        </li>	
+                        <li><a href="#" >Contact Us</a></li>
+                    </ul>  
+                    <div class="clearfix"> </div>	
+                </div>
+            </nav>    
+        </div>
+        <!-- banner-text -->
 
         <!--slide carousel-->
         <div class="container slidecarousel">
@@ -80,7 +110,7 @@
                 <div class="carousel-inner" role="listbox">
 
                     <div class="item active">
-                        <img  style="border-radius:10px;" src="../../resources/images/Banner1.jpg" alt="Chania" width="1800" height="300">
+                        <img  style="border-radius:10px;" src="../../resources/images/Banner1.jpg" alt="Chania" width="100%" height="300">
                         <div class="carousel-caption">
                             <h3>Deposit!</h3>
                             <h4>Only one registration for all transactions!</h4>
@@ -88,7 +118,7 @@
                     </div>
 
                     <div class="item">
-                        <img style="border-radius:10px;" src="../../resources/images/Banner2.png" alt="Chania" width="1800" height="300">
+                        <img style="border-radius:10px;" src="../../resources/images/Banner2.png" alt="Chania" width="100%" height="250">
                         <div class="carousel-caption">
                             <h3>Quick transaction!</h3>
                             <h4>Only one registration for all transactions!</h4>
@@ -96,7 +126,7 @@
                     </div>
 
                     <div class="item">
-                        <img style="border-radius:10px;" src="../../resources/images/Banner3.png" alt="Chania" width="1800" height="300">
+                        <img style="border-radius:10px;" src="../../resources/images/Banner3.png" alt="Chania" width="100%" height="250">
                         <div class="carousel-caption">
                             <h3>Basic account package.</h3>
                             <h4>Only one registration for all transactions!</h4>
@@ -104,7 +134,7 @@
                     </div>
 
                     <div class="item">
-                        <img style="border-radius:10px;" src="../../resources/images/Banner4.png" alt="Chania" width="1800" height="300">
+                        <img style="border-radius:10px;" src="../../resources/images/Banner4.png" alt="Chania" width="100%" height="250">
                         <div class="carousel-caption">
                             <h3>Withdraw.</h3>
                             <h4>Only one registration for all transactions!</h4>
@@ -112,7 +142,7 @@
                     </div>
 
                     <div class="item">
-                        <img style="border-radius:10px;" src="../../resources/images/Banner5.jpg" alt="Chania" width="1800" height="300">
+                        <img style="border-radius:10px;" src="../../resources/images/Banner5.jpg" alt="Chania" width="100%" height="250">
                         <div class="carousel-caption">
                             <h3>Personal loan.</h3>
                             <h4>Only one registration for all transactions!</h4>
@@ -137,9 +167,10 @@
             <div class="bormenu">
                 <p class="textmenu">Information Query</p>
                 <ul class="listmenu">
-                    <li><a href="#">Account Profile</a></li>
+                    <li><a href="<c:url value = "/account/viewCustomerInfor"/>">Account Profile</a></li>
                     <li><a href="<c:url value = "/viewTransaction"/>">Transaction Details</a></li>
-                    <li><a href="<c:url value = "/viewAccount"/>">View Ballance</a></li>
+                    <li><a href="<c:url value = "/viewBallance"/>">View Ballance</a></li>
+                    <li><a href="<c:url value = "/account/changePass"/>">Change Password</a></li>
                 </ul>
             </div>
             <br>
@@ -164,52 +195,69 @@
 
         <div class="content">
             <div class="col-md-7 info">
-                <h4 id="tittle" class="tittle">Account Infomation</h4>
+                <h4 id="tittle" class="tittle">Account Information</h4>
                 <div class="wrapper">
-                    <table class="tablec">
+                    <table class="tablec" style="line-height: 16px !important;">
                         <tbody>
                             <tr>
-                                <th scope="row"><label class="control-label" for="accountType">Select Type Account:</label></th>
-                                <td>
-                                    <select class="form-control" id="accountType" onchange="showDiv('hidden_div', this)">
-                                        <c:forEach items="${listAccount}" var="accountID">
-                                            <option value="${accountID}">
-                                                ${accountID.accountType}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
-                                </td>
+                                <th scope="row"><label class="control-label">Customer's ID:</label></th>
+                                <td><fmt:formatNumber  pattern="#" value="${currentCustomer.customerID}"/></td>
                             </tr>
                             <tr>
-                                <th scope="row"><label class="control-label" for="accountNumber">Account number:</label></th>
-                                <td>
-                                    <c:forEach items="${listAccount}" var="accountType">  
-                                        <label id="hidden_accNumber_${listAccount.indexOf(accountType)}" class="form-control readonly"><fmt:formatNumber pattern="#" value="${accountType.accountID}"/></label>
-                                    </c:forEach>
-                                </td>
+                                <th scope="row"><label class="control-label">Customer's Full Name:</label></th>
+                                <td>${currentCustomer.fullName}</td>
                             </tr>
                             <tr>
-                                <th scope="row"><label class="control-label" for="Ballance">Balance:</label></th>
-                                <td>
-                                    <c:forEach items="${listAccount}" var="accountType">  
-                                        <label id="hidden_div_${listAccount.indexOf(accountType)}" class="form-control readonly"><fmt:formatNumber pattern="#" value="${accountType.ballance}"/></label>
-                                    </c:forEach>
-                                </td>
+                                <th scope="row"><label class="control-label">Customer's Adress:</label></th>
+                                <td>${currentCustomer.address}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label">Customer's Country:</label></th>
+                                <td>${currentCustomer.country}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label">Customer's Nationlaty:</label></th>
+                                <td>${currentCustomer.nationlaty}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label">Customer's District:</label></th>
+                                <td>${currentCustomer.district}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label">Customer's city:</label></th>
+                                <td>${currentCustomer.city}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label">Customer's phone number:</label></th>
+                                <td>${currentCustomer.phone}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label">Customer's email:</label></th>
+                                <td>${currentCustomer.email}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label">Customer's ID Card:</label></th>
+                                <td>${currentCustomer.IDcard}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label">Customer's Date Issue ID Card:</label></th>
+                                <td>${currentCustomer.dateIssueIDCard}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label class="control-label">Customer's Issue ID Card Office:</label></th>
+                                <td>${currentCustomer.issueIDCardOffice}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <c:forEach items="${listAccount}" var="account">  
-                    <a id="hidden_button_${listAccount.indexOf(account)}" href="<c:url value = "/printRecieptAcc/${account.accountID}"/>" class="btn btn-info buttonback" role="button">Print reciept</a>
-                </c:forEach>
                 <button onclick="goBack()" type="button" class="btn btn-primary buttonback">Go Back</button>
             </div>
-
             <div class="clearfix"> </div>
         </div>
+        <!-- //contact --> 
 
         <!--footer-->
-        <div class="agile-footer w3ls-section">
+        <div class="agile-footer w3ls-section footer">
             <div class="container">
                 <div class="col-md-7 list-footer">
                     <ul class="footer-nav">
@@ -233,7 +281,7 @@
         </div>
         <!--//footer-->	
         <!-- subscribe -->
-        <div class="modal bnr-modal fade" id="myModal1" tabindex="-1" role="dialog">
+        <div class="modal bnr-modal fade " id="myModal1" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -253,11 +301,11 @@
             </div>
         </div>
         <!-- //subscribe --> 
-        <script src="../../resources/js/SmoothScroll.min.js"></script>
+        <script src="js/SmoothScroll.min.js"></script>
         <!-- smooth-scrolling-of-move-up -->
         <script type="text/javascript" src="../../resources/js/move-top.js"></script>
         <script type="text/javascript" src="../../resources/js/easing.js"></script>
-        <script src="../../resources/js/myJavascript.js" type="text/javascript"></script>
+        <script type="text/javascript" src="../../resources/js/myJavascript.js"></script>
         <script type="text/javascript">
                     $(document).ready(function () {
                         /*
@@ -278,6 +326,5 @@
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <script src="../../resources/js/bootstrap.js"></script>
-
     </body>
 </html>

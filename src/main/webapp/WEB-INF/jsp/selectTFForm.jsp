@@ -67,19 +67,18 @@
             <div class="bormenu">
                 <p class="textmenu">Information Query</p>
                 <ul class="listmenu">
-                    <li><a href="#">List Account</a></li>
+                    <li><a href="<c:url value = "/account/viewCustomerInfor"/>">Account Profile</a></li>
                     <li><a href="<c:url value = "/viewTransaction"/>">Transaction Details</a></li>
-                    <li><a href="#">List Card</a></li>
-                    <li><a href="#">Statement</a></li>
-                    <li><a href="#">Account Balance</a></li>
+                    <li><a href="<c:url value = "/viewBallance"/>">View Ballance</a></li>
+                    <li><a href="<c:url value = "/account/changePass"/>">Change Password</a></li>
                 </ul>
             </div>
             <br>
             <div class="bormenu">
-                <p class="textmenu">Pay</p>
+                <p class="textmenu">Transaction</p>
                 <ul class="listmenu">
-                    <li><a href="<c:url value = "/newTranfer"/>">Transaction</a></li>
-                    <li><a href="#">Deposit</a></li>
+                    <li><a href="<c:url value = "/selectTF?typeTF=1"/>">Internal Transaction</a></li>
+                    <li><a href="<c:url value = "/selectTF?typeTF=2"/>">External Transaction</a></li>
                 </ul>
             </div>
             <br>

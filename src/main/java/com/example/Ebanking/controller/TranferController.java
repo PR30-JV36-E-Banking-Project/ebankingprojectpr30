@@ -34,11 +34,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -119,7 +122,7 @@ public class TranferController {
             model.addAttribute("errorAccount", "Account not valid");
             return "tranferForm";
         }
-        if (accountService.checkBalance(senderAccID, amount)==false) {
+        if (accountService.checkBalance(senderAccID, amount) == false) {
             List<AccountEntity> accountTypesMap = getListAccType(principal);
             model.addAttribute("listTypeAccount", accountTypesMap);
             model.addAttribute("tittle", "Internal Transaction");
@@ -239,6 +242,19 @@ public class TranferController {
             accountEntitys.add(account);
         }
         return accountEntitys;
+    }
+
+    @GetMapping(value = "/list-transaction")
+    public String listTransactions(HttpServletRequest request, Model theModel, @Param("keyword") String keyword) {
+        List<TransactionEntity> transactions = transactionService.getTransactions(keyword);
+        PagedListHolder pagedListHolder = new PagedListHolder(transactions);
+        int page = ServletRequestUtils.getIntParameter(request, "p", 0);
+        pagedListHolder.setPage(page);
+        pagedListHolder.setPageSize(10);
+
+        theModel.addAttribute("pagedListHolder", pagedListHolder);
+
+        return "adminTransaction";
     }
 
 }

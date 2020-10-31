@@ -8,16 +8,23 @@ package com.example.Ebanking.controller;
 import com.example.Ebanking.entities.ConfirmationToken;
 import com.example.Ebanking.entities.CustomerEntity;
 import com.example.Ebanking.entities.UserEntity;
+import com.example.Ebanking.repository.CustomerRepositoryIF;
+import com.example.Ebanking.repository.UserRepositoryIF;
 import com.example.Ebanking.service.ConfirmationTokenService;
 import com.example.Ebanking.service.CustomerServiceIF;
 import com.example.Ebanking.service.UserServiceSecurity;
 import com.example.Ebanking.service.UserSevice;
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,36 +37,21 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author solid
  */
 @Controller
-@RequestMapping("account")
+@RequestMapping("/account")
 public class CustomerController {
 
     @Autowired
     private CustomerServiceIF customerService;
     @Autowired
     private UserSevice userSevice;
-//    @RequestMapping(value = "showForm", method = RequestMethod.GET)
-//    public String showFormForAdd(Model theModel) {
-//        CustomerEntity theCustomer = new CustomerEntity();
-//        theModel.addAttribute("customer", theCustomer);
-//        return "registerForm";
-//    }
-//
-//    @RequestMapping(value = "saveCustomer", method = RequestMethod.POST)
-//    @Transactional
-//    public String saveCustomer(@ModelAttribute("customer") CustomerEntity theCustomer) {
-//        customerService.saveCustomer(theCustomer);
-//        return "checkEmailNotification";
-//    }
-
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String login(@ModelAttribute("customer") CustomerEntity theCustomer) {
-        customerService.saveCustomer(theCustomer);
-        return "checkEmailNotification";
-    }
     @Autowired
     private UserServiceSecurity userServiceSecurity;
     @Autowired
     private ConfirmationTokenService confirmationTokenService;
+    @Autowired
+    UserRepositoryIF userRepository;
+    @Autowired
+    CustomerRepositoryIF customerRepository;
 
     @GetMapping("/sign-up")
     String signUp(Model model) {
@@ -69,10 +61,22 @@ public class CustomerController {
     }
 
     @PostMapping("/sign-up")
-    String signUp(@ModelAttribute("user") UserEntity userEntity) {
+    String signUp(@ModelAttribute("user") UserEntity userEntity, Model model) {
+        UserEntity existingUser = userRepository.findByEmailIgnoreCase(userEntity.getEmail());
+        CustomerEntity customerEntity = userEntity.getCustomerEntity();
+        customerEntity.setUserEntity(userEntity);
+        if (existingUser != null) {
+            model.addAttribute("error1", "Email is registered");
+            return "registerForm";
+        } else {
+            userServiceSecurity.signUpUser(userEntity, customerEntity);
+            return "checkEmailNotification";
+        }
+    }
 
-        userServiceSecurity.signUpUser(userEntity);
-
+    @RequestMapping(value = "login", method = RequestMethod.POST)
+    public String login(@ModelAttribute("customer") CustomerEntity theCustomer) {
+        customerService.saveCustomer(theCustomer);
         return "checkEmailNotification";
     }
 
@@ -86,19 +90,41 @@ public class CustomerController {
         return "registerSuccess";
     }
 
-    @RequestMapping(value = "viewUserInformation", method = RequestMethod.GET)
+    @RequestMapping(value = "viewCustomerInfor", method = RequestMethod.GET)
     public String home(Model model, Principal principal, HttpServletRequest request) {
         String username = principal.getName();
-
         UserEntity currentUser = userSevice.getUserByUserName(username);
-
-        CustomerEntity currentCustomer = currentUser.getCustomerEntity();
-//        CustomerEntity currentCustomer = customerService.findByUserEntity(currentUser);
-//        
-//        model.addAttribute("currentCustomer", currentCustomer);
+        int currentID = currentUser.getCustomerEntity().getCustomerID();
+        CustomerEntity currentCustomer = customerRepository.findByCustomerID(currentID);
         model.addAttribute("currentCustomer", currentCustomer);
+        return "viewCustomerInfo";
+    }
 
-        return "viewAccountInformation";
+    @GetMapping(value = "/list-customer")
+    public String listCustomers(HttpServletRequest request, Model theModel, @Param("keyword") String keyword) {
+        List<CustomerEntity> customers = customerService.getCustomers(keyword);
+        PagedListHolder pagedListHolder = new PagedListHolder(customers);
+        int page = ServletRequestUtils.getIntParameter(request, "p", 0);
+        pagedListHolder.setPage(page);
+        pagedListHolder.setPageSize(10);
+
+        theModel.addAttribute("pagedListHolder", pagedListHolder);
+
+        return "adminCustomer";
+    }
+
+    @GetMapping("/showFormForAddCustomer")
+    public String showFormForAddCustomer(Model model) {
+        CustomerEntity customer = new CustomerEntity();
+        model.addAttribute("customer", customer);
+        return "adminCustomerForm";
+    }
+
+    @PostMapping("/saveCustomer")
+    @Transactional
+    public String saveTeller(@ModelAttribute("customer") CustomerEntity customerEntity, Model model) {
+        customerRepository.save(customerEntity);
+        return "redirect:/account/list-customer";
     }
 
     @GetMapping("changePass")

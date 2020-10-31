@@ -7,6 +7,7 @@ package com.example.Ebanking.service;
 
 import com.example.Ebanking.entities.AccountEntity;
 import com.example.Ebanking.repository.AccountRepositoryIF;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,7 +51,7 @@ public class AccountService implements AccountServiceIF {
                 recieverAccount.setBallance(recieverAccount.getBallance() + amount - 5000);
             }
             accountRepositoryIF.save(recieverAccount);
-        } else if(msg.equalsIgnoreCase("external")){
+        } else if (msg.equalsIgnoreCase("external")) {
             if (fee == true) {
                 senderAccount.setBallance(senderAccount.getBallance() - amount - 5000);
                 restService.updateBallanceETF(recieverAccountID, amount);
@@ -69,8 +70,7 @@ public class AccountService implements AccountServiceIF {
     }
 
     @Override
-    public void saveAccount(AccountEntity account
-    ) {
+    public void saveAccount(AccountEntity account) {
         accountRepositoryIF.save(account);
     }
 
@@ -79,6 +79,14 @@ public class AccountService implements AccountServiceIF {
     ) {
         Optional<AccountEntity> accountEntity = accountRepositoryIF.findByAccountID(accountID);
         return accountEntity != null && accountEntity.isPresent();
+    }
+
+    @Override
+    public List<AccountEntity> getAccounts(String keyword) {
+        if (keyword != null) {
+            return accountRepositoryIF.search(keyword);
+        }
+        return (List) accountRepositoryIF.findAll();
     }
 
 }

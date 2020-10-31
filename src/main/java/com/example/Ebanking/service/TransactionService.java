@@ -39,4 +39,12 @@ public class TransactionService implements TransactionServiceIF {
         return transaction.isPresent() ? transaction.get() : null;
     }
 
+    @Override
+    public List<TransactionEntity> getTransactions(String keyword) {
+        if (keyword != null) {
+            return transactionRepositoryIF.search(keyword);
+        }
+        return (List) transactionRepositoryIF.findAll();
+    }
+
 }

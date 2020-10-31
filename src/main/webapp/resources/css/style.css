@@ -206,7 +206,7 @@ a.w3_agile_vimeo:hover{
     position: absolute;
     bottom: 0;
     background: #142340;
-    height: 1px;
+    height: 0px;
     width: 100%;
     left: 0;
     -webkit-transition: .5s all;

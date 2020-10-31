@@ -66,6 +66,36 @@
         </div>	
         <!-- //header -->  
 
+        <!-- banner -->
+        <div><!-- header-three --> 	
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        Menu 
+                    </button> 
+                </div>
+                <!-- top-nav -->
+                <div class="collapse mynav navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="<c:url value = "/"/>">Home</a></li>
+                        <li><a href="#">About</a></li>    
+                        <li><a href="#">services</a></li>    
+                        <li><a href="#">Account</a></li>    
+                        <li><a href="#" data-toggle="dropdown">Card<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Icons</a></li>
+                                <li><a href="#">Typograpghy</a></li>
+                            </ul>
+                        </li>	
+                        <li><a href="#" >Contact Us</a></li>
+                    </ul>  
+                    <div class="clearfix"> </div>	
+                </div>
+            </nav>    
+        </div>
+        <!-- banner-text -->
+
         <!--slide carousel-->
         <div class="container slidecarousel">
             <div  id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -140,9 +170,10 @@
             <div class="bormenu">
                 <p class="textmenu">Information Query</p>
                 <ul class="listmenu">
-                    <li><a href="#">Account Profile</a></li>
+                    <li><a href="<c:url value = "/account/viewCustomerInfor"/>">Account Profile</a></li>
                     <li><a href="<c:url value = "/viewTransaction"/>">Transaction Details</a></li>
-                    <li><a href="<c:url value = "/viewAccount"/>">View Ballance</a></li>
+                    <li><a href="<c:url value = "/viewBallance"/>">View Ballance</a></li>
+                    <li><a href="<c:url value = "/account/changePass"/>">Change Password</a></li>
                 </ul>
             </div>
             <br>
@@ -193,9 +224,9 @@
                                             <td>${u.transactionID}</td> 
                                             <td><fmt:formatNumber pattern="###,###,###,###" value="${u.amount}"/> VND</td> 
                                             <td>${u.transactionDate}</td> 
-                                            <td><fmt:formatNumber pattern="#############" value="${u.receiverAccount.accountID}"/></td> 
+                                            <td><fmt:formatNumber pattern="#" value="${u.receiverAccount.accountID}"/></td> 
                                             <td>${u.content}</td> 
-                                            <td><fmt:formatNumber pattern="#############" value="${u.senderAccount.accountID}"/></td> 
+                                            <td><fmt:formatNumber pattern="#" value="${u.senderAccount.accountID}"/></td> 
                                             <td> 5000 VND -
                                                 <c:choose>
                                                     <c:when test="${transaction.feeBearer==true}">
@@ -272,19 +303,19 @@
         <script type="text/javascript" src="../../resources/js/easing.js"></script>
         <script type="text/javascript" src="../../resources/js/myJavascript.js"></script>
         <script type="text/javascript">
-                                                                    $(document).ready(function () {
-                                                                        /*
-                                                                         var defaults = {
-                                                                         containerID: 'toTop', // fading element id
-                                                                         containerHoverID: 'toTopHover', // fading element hover id
-                                                                         scrollSpeed: 1200,
-                                                                         easingType: 'linear' 
-                                                                         };
-                                                                         */
+                        $(document).ready(function () {
+                            /*
+                             var defaults = {
+                             containerID: 'toTop', // fading element id
+                             containerHoverID: 'toTopHover', // fading element hover id
+                             scrollSpeed: 1200,
+                             easingType: 'linear' 
+                             };
+                             */
 
-                                                                        $().UItoTop({easingType: 'easeOutQuart'});
+                            $().UItoTop({easingType: 'easeOutQuart'});
 
-                                                                    });
+                        });
         </script>
         <!-- //smooth-scrolling-of-move-up -->  
         <!-- Bootstrap core JavaScript

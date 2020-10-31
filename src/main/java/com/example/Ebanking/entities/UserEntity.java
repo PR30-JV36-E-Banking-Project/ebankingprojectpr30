@@ -5,7 +5,9 @@
  */
 package com.example.Ebanking.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,7 +33,7 @@ public class UserEntity {
     private String email;
     private boolean isActived;
     
-    @OneToOne(mappedBy="userEntity")
+    @OneToOne(mappedBy="userEntity",cascade = CascadeType.ALL)
     private CustomerEntity customerEntity;
     @OneToOne(mappedBy="userEntity1")
     private TellerEntity tellerEntity;

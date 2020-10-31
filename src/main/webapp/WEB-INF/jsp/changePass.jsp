@@ -136,9 +136,10 @@
             <div class="bormenu">
                 <p class="textmenu">Information Query</p>
                 <ul class="listmenu">
-                    <li><a href="viewAccount">Account Profile</a></li>
+                    <li><a href="<c:url value = "/account/viewCustomerInfor"/>">Account Profile</a></li>
                     <li><a href="<c:url value = "/viewTransaction"/>">Transaction Details</a></li>
-                    <li><a href="#">View Ballance</a></li>
+                    <li><a href="<c:url value = "/viewBallance"/>">View Ballance</a></li>
+                    <li><a href="<c:url value = "/account/changePass"/>">Change Password</a></li>
                 </ul>
             </div>
             <br>
