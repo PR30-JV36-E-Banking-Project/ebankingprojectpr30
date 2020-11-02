@@ -20,4 +20,6 @@ public interface CustomerServiceIF {
     public CustomerEntity loadCustomerByEmail(String email);
     public CustomerEntity findByUserEntity(UserEntity userEntity);
     public List <CustomerEntity> getCustomers(String keyword);
+    public CustomerEntity getCustomer(int theId);
+    public void deleteCustomer(int theId);
 }

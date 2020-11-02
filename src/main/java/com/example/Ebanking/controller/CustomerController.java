@@ -122,11 +122,25 @@ public class CustomerController {
 
     @PostMapping("/saveCustomer")
     @Transactional
-    public String saveTeller(@ModelAttribute("customer") CustomerEntity customerEntity, Model model) {
+    public String saveCustomer(@ModelAttribute("customer") CustomerEntity customerEntity, Model model) {
         customerRepository.save(customerEntity);
         return "redirect:/account/list-customer";
     }
-
+    
+    @GetMapping("/updateCustomerForm")
+    public String showFormForUpdate(@RequestParam("customerID") int theId,
+	    Model theModel) {
+	CustomerEntity theCustomer = customerService.getCustomer(theId);
+	theModel.addAttribute("customer", theCustomer);
+	return "adminCustomerForm";
+    }
+    
+    @GetMapping("/deleteCustomer")
+    public String deleteCustomer(@RequestParam("customerID") int theId) {
+	customerService.deleteCustomer(theId);
+	return "redirect:/account/list-customer";
+    }
+    
     @GetMapping("changePass")
     public String changePass() {
         return "changePass";

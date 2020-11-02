@@ -27,7 +27,10 @@ public class TellerService implements TellerServiceIF{
     TellerRepository tellerRepository;
     
     @Override
-    public List<TellerEntity> getTellers() {
+    public List<TellerEntity> getTellers(String keyword) {
+        if (keyword != null) {
+            return tellerRepository.search(keyword);
+        }
         return (List)tellerRepository.findAll();
     }
 

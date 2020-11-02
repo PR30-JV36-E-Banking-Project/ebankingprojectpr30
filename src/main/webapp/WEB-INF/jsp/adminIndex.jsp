@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="en">
 
@@ -74,7 +75,7 @@
                                     <li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
                                     <li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
                                     <li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-                                    <li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+                                    <li><a href="/logout"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -100,8 +101,8 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li><a href="#" class=""><i class="fa fa-credit-card"></i> <span>Withdraw Money</span></a></li>
-                            <li><a href="#" class=""><i class="fa fa-credit-card"></i> <span>Deposit Money</span></a></li>
+                            <li><a href="withdraw" class=""><i class="fa fa-credit-card"></i> <span>Withdraw Money</span></a></li>
+                            <li><a href="deposit" class=""><i class="fa fa-credit-card"></i> <span>Deposit Money</span></a></li>
                         </ul>
                     </nav>
                 </div>
@@ -151,7 +152,8 @@
                                         <div class="metric">
                                             <span class="icon"><i class="fa fa-bar-chart"></i></span>
                                             <p>
-                                                <span id="amountOfTransaction" class="number">${amountOfTransaction}</span>
+                                                <span id="amountOfTransaction" class="number"><fmt:formatNumber  type="number" value="${amountOfTransaction}"></fmt:formatNumber></span>
+                                                
                                                 <span class="title">Amount of transactions</span>
                                             </p>
                                         </div>

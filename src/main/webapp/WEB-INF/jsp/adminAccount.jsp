@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="en">
 
@@ -135,7 +136,7 @@
                                         <th>Ballance</th>
                                         <th>Account Type</th>
                                         <th>Status</th>
-                                        <th>Actions</th>
+<!--                                        <th>Actions</th>-->
                                     </tr>
 
                                     <!-- loop over and print our customers -->
@@ -151,17 +152,17 @@
                                             <c:param name="accountID" value="${tempAccount.accountID}" />
                                         </c:url>
                                         <tr>
-                                            <td>${tempAccount.accountID}</td>
-                                            <td>${tempAccount.ballance}</td>
+                                            <td><fmt:formatNumber  type="number"  groupingUsed = "false" value="${tempAccount.accountID}"></fmt:formatNumber></td>
+                                            <td><fmt:formatNumber  type="number" value="${tempAccount.ballance}"></fmt:formatNumber></td>
                                             <td>${tempAccount.accountType}</td>
                                             <td>${tempAccount.status}</td>
 
-                                            <td>
-                                                <!-- display the update link --> 
+<!--                                            <td>
+                                                 display the update link  
                                                 <a href="${updateLink}">Update</a>| 
                                                 <a href="${deleteLink}"	onclick="if (!(confirm('Are you sure you want to delete this teller?')))
                                                             return false">Delete</a>
-                                            </td>
+                                            </td>-->
                                         </tr>
                                     </c:forEach>
                                 </table>

@@ -6,7 +6,7 @@
 <html lang="en">
 
     <head>
-        <title>Dashboard | Klorofil - Free Bootstrap Dashboard Template</title>
+        <title>Manage Teller For Admin</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -94,9 +94,10 @@
                                     <span>Management</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                 <div id="subPages" class="collapse ">
                                     <ul class="nav">
-                                        <li><a href="teller.html" class="lnr lnr-user active"> Tellers</a></li>
-                                        <li><a href="customer.html" class="lnr lnr-user"> Customers</a></li>
-                                        <li><a href="transaction.html" class="fa fa-random"> Transactions</a></li>
+                                        <li><a href="list-teller" class="lnr lnr-user"> Tellers</a></li>
+                                        <li><a href="/account/list-customer" class="lnr lnr-user"> Customers</a></li>
+                                        <li><a href="/list-account" class="lnr lnr-user"> Account</a></li>
+                                        <li><a href="/list-transaction" class="fa fa-random active"> Transactions</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -113,54 +114,41 @@
                 <div class="main-content">
                     <div class="container-fluid">
                         <!-- OVERVIEW -->
-                        <div class="panel">
-                            <div class="input-group" style="padding: 20px;">
-                                <input type="text" value="" class="form-control" placeholder="Search">
-                                <span class="input-group-btn"><button type="button" class="btn btn-primary">Search</button></span>
-                            </div>
-                            <div style="text-align: center;">
-                                <h1>Manage Teller</h1>
-                            </div>
-                            <div class="panel-body">
-                                <form:form action="saveTeller" cssClass="form-horizontal"
-                                           method="post" modelAttribute="user">
+                        <h1 style="text-align: center">Withdraw Money</h1>
+                        <div class="panel-body">
+                            <form action="withdraw" cssClass="form-horizontal"
+                                  method="post" modelAttribute="account">
 
-                                    <!-- need to associate this data with customer id -->
-                                    <form:hidden path="tellerEntity.tellerID" />
+                                <!-- need to associate this data with customer id -->
+                                <div class="form-group">
+                                    <label for="accountID" class="col-md-3 control-label">Input Account ID</label>
+                                    <div class="col-md-9">
+                                        <input name="accountID" cssClass="form-control" />
+                                    </div>
+                                </div>
+                                <!--                                <div class="form-group">
+                                                                    <label for="accountType" class="col-md-3 control-label">Input Account type</label>
+                                                                    <div class="col-md-9">
+                                                                        <input type="text" path="accountType" cssClass="form-control" />
+                                                                    </div>
+                                                                </div>-->
+                                <div class="form-group">
+                                    <label for="money" class="col-md-3 control-label">Input Amount of money To Withdraw</label>
+                                    <div class="col-md-9">
+                                        <input name="money" cssClass="form-control" />
+                                    </div>
+                                </div>
+                                <span id="error" style="color:red">${error}</span>
+                                <span id="notExist" style="color:red">${notExist}</span>
+                                <span id="success" style="color:green">${success}</span>
+                                <div class="form-group">
+                                    <!-- Button -->
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button cssClass="btn btn-primary">Withdraw Money</button>
+                                    </div>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label for="address" class="col-md-3 control-label">Address</label>
-                                        <div class="col-md-9">
-                                            <form:input path="tellerEntity.address" cssClass="form-control" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="email" class="col-md-3 control-label">Email</label>
-                                        <div class="col-md-9">
-                                            <form:input type="email" path="tellerEntity.email" cssClass="form-control" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="userName" class="col-md-3 control-label">Username</label>
-                                        <div class="col-md-9">
-                                            <form:input path="userName" cssClass="form-control" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password" class="col-md-3 control-label">Password</label>
-                                        <div class="col-md-9">
-                                            <form:input type="password" path="password" cssClass="form-control" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <!-- Button -->
-                                        <div class="col-md-offset-3 col-md-9">
-                                            <form:button cssClass="btn btn-primary">Submit</form:button>
-                                            </div>
-                                        </div>
-
-                                </form:form>
-                            </div>
+                            </form>
                         </div>
                         <!-- END OVERVIEW -->
                     </div>

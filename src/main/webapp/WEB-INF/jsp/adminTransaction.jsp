@@ -115,7 +115,7 @@
                         <!-- OVERVIEW -->
                         <div class="panel">
                             <div style="text-align: center;">
-                                <h1>Manage Teller</h1>
+                                <h1>Manage Transaction</h1>
                             </div>
                             <div style="float: left; margin: 20px;">
                                 <input type="button" value="Add New Transaction"
@@ -136,7 +136,7 @@
                                         <th>Amount</th>
                                         <th>Content</th>
                                         <th>Free Bearer</th>
-                                        <th>Action</th>
+<!--                                        <th>Action</th>-->
                                     </tr>
 
                                     <!-- loop over and print our customers -->
@@ -158,12 +158,12 @@
                                             <td>${tempTransaction.content}</td>
                                             <td>${tempTransaction.feeBearer}</td>
 
-                                            <td>
-                                                <!-- display the update link --> 
+<!--                                            <td>
+                                                 display the update link  
                                                 <a href="${updateLink}">Update</a>| 
                                                 <a href="${deleteLink}"	onclick="if (!(confirm('Are you sure you want to delete this teller?')))
                                                             return false">Delete</a>
-                                            </td>
+                                            </td>-->
                                         </tr>
                                     </c:forEach>
                                 </table>

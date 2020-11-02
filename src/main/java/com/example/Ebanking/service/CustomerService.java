@@ -54,4 +54,15 @@ public class CustomerService implements CustomerServiceIF {
         return (List) customerRepositoryIF.findAll();
     }
 
+    @Override
+    public CustomerEntity getCustomer(int theId) {
+        Optional<CustomerEntity> customerOpt = customerRepositoryIF.findById(theId);
+	return customerOpt.isPresent() ? customerOpt.get() : null;
+    }
+
+    @Override
+    public void deleteCustomer(int theId) {
+        customerRepositoryIF.deleteById(theId);
+    }
+
 }

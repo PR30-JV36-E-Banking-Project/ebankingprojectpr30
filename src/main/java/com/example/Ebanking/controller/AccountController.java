@@ -86,4 +86,52 @@ public class AccountController {
         rs.pdfAccount(ae, response);
     }
 
+    @GetMapping("withdraw")
+    public String withdraw(Model model) {
+        AccountEntity account = new AccountEntity();
+        model.addAttribute("account", account);
+        return "adminWithdraw";
+    }
+
+    @PostMapping("withdraw")
+    public String withdraw(Model model, @Param("money") double money, @Param("accountID") double accountID) {
+        AccountEntity account = accountService.findByAccountID(accountID);
+        if (account != null) {
+            if (account.getBallance() < money) {
+                model.addAttribute("error", "This account is not enough money!");
+                return "adminWithdraw";
+            } else {
+                account.setBallance(account.getBallance() - money);
+                accountService.saveAccount(account);
+                model.addAttribute("success", "Withdraw is successful!");
+                return "adminWithdraw";
+            }
+        } else {
+            model.addAttribute("notExist", "Please check the account again! It may be not existed");
+            return "adminWithdraw";
+        }
+
+    }
+
+    @GetMapping("deposit")
+    public String deposit(Model model) {
+        AccountEntity account = new AccountEntity();
+        model.addAttribute("account", account);
+        return "adminDeposit";
+    }
+
+    @PostMapping("deposit")
+    public String deposit(Model model, @Param("money") double money, @Param("accountID") double accountID) {
+        AccountEntity account = accountService.findByAccountID(accountID);
+        if (account != null) {
+            account.setBallance(account.getBallance() + money);
+            accountService.saveAccount(account);
+            model.addAttribute("success", "Deposit is successful!");
+            return "adminDeposit";
+        } else {
+            model.addAttribute("notExist", "Please check the account again! It may be not existed");
+            return "adminDeposit";
+        }
+
+    }
 }

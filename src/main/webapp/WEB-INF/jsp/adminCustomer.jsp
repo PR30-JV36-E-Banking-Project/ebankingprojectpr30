@@ -117,18 +117,18 @@
                             <div style="text-align: center;">
                                 <h1>Manage Customer</h1>
                             </div>
-                            <div style="float: left; margin: 20px;">
-                                <input type="button" value="Add New Customer"
-                                       onclick="window.location.href = 'showFormForAddCustomer'; return false;"
-                                       class="btn btn-primary" />
-                            </div>
+                            <!--                            <div style="float: left; margin: 20px;">
+                                                            <input type="button" value="Add New Customer"
+                                                                   onclick="window.location.href = 'showFormForAddCustomer'; return false;"
+                                                                   class="btn btn-primary" />
+                                                        </div>-->
                             <form action="list-customer">
-                                <div class="input-group" style="margin-top: 20px; width: 50%; float: right">
-                                    <input type="text" class="form-control" placeholder="Search Customer" name="keyword" id="keyword">
+                                <div class="input-group" style="width: 50%; float: right">
+                                    <input type="text" class="form-control" placeholder="Search Customer" name="keyword" id="keyword"  style="margin: 20px">
                                     <span class="input-group-btn"><input type="submit" value="Search" class="btn btn-primary"/>Search</span>
                                 </div>
                             </form>
-                            <div class="panel-body">
+                            <div class="panel-body" >
                                 <table class="table table-striped table-bordered">
                                     <tr>
                                         <th>Customer ID</th>
@@ -152,12 +152,12 @@
                                     <c:forEach var="tempCustomer" items="${pagedListHolder.pageList}">
 
                                         <!-- construct an "update" link with customer id -->
-                                        <c:url var="updateLink" value="/updateCustomerForm">
+                                        <c:url var="updateLink" value="/account/updateCustomerForm">
                                             <c:param name="customerID" value="${tempCustomer.customerID}" />
                                         </c:url>
 
                                         <!-- construct an "delete" link with customer id -->
-                                        <c:url var="deleteLink" value="/deleteCustomer">
+                                        <c:url var="deleteLink" value="/account/deleteCustomer">
                                             <c:param name="customerID" value="${tempCustomer.customerID}" />
                                         </c:url>
                                         <tr>
@@ -177,9 +177,9 @@
                                             <td>${tempCustomer.issueIDCardOffice}</td>
                                             <td>
                                                 <!-- display the update link --> 
-                                                <a href="${updateLink}">Update</a>| 
+                                                <a href="${updateLink}"><span class="lnr lnr-pencil" style="margin-right: 7px"></span></a> 
                                                 <a href="${deleteLink}"	onclick="if (!(confirm('Are you sure you want to delete this teller?')))
-                                                            return false">Delete</a>
+                                                            return false"><span class="lnr lnr-trash"  style="margin-left:  7px"></span></a>
                                             </td>
                                         </tr>
                                     </c:forEach>

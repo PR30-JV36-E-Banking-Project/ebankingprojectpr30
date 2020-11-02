@@ -122,7 +122,7 @@
                                 <h1>Manage Teller</h1>
                             </div>
                             <div class="panel-body">
-                                <form:form action="saveTeller" cssClass="form-horizontal"
+                                <form:form action="updateTeller" cssClass="form-horizontal"
                                            method="post" modelAttribute="teller">
                                     <form:hidden path="tellerID" />
 

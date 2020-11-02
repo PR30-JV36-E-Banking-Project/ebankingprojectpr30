@@ -211,7 +211,7 @@
                                     <div class="form-group">
                                         <!-- Button -->
                                         <div class="col-md-offset-3 col-md-9">
-                                            <form:button style="float: right" cssClass="btn btn-primary">Add New Customer</form:button>
+                                            <form:button style="float: right" cssClass="btn btn-primary">Update</form:button>
                                             </div>
                                         </div>
 

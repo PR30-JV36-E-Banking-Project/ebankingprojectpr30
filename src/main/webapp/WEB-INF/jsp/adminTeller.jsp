@@ -157,9 +157,9 @@
 
                                             <td>
                                                 <!-- display the update link --> 
-                                                <a href="${updateLink}">Update</a>| 
+                                                <a href="${updateLink}"><span class="lnr lnr-pencil" style="margin-right: 7px"></span>Update</a> | 
                                                 <a href="${deleteLink}"	onclick="if (!(confirm('Are you sure you want to delete this teller?')))
-                                                            return false">Delete</a>
+                                                            return false"><span class="lnr lnr-trash"  style="margin-left:  7px"></span>Delete</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
