@@ -117,13 +117,49 @@
                         <div class="content">
                             <div class="col-md-7 info">
                                 <h4 id="tittle" class="tittle">${tittle}</h4>
-                                <form:form action="createITF" method="post" modelAttribute="transaction" >
-                                    <div class="wrapper">
-                                         
+                                <h1 style="text-align: center">Internal Tranfer</h1>
+                        <div class="panel-body">
+                            <form:form action="addInternalTranfer" cssClass="form-horizontal"
+                                       method="post" modelAttribute="transaction">
+                                <form:hidden path="transactionID"/>
+                                <!-- need to associate this data with customer id -->
+                                <div class="form-group">
+                                    <label for="senderAccount" class="col-md-3 control-label">Input Sender Account</label>
+                                    <div class="col-md-9">
+                                        <form:input path="senderAccount" Class="form-control" />
                                     </div>
-                                    <input type="submit" class="btn btn-primary buttonback" value="Submit">
-                                    <button onclick="goBack()" type="button" class="btn btn-primary buttonback">Go Back</button>
-                                </form:form>
+                                </div>
+                                <div class="form-group">
+                                    <label for="receiverAccount" class="col-md-3 control-label">Input Receive Account</label>
+                                    <div class="col-md-9">
+                                        <form:input type="text" path="receiverAccount" Class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="content" class="col-md-3 control-label">Input Content</label>
+                                    <div class="col-md-9">
+                                        <form:input type="text" path="content" Class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="amount" class="col-md-3 control-label">Input Amount</label>
+                                    <div class="col-md-9">
+                                        <form:input type="text" path="amount" cssClass="form-control" />
+                                    </div>
+                                </div>
+                                    <div class="form-group">
+                                        <p style="color: blue">*Note: The tranfer fee is 5000</p>
+                                </div>
+                                        <span id="success" style="color: green">${success}</span>
+                                        <span id="error" style="color: red">${error}</span>
+                                    <!-- Button -->
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <form:button cssClass="btn btn-primary" style="float: right"> Tranfer Money</form:button>
+                                        </div>
+                                    </div>
+
+                            </form:form>
+                        </div>
                             </div>
                             <div class="clearfix"> </div>
                         </div>

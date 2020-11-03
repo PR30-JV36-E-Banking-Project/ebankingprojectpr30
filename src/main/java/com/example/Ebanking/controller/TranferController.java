@@ -256,5 +256,30 @@ public class TranferController {
 
         return "adminTransaction";
     }
-    
+
+    @GetMapping(value = "/addInternalTranfer")
+    public String addInternalTranfer(Model model) {
+        TransactionEntity transaction = new TransactionEntity();
+        model.addAttribute("transaction", transaction);
+        return "adminTransactionFormITF";
+    }
+
+    @PostMapping(value = "/addInternalTranfer")
+    public String addInternalTranfer(Model model, @ModelAttribute("transaction") TransactionEntity transaction, @Param("amount") double amount,
+            @Param("content") String content) {
+        double senderAccountBallance = transaction.getSenderAccount().getBallance();
+        double receiveAccountBallance = transaction.getReceiverAccount().getBallance();
+        if (senderAccountBallance > (amount + 5000)) {
+            transaction.getSenderAccount().setBallance(senderAccountBallance - amount - 5000);
+            transaction.getReceiverAccount().setBallance(receiveAccountBallance + amount);
+            transaction.setTransactionDate(LocalDate.now());
+            transaction.setTransactionType("Internal Tranfer");
+            transactionService.saveTransaction(transaction);
+            model.addAttribute("success", "Tranfer is successful");
+            return "redirect:/list-transaction";
+        } else {
+            model.addAttribute("error", "Tranfer is failed. Sender Account is not enough money");
+            return "adminTransactionFormITF";
+        }
+    }
 }
