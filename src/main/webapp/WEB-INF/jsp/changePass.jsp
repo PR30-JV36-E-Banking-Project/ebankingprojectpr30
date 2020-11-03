@@ -165,14 +165,14 @@
         <div class="content">
             <div class="col-md-7 info">
                 <h4 id="tittle" class="tittle">${tittle}</h4>
-                <form action="${pageContext.request.contextPath}/account/changePass" method="post" >
+                <form action="${pageContext.request.contextPath}/updatePassword" method="post" >
                     <div class="wrapper">
                         <table class="tablec">
                             <tbody>
                                 <tr>
                                     <th scope="row"><label class="control-label" for="accountType">Current Password:</label></th>
                                     <td>
-                                        <input type="password"  name="currentPass" class="form-control myinput"/>
+                                        <input type="password"  name="oldPassword" class="form-control myinput"/>
                                         <span class="error">${errorCurrentPass}</span>
                                     </td>
                                 </tr>
@@ -193,6 +193,8 @@
                             </tbody>
                         </table>
                     </div>
+                                    <span id="success" style="color: green">${success}</span>
+                                     <span id="error" style="color: red">${error}</span>
                     <input type="submit" class="btn btn-primary buttonback" value="Submit">
                     <button onclick="goBack()" type="button" class="btn btn-primary buttonback">Go Back</button>
                 </form>

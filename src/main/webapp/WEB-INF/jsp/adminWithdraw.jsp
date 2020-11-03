@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="en">
 
@@ -90,7 +91,7 @@
                             <li><a href="/"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
                             <li><a href="#" class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>
                             <li>
-                                <a href="#subPages" data-toggle="collapse"><i class="lnr lnr-cog"></i>
+                                <a href="#subPages" data-toggle="collapse" ><i class="lnr lnr-cog"></i>
                                     <span>Management</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                 <div id="subPages" class="collapse ">
                                     <ul class="nav">
@@ -101,7 +102,7 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li><a href="withdraw" class=" active"><i class="fa fa-credit-card "></i> <span>Withdraw Money</span></a></li>
+                            <li><a href="withdraw" class="active"><i class="fa fa-credit-card"></i> <span>Withdraw Money</span></a></li>
                             <li><a href="deposit" class=""><i class="fa fa-credit-card"></i> <span>Deposit Money</span></a></li>
                         </ul>
                     </nav>
@@ -115,46 +116,44 @@
                     <div class="container-fluid">
                         <!-- OVERVIEW -->
                         <h1 style="text-align: center">Withdraw Money</h1>
-                        <div class="panel-body" style="padding: 20px">
+                        <div class="panel-body">
                             <form:form action="withdraw" cssClass="form-horizontal"
-                                  method="post" modelAttribute="account">
+                                       method="post" modelAttribute="account">
 
                                 <!-- need to associate this data with customer id -->
-                                <div class="form-group" style="margin: 20px">
-                                    <label for="accountID" class="col-md-3 control-label">Input Account ID</label>
+                                <div class="form-group"  style="margin: 20px">
+                                    <label for="accountID" class="col-md-3 control-label"></label>
                                     <div class="col-md-9"  style="margin: 20px">
-                                        <form:input type="number" class="form-control myinput " value="${account.accountID}" id="accountID" required="required"  
-                                                    placeholder="Enter Account ID" path="accountID" onchange="myFunction1(this.value)"/>
+                                        <form:hidden path="accountID" Class="form-control"/>
                                     </div>
                                 </div>
-                                <div class="form-group" style="margin: 20px">
-                                    <label for="customerName" class="col-md-3 control-label">Customer Full Name</label>
-                                    <div class="col-md-9" style="margin: 20px">
-                                        <label id="customerName" class="form-control  myinput readonly">${customerName}</label>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin: 20px">
-                                    <label for="ballance" class="col-md-3 control-label">Account's Ballance</label>
-                                    <div class="col-md-9" style="margin: 20px">
-                                        <label name="ballance" Class="form-control"></label>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin: 20px">
-                                    <label for="money" class="col-md-3 control-label">Input Amount of money To Withdraw</label>
-                                    <div class="col-md-9" style="margin: 20px">
-                                        <input name="money" Class="form-control"  />
-                                    </div>
-                                </div>
-                                <span id="error" style="color:red">${error}</span>
-                                <span id="notExist" style="color:red">${notExist}</span>
-                                <span id="success" style="color:green">${success}</span>
                                 <div class="form-group">
+                                    <label for="customerName" class="col-md-3 control-label">Customer Full Name</label>
+                                    <div class="col-md-9">
+                                        <label id="userName" name="customerName" Class="form-control">${userName}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ballance" class="col-md-3 control-label">Account's Ballance</label>
+                                    <div class="col-md-9">
+                                        <label name="ballance" Class="form-control"><fmt:formatNumber  type="number"  groupingUsed = "false" value="${account.ballance}"></fmt:formatNumber></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="money" class="col-md-3 control-label">Input Amount of money To Withdraw</label>
+                                    <div class="col-md-9">
+                                        <input name="money" Class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <span id="notExist" style="color:red">${notExist}</span>
+                                    <span id="success" style="color:green">${success}</span>
+                                    <span id="error" style="color:red">${error}</span>
                                     <!-- Button -->
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button cssClass="btn btn-primary">Withdraw Money</button>
+                                        <form:button cssClass="btn btn-primary">Withdraw Money</form:button>
+                                        </div>
                                     </div>
-                                </div>
-
                             </form:form>
                         </div>
                         <!-- END OVERVIEW -->

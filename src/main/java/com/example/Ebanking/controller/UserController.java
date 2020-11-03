@@ -41,7 +41,7 @@ public class UserController {
 
     @GetMapping("/updatePassword")
     public String updatePassword() {
-        return "changePassword";
+        return "changePass";
     }
 
     @PostMapping("/updatePassword")
@@ -52,10 +52,10 @@ public class UserController {
         if (passwordEncoder.matches(oldPassword, currentUser.getPassword())) {
             userServiceSecurity.updatePassword(currentUser, password);
             model.addAttribute("success", "Change Password Successful");
-            return "changePassword";
+            return "changePass";
         } else {
             model.addAttribute("error", "Change Password Failed");
-            return "changePassword";
+            return "changePass";
         }
     }
 

@@ -170,7 +170,7 @@
                     <li><a href="<c:url value = "/account/viewCustomerInfor"/>">Account Profile</a></li>
                     <li><a href="<c:url value = "/viewTransaction"/>">Transaction Details</a></li>
                     <li><a href="<c:url value = "/viewBallance"/>">View Ballance</a></li>
-                    <li><a href="<c:url value = "/account/changePass"/>">Change Password</a></li>
+                    <li><a href="<c:url value = "/updatePassword"/>">Change Password</a></li>
                 </ul>
             </div>
             <br>

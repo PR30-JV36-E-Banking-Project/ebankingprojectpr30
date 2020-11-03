@@ -103,24 +103,37 @@ public class AccountController {
     public String withdraw(Model model) {
         AccountEntity account = new AccountEntity();
         model.addAttribute("account", account);
-        return "adminWithdraw";
+        return "adminWithdrawCheckAccount";
+    }
+
+    @PostMapping("withdrawCheck")
+    public String withdrawCheck(Model model, @Param("accountID") double accountID) {
+        AccountEntity account = accountService.findByAccountID(accountID);
+        if (account != null) {
+            String userName = account.getCustomerEntity().getFullName();
+            model.addAttribute("userName", userName);
+            model.addAttribute("account", account);
+            return "adminWithdraw";
+        } else {
+            model.addAttribute("notExist", "Account is not existed");
+            return "adminWithdrawCheckAccount";
+        }
+
     }
 
     @PostMapping("withdraw")
-    public String withdraw(Model model, @Param("money") double money, @Param("accountID") double accountID) {
-        AccountEntity account = accountService.findByAccountID(accountID);
-        if (account != null) {
-            if (account.getBallance() < money) {
-                model.addAttribute("error", "This account is not enough money!");
-                return "adminWithdraw";
-            } else {
-                account.setBallance(account.getBallance() - money);
-                accountService.saveAccount(account);
-                model.addAttribute("success", "Withdraw is successful!");
-                return "adminWithdraw";
-            }
+    public String withdraw(Model model, @Param("money") double money, @ModelAttribute("account") AccountEntity account) {
+
+        System.out.println(account.getAccountID());
+        AccountEntity account1 = accountService.findByAccountID(account.getAccountID());
+        System.out.println(money);
+        if (account1.getBallance() >= money) {
+            account1.setBallance(account1.getBallance() - money);
+            accountService.saveAccount(account1);
+            model.addAttribute("success", "Deposit is successful!");
+            return "redirect:/list-account";
         } else {
-            model.addAttribute("notExist", "Please check the account again! It may be not existed");
+            model.addAttribute("error", "Account is not enough money");
             return "adminWithdraw";
         }
 
@@ -149,10 +162,14 @@ public class AccountController {
 
     @PostMapping("deposit")
     public String deposit(Model model, @Param("money") double money, @ModelAttribute("account") AccountEntity account) {
-        account.setBallance(account.getBallance() + money);
-        accountService.saveAccount(account);
+
+        System.out.println(account.getAccountID());
+        AccountEntity account1 = accountService.findByAccountID(account.getAccountID());
+        System.out.println(money);
+        account1.setBallance(account1.getBallance() + money);
+        accountService.saveAccount(account1);
         model.addAttribute("success", "Deposit is successful!");
-        return "adminDeposit";
+        return "redirect:/list-account";
 
     }
 }

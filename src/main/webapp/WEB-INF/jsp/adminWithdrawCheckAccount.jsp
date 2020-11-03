@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="en">
 
@@ -102,8 +101,8 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li><a href="withdraw" class=""><i class="fa fa-credit-card"></i> <span>Withdraw Money</span></a></li>
-                            <li><a href="deposit" class="  active"><i class="fa fa-credit-card"></i> <span>Deposit Money</span></a></li>
+                            <li><a href="withdraw" class="active"><i class="fa fa-credit-card"></i> <span>Withdraw Money</span></a></li>
+                            <li><a href="deposit" class="  "><i class="fa fa-credit-card"></i> <span>Deposit Money</span></a></li>
                         </ul>
                     </nav>
                 </div>
@@ -115,44 +114,26 @@
                 <div class="main-content">
                     <div class="container-fluid">
                         <!-- OVERVIEW -->
-                        <h1 style="text-align: center">Deposit Money</h1>
+                        <h1 style="text-align: center">Withdraw Money</h1>
                         <div class="panel-body">
-                            <form:form action="deposit" cssClass="form-horizontal"
-                                       method="post" modelAttribute="account">
+                            <form:form action="withdrawCheck" cssClass="form-horizontal"
+                                  method="post" modelAttribute="account">
 
                                 <!-- need to associate this data with customer id -->
-                                <div class="form-group">
-                                    <label for="accountID" class="col-md-3 control-label"></label>
-                                    <div class="col-md-9">
-                                        <form:hidden path="accountID" Class="form-control"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="customerName" class="col-md-3 control-label">Customer Full Name</label>
-                                    <div class="col-md-9">
-                                        <label id="userName" name="customerName" Class="form-control">${userName}</label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="ballance" class="col-md-3 control-label">Account's Ballance</label>
-                                    <div class="col-md-9">
-                                        <label name="ballance" Class="form-control"><fmt:formatNumber  type="number"  groupingUsed = "false" value="${account.ballance}"></fmt:formatNumber></label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="money" class="col-md-3 control-label">Input Amount of money To Deposit</label>
-                                    <div class="col-md-9">
-                                        <input name="money" Class="form-control" />
+                                <div class="form-group"  style="margin: 20px">
+                                    <label for="accountID" class="col-md-3 control-label">Input Account ID</label>
+                                    <div class="col-md-9" style="margin: 20px">
+                                        <form:input path="accountID" Class="form-control" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <span id="notExist" style="color:red">${notExist}</span>
-                                    <span id="success" style="color:green">${success}</span>
+                                    <span id="error" style="color:red">${error}</span>
                                     <!-- Button -->
                                     <div class="col-md-offset-3 col-md-9">
-                                        <form:button cssClass="btn btn-primary">Deposit Money</form:button>
-                                        </div>
+                                        <form:button cssClass="btn btn-primary">Check Account</form:button>
                                     </div>
+                                </div>
                             </form:form>
                         </div>
                         <!-- END OVERVIEW -->

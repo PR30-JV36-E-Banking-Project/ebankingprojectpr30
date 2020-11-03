@@ -118,192 +118,192 @@
                             <div class="col-md-7 info">
                                 <h4 id="tittle" class="tittle">${tittle}</h4>
                                 <h1 style="text-align: center">Internal Tranfer</h1>
-                        <div class="panel-body">
-                            <form:form action="addInternalTranfer" cssClass="form-horizontal"
-                                       method="post" modelAttribute="transaction">
-                                <form:hidden path="transactionID"/>
-                                <!-- need to associate this data with customer id -->
-                                <div class="form-group">
-                                    <label for="senderAccount" class="col-md-3 control-label">Input Sender Account</label>
-                                    <div class="col-md-9">
-                                        <form:input path="senderAccount" Class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="receiverAccount" class="col-md-3 control-label">Input Receive Account</label>
-                                    <div class="col-md-9">
-                                        <form:input type="text" path="receiverAccount" Class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="content" class="col-md-3 control-label">Input Content</label>
-                                    <div class="col-md-9">
-                                        <form:input type="text" path="content" Class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="amount" class="col-md-3 control-label">Input Amount</label>
-                                    <div class="col-md-9">
-                                        <form:input type="text" path="amount" cssClass="form-control" />
-                                    </div>
-                                </div>
-                                    <div class="form-group">
-                                        <p style="color: blue">*Note: The tranfer fee is 5000</p>
-                                </div>
+                                <div class="panel-body">
+                                    <form:form action="addInternalTranfer" cssClass="form-horizontal"
+                                               method="post" modelAttribute="transaction">
+                                        <form:hidden path="transactionID"/>
+                                        <!-- need to associate this data with customer id -->
+                                        <div class="form-group">
+                                            <label for="senderAccount" class="col-md-3 control-label">Input Sender Account</label>
+                                            <div class="col-md-9">
+                                                <form:input path="senderAccount" Class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="receiverAccount" class="col-md-3 control-label">Input Receive Account</label>
+                                            <div class="col-md-9">
+                                                <form:input type="text" path="receiverAccount" Class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="content" class="col-md-3 control-label">Input Content</label>
+                                            <div class="col-md-9">
+                                                <form:input type="text" path="content" Class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="amount" class="col-md-3 control-label">Input Amount</label>
+                                            <div class="col-md-9">
+                                                <form:input type="text" path="amount" cssClass="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <p style="color: blue">*Note: The tranfer fee is 5000</p>
+                                        </div>
                                         <span id="success" style="color: green">${success}</span>
                                         <span id="error1" style="color: red">${error}</span>
                                         <span id="error" style="color: red">${error1}</span>
-                                    <!-- Button -->
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <form:button cssClass="btn btn-primary" style="float: right"> Tranfer Money</form:button>
+                                        <!-- Button -->
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <form:button cssClass="btn btn-primary" style="float: right"> Tranfer Money</form:button>
+                                            </div>
                                         </div>
-                                    </div>
 
-                            </form:form>
-                        </div>
+                                </form:form>
                             </div>
-                            <div class="clearfix"> </div>
                         </div>
-                        <!-- END OVERVIEW -->
+                        <div class="clearfix"> </div>
                     </div>
+                    <!-- END OVERVIEW -->
                 </div>
-                <!-- END MAIN CONTENT -->
             </div>
-            <!-- END MAIN -->
-            <div class="clearfix"></div>
-            <footer>
-                <div class="container-fluid">
-                    <p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>.
-                        All Rights Reserved.</p>
-                </div>
-            </footer>
+            <!-- END MAIN CONTENT -->
         </div>
-        <!-- END WRAPPER -->
-        <!-- Javascript -->
-        <script src="../../resources/assets/vendor/jquery/jquery.min.js"></script>
-        <script src="../../resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script src="../../resources/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-        <script src="../../resources/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
-        <script src="../../resources/assets/vendor/chartist/js/chartist.min.js"></script>
-        <script src="../../resources/assets/scripts/klorofil-common.js"></script>
-        <script>
-                                        $(function () {
-                                            var data, options;
+        <!-- END MAIN -->
+        <div class="clearfix"></div>
+        <footer>
+            <div class="container-fluid">
+                <p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>.
+                    All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+    <!-- END WRAPPER -->
+    <!-- Javascript -->
+    <script src="../../resources/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../../resources/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../resources/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="../../resources/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+    <script src="../../resources/assets/vendor/chartist/js/chartist.min.js"></script>
+    <script src="../../resources/assets/scripts/klorofil-common.js"></script>
+    <script>
+        $(function () {
+            var data, options;
 
-                                            // headline charts
-                                            data = {
-                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                                                series: [
-                                                    [23, 29, 24, 40, 25, 24, 35],
-                                                    [14, 25, 18, 34, 29, 38, 44],
-                                                ]
-                                            };
+            // headline charts
+            data = {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                series: [
+                    [23, 29, 24, 40, 25, 24, 35],
+                    [14, 25, 18, 34, 29, 38, 44],
+                ]
+            };
 
-                                            options = {
-                                                height: 300,
-                                                showArea: true,
-                                                showLine: false,
-                                                showPoint: false,
-                                                fullWidth: true,
-                                                axisX: {
-                                                    showGrid: false
-                                                },
-                                                lineSmooth: false,
-                                            };
+            options = {
+                height: 300,
+                showArea: true,
+                showLine: false,
+                showPoint: false,
+                fullWidth: true,
+                axisX: {
+                    showGrid: false
+                },
+                lineSmooth: false,
+            };
 
-                                            new Chartist.Line('#headline-chart', data, options);
-
-
-                                            // visits trend charts
-                                            data = {
-                                                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                                                series: [{
-                                                        name: 'series-real',
-                                                        data: [200, 380, 350, 320, 410, 450, 570, 400, 555, 620, 750, 900],
-                                                    }, {
-                                                        name: 'series-projection',
-                                                        data: [240, 350, 360, 380, 400, 450, 480, 523, 555, 600, 700, 800],
-                                                    }]
-                                            };
-
-                                            options = {
-                                                fullWidth: true,
-                                                lineSmooth: false,
-                                                height: "270px",
-                                                low: 0,
-                                                high: 'auto',
-                                                series: {
-                                                    'series-projection': {
-                                                        showArea: true,
-                                                        showPoint: false,
-                                                        showLine: false
-                                                    },
-                                                },
-                                                axisX: {
-                                                    showGrid: false,
-
-                                                },
-                                                axisY: {
-                                                    showGrid: false,
-                                                    onlyInteger: true,
-                                                    offset: 0,
-                                                },
-                                                chartPadding: {
-                                                    left: 20,
-                                                    right: 20
-                                                }
-                                            };
-
-                                            new Chartist.Line('#visits-trends-chart', data, options);
+            new Chartist.Line('#headline-chart', data, options);
 
 
-                                            // visits chart
-                                            data = {
-                                                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                                                series: [
-                                                    [6384, 6342, 5437, 2764, 3958, 5068, 7654]
-                                                ]
-                                            };
+            // visits trend charts
+            data = {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                series: [{
+                        name: 'series-real',
+                        data: [200, 380, 350, 320, 410, 450, 570, 400, 555, 620, 750, 900],
+                    }, {
+                        name: 'series-projection',
+                        data: [240, 350, 360, 380, 400, 450, 480, 523, 555, 600, 700, 800],
+                    }]
+            };
 
-                                            options = {
-                                                height: 300,
-                                                axisX: {
-                                                    showGrid: false
-                                                },
-                                            };
+            options = {
+                fullWidth: true,
+                lineSmooth: false,
+                height: "270px",
+                low: 0,
+                high: 'auto',
+                series: {
+                    'series-projection': {
+                        showArea: true,
+                        showPoint: false,
+                        showLine: false
+                    },
+                },
+                axisX: {
+                    showGrid: false,
 
-                                            new Chartist.Bar('#visits-chart', data, options);
+                },
+                axisY: {
+                    showGrid: false,
+                    onlyInteger: true,
+                    offset: 0,
+                },
+                chartPadding: {
+                    left: 20,
+                    right: 20
+                }
+            };
+
+            new Chartist.Line('#visits-trends-chart', data, options);
 
 
-                                            // real-time pie chart
-                                            var sysLoad = $('#system-load').easyPieChart({
-                                                size: 130,
-                                                barColor: function (percent) {
-                                                    return "rgb(" + Math.round(200 * percent / 100) + ", " + Math.round(200 * (1.1 - percent / 100)) + ", 0)";
-                                                },
-                                                trackColor: 'rgba(245, 245, 245, 0.8)',
-                                                scaleColor: false,
-                                                lineWidth: 5,
-                                                lineCap: "square",
-                                                animate: 800
-                                            });
+            // visits chart
+            data = {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                series: [
+                    [6384, 6342, 5437, 2764, 3958, 5068, 7654]
+                ]
+            };
 
-                                            var updateInterval = 3000; // in milliseconds
+            options = {
+                height: 300,
+                axisX: {
+                    showGrid: false
+                },
+            };
 
-                                            setInterval(function () {
-                                                var randomVal;
-                                                randomVal = getRandomInt(0, 100);
+            new Chartist.Bar('#visits-chart', data, options);
 
-                                                sysLoad.data('easyPieChart').update(randomVal);
-                                                sysLoad.find('.percent').text(randomVal);
-                                            }, updateInterval);
 
-                                            function getRandomInt(min, max) {
-                                                return Math.floor(Math.random() * (max - min + 1)) + min;
-                                            }
+            // real-time pie chart
+            var sysLoad = $('#system-load').easyPieChart({
+                size: 130,
+                barColor: function (percent) {
+                    return "rgb(" + Math.round(200 * percent / 100) + ", " + Math.round(200 * (1.1 - percent / 100)) + ", 0)";
+                },
+                trackColor: 'rgba(245, 245, 245, 0.8)',
+                scaleColor: false,
+                lineWidth: 5,
+                lineCap: "square",
+                animate: 800
+            });
 
-                                        });
-        </script>
-    </body>
+            var updateInterval = 3000; // in milliseconds
+
+            setInterval(function () {
+                var randomVal;
+                randomVal = getRandomInt(0, 100);
+
+                sysLoad.data('easyPieChart').update(randomVal);
+                sysLoad.find('.percent').text(randomVal);
+            }, updateInterval);
+
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+        });
+    </script>
+</body>
 
 </html>
