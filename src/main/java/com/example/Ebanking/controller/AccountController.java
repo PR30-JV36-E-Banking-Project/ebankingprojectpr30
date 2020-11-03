@@ -6,7 +6,12 @@
 package com.example.Ebanking.controller;
 
 import com.example.Ebanking.entities.AccountEntity;
+import com.example.Ebanking.entities.BankEntity;
+import com.example.Ebanking.entities.CustomerEntity;
+import com.example.Ebanking.repository.BankRepositoryIF;
+import com.example.Ebanking.repository.CustomerRepositoryIF;
 import com.example.Ebanking.service.AccountService;
+import com.example.Ebanking.service.CustomerService;
 import com.example.Ebanking.service.RecieptService;
 import java.io.IOException;
 import java.security.Principal;
@@ -36,6 +41,10 @@ public class AccountController {
     @Autowired
     AccountService accountService;
     @Autowired
+    CustomerRepositoryIF customerRepositoryIF;
+    @Autowired
+    BankRepositoryIF bankRepositoryIF;
+    @Autowired
     TranferController tc;
     @Autowired
     RecieptService rs;
@@ -46,16 +55,20 @@ public class AccountController {
     }
 
     @GetMapping("newAccount")
-    public String newAccount(Model model) {
+    public String newAccount(Model model, @ModelAttribute AccountEntity account) {
         model.addAttribute("account", new AccountEntity());
-        return "newAccount";
+        return "adminAccountForm";
     }
 
     @PostMapping("newAccount")
-    public String CreateNewAccount(@ModelAttribute AccountEntity account, Model model) {
-        model.addAttribute("account", new AccountEntity());
+    public String CreateNewAccount(@ModelAttribute("account") AccountEntity account, Model model, @Param("customerID") int customerID, @Param("bankID") int bankID) {
+        CustomerEntity customer = customerRepositoryIF.findByCustomerID(customerID);
+        BankEntity bank = bankRepositoryIF.findByBankID(bankID);
+        account.setCustomerEntity(customer);
+        account.setBankEntity(bank);
+        model.addAttribute("account", account);
         accountService.saveAccount(account);
-        return "logout";
+        return "redirect:/list-account";
     }
 
     @GetMapping(value = "/list-account")

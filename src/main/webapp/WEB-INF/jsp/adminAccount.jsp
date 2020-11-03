@@ -120,7 +120,7 @@
                             </div>
                             <div style="float: left; margin: 20px;">
                                 <input type="button" value="Add New Account"
-                                       onclick="window.location.href = 'showFormForAdd'; return false;"
+                                       onclick="window.location.href = 'newAccount'; return false;"
                                        class="btn btn-primary" />
                             </div>
                             <form action="list-account">

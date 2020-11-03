@@ -118,9 +118,14 @@
                                 <h1>Manage Transaction</h1>
                             </div>
                             <div style="float: left; margin: 20px;">
-                                <input type="button" value="Add New Transaction"
+                                <input type="button" value="Add Internal Transaction"
                                        onclick="window.location.href = 'showFormForAdd'; return false;"
                                        class="btn btn-primary" />
+                            </div>
+                            <div style="float: left; margin: 20px;">
+                                <input type="button" value="Add External Transaction"
+                                       onclick="window.location.href = 'showFormForAdd'; return false;"
+                                       class="btn btn-success" />
                             </div>
                             <form action="list-transaction">
                                 <div class="input-group" style="margin: 20px; width: 50%; float: right">

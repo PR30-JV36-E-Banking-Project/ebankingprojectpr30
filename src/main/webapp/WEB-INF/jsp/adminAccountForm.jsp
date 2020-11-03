@@ -114,34 +114,49 @@
                 <div class="main-content">
                     <div class="container-fluid">
                         <!-- OVERVIEW -->
-                        <h1 style="text-align: center">Deposit Money</h1>
+                        <h1 style="text-align: center">Open New Account</h1>
                         <div class="panel-body">
-                            <form:form action="saveAccount" cssClass="form-horizontal"
-                                       method="post" modelAttribute="customer">
-
+                            <form:form action="newAccount" cssClass="form-horizontal"
+                                       method="post" modelAttribute="account">
+                                <form:hidden path="accountID"/>
                                 <!-- need to associate this data with customer id -->
                                 <div class="form-group">
-                                    <label for="accountID" class="col-md-3 control-label">Input Account ID</label>
+                                    <label for="accountID" class="col-md-3 control-label">Input Customer ID</label>
                                     <div class="col-md-9">
-                                        <form:input path="accountID" cssClass="form-control" />
+                                        <input name="customerID" cssClass="form-control" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="accountType" class="col-md-3 control-label">Input Account type</label>
+                                    <label for="accountType" class="col-md-3 control-label">Input Bank ID</label>
                                     <div class="col-md-9">
-                                        <form:input type="text" path="accountType" cssClass="form-control" />
+                                        <input type="text" name="bankID" cssClass="form-control" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="money" class="col-md-3 control-label">Input Amount of money To Deposit</label>
+                                    <label for="accountType" class="col-md-3 control-label">Input Account Type</label>
                                     <div class="col-md-9">
-                                        <input name="money" cssClass="form-control" />
+                                        <form:select path="accountType" class="form-control ">
+                                            <form:option value="Saving Account" label="Saving Account"/>
+                                            <form:option value="Payment account" label="Payment account"/>
+                                        </form:select>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="accountType" class="col-md-3 control-label">Input First Ballance</label>
+                                    <div class="col-md-9">
+                                        <form:input type="text" path="ballance" cssClass="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div   style="float: right; margin-right: 20px">
+                                        <label><form:checkbox  value="true" path="status" checked="true"/> Active Account</label>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <!-- Button -->
                                     <div class="col-md-offset-3 col-md-9">
-                                        <form:button cssClass="btn btn-primary">Submit</form:button>
+                                        <form:button cssClass="btn btn-primary" style="float: right"> Create New Account</form:button>
                                         </div>
                                     </div>
 
