@@ -130,21 +130,29 @@ public class AccountController {
     public String deposit(Model model) {
         AccountEntity account = new AccountEntity();
         model.addAttribute("account", account);
-        return "adminDeposit";
+        return "adminDepositCheckAccount";
+    }
+
+    @PostMapping("depositCheck")
+    public String depositcheck(Model model, @Param("accountID") double accountID) {
+        AccountEntity account = accountService.findByAccountID(accountID);
+        if (account != null) {
+            String userName = account.getCustomerEntity().getFullName();
+            model.addAttribute("userName", userName);
+            model.addAttribute("account", account);
+            return "adminDeposit";
+        } else {
+            model.addAttribute("notExist", "Account is not existed");
+            return "adminDepositCheckAccount";
+        }
     }
 
     @PostMapping("deposit")
-    public String deposit(Model model, @Param("money") double money, @Param("accountID") double accountID) {
-        AccountEntity account = accountService.findByAccountID(accountID);
-        if (account != null) {
-            account.setBallance(account.getBallance() + money);
-            accountService.saveAccount(account);
-            model.addAttribute("success", "Deposit is successful!");
-            return "adminDeposit";
-        } else {
-            model.addAttribute("notExist", "Please check the account again! It may be not existed");
-            return "adminDeposit";
-        }
+    public String deposit(Model model, @Param("money") double money, @ModelAttribute("account") AccountEntity account) {
+        account.setBallance(account.getBallance() + money);
+        accountService.saveAccount(account);
+        model.addAttribute("success", "Deposit is successful!");
+        return "adminDeposit";
 
     }
 }

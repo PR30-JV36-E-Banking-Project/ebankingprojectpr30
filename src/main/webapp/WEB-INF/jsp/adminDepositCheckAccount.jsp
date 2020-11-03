@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="en">
 
@@ -117,44 +116,23 @@
                         <!-- OVERVIEW -->
                         <h1 style="text-align: center">Deposit Money</h1>
                         <div class="panel-body">
-                            <form:form action="deposit" cssClass="form-horizontal"
-                                       method="post" modelAttribute="account">
+                            <form:form action="depositCheck" cssClass="form-horizontal"
+                                  method="post" modelAttribute="account">
 
                                 <!-- need to associate this data with customer id -->
                                 <div class="form-group"  style="margin: 20px">
                                     <label for="accountID" class="col-md-3 control-label">Input Account ID</label>
                                     <div class="col-md-9" style="margin: 20px">
-                                        <form:label type="number" path="accountID" Class="form-control"><fmt:formatNumber  type="number"  groupingUsed = "false" value="${account.accountID}"></fmt:formatNumber></form:label>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin: 20px">
-                                    <label for="customerName" class="col-md-3 control-label">Customer Full Name</label>
-                                    <div class="col-md-9" style="margin: 20px">
-                                        <label id="userName" name="customerName" Class="form-control">${userName}</label>
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin: 20px">
-                                    <label for="ballance" class="col-md-3 control-label">Account's Ballance</label>
-                                    <div class="col-md-9" style="margin: 20px">
-                                        <label name="ballance" Class="form-control"><fmt:formatNumber  type="number"  groupingUsed = "false" value="${account.ballance}"></fmt:formatNumber></label>
-                                        <fmt:formatNumber  type="number"  groupingUsed = "false" value="${account.ballance}"></fmt:formatNumber>
-                                        
-                                    </div>
-                                </div>
-                                <div class="form-group" style="margin: 20px">
-                                    <label for="money" class="col-md-3 control-label">Input Amount of money To Deposit</label>
-                                    <div class="col-md-9" style="margin: 20px">
-                                        <input name="money" Class="form-control" />
+                                        <form:input path="accountID" Class="form-control" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <span id="notExist" style="color:red">${notExist}</span>
-                                    <span id="success" style="color:green">${success}</span>
                                     <!-- Button -->
                                     <div class="col-md-offset-3 col-md-9">
-                                        <form:button cssClass="btn btn-primary">Deposit Money</form:button>
-                                        </div>
+                                        <form:button cssClass="btn btn-primary">Check Account</form:button>
                                     </div>
+                                </div>
                             </form:form>
                         </div>
                         <!-- END OVERVIEW -->

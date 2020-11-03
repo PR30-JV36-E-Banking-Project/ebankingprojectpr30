@@ -116,14 +116,27 @@
                         <!-- OVERVIEW -->
                         <h1 style="text-align: center">Withdraw Money</h1>
                         <div class="panel-body" style="padding: 20px">
-                            <form action="withdraw" cssClass="form-horizontal"
+                            <form:form action="withdraw" cssClass="form-horizontal"
                                   method="post" modelAttribute="account">
 
                                 <!-- need to associate this data with customer id -->
                                 <div class="form-group" style="margin: 20px">
                                     <label for="accountID" class="col-md-3 control-label">Input Account ID</label>
                                     <div class="col-md-9"  style="margin: 20px">
-                                        <input name="accountID" Class="form-control" />
+                                        <form:input type="number" class="form-control myinput " value="${account.accountID}" id="accountID" required="required"  
+                                                    placeholder="Enter Account ID" path="accountID" onchange="myFunction1(this.value)"/>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin: 20px">
+                                    <label for="customerName" class="col-md-3 control-label">Customer Full Name</label>
+                                    <div class="col-md-9" style="margin: 20px">
+                                        <label id="customerName" class="form-control  myinput readonly">${customerName}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin: 20px">
+                                    <label for="ballance" class="col-md-3 control-label">Account's Ballance</label>
+                                    <div class="col-md-9" style="margin: 20px">
+                                        <label name="ballance" Class="form-control"></label>
                                     </div>
                                 </div>
                                 <div class="form-group" style="margin: 20px">
@@ -142,7 +155,7 @@
                                     </div>
                                 </div>
 
-                            </form>
+                            </form:form>
                         </div>
                         <!-- END OVERVIEW -->
                     </div>

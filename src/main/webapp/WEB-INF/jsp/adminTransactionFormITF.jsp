@@ -151,7 +151,8 @@
                                         <p style="color: blue">*Note: The tranfer fee is 5000</p>
                                 </div>
                                         <span id="success" style="color: green">${success}</span>
-                                        <span id="error" style="color: red">${error}</span>
+                                        <span id="error1" style="color: red">${error}</span>
+                                        <span id="error" style="color: red">${error1}</span>
                                     <!-- Button -->
                                     <div class="col-md-offset-3 col-md-9">
                                         <form:button cssClass="btn btn-primary" style="float: right"> Tranfer Money</form:button>

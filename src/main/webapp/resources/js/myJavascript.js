@@ -14,6 +14,10 @@ function myFunction(value) {
     fire_ajax_submit(value);
 }
 
+function myFunction1(value) {
+    fire_ajax_submit1(value);
+}
+
 function fire_ajax_submit(accountID) {
     var tittle = document.getElementById("tittle").innerHTML;
     var search = {
@@ -26,6 +30,20 @@ function fire_ajax_submit(accountID) {
         data: search,
         success: function (data) {
             $('#receiverU').html(data);
+        }
+    });
+}
+
+function fire_ajax_submit1(accountID) {
+    var search = {
+        "accountID": accountID
+    };
+    $.ajax({
+        type: "POST",
+        url: "/getUsernameForAdmin",
+        data: search,
+        success: function (data) {
+            $('#customerName').html(data);
         }
     });
 }

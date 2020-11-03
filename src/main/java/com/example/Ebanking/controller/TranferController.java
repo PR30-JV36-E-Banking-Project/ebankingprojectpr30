@@ -7,6 +7,7 @@ package com.example.Ebanking.controller;
 
 import com.example.Ebanking.entities.AccountEntity;
 import com.example.Ebanking.entities.TransactionEntity;
+import com.example.Ebanking.repository.AccountRepositoryIF;
 import com.example.Ebanking.service.AccountService;
 import com.example.Ebanking.service.CoverCurrencyToText;
 import com.example.Ebanking.service.EmailService;
@@ -64,6 +65,8 @@ public class TranferController {
     UserSevice userSevice;
     @Autowired
     AccountService accountService;
+    @Autowired
+    AccountRepositoryIF accountRepositoryIF;
     @Autowired
     TransactionService transactionService;
     @Autowired
@@ -234,6 +237,12 @@ public class TranferController {
             }
         }
     }
+    @PostMapping("getUsernameForAdmin")
+    @ResponseBody
+    public String getUsernameForAdmin(@RequestParam double accountID){
+        AccountEntity accountEntity = accountService.findByAccountID(accountID);
+                return accountEntity.getCustomerEntity().getFullName();
+    }
 
     public List<AccountEntity> getListAccType(Principal principal) {
         Set<AccountEntity> accounts = userSevice.getUserByUserName(principal.getName()).getCustomerEntity().getAccountEntitys();
@@ -269,17 +278,48 @@ public class TranferController {
             @Param("content") String content) {
         double senderAccountBallance = transaction.getSenderAccount().getBallance();
         double receiveAccountBallance = transaction.getReceiverAccount().getBallance();
+        if (accountRepositoryIF.findByAccountID(transaction.getSenderAccount().getAccountID()) != null && accountRepositoryIF.findByAccountID(transaction.getReceiverAccount().getAccountID()) != null) {
+            if (senderAccountBallance > (amount + 5000)) {
+                transaction.getSenderAccount().setBallance(senderAccountBallance - amount - 5000);
+                transaction.getReceiverAccount().setBallance(receiveAccountBallance + amount);
+                transaction.setTransactionDate(LocalDate.now());
+                transaction.setTransactionType("Internal Tranfer");
+                transactionService.saveTransaction(transaction);
+                model.addAttribute("success", "Tranfer is successful");
+                return "redirect:/list-transaction";
+            } else {
+                model.addAttribute("error", "Tranfer is failed. Sender Account is not enough money");
+                return "adminTransactionFormITF";
+            }
+        } else {
+            model.addAttribute("error1", "Please check account ID again");
+            return "adminTransactionFormITF";
+        }
+    }
+
+    @GetMapping(value = "/addExternalTranfer")
+    public String addExternalTranfer(Model model) {
+        TransactionEntity transaction = new TransactionEntity();
+        model.addAttribute("transaction", transaction);
+        return "adminTransactionFormETF";
+    }
+
+    @PostMapping(value = "/addExternalTranfer")
+    public String addExternalTranfer(Model model, @ModelAttribute("transaction") TransactionEntity transaction, @Param("amount") double amount,
+            @Param("content") String content) {
+        double senderAccountBallance = transaction.getSenderAccount().getBallance();
+        double receiveAccountBallance = transaction.getReceiverAccount().getBallance();
         if (senderAccountBallance > (amount + 5000)) {
             transaction.getSenderAccount().setBallance(senderAccountBallance - amount - 5000);
             transaction.getReceiverAccount().setBallance(receiveAccountBallance + amount);
             transaction.setTransactionDate(LocalDate.now());
-            transaction.setTransactionType("Internal Tranfer");
+            transaction.setTransactionType("External Tranfer");
             transactionService.saveTransaction(transaction);
             model.addAttribute("success", "Tranfer is successful");
             return "redirect:/list-transaction";
         } else {
             model.addAttribute("error", "Tranfer is failed. Sender Account is not enough money");
-            return "adminTransactionFormITF";
+            return "adminTransactionFormETF";
         }
     }
 }

@@ -117,9 +117,9 @@
                         <div class="content">
                             <div class="col-md-7 info">
                                 <h4 id="tittle" class="tittle">${tittle}</h4>
-                                <h1 style="text-align: center">Internal Tranfer</h1>
+                                <h1 style="text-align: center">External Tranfer</h1>
                         <div class="panel-body">
-                            <form:form action="addInternalTranfer" cssClass="form-horizontal"
+                            <form:form action="addExternalTranfer" cssClass="form-horizontal"
                                        method="post" modelAttribute="transaction">
                                 <form:hidden path="transactionID"/>
                                 <!-- need to associate this data with customer id -->
