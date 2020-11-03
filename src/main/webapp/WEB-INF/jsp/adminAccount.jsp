@@ -87,7 +87,7 @@
                 <div class="sidebar-scroll">
                     <nav>
                         <ul class="nav">
-                            <li><a href="index.html"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+                            <li><a href="/"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
                             <li><a href="#" class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>
                             <li>
                                 <a href="#subPages" data-toggle="collapse" class="active"><i class="lnr lnr-cog"></i>
@@ -101,8 +101,8 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li><a href="#" class=""><i class="fa fa-credit-card"></i> <span>Withdraw Money</span></a></li>
-                            <li><a href="#" class=""><i class="fa fa-credit-card"></i> <span>Deposit Money</span></a></li>
+                            <li><a href="withdraw" class=""><i class="fa fa-credit-card"></i> <span>Withdraw Money</span></a></li>
+                            <li><a href="deposit" class=""><i class="fa fa-credit-card"></i> <span>Deposit Money</span></a></li>
                         </ul>
                     </nav>
                 </div>

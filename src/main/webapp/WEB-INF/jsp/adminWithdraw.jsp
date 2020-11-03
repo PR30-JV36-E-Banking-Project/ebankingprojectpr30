@@ -87,22 +87,22 @@
                 <div class="sidebar-scroll">
                     <nav>
                         <ul class="nav">
-                            <li><a href="index.html"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+                            <li><a href="/"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
                             <li><a href="#" class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>
                             <li>
-                                <a href="#subPages" data-toggle="collapse" class="active"><i class="lnr lnr-cog"></i>
+                                <a href="#subPages" data-toggle="collapse"><i class="lnr lnr-cog"></i>
                                     <span>Management</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                 <div id="subPages" class="collapse ">
                                     <ul class="nav">
                                         <li><a href="list-teller" class="lnr lnr-user"> Tellers</a></li>
                                         <li><a href="/account/list-customer" class="lnr lnr-user"> Customers</a></li>
                                         <li><a href="/list-account" class="lnr lnr-user"> Account</a></li>
-                                        <li><a href="/list-transaction" class="fa fa-random active"> Transactions</a></li>
+                                        <li><a href="/list-transaction" class="fa fa-random"> Transactions</a></li>
                                     </ul>
                                 </div>
                             </li>
-                            <li><a href="#" class=""><i class="fa fa-credit-card"></i> <span>Withdraw Money</span></a></li>
-                            <li><a href="#" class=""><i class="fa fa-credit-card"></i> <span>Deposit Money</span></a></li>
+                            <li><a href="withdraw" class=" active"><i class="fa fa-credit-card "></i> <span>Withdraw Money</span></a></li>
+                            <li><a href="deposit" class=""><i class="fa fa-credit-card"></i> <span>Deposit Money</span></a></li>
                         </ul>
                     </nav>
                 </div>
@@ -115,27 +115,21 @@
                     <div class="container-fluid">
                         <!-- OVERVIEW -->
                         <h1 style="text-align: center">Withdraw Money</h1>
-                        <div class="panel-body">
+                        <div class="panel-body" style="padding: 20px">
                             <form action="withdraw" cssClass="form-horizontal"
                                   method="post" modelAttribute="account">
 
                                 <!-- need to associate this data with customer id -->
-                                <div class="form-group">
+                                <div class="form-group" style="margin: 20px">
                                     <label for="accountID" class="col-md-3 control-label">Input Account ID</label>
-                                    <div class="col-md-9">
-                                        <input name="accountID" cssClass="form-control" />
+                                    <div class="col-md-9"  style="margin: 20px">
+                                        <input name="accountID" Class="form-control" />
                                     </div>
                                 </div>
-                                <!--                                <div class="form-group">
-                                                                    <label for="accountType" class="col-md-3 control-label">Input Account type</label>
-                                                                    <div class="col-md-9">
-                                                                        <input type="text" path="accountType" cssClass="form-control" />
-                                                                    </div>
-                                                                </div>-->
-                                <div class="form-group">
+                                <div class="form-group" style="margin: 20px">
                                     <label for="money" class="col-md-3 control-label">Input Amount of money To Withdraw</label>
-                                    <div class="col-md-9">
-                                        <input name="money" cssClass="form-control" />
+                                    <div class="col-md-9" style="margin: 20px">
+                                        <input name="money" Class="form-control"  />
                                     </div>
                                 </div>
                                 <span id="error" style="color:red">${error}</span>

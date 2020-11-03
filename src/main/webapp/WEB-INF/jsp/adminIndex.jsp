@@ -154,7 +154,7 @@
                                             <p>
                                                 <span id="amountOfTransaction" class="number"><fmt:formatNumber  type="number" value="${amountOfTransaction}"></fmt:formatNumber></span>
                                                 
-                                                <span class="title">Amount of transactions</span>
+                                                <span class="title">Total Money of transactions</span>
                                             </p>
                                         </div>
                                     </div>

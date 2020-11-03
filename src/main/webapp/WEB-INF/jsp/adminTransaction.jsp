@@ -86,7 +86,7 @@
                 <div class="sidebar-scroll">
                     <nav>
                         <ul class="nav">
-                            <li><a href="index.html"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+                            <li><a href="/"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
                             <li><a href="#" class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>
                             <li>
                                 <a href="#subPages" data-toggle="collapse" class="active"><i class="lnr lnr-cog"></i>
@@ -100,8 +100,8 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li><a href="#" class=""><i class="fa fa-credit-card"></i> <span>Withdraw Money</span></a></li>
-                            <li><a href="#" class=""><i class="fa fa-credit-card"></i> <span>Deposit Money</span></a></li>
+                            <li><a href="withdraw" class=""><i class="fa fa-credit-card"></i> <span>Withdraw Money</span></a></li>
+                            <li><a href="deposit" class=""><i class="fa fa-credit-card"></i> <span>Deposit Money</span></a></li>
                         </ul>
                     </nav>
                 </div>
@@ -117,7 +117,7 @@
                             <div style="text-align: center;">
                                 <h1>Manage Transaction</h1>
                             </div>
-                            <div style="float: left; margin: 20px;">
+<!--                            <div style="float: left; margin: 20px;">
                                 <input type="button" value="Add Internal Transaction"
                                        onclick="window.location.href = 'showFormForAdd'; return false;"
                                        class="btn btn-primary" />
@@ -126,7 +126,7 @@
                                 <input type="button" value="Add External Transaction"
                                        onclick="window.location.href = 'showFormForAdd'; return false;"
                                        class="btn btn-success" />
-                            </div>
+                            </div>-->
                             <form action="list-transaction">
                                 <div class="input-group" style="margin: 20px; width: 50%; float: right">
                                     <input type="text" class="form-control" placeholder="Search By Address Or Email" name="keyword" id="keyword">
