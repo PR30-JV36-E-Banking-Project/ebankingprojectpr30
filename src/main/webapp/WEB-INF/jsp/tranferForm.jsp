@@ -189,7 +189,7 @@
                                     <th scope="row"><label class="control-label" for="Ballance">Balance:</label></th>
                                     <td>
                                         <c:forEach items="${listTypeAccount}" var="accountType">  
-                                            <form:label id="hidden_div_${listTypeAccount.indexOf(accountType)}" path="receiverAccount" class="form-control myinput  readonly"><fmt:formatNumber pattern="#" value="${accountType.ballance}"/></form:label>
+                                            <form:label id="hidden_div_${listTypeAccount.indexOf(accountType)}" path="receiverAccount" class="form-control myinput  readonly"><fmt:formatNumber pattern="###,###,###,###" value="${accountType.ballance}"/> VND</form:label>
                                         </c:forEach>
                                     </td>
                                 </tr>
@@ -214,7 +214,7 @@
                                 <tr>
                                     <th scope="row"><label class="control-label" for="receiverU">Name of beneficiary:</label></th>
                                     <td>
-                                        <label id="receiverU" class="form-control  myinput readonly">${receiverU}</label>
+                                        <label id="receiverU" class="form-control  myinput readonly"></label>
                                     </td>
                                 </tr>
                                 <tr>

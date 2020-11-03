@@ -193,7 +193,7 @@
                                 <th scope="row"><label class="control-label" for="Ballance">Balance:</label></th>
                                 <td>
                                     <c:forEach items="${listAccount}" var="accountType">  
-                                        <label id="hidden_div_${listAccount.indexOf(accountType)}" class="form-control readonly"><fmt:formatNumber pattern="#" value="${accountType.ballance}"/></label>
+                                        <label id="hidden_div_${listAccount.indexOf(accountType)}" class="form-control readonly"><fmt:formatNumber pattern="###,###,###,###" value="${accountType.ballance}"/> VND</label>
                                     </c:forEach>
                                 </td>
                             </tr>
