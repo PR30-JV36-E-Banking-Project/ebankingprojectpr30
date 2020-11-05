@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
 <html lang="en">
 
@@ -135,21 +136,26 @@
                             <div style="float: left; margin: 20px;">
                                 <input type="button" value="Add External Transfer"
                                        onclick="window.location.href = 'addExternalTranfer'; return false;"
-                                       class="btn btn-success" />
+                                       class="btn btn-danger" />
                             </div>
+                            
                             <form action="list-transaction">
                                 <div class="input-group" style="margin: 20px; width: 50%; float: right">
-                                    <input type="text" class="form-control" placeholder="Search By Address Or Email" name="keyword" id="keyword">
+                                    <input type="text" class="form-control" placeholder="Search" name="keyword" id="keyword">
                                     <span class="input-group-btn"><input type="submit" value="Search" class="btn btn-primary"/>Search</span>
                                 </div>
                             </form>
+                            
                             <div class="panel-body">
-                                <table class="table table-striped table-bordered">
+                                <table class="table table-striped table-bordered" id="tblTransactions">
                                     <tr>
                                         <th>Transaction ID</th>
                                         <th>Transaction Type</th>
                                         <th>Amount</th>
                                         <th>Content</th>
+                                        <th>Transaction Date</th>
+                                        <th>Sender Account</th>
+                                        <th>Receiver Account</th>
                                         <th>Free Bearer</th>
                                         <!--                                        <th>Action</th>-->
                                     </tr>
@@ -171,6 +177,9 @@
                                             <td>${tempTransaction.transactionType}</td>
                                             <td>${tempTransaction.amount}</td>
                                             <td>${tempTransaction.content}</td>
+                                            <td>${tempTransaction.transactionDate}</td>
+                                            <td><fmt:formatNumber  type="number"  groupingUsed = "false" value="${tempTransaction.senderAccount.accountID}"></fmt:formatNumber></td>
+                                            <td><fmt:formatNumber  type="number"  groupingUsed = "false" value="${tempTransaction.receiverAccount.accountID}"></fmt:formatNumber></td>
                                             <td>${tempTransaction.feeBearer}</td>
 
                                             <!--                                            <td>
@@ -188,7 +197,11 @@
                                     </c:url>
                                     <tg:paging pagedListHolder="${pagedListHolder}"	pagedLink="${pagedLink}" />
                                 </div>
+                                <div  style="float: right; margin: 20px" >
+                                    <input class="btn btn-success" type="button" id="btnExport" value="Export to Excel File" onclick="Export()" /><span class="fa fa-save" style="margin: 10px; height: 10px"></span>
                             </div>
+                            </div>
+                            
                         </div>
                         <!-- END OVERVIEW -->
                     </div>
@@ -212,123 +225,131 @@
         <script src="../../resources/assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
         <script src="../../resources/assets/vendor/chartist/js/chartist.min.js"></script>
         <script src="../../resources/assets/scripts/klorofil-common.js"></script>
+        <script src="../../resources/table2excel.js" type="text/javascript"></script>
+        <script type="text/javascript">
+                                                           function Export() {
+                                                               $("#tblTransactions").table2excel({
+                                                                   filename: "Transactions.xls"
+                                                               });
+                                                           }
+        </script>
         <script>
-                                           $(function () {
-                                               var data, options;
+            $(function () {
+                var data, options;
 
-                                               // headline charts
-                                               data = {
-                                                   labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                                                   series: [
-                                                       [23, 29, 24, 40, 25, 24, 35],
-                                                       [14, 25, 18, 34, 29, 38, 44],
-                                                   ]
-                                               };
+                // headline charts
+                data = {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    series: [
+                        [23, 29, 24, 40, 25, 24, 35],
+                        [14, 25, 18, 34, 29, 38, 44],
+                    ]
+                };
 
-                                               options = {
-                                                   height: 300,
-                                                   showArea: true,
-                                                   showLine: false,
-                                                   showPoint: false,
-                                                   fullWidth: true,
-                                                   axisX: {
-                                                       showGrid: false
-                                                   },
-                                                   lineSmooth: false,
-                                               };
+                options = {
+                    height: 300,
+                    showArea: true,
+                    showLine: false,
+                    showPoint: false,
+                    fullWidth: true,
+                    axisX: {
+                        showGrid: false
+                    },
+                    lineSmooth: false,
+                };
 
-                                               new Chartist.Line('#headline-chart', data, options);
-
-
-                                               // visits trend charts
-                                               data = {
-                                                   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                                                   series: [{
-                                                           name: 'series-real',
-                                                           data: [200, 380, 350, 320, 410, 450, 570, 400, 555, 620, 750, 900],
-                                                       }, {
-                                                           name: 'series-projection',
-                                                           data: [240, 350, 360, 380, 400, 450, 480, 523, 555, 600, 700, 800],
-                                                       }]
-                                               };
-
-                                               options = {
-                                                   fullWidth: true,
-                                                   lineSmooth: false,
-                                                   height: "270px",
-                                                   low: 0,
-                                                   high: 'auto',
-                                                   series: {
-                                                       'series-projection': {
-                                                           showArea: true,
-                                                           showPoint: false,
-                                                           showLine: false
-                                                       },
-                                                   },
-                                                   axisX: {
-                                                       showGrid: false,
-
-                                                   },
-                                                   axisY: {
-                                                       showGrid: false,
-                                                       onlyInteger: true,
-                                                       offset: 0,
-                                                   },
-                                                   chartPadding: {
-                                                       left: 20,
-                                                       right: 20
-                                                   }
-                                               };
-
-                                               new Chartist.Line('#visits-trends-chart', data, options);
+                new Chartist.Line('#headline-chart', data, options);
 
 
-                                               // visits chart
-                                               data = {
-                                                   labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                                                   series: [
-                                                       [6384, 6342, 5437, 2764, 3958, 5068, 7654]
-                                                   ]
-                                               };
+                // visits trend charts
+                data = {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    series: [{
+                            name: 'series-real',
+                            data: [200, 380, 350, 320, 410, 450, 570, 400, 555, 620, 750, 900],
+                        }, {
+                            name: 'series-projection',
+                            data: [240, 350, 360, 380, 400, 450, 480, 523, 555, 600, 700, 800],
+                        }]
+                };
 
-                                               options = {
-                                                   height: 300,
-                                                   axisX: {
-                                                       showGrid: false
-                                                   },
-                                               };
+                options = {
+                    fullWidth: true,
+                    lineSmooth: false,
+                    height: "270px",
+                    low: 0,
+                    high: 'auto',
+                    series: {
+                        'series-projection': {
+                            showArea: true,
+                            showPoint: false,
+                            showLine: false
+                        },
+                    },
+                    axisX: {
+                        showGrid: false,
 
-                                               new Chartist.Bar('#visits-chart', data, options);
+                    },
+                    axisY: {
+                        showGrid: false,
+                        onlyInteger: true,
+                        offset: 0,
+                    },
+                    chartPadding: {
+                        left: 20,
+                        right: 20
+                    }
+                };
+
+                new Chartist.Line('#visits-trends-chart', data, options);
 
 
-                                               // real-time pie chart
-                                               var sysLoad = $('#system-load').easyPieChart({
-                                                   size: 130,
-                                                   barColor: function (percent) {
-                                                       return "rgb(" + Math.round(200 * percent / 100) + ", " + Math.round(200 * (1.1 - percent / 100)) + ", 0)";
-                                                   },
-                                                   trackColor: 'rgba(245, 245, 245, 0.8)',
-                                                   scaleColor: false,
-                                                   lineWidth: 5,
-                                                   lineCap: "square",
-                                                   animate: 800
-                                               });
+                // visits chart
+                data = {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    series: [
+                        [6384, 6342, 5437, 2764, 3958, 5068, 7654]
+                    ]
+                };
 
-                                               var updateInterval = 3000; // in milliseconds
+                options = {
+                    height: 300,
+                    axisX: {
+                        showGrid: false
+                    },
+                };
 
-                                               setInterval(function () {
-                                                   var randomVal;
-                                                   randomVal = getRandomInt(0, 100);
+                new Chartist.Bar('#visits-chart', data, options);
 
-                                                   sysLoad.data('easyPieChart').update(randomVal);
-                                                   sysLoad.find('.percent').text(randomVal);
-                                               }, updateInterval);
 
-                                               function getRandomInt(min, max) {
-                                                   return Math.floor(Math.random() * (max - min + 1)) + min;
-                                               }
+                // real-time pie chart
+                var sysLoad = $('#system-load').easyPieChart({
+                    size: 130,
+                    barColor: function (percent) {
+                        return "rgb(" + Math.round(200 * percent / 100) + ", " + Math.round(200 * (1.1 - percent / 100)) + ", 0)";
+                    },
+                    trackColor: 'rgba(245, 245, 245, 0.8)',
+                    scaleColor: false,
+                    lineWidth: 5,
+                    lineCap: "square",
+                    animate: 800
+                });
 
-                                           });
+                var updateInterval = 3000; // in milliseconds
+
+                setInterval(function () {
+                    var randomVal;
+                    randomVal = getRandomInt(0, 100);
+
+                    sysLoad.data('easyPieChart').update(randomVal);
+                    sysLoad.find('.percent').text(randomVal);
+                }, updateInterval);
+
+                function getRandomInt(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+
+            });
         </script>
     </body>
 
