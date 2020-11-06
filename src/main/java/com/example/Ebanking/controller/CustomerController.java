@@ -65,6 +65,7 @@ public class CustomerController {
         UserEntity existingUser = userRepository.findByEmailIgnoreCase(userEntity.getEmail());
         CustomerEntity customerEntity = userEntity.getCustomerEntity();
         customerEntity.setUserEntity(userEntity);
+        customerEntity.setEmail(userEntity.getEmail());
         if (existingUser != null) {
             model.addAttribute("error1", "Email is registered");
             return "registerForm";

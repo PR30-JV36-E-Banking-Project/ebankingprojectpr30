@@ -120,9 +120,9 @@
                                   method="post" modelAttribute="account">
 
                                 <!-- need to associate this data with customer id -->
-                                <div class="form-group"  style="margin: 20px">
+                                <div class="form-group">
                                     <label for="accountID" class="col-md-3 control-label">Input Account ID</label>
-                                    <div class="col-md-9" style="margin: 20px">
+                                    <div class="col-md-9">
                                         <form:input path="accountID" Class="form-control" />
                                     </div>
                                 </div>
@@ -131,7 +131,7 @@
                                     <span id="error" style="color:red">${error}</span>
                                     <!-- Button -->
                                     <div class="col-md-offset-3 col-md-9">
-                                        <form:button cssClass="btn btn-primary">Check Account</form:button>
+                                        <form:button Class="btn btn-primary">Check Account</form:button>
                                     </div>
                                 </div>
                             </form:form>

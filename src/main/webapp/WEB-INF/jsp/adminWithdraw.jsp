@@ -136,7 +136,13 @@
                                 <div class="form-group">
                                     <label for="ballance" class="col-md-3 control-label">Account's Ballance</label>
                                     <div class="col-md-9">
-                                        <label name="ballance" Class="form-control"><fmt:formatNumber  type="number"  groupingUsed = "false" value="${account.ballance}"></fmt:formatNumber></label>
+                                        <label name="ballance" Class="form-control"><fmt:formatNumber  type="number"  maxFractionDigits = "3"  value="${account.ballance}"></fmt:formatNumber></label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="accountType" class="col-md-3 control-label">Account Type</label>
+                                        <div class="col-md-9">
+                                            <label id="accountType" name="accountType" Class="form-control">${account.accountType}</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -151,7 +157,7 @@
                                     <span id="error" style="color:red">${error}</span>
                                     <!-- Button -->
                                     <div class="col-md-offset-3 col-md-9">
-                                        <form:button cssClass="btn btn-primary">Withdraw Money</form:button>
+                                        <form:button Class="btn btn-primary">Withdraw Money</form:button>
                                         </div>
                                     </div>
                             </form:form>

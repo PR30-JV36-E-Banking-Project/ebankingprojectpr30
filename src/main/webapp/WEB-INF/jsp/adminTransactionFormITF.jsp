@@ -155,7 +155,7 @@
                                         <span id="error" style="color: red">${error1}</span>
                                         <!-- Button -->
                                         <div class="col-md-offset-3 col-md-9">
-                                            <form:button cssClass="btn btn-primary" style="float: right"> Tranfer Money</form:button>
+                                            <form:button Class="btn btn-primary" style="float: right"> Tranfer Money</form:button>
                                             </div>
                                         </div>
 

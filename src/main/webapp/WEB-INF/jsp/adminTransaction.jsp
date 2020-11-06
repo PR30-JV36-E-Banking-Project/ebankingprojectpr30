@@ -150,10 +150,10 @@
                                     <table>
                                         <tbody>
                                             <tr>
-                                                <th style="padding:  10px">Search by Date</th>
-                                                <th style="padding:  10px"><input type="date" name="startDay" class="form-control myinput" required="" id="startday" /></th>
-                                                <th style="padding:  10px"><input type="date" name="endDay" class="form-control myinput" required="" /></th>
-                                                <th style="padding:  10px"><input type="submit" class="btn btn-primary buttonback" value="View Transactions"></th>
+                                                <th style="padding:  5px">Search by Date</th>
+                                                <th style="padding:  5px"><input type="date" name="startDay" class="form-control myinput" required="" id="startday" /></th>
+                                                <th style="padding:  5px"><input type="date" name="endDay" class="form-control myinput" required="" /></th>
+                                                <th style="padding:  5px"><input type="submit" class="btn btn-primary buttonback" value="View Transactions"></th>
                                             </tr>
                                         </tbody>
                                     </table>

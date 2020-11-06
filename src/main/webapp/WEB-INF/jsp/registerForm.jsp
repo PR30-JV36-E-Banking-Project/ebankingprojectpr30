@@ -248,11 +248,7 @@
                                     <td><form:input  type="text" class="form-control myinput" required="required" placeholder="Enter Your Phone" path="customerEntity.phone"/>
                                         <form:errors path="customerEntity.phone" class="error"/></td>
                                 </tr>
-                                <tr>
-                                    <th scope="row"><label class="control-label">Email(Customer):</label></th>
-                                    <td><form:input type="text" class="form-control myinput" required="required" placeholder="Enter Your email(Customer)" path="customerEntity.email"/>
-                                        <form:errors path="customerEntity.email" class="error"/></td>
-                                </tr>
+                                
                                 <tr>
                                     <th scope="row"><label class="control-label">ID card:</label></th>
                                     <td><form:input type="text" class="form-control myinput" required="required" placeholder="Enter Your ID card" path="customerEntity.IDcard"/>
@@ -269,6 +265,11 @@
                                         <form:errors path="customerEntity.issueIDCardOffice" class="error"/></td>
                                 </tr>
                                 <tr>
+                                    <th scope="row"><label class="control-label">Email (User):</label></th>
+                                    <td><form:input type="email"  class="form-control myinput" required="required" placeholder="Enter Your Email (User)" path="email"/>
+                                        <form:errors path="email" class="error"/></td>
+                                </tr>
+                                <tr>
                                     <th scope="row"><label class="control-label">User Name:</label></th>
                                     <td><form:input type="text" class="form-control myinput" required="required" placeholder="Enter Your User Name" path="userName"/>
                                         <form:errors path="userName" class="error"/></td>
@@ -283,11 +284,7 @@
                                     <td><input type="password" class="form-control myinput" required="required" placeholder="Comfirm Your Password" name="confirm_password" id="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" id="password"  onkeyup='check();'/>
                                         <span id='message'></span></td>
                                 </tr>
-                                <tr>
-                                    <th scope="row"><label class="control-label">Email (User):</label></th>
-                                    <td><form:input type="email"  class="form-control myinput" required="required" placeholder="Enter Your Email (User)" path="email"/>
-                                        <form:errors path="email" class="error"/></td>
-                                </tr>
+                                
                                 <tr>
                                     <td><span id="error1" style="color:red">${error1}</span>
                                         <span id="error2" style="color:red">${error2}</span></td>

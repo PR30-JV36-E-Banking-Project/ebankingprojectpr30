@@ -100,8 +100,8 @@
                                     </ul>
                                 </div>
                             </li>
-                            <li><a href="#" class=""><i class="fa fa-credit-card"></i> <span>Withdraw Money</span></a></li>
-                            <li><a href="#" class=""><i class="fa fa-credit-card"></i> <span>Deposit Money</span></a></li>
+                            <li><a href="/withdraw" class=""><i class="fa fa-credit-card"></i> <span>Withdraw Money</span></a></li>
+                            <li><a href="/deposit" class=""><i class="fa fa-credit-card"></i> <span>Deposit Money</span></a></li>
                         </ul>
                     </nav>
                 </div>

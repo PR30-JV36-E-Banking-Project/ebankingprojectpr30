@@ -103,7 +103,7 @@ public class mainController {
 
     @GetMapping("/teller")
     public String teller() {
-        return "adminTeller";
+        return "redirect:/account/list-customer";
     }
 
     @GetMapping("/admin")
