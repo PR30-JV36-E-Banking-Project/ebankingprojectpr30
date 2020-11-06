@@ -102,8 +102,16 @@ public class mainController {
     }
 
     @GetMapping("/teller")
-    public String teller() {
-        return "redirect:/account/list-customer";
+    public String teller(Model model) {
+        int numberOfTeller = tellerRepository.getNumberOfTellers();
+        int numberOfCustomer = customerRepositoryIF.getNumberOfCustomers();
+        float amountOfTransaction = transactionRepositoryIF.getAmountOfTransactions();
+        LocalDate today = LocalDate.now();
+        model.addAttribute("numberOfTeller", numberOfTeller);
+        model.addAttribute("numberOfCustomer", numberOfCustomer);
+        model.addAttribute("amountOfTransaction", amountOfTransaction);
+        model.addAttribute("today", today);
+        return "adminIndex";
     }
 
     @GetMapping("/admin")

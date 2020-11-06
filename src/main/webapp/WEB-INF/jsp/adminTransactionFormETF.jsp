@@ -32,7 +32,7 @@
             <!-- NAVBAR -->
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="brand">
-                    <a href="index.html"><img src="../../resources/assets/img/logo.png" alt="Klorofil Logo" class="img-responsive logo"
+                    <a href="/"><img src="../../resources/assets/img/logo.png" alt="Klorofil Logo" class="img-responsive logo"
                                               style="height: 60%; width: 60%;"></a>
                 </div>
                 <div class="container-fluid">
@@ -117,7 +117,7 @@
                         <div class="content">
                             <div class="col-md-7 info">
                                 <h4 id="tittle" class="tittle">${tittle}</h4>
-                                <h1 style="text-align: center">External Tranfer</h1>
+                                <h1 style="text-align: center">External Transfer</h1>
                         <div class="panel-body">
                             <form:form action="addExternalTranfer" cssClass="form-horizontal"
                                        method="post" modelAttribute="transaction">

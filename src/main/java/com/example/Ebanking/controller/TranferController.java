@@ -301,7 +301,7 @@ public class TranferController {
                 transaction.getSenderAccount().setBallance(senderAccountBallance - amount - 5000);
                 transaction.getReceiverAccount().setBallance(receiveAccountBallance + amount);
                 transaction.setTransactionDate(LocalDate.now());
-                transaction.setTransactionType("Internal Tranfer");
+                transaction.setTransactionType("Internal Transfer");
                 transactionService.saveTransaction(transaction);
                 model.addAttribute("success", "Tranfer is successful");
                 return "redirect:/list-transaction";
@@ -331,7 +331,7 @@ public class TranferController {
             transaction.getSenderAccount().setBallance(senderAccountBallance - amount - 5000);
             transaction.getReceiverAccount().setBallance(receiveAccountBallance + amount);
             transaction.setTransactionDate(LocalDate.now());
-            transaction.setTransactionType("External Tranfer");
+            transaction.setTransactionType("External Transfer");
             transactionService.saveTransaction(transaction);
             model.addAttribute("success", "Tranfer is successful");
             return "redirect:/list-transaction";

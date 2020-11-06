@@ -31,7 +31,7 @@
             <!-- NAVBAR -->
             <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="brand">
-                    <a href="index.html"><img src="../../resources/assets/img/logo.png" alt="Klorofil Logo" class="img-responsive logo"
+                    <a href="/"><img src="../../resources/assets/img/logo.png" alt="Klorofil Logo" class="img-responsive logo"
                                               style="height: 60%; width: 60%;"></a>
                 </div>
                 <div class="container-fluid">
@@ -86,7 +86,7 @@
                 <div class="sidebar-scroll">
                     <nav>
                         <ul class="nav">
-                            <li><a href="index.html"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+                            <li><a href="/"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
                             <li><a href="#" class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>
                             <li>
                                 <a href="#subPages" data-toggle="collapse" class="active"><i class="lnr lnr-cog"></i>
