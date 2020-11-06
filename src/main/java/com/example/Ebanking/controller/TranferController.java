@@ -16,6 +16,7 @@ import com.example.Ebanking.service.RestService;
 import com.example.Ebanking.service.TransactionService;
 import com.example.Ebanking.service.UserSevice;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import static com.sun.corba.se.spi.presentation.rmi.StubAdapter.request;
 import java.io.IOException;
 import java.security.Principal;
 import java.text.DecimalFormat;
@@ -237,11 +238,12 @@ public class TranferController {
             }
         }
     }
+
     @PostMapping("getUsernameForAdmin")
     @ResponseBody
-    public String getUsernameForAdmin(@RequestParam double accountID){
+    public String getUsernameForAdmin(@RequestParam double accountID) {
         AccountEntity accountEntity = accountService.findByAccountID(accountID);
-                return accountEntity.getCustomerEntity().getFullName();
+        return accountEntity.getCustomerEntity().getFullName();
     }
 
     public List<AccountEntity> getListAccType(Principal principal) {
@@ -262,6 +264,22 @@ public class TranferController {
         pagedListHolder.setPageSize(10);
 
         theModel.addAttribute("pagedListHolder", pagedListHolder);
+
+        return "adminTransaction";
+    }
+
+    @GetMapping(value = "/list-transaction-byDate")
+    public String listTransactionByDate(HttpServletRequest request, @RequestParam("startDay") String startDay,
+            @RequestParam("endDay") String endDay, Model model) throws ParseException {
+        Date startD = new SimpleDateFormat("yyyy-MM-dd").parse(startDay);
+        Date endD = new SimpleDateFormat("yyyy-MM-dd").parse(endDay);
+        List<TransactionEntity> transactions = transactionService.getTransactionByDate(startD, endD);
+        PagedListHolder pagedListHolder = new PagedListHolder(transactions);
+        int page = ServletRequestUtils.getIntParameter(request, "p", 0);
+        pagedListHolder.setPage(page);
+        pagedListHolder.setPageSize(10);
+
+        model.addAttribute("pagedListHolder", pagedListHolder);
 
         return "adminTransaction";
     }

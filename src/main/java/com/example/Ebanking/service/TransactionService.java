@@ -47,4 +47,9 @@ public class TransactionService implements TransactionServiceIF {
         return (List) transactionRepositoryIF.findAll();
     }
 
+    @Override
+    public List<TransactionEntity> getTransactionByDate(Date start, Date end) {
+        return transactionRepositoryIF.getTransactionWhereDateBetweenValue(start, end);
+    }
+
 }

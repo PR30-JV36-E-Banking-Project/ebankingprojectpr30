@@ -138,14 +138,29 @@
                                        onclick="window.location.href = 'addExternalTranfer'; return false;"
                                        class="btn btn-danger" />
                             </div>
-                            
+
                             <form action="list-transaction">
                                 <div class="input-group" style="margin: 20px; width: 50%; float: right">
                                     <input type="text" class="form-control" placeholder="Search" name="keyword" id="keyword">
                                     <span class="input-group-btn"><input type="submit" value="Search" class="btn btn-primary"/>Search</span>
                                 </div>
                             </form>
-                            
+                            <form action="/list-transaction-byDate" method="get" modelAttribute="transaction">
+                                <div style="padding-right: 20px; margin-top: 10px; margin-bottom: 30px; float: right">
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <th style="padding:  10px">Search by Date</th>
+                                                <th style="padding:  10px"><input type="date" name="startDay" class="form-control myinput" required="" id="startday" /></th>
+                                                <th style="padding:  10px"><input type="date" name="endDay" class="form-control myinput" required="" /></th>
+                                                <th style="padding:  10px"><input type="submit" class="btn btn-primary buttonback" value="View Transactions"></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                    
+                                </div>
+                            </form>
                             <div class="panel-body">
                                 <table class="table table-striped table-bordered" id="tblTransactions">
                                     <tr>
@@ -199,9 +214,9 @@
                                 </div>
                                 <div  style="float: right; margin: 20px" >
                                     <input class="btn btn-success" type="button" id="btnExport" value="Export to Excel File" onclick="Export()" /><span class="fa fa-save" style="margin: 10px; height: 10px"></span>
+                                </div>
                             </div>
-                            </div>
-                            
+
                         </div>
                         <!-- END OVERVIEW -->
                     </div>
@@ -227,11 +242,11 @@
         <script src="../../resources/assets/scripts/klorofil-common.js"></script>
         <script src="../../resources/table2excel.js" type="text/javascript"></script>
         <script type="text/javascript">
-                                                           function Export() {
-                                                               $("#tblTransactions").table2excel({
-                                                                   filename: "Transactions.xls"
-                                                               });
-                                                           }
+                                        function Export() {
+                                            $("#tblTransactions").table2excel({
+                                                filename: "Transactions.xls"
+                                            });
+                                        }
         </script>
         <script>
             $(function () {

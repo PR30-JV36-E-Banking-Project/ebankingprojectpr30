@@ -16,6 +16,7 @@ import java.util.List;
 public interface TransactionServiceIF {
     public void saveTransaction(TransactionEntity transactionEntity);
     public List<TransactionEntity>getTransactionByDate(Date start,Date end,double id);
+    public List<TransactionEntity>getTransactionByDate(Date start,Date end);
     public TransactionEntity getTransactionByID(int id);
     public List <TransactionEntity> getTransactions(String keyword);
 }
